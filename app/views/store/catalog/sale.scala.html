@@ -1,0 +1,184 @@
+@import daos.default.mall.Sale
+@import models.default.mall.SaleFilter
+@import daos.default.product.Attribute
+@import daos.default.product.AttributeOption
+@(sale: Sale, pager: ModelPager, filter: SaleFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
+
+@styles = {
+	<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/sale.css")">
+}
+
+@scripts = {
+	.script('@customRoutes.Assets.at("store/scripts/pages/sale.js")')
+	.script('@customRoutes.Assets.at("shared/plugins/zoom/jquery.zoom.min.js")')
+	.wait(function () {
+		PageSale.init();
+	})
+}
+
+
+@alternatNav = {
+	<ul class="nav-mobile sale-nav list-inline justify-non-text mb-0 hidden-md-up">
+		<li style="margin-left: 15px;">
+			<a href="@controllers.store.routes.ApplicationController.index()">
+				<i class="fa fa-home" style="font-size: 2.2rem;"></i>
+			</a>
+		</li>
+		<li>
+			<a href="@controllers.store.routes.AccountController.index()" rel="nofollow">
+				<i class="icon-man"></i>
+			</a>
+		</li>
+
+		<li class="nav-button" id="nav-booking" >
+			<a href="@controllers.store.routes.BookingController.index(Some(sale.saleNumber))">
+				预约量体
+			</a>
+		</li>
+		<li class="nav-button" id="nav-add-to-bag">
+			<a href="javascript:void(0)" class="btnAddToCart">
+				加入购物袋
+			</a>
+		</li>
+
+	</ul>
+}
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store"), modalsOpt = Some(alternatNav), stylesOpt = Some(styles), scriptsOpt = Some(scripts)) {
+
+	<ol class="breadcrumb">
+		@sale.category.map{ productCategory =>
+			<li class="breadcrumb-item"><a href="@controllers.store.routes.CatalogController.list(pager, filter.copy(categoryIdOpt = Some(sale.categoryId), subcategoryIdOpt = None), sorter)">@productCategory.name</a></li>
+		}
+
+		@sale.subcategory.map{ productSubcategory =>
+			<li class="breadcrumb-item"><a href="@controllers.store.routes.CatalogController.list(pager, filter.copy(subcategoryIdOpt = Some(sale.subcategoryId)), sorter)">@productSubcategory.name</a></li>
+		}
+	</ol>
+
+	<div class="row pdp-content">
+
+		<div class="col-md-7 col-lg-8">
+			<div class="row">
+				<div class="col-lg-10 push-lg-2 pb-1 text-xs-center">
+					<div id="wrap">
+						<img class="img-fluid cloudzoom" src="@customRoutes.UploadedAssets.at(sale.sku.imageUrls.head)?x-oss-process=image/resize,w_596,h_800,m_fill/sharpen,100" data-cloudzoom="zoomImage: '@customRoutes.UploadedAssets.at(sale.sku.imageUrls.head)?x-oss-process=image/resize,w_1490,h_2000,m_fill/sharpen,100'" alt="@sale.title">
+						<a class="show-mobile-detail hidden-md-up" href="@request.uri#detail">点击查看产品详情</a>
+					</div>
+				</div>
+
+				<div class="pull-lg-10 col-lg-2 pdp-alt-images pb-1">
+                @if(sale.sku.imageUrls.length > 1) {
+                    @for(imageUrl<-sale.sku.imageUrls) {
+						<img data-img-src="@customRoutes.UploadedAssets.at(imageUrl)?x-oss-process=image/resize,w_180,h_240,m_fill/sharpen,100" data-main-src="@customRoutes.UploadedAssets.at(imageUrl)?x-oss-process=image/resize,w_596,h_800,m_fill/sharpen,100" data-zoom-src="@customRoutes.UploadedAssets.at(imageUrl)?x-oss-process=image/resize,w_1490,h_2000,m_fill/sharpen,100" >
+                        }
+                }
+                </div>
+			</div>
+		</div>
+
+		<a name="detail"></a>
+		<div class="col-md-5 col-lg-4 pd-sidebar">
+			<div class="text-muted"><span id="spnSku" data-base-sku="@sale.sku.sku">@sale.sku.sku</span></div>
+			<h3>@sale.title</h3>
+
+			<div class="pdp-product-price font-weight-normal" style="margin-top: -10px;">
+			@if(sale.unitPrice < sale.originalUnitPrice) {
+				<div>
+					<ins>会员价 @(sale.unitPrice)元</ins>&nbsp;
+					<span>@(sale.originalUnitPrice)元</span>&nbsp;
+				</div>
+			} else {
+				<span class="h2">@(sale.unitPrice)元</span>
+			}
+			</div>
+
+			<div class="pdp-purchase mt-1">
+				<div id="pdp-info" class="pdp-purchase-info panel panel-default">
+
+					<h6 data-toggle="collapse" data-parent="#pdp-info" href="#pdp-description" aria-expanded="true" aria-controls="pdp-description">产品描述<i class="icon-plus"></i></h6>
+					<div class="collapse in px-1" id="pdp-description">
+						<p style="white-space: pre-line">
+							@Html(sale.description)
+						</p>
+					</div>
+
+					@if(sale.product.subcategory.category.isCustom) {
+						<h6 data-toggle="collapse" data-parent="#pdp-info" href="#pdp-fabricInfo" aria-expanded="true" aria-controls="pdp-fabricInfo">定制详情<i class="icon-plus"></i></h6>
+						<div id="pdp-fabricInfo" class="collapse in px-1">
+							<table class="pdp-table table table-sm">
+								<tbody>
+								@for(attributeValue <- sale.sku.attributeValueSet.attributeValues.includes(_.attribute)){
+									<tr>
+										<td class="text-sm-right">@attributeValue.attribute.description</td>
+										<td class="pl-1">@attributeValue.readableValue()</td>
+									</tr>
+								}
+								</tbody>
+							</table>
+						</div>
+					}
+
+					<h6 data-toggle="collapse" data-parent="#pdp-info" href="#pdp-delivery" aria-expanded="false" aria-controls="pdp-delivery">运输说明<i class="icon-plus"></i></h6>
+					<div class="collapse px-1" id="pdp-delivery">
+						<p style="white-space: pre-line">
+							成衣产品付款后24小时内发货，某些特殊商品付款后48小时内发货（双休日订单将在周一发货），送达时间以物流实际配送为准，订购后请随时登录查询物流状态。特别提醒：法定节假日店休不发货。定制产品付款后24小时内客服人员将与您取得联系，具体发货时间待定。
+						</p>
+					</div>
+
+					<h6 data-toggle="collapse" data-parent="#pdp-info" href="#pdp-return" aria-expanded="false" aria-controls="pdp-return">退换货说明<i class="icon-plus"></i></h6>
+					<div class="collapse px-1" id="pdp-return">
+						<p style="white-space: pre-line">
+							如有质量问题，请在签收后7日内联系客服。
+						</p>
+					</div>
+
+				</div>
+
+				<div class="pdp-purchase-options js-zoom-target">
+					<div class="pdp-product-actions text-xs-center mt-1h hidden-sm-down">
+						@if(sale.product.subcategory.category.isCustom) {
+							<a href="@controllers.store.routes.BookingController.index(Some(sale.saleNumber))" class="cta-button">预约量体</a>
+						}
+						<input type="hidden" value="@sale.saleNumber" id="saleNumber" />
+						<a href="javascript:void(0)" class="cta-button alt btnAddToCart">加入购物袋</a>
+					</div>
+
+					@*<h3 class="mt-1 mb-h">关于尺码</h3>*@
+					@*<p>At checkout, we will generate your Personalized Shirt measurements using our revolutionary technology, T.A.P.E.</p>*@
+				</div>
+
+			</div>
+		</div>
+
+		<div class="col-lg-8 push-lg-2">
+			<div class="row">
+				<div class="col-lg-12">
+				@if(sale.sku.detail.isDefined) {
+					<div class="pd-detail ">
+					@Html(sale.sku.detail.get)
+					</div>
+				}
+
+					<div class="pd-detail">
+					@sale.categoryId match {
+						case 1 | 2 => {@views.html.store.page.guide.tags.suit()}
+						case 3 => {@views.html.store.page.guide.tags.shirt()}
+						case _ => {}
+					}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+
+	</div>
+
+	<div class="hidden-md-up">
+		<h4 class="text-md-left text-xs-center mt-3">客服电话</h4>
+		<p class="text-md-left text-xs-center"><a href="tel:010-84417380">010-84417380</a> / 周一至周五 8:30 - 20:30</p>
+		<div class=" col-xs-12"><img src="@customRoutes.Assets.at("store/images/qrcode.jpg")" style="max-width:100%"></div>
+	</div>
+
+}

@@ -1,0 +1,212 @@
+body {
+    font-family:"PingFangSC-Regular", "Microsoft YaHei", "San Francisco", serif;
+    background: #f9f9f9;
+    padding: 5px;
+}
+
+body > img, .header {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.header {
+    display: block;
+    position: relative;
+}
+
+.header img{
+    width: 100%;
+}
+
+.header .btn {
+    position: absolute;
+    bottom: 0px;
+    display: block;
+    font-size: 18px;
+    width: 100%;
+    background: #ff6000;
+    opacity: 0.9;
+    color: white;
+    padding: 10px 15px;
+    border: 0;
+    border-radius: 0;
+    text-align: center;
+}
+
+.titleHead h2, #booking p{
+    text-align: center;
+    margin-bottom: 0;
+    font-size: 17px;
+}
+.titleHead p {
+    font-size: 14px;
+    text-align: center;
+}
+
+.section {
+    position: relative;
+    clear: both;
+}
+
+.section img {
+    width: 100%;
+}
+
+.section .head h2 {
+    width: 100%;
+    text-align: center;
+    color: black;
+    opacity: 0.95;
+}
+
+.section .head h2 small {
+    display: block;
+    color: inherit;
+    text-transform: uppercase;
+    font-family: freight-display-pro, freight, "times new roman", serif;
+}
+
+.section .body {
+    padding: 10pt 10pt 0;
+    text-align: center;
+}
+
+.section .body ul {
+    padding: 0;
+    padding-left: 10pt;
+}
+
+.section .body ul li {
+    text-align: left;
+    list-style-type: square;
+}
+
+.section .body strong {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.section .body p small {
+    display: block;
+    font-size: 0.8em;
+    line-height: 1em;
+    opacity: 0.2;
+    font-family: freight-display-pro, freight, "times new roman", serif;
+    text-transform: uppercase;
+}
+
+.list ul {
+    padding: 0;
+    margin: 0;
+    margin-top: 10pt;
+}
+
+.list li {
+    width: 50%;
+    float: left;
+    list-style: none;
+    height: 240pt;
+    text-align: center;
+}
+.list .title {
+    font-weight: bold;
+    margin-top: 5pt;
+}
+.list .btn {
+    background: #ff6000;
+    color: white;
+    font-size: 18px;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border: 0;
+    border-radius: 0;
+    width: 80%;
+}
+
+.price {
+    color: #ff6000;
+}
+
+.price span {
+    color: darkgray;
+    text-decoration: line-through;
+    font-size: 12px;
+}
+
+.more, .more:hover {
+    clear: both;
+    display: block;
+    text-align: center;
+    padding-top: 10pt;
+    font-size: 18px;
+    color: #ff6000;
+    text-decoration: none;
+}
+
+.more:hover {
+    text-decoration: underline;
+}
+
+#booking .form {
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 15px;
+    padding: 0;
+    border: 1px solid #ededed;
+    border-radius: 10px;
+    background: white;
+}
+#booking .form .form-group{
+    padding: 10px 0;
+    margin: 0;
+    border-bottom: 1px solid #ededed;
+}
+#booking .form .form-group:last-child {
+    border: 0;
+}
+#bookingNumber_field {
+    display: none;
+}
+#booking .form .form-group .control-label {
+    margin-top: 7px;
+    padding-right: 0;
+    text-align: right;
+    font-size: 14px;
+}
+#booking .form .form-group input, #booking .form .form-group select{
+    margin: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+#booking .info {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #909090;
+}
+
+.submit {
+    display: block;
+    font-size: 18px;
+    width: 100%;
+    background: #ff6000;
+    color: white;
+    padding: 10px 15px;
+    margin-top: 15px;
+    border: 0;
+    text-align: center;
+}
+
+.submit:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.footer {
+    text-align: center;
+    font-size: 10px;
+    color: #b4b4b4;
+    margin-top: 55px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,147 @@
+.form-control.select2-container{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.form-control .select2-choice {
+    color: #666;
+    border: 0 !important;
+    background-image: none !important;
+    filter: none;
+    padding: 0;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.select2-drop {
+    color: #666 !important;
+}
+
+.select2-drop-active {
+    border: 1px solid #000 !important;
+    border-radius: 0 !important;
+}
+
+.select2-container .select2-choice .select2-arrow {
+    background: none;
+    border-left: 0;
+}
+
+.select2-search {
+    padding: 0.5rem;
+}
+
+.select2-search input {
+    border: 1px solid #000;
+    padding: 0.5rem;
+    background: none !important;
+}
+
+.select2-dropdown-open .select2-choice {
+    background-color: transparent;
+}
+
+.select2-drop.select2-drop-above.select2-drop-active {
+    border-bottom: 0 !important;
+}
+
+.select2-results {
+    padding: 0.5rem;
+}
+
+.select2-results .select2-highlighted {
+    background: darkgoldenrod;
+}
+
+.select2-results .select2-highlighted .select2-result-label {
+    color: #fff;
+}
+
+.select2-results li {
+    padding: 0.5rem;
+}
+
+.select2-container-multi .select2-choices {
+    border: 0 !important;
+    background-image: none;
+    background-color: #fff;
+    filter: none;
+}
+
+.select2-container-multi.select2-container-active .select2-choices {
+    border: 0 !important;
+    background-image: none;
+    background-color: #fff;
+    filter: none;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.select2-container-multi .select2-choices .select2-search-choice {
+    padding: 3px 5px 3px 18px;
+    margin: 5px 0 3px 5px;
+    border: 1px solid #e5e5e5;
+    background-image: none;
+    background-color: #fff;
+    filter: none;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+/* contextual */
+.warning .select2-container .select2-choice,
+.warning .select2-container .select2-choices,
+.warning .select2-container-multi.select2-container-active .select2-choices {
+    border: 0 !important;
+    color: #C09853;
+}
+.warning .select2-container .select2-choice .select2-arrow {
+    border: 0 !important;
+    color: #C09853;
+}
+
+.error .select2-container .select2-choice,
+.error .select2-container .select2-choices,
+.error .select2-container-multi.select2-container-active .select2-choices {
+    border: 0 !important;
+    color: #B94A48;
+}
+.error .select2-container .select2-choice .select2-arrow {
+    border: 0 !important;
+    color: #B94A48;
+}
+
+.info .select2-container .select2-choice,
+.info .select2-container .select2-choices,
+.info .select2-container-multi.select2-container-active .select2-choices {
+    border: 0 !important;
+    color: #3A87AD;
+}
+.info .select2-container .select2-choice .select2-arrow {
+    border: 0 !important;
+    color: #3A87AD;
+}
+
+.success .select2-container .select2-choice,
+.success .select2-container .select2-choices,
+.success .select2-container-multi.select2-container-active .select2-choices {
+    border: 0 !important;
+    color: #468847;
+}
+.success .select2-container .select2-choice .select2-arrow {
+    border: 0 !important;
+    color: #468847;
+}
+
+/* Fix z-index when select2 opened in modals*/
+.modal-open .select2-drop-mask {
+    z-index: 10101;
+}
+
+.modal-open .select2-drop {
+    z-index: 10102;
+}
+
+.modal-open .select2-search {
+    z-index: 10102;
+}

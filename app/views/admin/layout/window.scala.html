@@ -1,0 +1,28 @@
+@(title: String,
+        tabOpt: Option[String] = None,
+        breadcrumb: Seq[(String, Option[Call])] = Seq.empty,
+        stylesOpt: Option[Html] = None,
+        scriptsOpt: Option[Html] = None,
+        modalsOpt: Option[Html] = None
+)(content: Html)(implicit messages: Messages, request: RequestHeader)
+
+@views.html.admin.layout.main(title,
+    tabOpt,
+    breadcrumb,
+    stylesOpt,
+    scriptsOpt,
+    modalsOpt) {
+
+    <style>
+        body {
+            background: #FFF;
+        }
+        header, footer, .nav-mobile {
+            display: none !important;
+        }
+        main {
+            padding-top: 0 !important;
+        }
+    </style>
+    @content
+}

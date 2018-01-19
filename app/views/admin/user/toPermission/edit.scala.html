@@ -1,0 +1,60 @@
+@import daos.default.user.ToPermission
+@import models.default.user.ToPermissionFilter
+@import daos.default.user.ToPermission.UserToPermission
+@(userId: Long, modelForm: Form[ToPermission], action: Call)(implicit messages: Messages, request: RequestHeader)
+
+@currentController = @{controllers.admin.user.routes.ToPermissionController}
+@implicitFieldConstructor = @{ b3.vertical.fieldConstructor }
+@updateOrCreateLabel() = @{modelForm.value.fold("新建")( _ => "更新")}
+
+@breadcrumb = @{
+  Seq(
+    ("返回", Some( controllers.admin.user.routes.ToPermissionController.index(f = ToPermissionFilter(userIdOpt = Some(userId) ))))
+  )
+}
+
+@views.html.admin.layout.window(title = updateOrCreateLabel, tabOpt = Some("userToPermission"), breadcrumb = breadcrumb) {
+
+  @b3.form(action) {
+    @views.html.admin.tags.pageHead {
+      @updateOrCreateLabel 用户权限
+    } {
+      <button type="submit" class="cta-button">保存</button>
+      @modelForm.value.map{ item =>
+        <a href="@currentController.newPage(userId)" class="cta-button alt pad-left">新建</a>
+        <a href="javascript:void()" data-redirect="@controllers.admin.user.routes.ToPermissionController.index(f = ToPermissionFilter(userIdOpt = Some(userId) ))" data-target="@currentController.delete(item.id)" class="cta-button alt pad-left btn-delete">删除</a>
+        <a class="cta-button plain pad-left" href="@currentController.prev(item.id)"><i class="fa fa-angle-double-left" aria-hidden="true"> 上一条</i></a>
+        <a class="cta-button plain" href="@currentController.next(item.id)">下一条 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+      }
+    }
+
+    @views.html.admin.tags.pageEditBody{
+      @modelForm.value match {
+        case Some(item) => {
+          <tr><th>创建时间</th><td><samp class="small">@item.createdAt</samp></td></tr>
+          <tr><th>更新时间</th><td><samp class="small">@item.updatedAt</samp></td></tr>
+        }
+        case _ => {
+          无.
+          <input type="hidden" name="userId" value="@userId" />
+        }
+      }
+    }{
+      <ul class="nav nav-tabs">
+        <li class="nav-item ml-1"><a class="nav-link active" href="#general-tab" data-toggle="tab" aria-expanded="true">基础信息</a></li>
+      </ul>
+
+      <div class="tab-content pt-1">
+        <div class="tab-pane fade active in" id="general-tab" aria-expanded="true">
+          <div class="row">
+            <div class="col-md-4">
+              @b3.select(modelForm("permission"), UserToPermission.map(value => value.toString -> value.name), '_label -> "权限" )
+            </div>
+          </div>
+
+        </div>
+      </div>
+    }
+  }
+
+}

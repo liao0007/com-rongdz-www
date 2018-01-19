@@ -1,0 +1,32 @@
+.pd-detail img {
+    max-width: 100%;
+}
+
+.nav-mobile {
+    display: none;
+}
+.nav-mobile.sale-nav {
+    display: block;
+}
+.nav-mobile li {
+    width: 10%;
+    padding-top: 6px;
+}
+.nav-mobile li.nav-button {
+    width: 35%;
+    background: darkgoldenrod;
+    float: right;
+    height: 100%;
+    padding-top: 14px;
+    border: 0;
+    font-size: 1.2rem;
+}
+#nav-booking {
+    margin-right:0;
+}
+#nav-add-to-bag {
+    background: white;
+    border-top: 2px solid darkgoldenrod;
+    color: darkgoldenrod;
+    padding-top: 12px;
+}

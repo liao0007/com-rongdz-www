@@ -1,0 +1,61 @@
+@import daos.default.core.Image
+@import models.default.core.ImageFilter
+@import daos.ActiveRecord
+@(items: Seq[Image], pagination: Pagination, filter: ImageFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
+@implicitFieldConstructor = @{ b3.vertical.fieldConstructor }
+
+@currentController = @{controllers.admin.core.routes.ImageController}
+
+@breadcrumb = @{
+    Seq(
+        ("图片库", Some(currentController.index(pagination.pager, filter, sorter)))
+    )
+}
+
+@styles = {
+    <link href="@customRoutes.Assets.at("shared/plugins/dropzone/css/dropzone.css")" rel="stylesheet"/>
+    <style>
+        .dropzone {
+            display: none;
+        }
+    </style>
+}
+
+@scripts = {
+    .script('@customRoutes.Assets.at("shared/plugins/dropzone/dropzone.js")')
+    .wait(function () {
+        Admin.dropZone();
+        $("#uploadImages").on('click', function () {
+            $("#imageDropzone").slideToggle();
+        })
+    })
+}
+
+@views.html.admin.layout.main(title = "图片库", tabOpt = Some("coreImage"), breadcrumb = breadcrumb, scriptsOpt = Some(scripts), stylesOpt = Some(styles)) {
+
+    @views.html.admin.tags.pageHead {
+        图片库
+    } {
+        <button id="uploadImages" class="cta-button float-xs-right">上传图片</button>
+    }
+
+    @b3.form(controllers.admin.core.routes.ImageController.upload(), 'class -> "dropzone mt-1", 'id->"imageDropzone"){
+
+    }
+
+    <div class="row mt-1">
+    @for(item<-items) {
+        <div class="col-xs-6 col-md-2">
+            <a target="_blank" href="@customRoutes.UploadedAssets.at(item.url)" >
+                <img src="@customRoutes.UploadedAssets.at(item.url)?x-oss-process=image/resize,limit_0,h_200,w_200,m_pad,color_EEEEEE">
+            </a>
+            <p>
+                <span style="word-wrap:break-word; font-size: 0.8rem;">@item.url</span>
+                <a href="javascript:void()" data-target="@currentController.delete(item.id)" class="cta-button plain fill btn-delete">删除</a>
+            </p>
+        </div>
+    }
+    </div>
+    @views.html.shared.paginator(pager => currentController.index(pager), pagination)
+
+}

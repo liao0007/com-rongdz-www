@@ -1,0 +1,28 @@
+@import daos.default.mall.Sale
+@import daos.default.product.Category.CategoryHoverType
+@(sale: Sale)(implicit messages: Messages, request: RequestHeader)
+
+<div class="catalog-tile col-xl-3 col-sm-4 col-xs-6">
+    <a href="@controllers.store.routes.CatalogController.sale(sale.saleNumber)" class="catalog-image" data-img-src="@customRoutes.UploadedAssets.at(sale.sku.imageUrls.head)?x-oss-process=image/resize,w_370,w_496,m_fill/sharpen,100">
+        @if(sale.sku.hoverImage.isDefined && sale.category.hoverType != CategoryHoverType.None.toString) {
+            <div class="catalog-hover-image">
+                <div class="catalog-swatch-background">
+                    <div class="@sale.category.hoverType.toLowerCase" data-hover-src="@customRoutes.UploadedAssets.at(sale.sku.hoverImage.get)?x-oss-process=image/resize,w_340,h_456,m_fill/sharpen,100"></div>
+                </div>
+            </div>
+        }
+    </a>
+
+    <a href="@controllers.store.routes.CatalogController.sale(sale.saleNumber)">
+        @sale.title
+
+        @if(sale.unitPrice < sale.originalUnitPrice) {
+            <div>
+                <ins>会员价 ¥@(sale.unitPrice)</ins>&nbsp;
+                <span>¥@sale.originalUnitPrice</span>&nbsp;
+            </div>
+        } else {
+            <div>¥@(sale.unitPrice)</div>
+        }
+    </a>
+</div>

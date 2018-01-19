@@ -1,0 +1,22 @@
+@(elements: helper.FieldElements)
+
+@*
+<div class="@if(elements.hasErrors) {error}">
+    <label for="@elements.id">@elements.label</label>
+    <div class="input">
+        @elements.input
+        <span class="errors">@elements.errors.mkString(", ")</span>
+        <span class="help">@elements.infos.mkString(", ")</span>
+    </div>
+</div>
+*@
+
+<div class="weui-cell @if(elements.hasErrors) {weui-cell_warn} ">
+    <div class="weui-cell__hd"><label for="@elements.id" class="weui-label">@elements.label</label></div>
+    <div class="weui-cell__bd">
+        @elements.input
+    </div>
+    <div class="weui-cell__ft" style="display: none">
+        <i class="weui-icon-warn"></i>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+@import daos.default.user.LoginInfo
+@import models.default.user.LoginInfoFilter
+@import daos.default.user.LoginInfo.LoginInfoProviderId
+@(items: Seq[LoginInfo], pagination: Pagination, filter: LoginInfoFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
+
+@currentController = @{controllers.admin.user.routes.LoginInfoController}
+@typedItems = @{items.asInstanceOf[Seq[LoginInfo]]}
+@typedFilter = @{filter.asInstanceOf[LoginInfoFilter]}
+
+@views.html.admin.layout.window(title = "登录方式", tabOpt = Some("productLoginInfo")) {
+
+    @views.html.admin.tags.pageHead {
+        登录方式
+    } {
+        <a href="@currentController.newPage(filter.userIdOpt.get)" class="cta-button">新建</a>
+    }
+
+    @views.html.admin.tags.pageIndexBody {
+        <form method="get" action="@currentController.index()">
+            <table class="table table-inverse" >
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="100px">方式</th>
+                        <th>ID</th>
+                        <th width="150px">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @for(item<-items) {
+                    <tr class="align-middle">
+                        <td class="align-middle"><a class="highlight-link" href="@currentController.edit(item.id)">@LoginInfoProviderId.fromString(item.providerId).fold("")(_.name)</a></td>
+                        <td class="align-middle">@item.providerKey</td>
+                        <td class="align-middle">
+                            <a href="javascript:void()" data-target="@currentController.delete(item.id)" class="cta-button plain trans borderless btn-delete">删除</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </form>
+    }
+
+    @views.html.shared.paginator(pager => currentController.index(pager), pagination)
+
+}

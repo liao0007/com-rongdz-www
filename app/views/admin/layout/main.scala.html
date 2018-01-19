@@ -1,0 +1,39 @@
+@(title: String,
+        tabOpt: Option[String] = None,
+        breadcrumb: Seq[(String, Option[Call])] = Seq.empty,
+        stylesOpt: Option[Html] = None,
+        scriptsOpt: Option[Html] = None,
+        modalsOpt: Option[Html] = None
+)(content: Html)(implicit messages: Messages, request: RequestHeader)
+
+@styles = {
+    <link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("shared/plugins/select2/select2.css")"/>
+    <link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("shared/plugins/select2/select2-jh.css")"/>
+    <link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("shared/plugins/bootstrap-datepicker/css/datepicker.css")"/>
+    <link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("shared/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css")" />
+    <link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("admin/styles/admin.css")"/>
+    @stylesOpt.map{styles => @styles}
+}
+
+@scripts = {
+    .script('@customRoutes.Assets.at("shared/plugins/select2/select2.min.js")')
+    .script('@customRoutes.Assets.at("shared/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js")')
+    .script('@customRoutes.Assets.at("shared/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js")')
+    .script('@customRoutes.Assets.at("shared/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js")')
+    .script('@customRoutes.Assets.at("admin/scripts/admin.js")')
+    .script('@controllers.rest.routes.ApplicationController.javascriptRoutes()')
+    .script('@controllers.wechat.routes.ApplicationController.javascriptRoutes()')
+    .script('@controllers.store.routes.ApplicationController.javascriptRoutes()')
+    .script('@controllers.admin.routes.ApplicationController.javascriptRoutes()')
+    .wait(function () {
+        Admin.init();
+    })
+    @scriptsOpt.map{scripts => @scripts}
+}
+
+@views.html.shared.layout.main(title,
+    tabOpt,
+    breadcrumb,
+    Some(styles),
+    Some(scripts),
+    modalsOpt)(content)

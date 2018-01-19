@@ -1,0 +1,5 @@
+@()(implicit messages: Messages, request: RequestHeader)
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store")) {
+    @views.html.store.page.guide.tags.shirt()
+}

@@ -1,0 +1,17 @@
+@(message: Option[String] = None)(implicit messages: Messages, request: RequestHeader)
+
+@views.html.store.layout.main(title = "荣定制") {
+
+	<div class="text-md-center">
+		<h1 class="display-3 pt-3">非常抱歉! </h1>
+		<p>
+		@message.getOrElse("您查看的页面找不到了！")
+		</p>
+		<p class="mt-3">
+			<a href="@controllers.store.routes.ApplicationController.index()" class="cta-button">返回首页</a>
+			<span class="cta-sep px-1">或</span>
+			<a href="@controllers.store.routes.ApplicationController.contact()" class="cta-button alt">联系我们</a>
+		</p>
+	</div>
+
+}

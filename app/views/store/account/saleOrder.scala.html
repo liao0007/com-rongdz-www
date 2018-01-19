@@ -1,0 +1,203 @@
+@import com.mohiva.play.silhouette.api.actions.SecuredRequest
+@import auth.JWTEnv
+@import org.joda.time.format.DateTimeFormat
+@import daos.default.mall.SaleOrder.SaleOrderShippingState
+@import daos.default.mall.SaleOrder.SaleOrderState
+@import daos.default.mall.SaleOrder.SaleOrderPaymentState
+@import daos.default.mall.SaleOrder
+@import daos.default.mall.SaleOrder.SaleOrderDeliveryType
+@import daos.default.mall.SaleOrder.SaleOrderPaymentMethod
+@import daos.default.product.Attribute
+@import daos.default.product.AttributeOption
+@(order: SaleOrder)(implicit messages: Messages, request: SecuredRequest[JWTEnv, _])
+
+@styles = {
+	<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/account.css")">
+	<style>
+	main {
+		background: transparent;
+	}
+	</style>
+}
+
+@scripts = {
+    .script('@customRoutes.Assets.at("shared/plugins/jquery.qrcode/jquery-qrcode-0.14.0.js")')
+    .script('https://res.wx.qq.com/open/js/jweixin-1.1.0.js')
+    .script('@customRoutes.Assets.at("store/scripts/pages/account.js")')
+    .wait(function () {
+        PageAccount.init();
+
+        var b = $('#btnPay');
+        Store.initWechatJsApi();
+        b.on('click', function (event) {
+            b.addClass("wait");
+            var orderNumber = $(event.target).data("orderNumber")
+            Store.payOrder(orderNumber, $("#paymentMethod").val())
+        })
+    })
+}
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store"), stylesOpt = Some(styles), scriptsOpt = Some(scripts)) {
+
+	<div class="row pt-1 order-info">
+		<div class="col-md-3 col-sm-12 pt-1 pb-1 order-info-item">
+			<h4>订单信息</h4>
+			<dl>
+				<dt>订单号</dt><dd>@order.orderNumber</dd>
+				<dt>创建时间</dt><dd>@defining(
+				DateTimeFormat.forPattern("yyyy-MM-dd hh:mm:ss")
+			) { dateTimeFormatter =>
+				@dateTimeFormatter.print(order.createdAt)
+			}</dd>
+				<dt>订单状态</dt><dd>@SaleOrderState.fromString(order.state).fold("")(_.name)</dd>
+				<dt>付款状态</dt><dd>@SaleOrderPaymentState.fromString(order.paymentState).fold("")(_.name)</dd>
+			</dl>
+			<div class="clearfix"></div>
+		</div>
+		<div class="col-md-3 col-sm-12 pt-1 pb-1 order-info-item">
+			<h4>收货信息</h4>
+			<dl>
+				<dt>收货人</dt><dd>@order.shipToName</dd>
+				<dt>手机号码</dt><dd>@order.shipToMobile</dd>
+				<dt>地址</dt><dd>@Seq(order.shipToProvince, order.shipToCity, order.shipToDistrict).mkString(" ")<br/>@order.shipToAddress</dd>
+			</dl>
+			<div class="clearfix"></div>
+		</div>
+		<div class="col-md-3 col-sm-12 pt-1 pb-1 order-info-item">
+			<h4>配送信息</h4>
+			<dl>
+				<dt>配送状态</dt><dd>@SaleOrderShippingState.fromString(order.shippingState).fold("")(_.name)</dd>
+				<dt>配送方式</dt><dd>@SaleOrderDeliveryType.fromString(order.deliveryType).fold("")(_.name)</dd>
+				@*<dt>运费</dt><dd>¥0.00</dd>*@
+				@order.carrier.map{ carrier =>
+					<dt>承运商</dt><dd>@carrier</dd>
+				}
+				@order.trackingNumber.map{ trackingNumber =>
+					<dt>承运单号</dt><dd>@trackingNumber</dd>
+				}
+			</dl>
+			<div class="clearfix"></div>
+		</div>
+		<div class="col-md-3 col-sm-12 pt-1 pb-1 order-info-item">
+			<h4>付款信息</h4>
+			<dl>
+				<dt>付款方式</dt><dd>@SaleOrderPaymentMethod.fromString(order.paymentMethod).fold("")(_.name)</dd>
+				<dt>商品总额</dt><dd>¥@order.totalAmount</dd>
+				@*<dt>应付金额</dt><dd>¥@order.totalAmount</dd>*@
+				@*<dt>运费金额</dt><dd>¥0.00</dd>*@
+				@*<dt>优惠券</dt><dd>¥0.00</dd>*@
+			</dl>
+			<div class="clearfix"></div>
+		</div>
+
+
+		@if(order.state == SaleOrderState.Created.toString && order.paymentState == SaleOrderPaymentState.Open.toString ) {
+			<div class="col-md-12 col-sm-12 pt-1 pb-1 order-info-item">
+
+				<div class="row">
+					<div class="col-md-2">
+						<h3 style="text-align: center; color: orangered;">等待付款</h3>
+					</div>
+					<div class="col-md-10">
+						<p>该订单会为您保留24小时（从下单之日算起），24小时之后如果还未付款，系统将自动取消该订单。</p>
+						<div class="mt-1">
+							<a class="highlight-link" href="javascript:void(0)"><h6 data-toggle="collapse" href="#pay">立即支付 <i class="icon-right-open"></i></h6></a>
+
+							<div id="pay" class="collapse">
+
+								<section id="section-payment" class="mt-2">
+									<h4 class="section-header">支付方式</h4>
+									<div class="section-summary"></div>
+
+									<fieldset class="form-group">
+										<div class="clearfix payment-method-row radio-list">
+
+											@for(paymentMethod <- SaleOrderPaymentMethod) {
+												<div class="payment-method-col radio-list-item @paymentMethod.toString @if(paymentMethod == SaleOrderPaymentMethod.Wepay){selected}" data-value="@paymentMethod.toString">
+													<div class="mb-1 mr-1 payment-method">
+														<span class="font-weight-bold text-uppercase">@paymentMethod.name</span>
+													</div>
+												</div>
+											}
+
+											<input name="paymentMethod" id="paymentMethod" type="hidden" value="@SaleOrderPaymentMethod.Wepay.toString" required data-msg-required="请选择支付方式">
+										</div>
+									</fieldset>
+								</section>
+								<a class="cta-button mr-1 float-xs-left" id="btnPay" data-order-number="@order.orderNumber">立即付款</a>
+								<a class="cta-button plain float-xs-right" href="@controllers.store.routes.AccountController.cancelSaleOrder(order.orderNumber)">取消订单</a>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+
+	</div>
+
+
+
+	<div class="row mt-1h pt-1 pb-1 order-detail">
+		<div class="col-sm-12">
+			<h4>商品详情</h4>
+		</div>
+
+		<div class="col-sm-12 hidden-sm-down pt-1">
+			<div class="row">
+				<div class="offset-md-2 col-md-4">产品描述</div>
+				<div class="col-md-2 push-md-2 text-md-right">单价</div>
+				<div class="col-md-2 pull-md-2 text-md-center">数量</div>
+				<div class="col-md-2 text-md-right">小计</div>
+			</div>
+		</div>
+
+		@for(detail <- order.details) {
+			<div class="col-md-12 line-top pt-1 mt-1">
+				<div class="row">
+					<div class="col-md-2 text-xs-center mb-1">
+						<a href="@controllers.store.routes.CatalogController.sale(detail.sale.saleNumber)">
+							<img class="img-fluid mx-auto" src="@customRoutes.UploadedAssets.at(detail.sale.sku.imageUrls(0))?x-oss-process=image/resize,limit_0,w_300/sharpen,100" alt="@detail.sale.title">
+						</a>
+					</div>
+					<div class="col-md-4 text-xs-center text-md-left">
+						<h3>@detail.sale.title</h3>
+						<div class="mb-1">
+							<a class="text-muted" href="@controllers.store.routes.CatalogController.sale(detail.sale.saleNumber)">@detail.sale.sku.sku</a>
+						</div>
+						<span class="popover-trigger popover-trigger-html">
+							<i class="icon-info-circled"></i> 定制详情
+						</span>
+						<div hidden>
+							<table class="option-table">
+								<tbody>
+								@for(attributeValue <- detail.saleOrderDetailAttributeValues){
+                                    <tr>
+                                        <td class="text-sm-right">@attributeValue.attribute.description</td>
+                                        <td class="pl-1">@attributeValue.readableValue()</td>
+                                    </tr>
+								}
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="col-md-2 push-md-2 text-xs-center text-md-right">
+						<span class="hidden-md-up">单价: </span>¥@detail.sale.originalUnitPrice
+					</div>
+
+					<div class="col-md-2 pull-md-2 text-md-center text-xs-center">
+					@detail.quantity 件
+					</div>
+
+					<div class="col-md-2 text-xs-center text-md-right">
+						<span class="hidden-md-up">小计: </span>
+						<span class="item-price">¥@(detail.sale.originalUnitPrice * detail.quantity)</span>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+
+
+}

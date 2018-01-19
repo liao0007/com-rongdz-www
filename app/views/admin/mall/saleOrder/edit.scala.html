@@ -1,0 +1,163 @@
+@import daos.default.mall.SaleOrder
+@import daos.default.mall.SaleOrder.SaleOrderState
+@import daos.default.mall.SaleOrder.SaleOrderPaymentState
+@import daos.default.mall.SaleOrder.SaleOrderShippingState
+@import models.default.user.ShipToAddressFilter
+@import daos.default.mall.SaleOrder.SaleOrderDeliveryType
+@import models.default.mall.SaleOrderDetailFilter
+@import daos.default.product.Attribute
+@import daos.default.product.AttributeOption
+@import daos.default.product.Attribute.AttributeInputType
+@import models.default.mall.SaleOrderDetailAttributeValueFilter
+@(modelForm: Form[SaleOrder], action: Call)(implicit messages: Messages, request: RequestHeader)
+
+@currentController = @{controllers.admin.mall.routes.SaleOrderController}
+@implicitFieldConstructor = @{ b3.vertical.fieldConstructor }
+@updateOrCreateLabel() = @{modelForm.value.fold("新建")( _ => "更新")}
+
+@breadcrumb = @{
+  Seq(
+    ("销售订单", Some(currentController.index())),
+    modelForm.value.fold(("新建", None)){ item => (item.orderNumber, None)}
+  )
+}
+
+@scripts = {
+  .wait(function(){
+  Admin.userSelect2($('#userId'));
+  })
+}
+@views.html.admin.layout.main(title = updateOrCreateLabel, tabOpt = Some("mallSaleOrder"), breadcrumb = breadcrumb, scriptsOpt = Some(scripts)) {
+
+  @b3.form(action, 'id->"saleOrderForm") {
+    @views.html.admin.tags.pageHead {
+      @updateOrCreateLabel 销售订单
+    } {
+      <button type="submit" class="cta-button">保存</button>
+      @modelForm.value.map{ item =>
+        <a href="@currentController.newPage()" class="cta-button alt pad-left">新建</a>
+        <a href="javascript:void()" data-redirect="@currentController.index()" data-target="@currentController.delete(item.id)" class="cta-button alt pad-left btn-delete">删除</a>
+        <a class="cta-button plain pad-left" href="@currentController.prev(item.id)"><i class="fa fa-angle-double-left" aria-hidden="true"> 上一条</i></a>
+        <a class="cta-button plain" href="@currentController.next(item.id)">下一条 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+      }
+    }
+
+    @views.html.admin.tags.pageEditBody{
+      @modelForm.value match {
+        case Some(item) => {
+          <tr><th>订单编号</th><td><samp class="small">@item.orderNumber</samp></td></tr>
+          <tr><th>用户</th><td>@item.user.name</td></tr>
+          <tr><th>创建时间</th><td><samp class="small">@item.createdAt</samp></td></tr>
+          <tr><th>更新时间</th><td><samp class="small">@item.updatedAt</samp></td></tr>
+        }
+        case _ => {
+          @b3.text(modelForm("userId"), '_label -> "用户")
+        }
+      }
+    }{
+      <ul class="nav nav-tabs">
+        <li class="nav-item ml-1"><a class="nav-link active" href="#general-tab" data-toggle="tab" aria-expanded="true">基础信息</a></li>
+      </ul>
+
+      <div class="tab-content pt-1">
+        <div class="tab-pane fade active in" id="general-tab" aria-expanded="true">
+
+          <div class="row">
+            <div class="col-md-6">
+            @b3.select(modelForm("state"), SaleOrderState.map{ state => state.toString -> state.name}, '_label -> "订单状态")
+            </div>
+            <div class="col-md-6">
+            @b3.select(modelForm("paymentState"), SaleOrderPaymentState.map{ state => state.toString -> state.name}, '_label -> "付款状态")
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+            @b3.select(modelForm("shippingState"), SaleOrderShippingState.map{ state => state.toString -> state.name}, '_label -> "配送状态")
+            </div>
+          </div>
+
+          <div class="row">
+              @modelForm.value match {
+                case Some(item) => {
+                  <div class="col-md-6">
+                  @b3.select(modelForm("shipToAddressId"), item.user.shipToAddresses.includes(_.district).toSeq.map{shipToAddress =>
+                    shipToAddress.id.toString -> Seq(shipToAddress.name, shipToAddress.mobile, shipToAddress.district.city.province.name, shipToAddress.district.city.name, shipToAddress.district.name, shipToAddress.address).mkString(" ")
+                  }, '_label -> "收货信息")
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label"></label>
+                      <div>
+                        <a href="javascript:App.popupWindow('@controllers.admin.user.routes.ShipToAddressController.index(f = ShipToAddressFilter(userIdOpt = Some(item.userId)))', '@item.user.name', true)" class="cta-button alt">修改收货地址</a>
+                      </div>
+                    </div>
+                  </div>
+                }
+                case _ => {}
+              }
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+            @b3.select(modelForm("deliveryType"), SaleOrderDeliveryType.map{ state => state.toString -> state.name}, '_label -> "配送方式")
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+            @b3.text(modelForm("totalAmount"), '_label -> "商品总额")
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+            @b3.textarea(modelForm("memo"), '_label -> "备注")
+            </div>
+          </div>
+
+
+          @modelForm.value match {
+            case Some(item) => {
+
+              <table class="table table-inverse" >
+                <thead>
+                  <tr role="row" class="heading">
+                    <th width="80px"></th>
+                    <th>详情</th>
+                    <th width="100px">数量</th>
+                    <th width="100px">单价</th>
+                    <th width="100px">原价</th>
+                    <th width="120px"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                @for(detail<-item.details) {
+                  <tr class="align-middle">
+                    <td class="align-middle">
+                      <img class="img-fluid mx-auto" src="@customRoutes.UploadedAssets.at(detail.sale.sku.imageUrls(0))?x-oss-process=image/resize,limit_0,w_80/sharpen,100" alt="@detail.sale.title">
+                    </td>
+                    <td class="align-middle">@detail.sale.title<br/><a target="_blank" class="text-muted" href="@controllers.admin.mall.routes.SaleController.edit(detail.sale.id)"><samp>@detail.sale.saleNumber</samp></a><br/><a target="_blank" class="text-muted" href="@controllers.admin.product.routes.SkuController.edit(detail.sale.sku.id)"><samp>@detail.sale.sku.sku</samp></a></td>
+                    <td class="align-middle">@detail.quantity 件</td>
+                    <td class="align-middle">@detail.sale.unitPrice</td>
+                    <td class="align-middle">@detail.sale.originalUnitPrice</td>
+                    <td class="align-middle">
+                      <a href="javascript:App.popupWindow('@controllers.admin.mall.routes.SaleOrderDetailAttributeValueController.index(f = SaleOrderDetailAttributeValueFilter(saleOrderDetailIdOpt = Some(detail.id)))', '@detail.id')" class="cta-button plain trans borderless">定制</a>
+                    </td>
+                  </tr>
+                }
+                </tbody>
+              </table>
+
+              <a href="javascript:App.popupWindow('@controllers.admin.mall.routes.SaleOrderDetailController.index(f = SaleOrderDetailFilter(saleOrderIdOpt = Some(item.id)))', '@item.orderNumber', true)" class="cta-button alt">修改订单详情</a>
+
+            }
+            case _ => {}
+         }
+
+        </div>
+
+      </div>
+    }
+  }
+}

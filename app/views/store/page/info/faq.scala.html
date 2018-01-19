@@ -1,0 +1,239 @@
+@()(implicit messages: Messages, request: RequestHeader)
+
+@styles = {
+    <style>
+    .faq-question { margin: 12px 0; }
+    .faq-answer { display: none; }
+    .faq-category, .faq-category-list { margin: 20px 0 40px 0; }
+    .faq-question, .faq-answer a, .faq-category-list a { text-decoration: underline; }
+    </style>
+}
+
+@scripts = {
+    .wait(function(){
+        // create bookmark for each category and add link to bookmark list -- format: faq-category, ex: #faq-orders
+        $('.faq-category').each(function () {
+            var $cat = $(this);
+            $cat.attr('id', 'faq-' + $cat.data('category'));
+            $('.faq-category-list').append('<li><a href="#faq-' + $cat.data('category') + '">' + $cat.children('h2:first').text() + '</a></li>');
+
+            // create bookmark for each question and bind click event to expand answer -- format: faq-category-question, ex: #faq-orders-2
+            $cat.find('.faq-question').each(function (i) {
+                var $this = $(this);
+                $this.attr('id', 'faq-' + $cat.data('category') + '-' + i).attr('role', 'button');
+            });
+        }).on('click', '.faq-question', function () {
+            var $this = $(this);
+            $this.next('.faq-answer').slideToggle('fast');
+            ga('send', 'event', 'Interaction', 'Viewed', 'FAQ #' + $this.attr('id'));
+        });
+
+        // auto-expand direct-linked question
+        if (location.hash) {
+            $('#' + location.hash.substr(1)).trigger('click');
+            setTimeout(function () { location.hash = location.hash; }, 200); // force the bookmark navigation again since bookark didn't exist originally
+        }
+    })
+}
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store"), stylesOpt = Some(styles), scriptsOpt = Some(scripts)) {
+
+    <div class="mx-auto" style="max-width: 900px;">
+
+        <h1>常见问题</h1>
+        <ul class="faq-category-list list-simple"><!-- bookmark links filled in by script --></ul>
+
+        <div class="faq-category" data-category="fabirc-process" id="faq-fabirc-process">
+            <h2>面料与工艺</h2>
+            <div class="faq-question">
+                RONG定制的定制西装、衬衫在哪里生产？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    我们的西装在北京生产，合作的工厂专业从事西装定制，已服务日本、法国的知名连锁西装定制店10余年，年出口定制西装10几万套。 衬衫工厂位于上海，是业界知名的高端衬衫厂，为许多国际知名品牌进行成衣代工和量体定制服务。
+                </p>
+            </div>
+            <div class="faq-question">
+                面料是正品吗？为何比实体定制店便宜那么多？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    100%正品。我们绕过代理商，和意大利纺织厂直接批量采购面料，价格要比实体定制店一次3米的零剪要便宜得多，而且可以还及时拿到厂家当季推出的最新面料。另外，我们没有实体店，省去了高昂的店面租金。
+                </p>
+            </div>
+            <div class="faq-question">
+                在购买之前能否看到面料样品？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    量体师上门服务时，会携带面料册供您亲身感受面料的触感与品质。 未开通上门量体的地区，我们即将推出可以邮寄给您的自选面料卡，敬请期待。 您也可以到附近的实体定制店，凭面料品牌和编号查询到相应的面料。
+                </p>
+            </div>
+            <div class="faq-question">
+                衬衫面料抗皱吗？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    鲁泰的面料的抗皱性能较好，而Canclini面料则秉承意大利面料的一贯风格，未经过任何抗皱处理。总体来说，越高支纱的面料，抗皱性能越弱，越需要精心的打理。
+                </p>
+            </div>
+        </div>
+
+        <div class="faq-category" data-category="mtc" id="faq-mtc">
+            <h2>定制</h2>
+
+            <div class="faq-question">
+                那么多定制选项，我该如何选择？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    西装定制可以有成百上千种变化，我们已经剔除了那些不必要的选项，只留下经典。所以您尽可以参考每一个选项的说明和示意图，按自己的喜好进行选择。或者就按照默认的选项，绝对不会出错。也可拨打客服电话 010-84417380，我们将很高兴为您提供专业的意见，协助您做出最适合自己的选择。
+                </p>
+            </div>
+            <div class="faq-question">
+                我可以单独定制一件西装上衣，裤子或马甲吗？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    网站暂时还没有单西、裤子和马甲的单独定制，但已在我们的计划之中。如您现在就有需要，可以拨打客服电话 010-84417380，我们将尽最大的努力满足您的需要。
+                </p>
+            </div>
+            <div class="faq-question">
+                我可以定制包含马甲的西装三件套吗？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    可以，请您在定制选项中点击“高级选项”，在“马甲”项中选择“需要”，即可添加马甲并定制样式。
+                </p>
+            </div>
+            <div class="faq-question">
+                我已经付款了，还可以更改定制选项吗？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    在付款24小时内是可以修改的，24小时后则要看生产的进度而定。请拨打客服电话 010-84417380，我们将尽最大的努力满足您的需要。
+                </p>
+            </div>
+            <div class="faq-question">
+                我可以选择网站上没有的定制选项或款式吗？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    一般情况下是不可以的，但如果您有特殊原因或需要，请拨打客服电话 010-84417380，我们将尽最大的努力满足您的需要。
+                </p>
+            </div>
+        </div>
+
+        <div class="faq-category" data-category="measurement" id="faq-measurement">
+            <h2>量体</h2>
+            <div class="faq-question">
+                如选择自助量体，如何保证量出的尺寸准确呢？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    测量净体尺寸其实非常简单，您只需认真按照视频中的步骤测量，并提供正、侧、后面三张照片即可。在后台，我们会对您提供的尺寸进行数据模型校验，并由业界最有经验的裁剪师进行人工审核。另外，我们提供100%合身保证，任何原因造成的不合身，我们都会提供免费修改、免费重做或者退货。
+                </p>
+            </div>
+            <div class="faq-question">
+                我已经有一件很合身的西装，可否按照它的尺寸制作？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    可以，我们可以做到肩宽、胸围、腰围、袖长、衣长等尺寸一样，但不能保证每个细节尺寸完全一样。您需要将这件西装寄给我们，我们会按照它的尺寸为您制版，大概在一周后将这件西装寄回给您。
+                </p>
+            </div>
+            <div class="faq-question">
+                一个账户是否可以拥有多个尺寸？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    不可以，除非您像绿巨人一样能变身 :) 如果您需要为亲人或朋友定制，请为他们每人建立一个账户。
+                </p>
+            </div>
+            <div class="faq-question">
+                我的账户中的尺寸为什么和我输入过的尺寸不一样？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    您输入的尺寸是“净体尺寸”（即您身体的尺寸），在您第一次下单后，我们的裁剪师在制版的过程中会为您生成“成衣尺寸”（即您衣服的尺寸），并在我的账户中替换“净体尺寸”。
+                </p>
+            </div>
+            <div class="faq-question">
+                为何在我的账户中看不到我的净体尺寸？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    在您第一次下单后，“成衣尺寸”会替换“净体尺寸”。如您需要了解您的“净体尺寸”，请拨打客服电话 010-84417380。
+                </p>
+            </div>
+        </div>
+
+        <div class="faq-category" data-category="delivery" id="faq-delivery">
+            <h2>配送</h2>
+            <div class="faq-question">
+                商品如何配送？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    所有商品免费邮寄，优先选用顺丰和德邦，如无法到达就选择申通，申通如果也无法到达就选择中国邮政EMS。
+                </p>
+            </div>
+            <div class="faq-question">
+                付款后多久可以收到商品？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    从付款日起，西装定制周期15个工作日，衬衫定制周期10个工作日。
+                </p>
+            </div>
+            <div class="faq-question">
+                在下单后，收货地址发生变更，如何修改？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    请拨打客服电话 010-84417380，在核实您的身份信息后，客服人员会为您修改。
+                </p>
+            </div>
+            <div class="faq-question">
+                我的订单可以加急吗？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    可以，但需收取额外的费用。西装定制周期缩短至9个工作日，额外收取500元；衬衫缩短至5个工作日，额外收取200元。
+                </p>
+            </div>
+        </div>
+
+        <div class="faq-category" data-category="return" id="faq-return">
+            <h2>修改/退货</h2>
+            <div class="faq-question">
+                收到的西装不合身，我该怎么办？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    RONG定制承诺100%合身保证。在您收到西装的一个月内，任何尺寸问题我们将免费为您修改至100%合身为止，如无法修改则会为您免费重做。请拨打客服电话 010-84417380。
+                </p>
+            </div>
+        </div>
+
+        <div class="faq-category" data-category="payment" id="faq-payment">
+            <h2>支付方式</h2>
+            <div class="faq-question">
+                有哪些支付方式？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    在线支付支持支付宝、微信支付和多数银行的网银支付，皆为第三方支付平台。目前微信支付仅支持微信访问网站时使用。Tailorwoods不保留您的任何支付信息。
+                </p>
+            </div>
+            <div class="faq-question">
+                是否支持货到付款？
+            </div>
+            <div class="faq-answer">
+                <p>
+                    定制西装、衬衫和鞋都是按照您的尺寸和要求制作的，所以必须是付款后才开始制作，不支持货到付款。
+                </p>
+            </div>
+        </div>
+    </div>
+}

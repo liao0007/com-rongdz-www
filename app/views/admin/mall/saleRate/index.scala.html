@@ -1,0 +1,79 @@
+@import daos.default.mall.SaleRate
+@import models.default.mall.SaleRateFilter
+@import daos.ActiveRecord
+@import daos.default.mall.SaleRate.SaleRateType
+@(items: Seq[SaleRate], pagination: Pagination, filter: SaleRateFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
+
+@currentController = @{controllers.admin.mall.routes.SaleRateController}
+
+@breadcrumb = @{
+  Seq(
+    ("销售折扣", Some(currentController.index()))
+  )
+}
+
+@views.html.admin.layout.main(title = "销售折扣", tabOpt = Some("mallSaleRate"), breadcrumb = breadcrumb) {
+
+    @views.html.admin.tags.pageHead {
+        销售折扣
+    } {
+        <a href="@currentController.newPage()" class="cta-button">新建</a>
+    }
+
+    @views.html.admin.tags.pageIndexBody {
+        <form method="get" action="@currentController.index()">
+            <table class="table table-inverse" >
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="80px"></th>
+                        <th>代码</th>
+                        <th width="100px">描述</th>
+                        <th width="100px">类别</th>
+                        <th width="100px">折扣</th>
+                        <th width="120px">开始日期</th>
+                        <th width="120px">结束日期</th>
+                        <th width="150px">操作</th>
+                    </tr>
+                        <tr role="row" class="filter">
+                            <td class="align-middle"><input type="text" class="form-control" name="f.price" value="@filter.codeOpt.getOrElse("")"></td>
+                            <td class="align-middle"><input type="text" class="form-control" name="f.price" value="@filter.descriptionOpt.getOrElse("")"></td>
+                            <td class="align-middle">
+                                <select name="f.cid" class="form-control input-sm">
+                                    <option></option>
+                                    @SaleRateType.map{ rateType =>
+                                        <option value="@rateType.toString" @if(filter.rateTypeOpt.contains(rateType.toString)){selected}>@rateType.name</option>
+                                    }
+                                </select>
+                            </td>
+                            <td class="align-middle"><input type="text" class="form-control" name="f.start" value="@filter.startAtOpt.getOrElse("")"></td>
+                            <td class="align-middle"><input type="text" class="form-control" name="f.close" value="@filter.closeAtOpt.getOrElse("")"></td>
+                            <td class="align-middle">
+                                <button class="cta-button alt"><i class="fa fa-search"></i> 搜索</button>
+                            </td>
+                        </tr>
+                </thead>
+                <tbody>
+                @for(item<-items) {
+                    <tr>
+                        <td class="align-middle">
+                            <div><a class="highlight-link" href="@currentController.edit(item.id)"><samp>@item.code</samp></a></div>
+                        </td>
+                        <td class="align-middle">@item.description</td>
+                        <td class="align-middle">@SaleRateType.fromString(item.rateType).map(_.name)</td>
+                        <td class="align-middle">@item.rate</td>
+                        <td class="align-middle">@item.startAt</td>
+                        <td class="align-middle">@item.closeAt</td>
+                        <td class="align-middle">
+                            <a href="javascript:void()" data-target="@currentController.delete(item.id)" class="cta-button plain trans borderless btn-delete">删除</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </form>
+    }
+
+    @views.html.shared.paginator(pager => currentController.index(pager), pagination)
+
+
+}

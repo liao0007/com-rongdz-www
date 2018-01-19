@@ -1,0 +1,57 @@
+@import daos.default.mall.SaleOrderDetail
+@import models.default.mall.SaleOrderDetailFilter
+@import daos.default.product.Attribute
+@import daos.default.product.AttributeOption
+@import models.default.mall.SaleOrderDetailAttributeValueFilter
+@(items: Seq[SaleOrderDetail], pagination: Pagination, filter: SaleOrderDetailFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
+
+@currentController = @{controllers.admin.mall.routes.SaleOrderDetailController}
+
+@views.html.admin.layout.window(title = "订单详情", tabOpt = Some("productSaleOrderDetail")) {
+
+    @views.html.admin.tags.pageHead {
+        订单详情
+    } {
+        <a href="@currentController.newPage(filter.saleOrderIdOpt.get)" class="cta-button">新建</a>
+    }
+
+    @views.html.admin.tags.pageIndexBody {
+        <form method="get" action="@currentController.index()">
+            <table class="table table-inverse" >
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="150px"></th>
+                        <th>详情</th>
+                        <th width="100px">数量</th>
+                        <th width="100px">单价</th>
+                        <th width="100px">原价</th>
+                        <th width="250px">操作</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                @for(item<-items) {
+                    <tr class="align-middle">
+                        <td class="align-middle">
+                            <a href="@currentController.edit(item.id)">
+                                <img class="img-fluid mx-auto" src="@customRoutes.UploadedAssets.at(item.sale.sku.imageUrls(0))?x-oss-process=image/resize,limit_0,w_80/sharpen,100" alt="@item.sale.title">
+                            </a>
+                        </td>
+                        <td class="align-middle">@item.sale.title<br/><samp>@item.sale.saleNumber</samp><br/><samp>@item.sale.sku.sku</samp></td>
+                        <td class="align-middle">@item.quantity 件</td>
+                        <td class="align-middle">@item.sale.unitPrice</td>
+                        <td class="align-middle">@item.sale.originalUnitPrice</td>
+                        <td class="align-middle">
+                            <a href="javascript:App.popupWindow('@controllers.admin.mall.routes.SaleOrderDetailAttributeValueController.index(f = SaleOrderDetailAttributeValueFilter(saleOrderDetailIdOpt = Some(item.id)))', '@item.id')" class="cta-button plain trans borderless">定制</a>
+                            <a href="javascript:void()" data-target="@currentController.delete(item.id)" class="cta-button plain trans borderless btn-delete">删除</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </form>
+    }
+
+    @views.html.shared.paginator(pager => currentController.index(pager), pagination)
+
+}

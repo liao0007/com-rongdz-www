@@ -1,0 +1,73 @@
+@import daos.default.product.Subcategory
+@import models.default.product.SubcategoryFilter
+@import daos.default.product.Category
+@(items: Seq[Subcategory], pagination: Pagination, filter: SubcategoryFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
+
+@currentController = @{controllers.admin.product.routes.SubcategoryController}
+
+@breadcrumb = @{
+    Seq(
+        ("子类", Some(currentController.index()))
+    )
+}
+
+@views.html.admin.layout.main(title = "子类", tabOpt = Some("productSubcategory"), breadcrumb = breadcrumb) {
+
+    @views.html.admin.tags.pageHead {
+        子类
+    } {
+        <a href="@currentController.newPage()" class="cta-button">新建</a>
+    }
+
+    @views.html.admin.tags.pageIndexBody {
+        <form method="get" action="@currentController.index()">
+            <table class="table table-inverse" >
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="200px"></th>
+                        <th width="200px">名称</th>
+                        <th>描述</th>
+                        <th width="200px">品类</th>
+                        <th width="200px">排序</th>
+                        <th width="150px">操作</th>
+                    </tr>
+                    <tr role="row" class="filter">
+                        <td class="align-middle"></td>
+                        <td class="align-middle"><input type="text" class="form-control" name="f.name" value="@filter.nameOpt.getOrElse("")"></td>
+                        <td class="align-middle"><input type="text" class="form-control" name="f.desc" value="@filter.descriptionOpt.getOrElse("")"></td>
+                        <td class="align-middle">
+                            <select name="f.cid" class="form-control input-sm">
+                                <option></option>
+                                @Category.all.toList.map{ category =>
+                                    <option value="@category.id" @if(filter.categoryIdOpt.contains(category.id)){selected}>@category.name</option>
+                                }
+                            </select>
+                        </td>
+                        <td class="align-middle"><button class="cta-button alt"><i class="fa fa-search"></i> 搜索</button></td>
+                    </tr>
+                </thead>
+                <tbody>
+                @for(item<-items) {
+                    <tr>
+                        <td class="align-middle">
+                        @item.bannerImage.map{ bannerImage =>
+                            <img src="@customRoutes.UploadedAssets.at(bannerImage)?x-oss-process=image/resize,limit_0,w_200">
+                        }
+                        </td>
+                        <td class="align-middle"><a class="highlight-link" href="@currentController.edit(item.id)">@item.name</a></td>
+                        <td class="align-middle">@item.description</td>
+                        <td class="align-middle">@item.category.name</td>
+                        <td class="align-middle">@item.sequence</td>
+                        <td class="align-middle">
+                            <a href="javascript:void()" data-target="@currentController.delete(item.id)" class="cta-button plain trans borderless btn-delete">删除</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </form>
+    }
+
+    @views.html.shared.paginator(pager => currentController.index(pager), pagination)
+
+}

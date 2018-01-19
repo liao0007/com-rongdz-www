@@ -1,0 +1,42 @@
+@import daos.default.mall.Booking
+@(booking: Booking)(implicit messages: Messages, request: RequestHeader)
+
+@styles = {
+	<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/booking.css")">
+}
+
+@scripts = {
+    .script('@customRoutes.Assets.at("store/scripts/pages/booking.js")')
+    .wait(function () {
+        PageBooking.init();
+    })
+}
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store"), stylesOpt = Some(styles), scriptsOpt = Some(scripts)) {
+
+	<h1 class="text-xs-center">预约成功</h1>
+	<div class="text-xs-center text-uppercase">我们的客服将尽快与您联系</div>
+
+	<table class="table table-inverse mt-1h">
+		<tr>
+			<th>预约号</th>
+			<td>@booking.bookingNumber</td>
+		</tr>
+		<tr>
+			<th>您的姓名</th>
+			<td>@booking.name</td>
+		</tr>
+		<tr>
+			<th>手机号码</th>
+			<td>@booking.mobile</td>
+		</tr>
+		<tr>
+			<th>所在城市</th>
+			<td>@booking.city</td>
+		</tr>
+	</table>
+
+	<div class="text-xs-center mt-1">
+		<a href="@controllers.store.routes.ApplicationController.index()" class="cta-button">返回首页</a>
+	</div>
+}

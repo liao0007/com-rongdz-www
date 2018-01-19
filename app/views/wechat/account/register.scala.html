@@ -1,0 +1,102 @@
+@import auth.providers.WechatProfile
+@(wechatProfile: WechatProfile, openId: String, returnUrl: String)(implicit messages: Messages, request: RequestHeader)
+
+@styles = {
+	<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("wechat/styles/pages/account.css")">
+}
+
+@scripts = {
+	<script type="text/javascript">
+			$LAB
+					.script('@customRoutes.Assets.at("wechat/scripts/pages/account.js")')
+					.wait(function () {
+						PageAccount.handleSignUp();
+						PageAccount.handleActivate();
+					});
+	</script>
+}
+
+@views.html.wechat.layout.main(title = "荣定制", tabOpt = Some("store"), stylesOpt = Some(styles), scriptsOpt = Some(scripts)) {
+
+	<header class='title-header'>
+		<h1 class="title">注册</h1>
+	</header>
+
+		<form id="signUpForm">
+			<div class="weui-cells weui-cells_form">
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">昵称</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" type="text" id="name" name="name" required data-msg-required="请输入昵称" value="@wechatProfile.nickname">
+					<input type="hidden" id="avatar" name="avatar" value="@wechatProfile.avatarUrl">
+					<input type="hidden" id="openId" name="openId" value="@openId">
+					<input type="hidden" name="returnUrl" id="returnUrl" value="@returnUrl">
+				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn hidden"></i>
+				</div>
+			</div>
+
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" type="number" pattern="[0-9]*" id="mobile" name="mobile" required digits data-msg-required="请输入手机号码" data-msg-digits="请输入有效手机号码">
+				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn hidden"></i>
+				</div>
+			</div>
+			</div>
+		</form>
+
+		<form id="activateForm">
+			<div class="weui-cells weui-cells_form">
+			<div class="weui-cell weui-cell_vcode">
+				<div class="weui-cell__hd">
+					<label class="weui-label">验证码</label>
+				</div>
+				<div class="weui-cell__bd">
+					<input type="text" id="checkCode" name="checkCode" class="weui-input" required data-msg-required="请请输入验证码">
+				</div>
+				<div class="weui-cell__ft">
+					<button class="weui-vcode-btn" id="signUpButton">获取验证码</button>
+				</div>
+			</div>
+
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">设置密码</label></div>
+				<div class="weui-cell__bd">
+					<input type="password" id="password" name="password" class="weui-input" required data-msg-required="请请输入密码">
+				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn hidden"></i>
+				</div>
+			</div>
+
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">确认密码</label></div>
+				<div class="weui-cell__bd">
+					<input type="password" id="passwordCf" class="weui-input" required data-msg-required="请确认密码" data-rule-equalto="#password" data-msg-equalto="两次密码输入不一致">
+				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn hidden"></i>
+				</div>
+			</div>
+			</div>
+		</form>
+
+	<div class="weui-cells__tips error hidden" id="error"></div>
+
+	<label for="weuiAgree" class="weui-agree">
+		<span class="weui-agree__text">
+			我已阅读并同意<a href="@controllers.store.routes.PageController.info(id="terms")">《荣定制用户协议》</a>
+		</span>
+	</label>
+
+	<div class="weui-btn-area">
+		<input type="button" id="registerButton" class="weui-btn weui-btn_primary" value="立即注册">
+		<a href="@controllers.wechat.routes.AccountController.bind(openId, returnUrl)" class="weui-btn weui-btn_plain-primary">已有账号? 立即绑定</a>
+	</div>
+
+
+}

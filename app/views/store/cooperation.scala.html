@@ -1,0 +1,171 @@
+@import daos.default.mall.Booking
+@(bookingForm: Form[Booking])(implicit messages: Messages, request: RequestHeader)
+
+@implicitFieldConstructor = @{ b3.vertical.fieldConstructor }
+
+@styles = {
+	<style>
+		h1 {
+			text-align: center;
+			margin: 40px auto;
+		}
+		.target {
+			padding: 20px;
+			background-color: #EEEEEE;
+			height: 150px;
+		}
+
+		.adv {
+			font-size: 24px;
+			background-color: #EEEEEE;
+			height: 100%;
+			text-align: center;
+		}
+
+		.adv:nth-child(even) {
+			background-color: transparent;
+		}
+
+		.adv p {
+			margin-top: 40px;
+		}
+
+		.info {
+			text-align: center;
+		}
+	</style>
+}
+
+@scripts = {
+
+}
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store"), stylesOpt = Some(styles), scriptsOpt = Some(scripts)) {
+
+	<div class="catalog-hero-img" data-img-src="@routes.Assets.at("/store/images/cooperation/join-us.jpg")" ></div>
+	<div class="catalog-hero-txt">
+		<div class="txt-md-invert">
+			<h1 class="display-3">
+				成为RONG定制的一员
+			</h1>
+		</div>
+	</div>
+
+	<h1>招募对象</h1>
+	<div class="row">
+		<div class="col-md-3">
+			<img style="width: 100%" src="@routes.Assets.at("/store/images/cooperation/social-contact.jpg")">
+			<div class="target">
+				<h3>社交范围广的人士</h3>
+				<p>拥有一定的人脉资源，<br/>
+					拥有各行各业的生活圈，<br/>
+					拥有一定的社交圈，<br/>
+					微信朋友圈范围强大</p>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<img style="width: 100%" src="@routes.Assets.at("/store/images/cooperation/high-set.jpg")">
+			<div class="target">
+				<h3>高定行业的从业人员</h3>
+				<p>从事过服装定制，<br/>
+					家具定制，<br/>
+					其他私人定制相关行业</p>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<img style="width: 100%" src="@routes.Assets.at("/store/images/cooperation/customer-groups.jpg")">
+			<div class="target">
+				<h3>拥有高品质客户群体</h3>
+				<p>高端会所，婚庆公司，4S店，<br/>
+					律师事务所，金融公司，<br/>
+					健身房，酒店，公务员培训学校，<br/>
+					律师培训学校等</p>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<img style="width: 100%" src="@routes.Assets.at("/store/images/cooperation/ardently-love.jpg")">
+			<div class="target">
+				<h3>热爱时尚行业</h3>
+				<p>认同RONG定制理念，<br/>
+					与RONG定制共同打造“互联网<br/>
+					＋时尚”服装定制新体验</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="catalog-hero-img" data-img-src="@routes.Assets.at("/store/images/cooperation/whole-category-.jpg")" style="margin-top: 80px;"></div>
+
+	<h1>项目优势</h1>
+	<div class="row adv">
+		<div class="col-md-6">
+			<p>推荐他人成为我们的客户<br/>
+				立即成为我们的一员<br/>
+				还可轻松赚取推荐奖励
+			</p>
+		</div>
+		<div class="col-md-6">
+			<img style="width: 100%" src="@routes.Assets.at("/store/images/cooperation/wealth.jpg")">
+		</div>
+	</div>
+
+	<div class="row adv">
+		<div class="col-md-6">
+			<img style="width: 100%" src="@routes.Assets.at("/store/images/cooperation/recommend.jpg")">
+		</div>
+		<div class="col-md-6">
+			<p>自由支配自己时间的同时<br/>
+				轻松积累财富</p>
+		</div>
+	</div>
+
+	<div class="row adv">
+		<div class="col-md-6">
+			<p>打开时尚大门<br/>
+				成为朋友圈最有品味的时尚达人<br/>
+				引领品质生活</p>
+		</div>
+		<div class="col-md-6">
+			<img style="width: 100%" src="@routes.Assets.at("/store/images/cooperation/fashion-week.jpg")">
+		</div>
+	</div>
+
+	<div class="row adv">
+		<div class="col-md-6">
+			<img style="width: 100%" src="@routes.Assets.at("/store/images/cooperation/salon.jpg")">
+		</div>
+		<div class="col-md-6">
+			<p>加入我们丰富的活动和话题<br/>
+				拓宽您的人脉<br/>
+				加强您与朋友客户的关系
+			</p>
+		</div>
+	</div>
+
+	<div class="row">
+	<div class="col-md-4 offset-md-4">
+		<h1>联系我们</h1>
+		<p class="info">请填写您的联系方式，服务专员将尽快与您取得联系<br/>客服热线: 010-84417380 微信客服: yuanfatz</p>
+		@b3.form(controllers.store.routes.ApplicationController.submitCooperation(), 'id->"bookingForm") {
+			<div class="section" id="booking">
+				<div class="container form">
+					@b3.inputType("hidden", bookingForm("bookingNumber"), 'value-> Booking.newBookingNumber)
+					@b3.text(bookingForm("name"), '_label->"您的姓名", 'required->"required", Symbol("data-msg-required")->"请输入姓名，我们将与您联系", Symbol("placeholder") -> "请输入姓名，我们将与您联系")
+					@b3.text(bookingForm("mobile"), '_label->"手机号码", 'required->"required", 'digits->"digits", Symbol("data-msg-required")->"请填写手机号码", Symbol("data-msg-digits")->"请填写有效手机号码", Symbol("placeholder") -> "请输入电话号码，洽谈合作事宜" )
+					@b3.select(bookingForm("city"), Seq("北京市" -> "北京市", "上海市" -> "上海市", "广州市" -> "广州市", "深圳市" -> "深圳市", "重庆市" -> "重庆市", "成都市" -> "成都市", "杭州市" -> "杭州市", "郑州市" -> "郑州市", "青岛市" -> "青岛市", "合肥市" -> "合肥市", "长沙市" -> "长沙市", "沈阳市" -> "沈阳市", "济南市" -> "济南市", "其他"->"其他"), '_label->"所在城市")
+					@b3.text(bookingForm("address"), '_label->"备注", Symbol("placeholder") -> "请输入平安工号或职业或公司(选填)")
+
+					<button style="width: 100%" type="submit" class="cta-button submit" id="submit">立即提交</button>
+				</div>
+			</div>
+		}
+	</div>
+	</div>
+
+	<h1>关注我们</h1>
+	<div class="row">
+		<div class="col-md-2 offset-md-5">
+			<img src="@customRoutes.Assets.at("pinan/images/booking/succeed/QR-code.jpg")">
+		</div>
+	</div>
+
+}

@@ -1,0 +1,309 @@
+@import daos.default.mall.Booking
+@import java.util.UUID
+@import models.default.mall.SaleFilter
+@(bookingForm: Form[Booking])(implicit messages: Messages, request: RequestHeader)
+@implicitFieldConstructor = @{ b3.horizontal.fieldConstructor("col-xs-3", "col-xs-9") }
+
+@headScripts = {
+    <!-- Google Analytics Content Experiment code -->
+    <script>function utmx_section(){}function utmx(){}(function(){var
+            k='136932500-0',d=document,l=d.location,c=d.cookie;
+        if(l.search.indexOf('utm_expid='+k)>0)return;
+        function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
+        indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
+                        length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
+                '<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
+                        '://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
+                '&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
+                valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+                '" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
+    </script><script>utmx('url','A/B');</script>
+        <!-- End of Google Analytics Content Experiment code -->
+}
+
+@styles = {
+    <link href="@customRoutes.Assets.at("pinan/styles/booking/v6.css")" rel="stylesheet" type="text/css"/>
+    <style>
+        .header {
+            margin-top: 40px;
+        }
+    </style>
+}
+
+@scripts = {
+    <script>
+            $(document).ready(function () {
+                $('#bookingForm').validate({
+                    ignore: ":hidden, :disabled",
+                    highlight: function(n) {
+                        $(n).addClass("err").closest(".form-group").addClass("has-error")
+                    },
+                    unhighlight: function(n) {
+                        $(n).removeClass("err").closest(".form-group").filter(":not(:has(.err))").removeClass("has-error")
+                    },
+                    errorElement: "span",
+                    errorClass: "help-block",
+                    errorPlacement: function(errorNode, input) {
+                        $("nowhere")
+                    }
+                });
+            });
+            $(window).on('load', function () {
+                @if(bookingForm.errors.nonEmpty) {
+                document.getElementById("anchor").scrollIntoView();
+                }
+            })
+    </script>
+}
+
+@views.html.pinan.layout.main(title = "立即预约 免费量体", headScripts = headScripts, styles = styles, scripts = scripts) {
+
+    <img src="@customRoutes.Assets.at("pinan/images/booking/v6/pingan@2x.jpg")" style="margin-top: 0;">
+
+    <div class="header">
+        <img src="@customRoutes.Assets.at("pinan/images/booking/v6/recruitment_order@2x.jpg")">
+        <a class="btn" href="@controllers.store.routes.ApplicationController.cooperation()">点击了解更多</a>
+    </div>
+
+
+    <img src="@customRoutes.Assets.at("pinan/images/booking/v6/introduce@2x.jpg")">
+    <img style="margin-top:0;" src="@customRoutes.Assets.at("pinan/images/booking/v6/designer@2x.jpg")">
+
+
+    <div class="header">
+        <img src="@customRoutes.Assets.at("pinan/images/booking/v6/star_customer@2x.jpg")">
+    </div>
+
+    <div class="header">
+        <img src="@customRoutes.Assets.at("pinan/images/booking/v6/new_arrival@2x.jpg")">
+        <a class="btn" href="@controllers.store.routes.CatalogController.list(f = SaleFilter( categoryIdOpt = Some(12)))">点击了解更多</a>
+    </div>
+
+    <div class="header">
+        <img src="@customRoutes.Assets.at("pinan/images/booking/v6/necktie_list@2x.jpg")">
+        <a class="btn" href="@controllers.store.routes.CatalogController.list(f = SaleFilter( categoryIdOpt = Some(8)))">点击了解更多</a>
+    </div>
+
+    <div class="section list">
+        @*<div class="head">*@
+            @*<h2><small>SPRING AND SUMMER WEDDING SEASON</small>春夏婚礼季</h2>*@
+        @*</div>*@
+
+        <img src="@customRoutes.Assets.at("pinan/images/booking/v6/best_sellers@2x.jpg")">
+        <ul>
+            <li>
+                <a href="@controllers.store.routes.CatalogController.sale(saleNumber = "TIE0008Y0002600120170629164239")">
+                    <img src="@customRoutes.Assets.at("pinan/images/booking/v6/necktie1@2x.jpg")" />
+                    <div class="title">意大利进口酒红色条纹真丝领带</div>
+                    <div class="price">平安价：¥699</div>
+                </a>
+            </li>
+
+            <li>
+                <a href="@controllers.store.routes.CatalogController.sale(saleNumber = "TIE0008Y0005400220170629164535")">
+                <img src="@customRoutes.Assets.at("pinan/images/booking/v6/necktie2.jpg")" />
+                <div class="title">意大利进口藏蓝色佩斯利花纹真丝领带</div>
+                <div class="price">平安价：¥699</div>
+                </a>
+            </li>
+        </ul>
+
+        <a class="btn" href="@controllers.store.routes.CatalogController.list(f = SaleFilter( categoryIdOpt = Some(8)))">点击了解更多</a>
+    </div>
+
+
+    <div class="section list">
+        @*<div class="head">*@
+            @*<h2><small>NEW LORO PIANA</small>新品Loro Piana</h2>*@
+        @*</div>*@
+
+        <img src="@customRoutes.Assets.at("pinan/images/booking/v6/glasses_banner@2x.jpg")">
+        <ul>
+            <li>
+                <a href="@controllers.store.routes.CatalogController.sale(saleNumber = "Z260P16S000120170629163922")">
+                    <img src="@customRoutes.Assets.at("pinan/images/booking/v6/glasses1.jpg")" />
+                    <div class="title">ZELES黑色经典大框太阳眼镜</div>
+                    <div class="price">尝鲜价：¥980</div>
+                </a>
+            </li>
+
+            <li>
+                <a href="@controllers.store.routes.CatalogController.sale(saleNumber = "Z260P16S0012 YL920170629164021")">
+                    <img src="@customRoutes.Assets.at("pinan/images/booking/v6/glasses2@2x.jpg")" />
+                    <div class="title">ZELES金框镀膜镜片飞行员系列太阳眼镜</div>
+                    <div class="price">尝鲜价：¥980</div>
+                </a>
+            </li>
+        </ul>
+
+        <a class="btn" href="@controllers.store.routes.CatalogController.list(f = SaleFilter( categoryIdOpt = Some(12)))">点击了解更多</a>
+    </div>
+
+
+
+    <div class="section list">
+        @*<div class="head">*@
+            @*<h2><small>FASHION CASUAL</small>时尚休闲单西</h2>*@
+        @*</div>*@
+
+        <img src="@customRoutes.Assets.at("pinan/images/booking/v6/ceremony_banner@2x.jpg")">
+        <ul>
+            <li>
+                <a href="@controllers.store.routes.CatalogController.sale(saleNumber = "ST0108C2750900220170301141139")">
+                    <img src="@customRoutes.Assets.at("pinan/images/booking/v6/ceremony1@2x.jpg")" />
+                    <div class="title">意大利康可丽尼面料纯棉白色提花礼服衬衣</div>
+                    <div class="price">平安价：¥1099&nbsp;<span>1699</span></div>
+                </a>
+            </li>
+
+            <li>
+                <a href="@controllers.store.routes.CatalogController.sale(saleNumber = "SU15Q08Z002100120170703103313")">
+                    <img src="@customRoutes.Assets.at("pinan/images/booking/v6/ceremony2@2x.jpg")" />
+                    <div class="title">意大利杰尼亚面料黑色礼服套装</div>
+                    <div class="price">平安价：¥5900&nbsp;<span>7900</span></div>
+                </a>
+            </li>
+        </ul>
+
+        <a class="btn" href="@controllers.store.routes.CatalogController.list(f = SaleFilter( categoryIdOpt = Some(2)))">点击了解更多</a>
+    </div>
+
+
+
+    <div class="section list">
+        @*<div class="head">*@
+            @*<h2><small>MEN'S SHIRT</small>男士长袖衬衫</h2>*@
+        @*</div>*@
+
+        <img src="@customRoutes.Assets.at("pinan/images/booking/v6/suit_banner@2x.jpg")">
+        <ul>
+            <li>
+                <a href="@controllers.store.routes.CatalogController.sale(saleNumber = "SU22Q10L0014400220170531163211")">
+                    <img src="@customRoutes.Assets.at("pinan/images/booking/v6/suit1@2x.jpg")" />
+                    <div class="title">意大利Loro Piana面料130支纯羊毛藏蓝色套西</div>
+                    <div class="price">平安价：¥5188 <span>6900</span></div>
+                </a>
+            </li>
+
+            <li>
+                <a href="@controllers.store.routes.CatalogController.sale(saleNumber = "SU03Q08L0013200220170703103130")">
+                    <img src="@customRoutes.Assets.at("pinan/images/booking/v6/suit2@2x.jpg")" />
+                    <div class="title">意大利Loro Piana面料130支纯羊毛深灰色套西</div>
+                    <div class="price">平安价：¥5188&nbsp;<span>6900</span></div>
+                </a>
+            </li>
+        </ul>
+
+        <a class="btn" href="@controllers.store.routes.CatalogController.list(f = SaleFilter( categoryIdOpt = Some(2)))">点击了解更多</a>
+    </div>
+
+
+
+    <div class="section list">
+        @*<div class="head">*@
+            @*<h2><small>READY TO WEAR</small>女士成衣</h2>*@
+        @*</div>*@
+
+        <img src="@customRoutes.Assets.at("pinan/images/booking/v6/shirt_banner@2x.jpg")">
+        <ul>
+            <li>
+                <a href="@controllers.store.routes.CatalogController.sale(saleNumber = "ST0104C3340400120170301142701")">
+                    <img src="@customRoutes.Assets.at("pinan/images/booking/v6/shirt1@2x.jpg")" />
+                    <div class="title">意大利康可丽尼面料纯棉浅蓝色衬衣</div>
+                    <div class="price">平安价：¥999&nbsp;<span>1599</span></div>
+                </a>
+            </li>
+
+            <li>
+                <a href="@controllers.store.routes.CatalogController.sale(saleNumber = "ST0116L0054400120170622172547")">
+                    <img src="@customRoutes.Assets.at("pinan/images/booking/v6/shirt2@2x.jpg")" />
+                    <div class="title">国产新疆优质棉面料长袖蓝色格纹衬衣</div>
+                    <div class="price">平安价：¥699&nbsp;<span>1099</span></div>
+                </a>
+            </li>
+        </ul>
+
+        <a class="btn" href="@controllers.store.routes.CatalogController.list(f = SaleFilter( categoryIdOpt = Some(3)))">点击了解更多</a>
+    </div>
+
+
+
+    <div class="titleHead" id="anchor">
+        <h2>免费预约上门量体</h2>
+        <p>Reserve Now</p>
+    </div>
+    @b3.form(controllers.pinan.routes.BookingController.book("v6"), 'id->"bookingForm") {
+        <div class="section" id="booking">
+            <div class="container form">
+                @b3.inputType("hidden", bookingForm("bookingNumber"), 'value-> Booking.newBookingNumber)
+                @b3.text(bookingForm("name"), '_label->"您的姓名", 'required->"required", Symbol("data-msg-required")->"您的姓名", Symbol("placeholder") -> "请输入姓名，免费预约上门量体")
+                @b3.text(bookingForm("mobile"), '_label->"手机号码", 'required->"required", 'digits->"digits", Symbol("data-msg-required")->"您的手机号码", Symbol("data-msg-digits")->"请填写有效手机号码", Symbol("placeholder") -> "请输入电话号码，享受专人服务" )
+                @b3.select(bookingForm("city"), Seq("北京" -> "北京","天津" -> "天津","上海" -> "上海","广州" -> "广州","深圳" -> "深圳","珠海" -> "珠海","中山" -> "中山","东莞" -> "东莞","佛山" -> "佛山","重庆" -> "重庆","成都" -> "成都","南京" -> "南京","西安" -> "西安","武汉" -> "武汉","长沙" -> "长沙","沈阳" -> "沈阳","哈尔滨" -> "哈尔滨","杭州" -> "杭州","苏州" -> "苏州","张家港" -> "张家港","郑州" -> "郑州","青岛" -> "青岛","济南" -> "济南","日照" -> "日照","潍坊" -> "潍坊","石家庄" -> "石家庄","保定" -> "保定","秦皇岛" -> "秦皇岛","合肥" -> "合肥","黄山" -> "黄山","乌鲁木齐" -> "乌鲁木齐","昆明" -> "昆明","福州" -> "福州","厦门" -> "厦门","泉州" -> "泉州","莆田" -> "莆田","贵阳" -> "贵阳", "其他"->"其他"), '_label->"所在城市")
+                @b3.text(bookingForm("address"), '_label->"推荐人", Symbol("placeholder") -> "您的客户经理手机号或者工号")
+                @b3.text(bookingForm("memo"), '_label->"备注", Symbol("placeholder") -> "可留下您想说的话")
+            </div>
+
+            <p class="info">开通服务城市: 北京 天津 上海 广州 深圳 珠海 中山 东莞 佛山 重庆 成都 南京 西安 武汉 长沙 沈阳 哈尔滨 杭州 苏州 张家港 郑州 青岛 济南 日照 潍坊 石家庄 保定 秦皇岛 合肥 黄山 乌鲁木齐 昆明 福州 厦门 泉州 莆田 贵阳<br/>客服热线: 010-84417380 微信客服: yuanfatz</p>
+
+            <button type="submit" class="submit" id="submit">点击预约量体</button>
+        </div>
+    }
+
+    <div class="section list">
+        <div class="head">
+            <h2>关注我们</h2>
+        </div>
+        <div>
+            <img src="@customRoutes.Assets.at("pinan/images/booking/succeed/QR-code.jpg")">
+        </div>
+    </div>
+
+    <div class="section list">
+        <div class="head">
+            <h2><small>OUR CUSTOMERS</small>名人定制案例</h2>
+        </div>
+        <div>
+            <img src="@customRoutes.Assets.at("pinan/images/booking/v5/figure-1.jpg")" style="width: 49%; float:left">
+            <img src="@customRoutes.Assets.at("pinan/images/booking/v5/figure-2.jpg")" style="width: 49%; float:right">
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+
+    <div class="section list">
+        <div class="head">
+            <h2><small>CUSTOM STYLE OPTIONAL</small>定制款式可选</h2>
+        </div>
+        <img src="@customRoutes.Assets.at("pinan/images/booking/v5/details.jpg")">
+    </div>
+
+    <div class="section list">
+        <div class="head">
+            <h2><small>CUSTOMIZATION PROCESS</small>个性化定制流程</h2>
+        </div>
+        <img src="@customRoutes.Assets.at("pinan/images/booking/v5/process.jpg")">
+    </div>
+
+    <div class="section list">
+        <div class="head">
+            <h2><small>TOP FABRIC PARTNER</small>顶级面料合作商</h2>
+        </div>
+        <img src="@customRoutes.Assets.at("pinan/images/booking/v5/fabric.jpg")">
+    </div>
+
+    <div class="section list">
+        <div class="head">
+            <h2><small>CUSTOM EMBROIDERY</small>个性化刺绣</h2>
+        </div>
+        <img src="@customRoutes.Assets.at("pinan/images/booking/v5/embroidery.jpg")">
+    </div>
+
+    <a class="submit" href="#booking">一键预约</a>
+
+
+
+    <div class="footer">
+        以上服务由RONG定制提供<br />©2016 RONG定制 京ICP备16039452号
+    </div>
+
+
+}

@@ -1,0 +1,20 @@
+.filter-group { margin-top: 0.666rem; }
+.filter-group em { font-style: normal; }
+.filter-group li { margin-bottom: 1rem; width: 200px; }
+.filter-group .filter-disabled, .filter-group .filter-disabled + em { color: #999; }
+.filter-group .icon-ok { opacity: 0; font-size: 1.2em; transition: opacity ease-out 150ms; }
+.filter-group .filter-active .icon-ok { opacity: 1; }
+.filter-check { display: inline-block; width: 18px; height: 18px; border: 2px solid black; margin-right: -18px; margin-bottom: -4px; }
+.filter-color { display: block; width: 14px; height: 14px; }
+.catalog-nav-filters > h6 > i::before { transition: transform ease-in-out 300ms; }
+.catalog-nav-filters > h6[aria-expanded='true'] > i::before { transform: rotate(-180deg); } /*content: '\22c0';*/
+h6.filter-toggle { margin-top: -0.666rem; }
+h6.filter-heading, h6.filter-toggle { padding: 0.666rem 0; margin-bottom: 0.666rem; }
+h6.filter-heading[aria-expanded='true'] > i::before { content: '-'; }
+.catalog-nav-filter-working { display: none; background: rgba(255,255,255,0.3); }
+.filtering .catalog-nav-filter-working { display: block; }
+
+@media (min-width: 768px) {
+    .filter-group.collapse { display: block; }
+    h6.filter-heading { padding: 0 0 0.2rem 0; cursor: default; }
+}

@@ -1,0 +1,33 @@
+@(title: String,
+        tabOpt: Option[String] = None,
+        breadcrumb: Seq[(String, Option[Call])] = Seq.empty,
+        stylesOpt: Option[Html] = None,
+        scriptsOpt: Option[Html] = None,
+        modalsOpt: Option[Html] = None
+)(content: Html)(implicit messages: Messages, request: RequestHeader)
+
+@styles = {
+    <link href="@customRoutes.Assets.at("store/styles/store.css")" rel="stylesheet"/>
+    <link href="@customRoutes.Assets.at("shared/plugins/jquery-cloud-zoom/cloudzoom.css")" rel="stylesheet"/>
+    @stylesOpt.map{styles => @styles}
+}
+
+@scripts = {
+    .script('@customRoutes.Assets.at("store/scripts/store.js")')
+    .script('@customRoutes.Assets.at("shared/plugins/jquery-cloud-zoom/cloudzoom.js")')
+    .script('@controllers.rest.routes.ApplicationController.javascriptRoutes()')
+    .script('@controllers.wechat.routes.ApplicationController.javascriptRoutes()')
+    .script('@controllers.store.routes.ApplicationController.javascriptRoutes()')
+    .wait(function () {
+        Store.init();
+        if (App.settings.env == "prd") track();
+    })
+    @scriptsOpt.map{scripts => @scripts}
+}
+
+@views.html.shared.layout.main(title,
+    tabOpt,
+    breadcrumb,
+    Some(styles),
+    Some(scripts),
+    modalsOpt)(content)

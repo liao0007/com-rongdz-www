@@ -1,0 +1,76 @@
+@import daos.default.mall.HomeFeature
+@import daos.default.mall.HomeFeature.HomeFeaturePresentingType
+@import daos.default.mall.HomeSlider
+@(features: Map[String, List[HomeFeature]], sliders: List[HomeSlider])(implicit messages: Messages, request: RequestHeader)
+
+@styles = {
+	<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/index.css")">
+}
+
+@scripts = {
+    .script('@customRoutes.Assets.at("store/scripts/pages/index.js")')
+    .wait(function () {
+        PageIndex.init();
+    })
+}
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store"), stylesOpt = Some(styles), scriptsOpt = Some(scripts)) {
+
+	@if(features.contains(HomeFeaturePresentingType.Custom.toString)) {
+		@features(HomeFeaturePresentingType.Custom.toString).headOption.map { feature =>
+			<a href="@feature.link">
+				<div class="hero-img" data-img-src="@customRoutes.UploadedAssets.at(feature.backgroundImage)?x-oss-process=image/resize,w_2672/sharpen,100" ></div>
+				<div class="gutter-vertical feature-txt">
+					<div class="row">
+						<div class="col-md-6 offset-md-3 text-xs-center">
+							<h2><small>@feature.smallTitle</small></h2>
+							<h1 class="display-2 text-uppercase">@feature.title</h1>
+						</div>
+					</div>
+				</div>
+			</a>
+		}
+	}
+
+	<div class="row">
+		@if(features.contains(HomeFeaturePresentingType.Custom.toString)) {
+			@for(feature<-features(HomeFeaturePresentingType.Custom.toString).tail) {
+				<a href="@feature.link" class="col-md-6 col-xs-12">
+					<div class="feature feature-hero" data-img-src="@customRoutes.UploadedAssets.at(feature.backgroundImage)?x-oss-process=image/resize,w_1306/sharpen,100"></div>
+					<div class="feature-txt gutter-vertical">
+						<h2><small>@feature.smallTitle</small>@feature.title</h2>
+					</div>
+				</a>
+			}
+		}
+
+		@if(features.contains(HomeFeaturePresentingType.Collection.toString)) {
+			<h3 class="rtw-header"><small>ready-to-wear collections</small>精品成衣</h3>
+			@for(feature <- features(HomeFeaturePresentingType.Collection.toString)) {
+				<div class="col-md-3 col-xs-6">
+					<div class="feature" data-img-src="@customRoutes.UploadedAssets.at(feature.backgroundImage)?x-oss-process=image/resize,w_632/sharpen,100">
+						<a href="@feature.link" class="feature-tile">
+							<h5><small>@feature.smallTitle</small>
+								@feature.title</h5>
+						</a>
+					</div>
+				</div>
+			}
+		}
+
+		@if(features.contains(HomeFeaturePresentingType.Page.toString)) {
+			@for(feature <- features(HomeFeaturePresentingType.Page.toString)) {
+				<div class="col-md-4 col-xs-12">
+					<div class="feature bottom-feature" data-img-src="@customRoutes.UploadedAssets.at(feature.backgroundImage)?x-oss-process=image/resize,w_632/sharpen,100">
+						<a href="@feature.link" class="feature-tile">
+							<h5><small>@feature.smallTitle</small>
+								@feature.title</h5>
+						</a>
+					</div>
+				</div>
+			}
+		}
+	</div>
+
+	@views.html.store.tags.stylistLocator()
+}

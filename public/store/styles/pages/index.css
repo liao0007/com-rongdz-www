@@ -1,0 +1,20 @@
+.hero-img { background-position: center top; background-size: cover; height: 0; padding-bottom: 45%; }
+.hero-txt, .feature-txt { margin-top: 0.5rem; text-align: center; text-transform: uppercase; letter-spacing: 0.04em; }
+.hero-txt h1 { font-size: 2rem; }
+.feature-hero { background-position: center top; padding-bottom: 45%; margin-bottom: 0; }
+.feature-txt h2 { font-size: 2rem; }
+.feature-txt h2 small { font-size: 1rem; }
+.rtw-header { text-align: center; font-size: 2rem; text-transform: uppercase; }
+.bottom-feature { background-position: center top; padding-bottom: 46%; }
+
+@media (min-width: 768px) {
+    .hero-img { padding-bottom: 450px; }
+    .hero-txt { height: 200px; margin-top: -200px; color: #fff; }
+    .hero-txt h1 { font-size: 4rem; max-width: 600px; margin: 0 auto; }
+    .feature-hero { padding-bottom: 400px; position: static; }
+    .feature-txt { height: 160px; margin-top: -160px; color: #fff; }
+    .feature-txt h2 { font-size: 2.666rem; }
+    .feature-txt h2 small { font-size: 1.2rem; }
+    .rtw-header { font-size: 2.666rem; }
+    .bottom-feature{ padding-bottom: 75%; }
+}

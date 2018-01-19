@@ -1,0 +1,53 @@
+@import daos.default.product.Brand
+@(modelForm: Form[Brand], action: Call)(implicit messages: Messages, request: RequestHeader)
+
+@currentController = @{controllers.admin.product.routes.BrandController}
+@implicitFieldConstructor = @{ b3.vertical.fieldConstructor }
+@updateOrCreateLabel() = @{modelForm.value.fold("新建")( _ => "更新")}
+
+@breadcrumb = @{
+  Seq(
+    ("品牌", Some(currentController.index())),
+    modelForm.value.fold(("新建", None)){ item => (item.name, None)}
+  )
+}
+
+@views.html.admin.layout.main(title = updateOrCreateLabel, tabOpt = Some("productBrand"), breadcrumb = breadcrumb) {
+  @b3.form(action) {
+    @views.html.admin.tags.pageHead {
+      @updateOrCreateLabel 品牌
+    } {
+      <button type="submit" class="cta-button">保存</button>
+      @modelForm.value.map{ item =>
+        <a href="@currentController.newPage()" class="cta-button alt pad-left">新建</a>
+        <a href="javascript:void()" data-redirect="@currentController.index()" data-target="@currentController.delete(item.id)" class="cta-button alt pad-left btn-delete">删除</a>
+        <a class="cta-button plain pad-left" href="@currentController.prev(item.id)"><i class="fa fa-angle-double-left" aria-hidden="true"> 上一条</i></a>
+        <a class="cta-button plain" href="@currentController.next(item.id)">下一条 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+      }
+    }
+
+    @views.html.admin.tags.pageEditBody{
+      @modelForm.value match {
+        case Some(item) => {
+          <tr><th>创建时间</th><td><samp class="small">@item.createdAt</samp></td></tr>
+          <tr><th>更新时间</th><td><samp class="small">@item.updatedAt</samp></td></tr>
+        }
+        case _ => {
+          无.
+        }
+      }
+    }{
+      <ul class="nav nav-tabs">
+          <li class="nav-item ml-1"><a class="nav-link active" href="#tab-general" data-toggle="tab">基础信息</a></li>
+      </ul>
+
+      <div class="tab-content pt-1">
+          <div class="tab-pane fade in active" id="tab-general">
+            <div class="row">
+              <div class="col-md-4">@b3.text( modelForm("name"), '_label -> "名称" )</div>
+            </div>
+          </div>
+      </div>
+    }
+  }
+}

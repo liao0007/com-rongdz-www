@@ -1,0 +1,614 @@
+@import models.default.mall.SaleFilter
+@()(implicit messages: Messages, request: RequestHeader)
+
+<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/guide/shirt.css")">
+<script>
+    /**
+        $LAB.wait(function(){
+            var dlgopts = { top: 'center', fixed: false, close: '.close-dialog', mask: '#000', onBeforeLoad: function () { this.getOverlay().find('[data-img-src]').trigger('appear'); } };
+            $('.option-link-collars').overlay($.extend(dlgopts, { target: '#dlgCollars' }));
+            $('.option-link-cuffs').overlay($.extend(dlgopts, { target: '#dlgCuffs' }));
+            $('.option-link-pockets').overlay($.extend(dlgopts, { target: '#dlgPockets' }));
+            $('.option-link-fronts').overlay($.extend(dlgopts, { target: '#dlgFronts' }));
+            $('.option-link-backs').overlay($.extend(dlgopts, { target: '#dlgBacks' }));
+            $('.option-link-contrast-fabric').overlay($.extend(dlgopts, { target: '#dlgContrastFabric' }));
+            $('.option-link-contrast-thread').overlay($.extend(dlgopts, { target: '#dlgContrastThread' }));
+            $('.option-link-buttons').overlay($.extend(dlgopts, { target: '#dlgButtons' }));
+            $('.option-link-monograms').overlay($.extend(dlgopts, { target: '#dlgMonograms' }));
+        })
+    **/
+</script>
+
+<div class="hero-fit text-xs-center gutter-vertical">
+    <div class="mx-auto center-vertical rel">
+        <div class="w-100">
+            <h1 class="display-2">一件合身的衬衣</h1>
+            <p class="large text-uppercase hidden-sm-down">完美的个人风格开始于一件完美的衬衣</p>
+        </div>
+        <div class="hidden-sm-down" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;">
+            <div style="width: 100%; height: 100%; overflow: hidden; position: relative;">
+                <svg class="line" viewBox="0 0 500 9"><line x1="4" y1="4.5" x2="500" y2="4.5"></line><circle cx="004.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="0" y1="4.5" x2="496" y2="4.5"></line><circle cx="495.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="4" y1="4.5" x2="500" y2="4.5"></line><circle cx="004.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="0" y1="4.5" x2="496" y2="4.5"></line><circle cx="495.5" cy="4.5" r="4.5"></circle></svg>
+            </div>
+            <div class="note note-right">领围既要贴合又要舒适</div>
+            <div class="note note-left">合身的衬衫肩线应该落在你肩膀的边缘部位</div>
+            <div class="note note-right">正装衬衣的衣长需要够长，保证抬手时不脱出西裤</div>
+            <div class="note note-left">袖长可落在手腕骨位置</div>
+        </div>
+    </div>
+</div>
+
+<h1 class="text-xs-center">专属个性化定制</h1>
+
+<div class="hero-options hidden-sm-down text-xs-center gutter-vertical" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/hero-options.jpg")">
+    <div class="mx-auto rel">
+        <div style="width: 100%; height: 100%; overflow: hidden; position: relative;">
+            <svg class="line" viewBox="0 0 500 9"><line x1="4" y1="4.5" x2="500" y2="4.5"></line><circle cx="004.5" cy="4.5" r="4.5"></circle></svg>
+            <svg class="line" viewBox="0 0 500 9"><line x1="0" y1="4.5" x2="496" y2="4.5"></line><circle cx="495.5" cy="4.5" r="4.5"></circle></svg>
+            <svg class="line" viewBox="0 0 500 9"><line x1="4" y1="4.5" x2="500" y2="4.5"></line><circle cx="004.5" cy="4.5" r="4.5"></circle></svg>
+            <svg class="line" viewBox="0 0 500 9"><line x1="0" y1="4.5" x2="496" y2="4.5"></line><circle cx="495.5" cy="4.5" r="4.5"></circle></svg>
+            <svg class="line" viewBox="0 0 500 9"><line x1="4" y1="4.5" x2="500" y2="4.5"></line><circle cx="004.5" cy="4.5" r="4.5"></circle></svg>
+            <svg class="line" viewBox="0 0 500 9"><line x1="4" y1="4.5" x2="500" y2="4.5"></line><circle cx="004.5" cy="4.5" r="4.5"></circle></svg>
+            <svg class="line" viewBox="0 0 500 9"><line x1="0" y1="4.5" x2="496" y2="4.5"></line><circle cx="495.5" cy="4.5" r="4.5"></circle></svg>
+            <svg class="line" viewBox="0 0 500 9"><line x1="0" y1="4.5" x2="496" y2="4.5"></line><circle cx="495.5" cy="4.5" r="4.5"></circle></svg>
+            <svg class="line" viewBox="0 0 500 9"><line x1="4" y1="4.5" x2="500" y2="4.5"></line><circle cx="004.5" cy="4.5" r="4.5"></circle></svg>
+        </div>
+        <div class="note note-right"><h6>Your Initials</h6>With our compliments</div>
+        <div class="note note-left"><h6>领型</h6><a href="javascript:void(0)" class="option-link-collars">7种选择@*<i class="icon-right-open"></i>*@</a></div>
+        <div class="note note-right"><h6>Contrast Fabrics</h6><a href="javascript:void(0)" class="option-link-contrast-fabric">4 Configurations@*<i class="icon-right-open"></i>*@</a></div>
+        <div class="note note-left"><h6>Contrast Stitching</h6><a href="javascript:void(0)" class="option-link-contrast-thread">15 Colors@*<i class="icon-right-open"></i>*@</a></div>
+        <div class="note note-right"><h6>口袋</h6><a href="javascript:void(0)" class="option-link-pockets">可选择@*<i class="icon-right-open"></i>*@</a></div>
+        <div class="note note-right"><h6>面料</h6><a href="javascript:void(0)">超过100种意大利面料选择@*<i class="icon-right-open"></i>*@</a></div>
+        <div class="note note-left"><h6>扣子</h6><a href="javascript:void(0)" class="option-link-buttons">5种选择@*<i class="icon-right-open"></i>*@</a></div>
+        <div class="note note-left"><h6>绣字</h6><a href="javascript:void(0)" class="option-link-monograms">5个位置，5种字体选择@*<i class="icon-right-open"></i>*@</a></div>
+        <div class="note note-right"><h6>袖口款式</h6><a href="javascript:void(0)" class="option-link-cuffs">10种选择@*<i class="icon-right-open"></i>*@</a></div>
+    </div>
+</div>
+
+<div class="row option-row hidden-md-up text-xs-center text-uppercase">
+    <div class="col-xs-6">
+        <div class="center-vertical" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/options-collars.jpg")">
+            <a href="javascript:void(0)" class="w-100 option-link-collars"><h6>领型</h6>7种选择@*<i class="icon-right-open"></i>*@</a>
+        </div>
+    </div>
+    @*
+    <div class="col-xs-6">
+    <div class="center-vertical" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/options-contrastfabric.jpg")">
+    <a href="javascript:void(0)" class="w-100 option-link-contrast-fabric">Contrast<br>Fabrics<i class="icon-right-open"></i></a>
+    </div>
+    </div>
+    *@
+    <div class="col-xs-6">
+        <div class="center-vertical" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/options-pockets.jpg")">
+            <a href="javascript:void(0)" class="w-100 option-link-pockets"><h6>口袋</h6>可选择@*<i class="icon-right-open"></i>*@</a>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="center-vertical" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/options-cuffs.jpg")">
+            <a href="javascript:void(0)" class="w-100 option-link-cuffs"><h6>袖口款式</h6>10种选择@*<i class="icon-right-open"></i>*@</a>
+        </div>
+    </div>
+    @*
+    <div class="col-xs-6">
+    <div class="center-vertical" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/options-plackets.jpg")">
+    <a href="javascript:void(0)" class="w-100 option-link-fronts">Front<br>Placket<i class="icon-right-open"></i></a>
+    </div>
+    </div>
+    <div class="col-xs-6">
+    <div class="center-vertical" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/options-contrastthread.jpg")">
+    <a href="javascript:void(0)" class="w-100 option-link-contrast-thread">Contrast<br>Stitching<i class="icon-right-open"></i></a>
+    </div>
+    </div>
+    *@
+    <div class="col-xs-6">
+        <div class="center-vertical" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/options-monograms.jpg")">
+            <a href="javascript:void(0)" class="w-100 option-link-monograms"><h6>绣字</h6>5个位置，5种字体选择@*<i class="icon-right-open"></i>*@</a>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="center-vertical" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/options-buttons.jpg")">
+            <a href="javascript:void(0)" class="w-100 option-link-buttons"><h6>扣子</h6>5种选择@*<i class="icon-right-open"></i>*@</a>
+        </div>
+    </div>
+</div>
+
+@*<h1 class="text-xs-center">Our Fabric Collections</h1>*@
+
+@*
+<div class="row fabric-row gutter-vertical">
+<div class="col-md-6 col-lg-7">
+<div class="fabric-img" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/fabrics-core.jpg")"></div>
+</div>
+<div class="col-md-6 col-lg-5 text-xs-center">
+<div class="center-vertical">
+<div class="w-100">
+<h1><small>Timeless Classics </small>Core Collection</h1>
+<p class="hidden-sm-down">Made of premium Egyptian cotton by renowned shirting mills of northern Italy, our Core Collection features over 130 fabrics in a range of timeless patterns and styles.</p>
+<a href="/catalog/custom_shirts/core-shirting" class="text-uppercase">View All<i class="icon-right-open"></i></a>
+</div>
+</div>
+</div>
+</div>
+*@
+
+<div class="row fabric-row gutter-vertical">
+    <div class="col-md-6 push-md-6 col-lg-7 push-lg-5">
+        <div class="fabric-img" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/fabrics-non-iron.jpg")"></div>
+    </div>
+    <div class="col-md-6 pull-md-6 col-lg-5 pull-lg-7 text-xs-center">
+        <div class="center-vertical">
+            <div class="w-100">
+                <h1><small>Timeless Classics </small>商务系列</h1>
+                <p class="hidden-sm-down">Made of premium Egyptian cotton by renowned shirting mills of northern Italy, our Core Collection features over 130 fabrics in a range of timeless patterns and styles.</p>
+                <a href="@controllers.store.routes.CatalogController.list(f = SaleFilter(subcategoryIdOpt = Some(6)))" class="text-uppercase">查看全部<i class="icon-right-open"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row fabric-row gutter-vertical">
+    <div class="col-md-6 col-lg-7">
+        <div class="fabric-img" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/fabrics-indigo.jpg")"></div>
+    </div>
+    <div class="col-md-6 col-lg-5 text-xs-center">
+        <div class="center-vertical">
+            <div class="w-100">
+                <h1><small>Casual Comfort </small>休闲系列</h1>
+                <p class="hidden-sm-down">Our Italian Indigo Collection combines the best of American heritage and Italian sophistication with a custom fit. Natural indigo slowly fades, like your favorite jeans over time, telling your story with every wear.</p>
+                <a href="@controllers.store.routes.CatalogController.list(f = SaleFilter(subcategoryIdOpt = Some(4)))" class="text-uppercase">查看全部<i class="icon-right-open"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hero-img" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/soft-wash.jpg")"></div>
+<div class="hero-txt center-vertical gutter-vertical">
+    <div class="text-xs-center">
+        <h1>免费量体</h1>
+        <p>打造最具个人风格的个性化定制衣橱，即刻预约您的专属时尚顾问</p>
+        <a href="@controllers.store.routes.BookingController.index(None)" class="text-uppercase">立即预约<i class="icon-right-open"></i></a>
+    </div>
+</div>
+
+<div id="dlgCollars" class="dialog option-dialog-wide">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Collars</h1>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/01-classic.svg")"></div>
+            Classic
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/02-spread.svg")"></div>
+        Spread
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/03-modern-spread.svg")"></div>
+        Modern Spread
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/04-cutaway.svg")"></div>
+        Cutaway
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/05-full-cutaway.svg")"></div>
+        Full Cutaway
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/06-english-cutaway.svg")"></div>
+        English Cutaway
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/07-curved-cutaway.svg")"></div>
+        Curved Cutaway
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/08-two-button-cutaway.svg")"></div>
+        Two-Button Cutway
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/09-elevated-cutaway.svg")"></div>
+        Elevated Cutaway
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/10-button-down.svg")"></div>
+        Button-Down
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/11-modern-button-down.svg")"></div>
+        Modern Button-Down
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/12-hidden-button-down.svg")"></div>
+        Hidden Button-Down
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/13-straight.svg")"></div>
+        Straight
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/14-club.svg")"></div>
+        Club
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/15-tab.svg")"></div>
+        Tab
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/16-banded.svg")"></div>
+        Banded
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/17-wing-tip.svg")"></div>
+        Wing-Tip
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/collars/18-interlining.svg")"></div>
+        Interlining
+    </div>
+    </div>
+</div>
+
+<div id="dlgCuffs" class="dialog option-dialog-wide">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Cuffs</h1>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/01-single-button-mitered.svg")"></div>
+            Single Button Mitered
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/02-double-button-mitered.svg")"></div>
+        Double Button Mitered
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/03-french-mitered.svg")"></div>
+        French Mitered
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/04-convertible-mitered.svg")"></div>
+        Convertible Mitered
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/05-reverse-french-mitered.svg")"></div>
+        Reverse French Mitered
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/06-single-button-round.svg")"></div>
+        Single Button Round
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/07-double-button-round.svg")"></div>
+        Double Button Round
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/08-french-round.svg")"></div>
+        French Round
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/09-convertible-round.svg")"></div>
+        Convertible Round
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/10-single-button-square.svg")"></div>
+        Single Button Square
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/11-double-button-square.svg")"></div>
+        Double Button Square
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/12-french-square.svg")"></div>
+        French Square
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/13-convertible-square.svg")"></div>
+        Convertible Square
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/14-western.svg")"></div>
+        Western
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/15-rolled.svg")"></div>
+        Rolled
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/16-epaulette.svg")"></div>
+        Epaulette
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/17-shortsleeve.jpg")"></div>
+        Short Sleeve
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/cuffs/18-shortsleevecuffed.jpg")"></div>
+        Short Sleeve Cuffed
+    </div>
+    </div>
+</div>
+
+<div id="dlgPockets" class="dialog option-dialog-wide">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Pockets</h1>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/pockets/01-mitered.svg")"></div>
+            Mitered
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/pockets/02-round.svg")"></div>
+        Round
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/pockets/03-square.svg")"></div>
+        Square
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/pockets/04-v-shaped.svg")"></div>
+        V-Shaped
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/pockets/05-mitered-button-through.svg")"></div>
+        Mitered Button Through
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/pockets/06-western.svg")"></div>
+        Western
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/pockets/07-pleated-mitered-with-flap.svg")"></div>
+        Pleated Mitered with Flap
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/pockets/08-mitered-with-flap.svg")"></div>
+        Mitered with Flap
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/pockets/09-no-pocket.svg")"></div>
+        No Pocket
+    </div>
+    </div>
+</div>
+
+<div id="dlgFronts" class="dialog option-dialog">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Front</h1>
+    <div class="row">
+        <div class="col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/fronts/01-noplacket.svg")"></div>
+            No Placket
+        </div><div class="col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/fronts/02-placket.svg")"></div>
+        Placket
+    </div><div class="col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/fronts/03-hidden.svg")"></div>
+        Hidden
+    </div><div class="col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/fronts/04-tuxedo.svg")"></div>
+        Tuxedo
+    </div>
+    </div>
+</div>
+
+<div id="dlgBacks" class="dialog option-dialog">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Back</h1>
+    <div class="row">
+        <div class="col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/backs/01-side-pleats.svg")"></div>
+            Side Pleats
+        </div><div class="col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/backs/02-box-pleats.svg")"></div>
+        Box Pleats
+    </div><div class="col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/backs/03-no-pleats.svg")"></div>
+        No Pleats
+    </div><div class="col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/backs/04-split.svg")"></div>
+        Split Yoke<div class="small">($10 Surcharge)</div>
+    </div>
+    </div>
+</div>
+
+<div id="dlgContrastFabric" class="dialog option-dialog">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Contrast Fabric</h1>
+    <div class="row">
+        <div class="col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/fabricplacements/01-int-collar.jpg")"></div>
+            Interior Collar
+        </div><div class="col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/fabricplacements/02-int-placket.jpg")"></div>
+        Interior Placket
+    </div><div class="col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/fabricplacements/03-int-cuff.jpg")"></div>
+        Interior Cuff
+    </div><div class="col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/fabricplacements/04-entire.jpg")"></div>
+        Entire Collar/Cuff
+    </div>
+    </div>
+</div>
+
+<div id="dlgButtons" class="dialog option-dialog-wide">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Buttons</h1>
+    <div class="row text-xs-center">
+        <div class="col-md-6">
+            <div class="img-2-1 gutter-vertical" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/buttontypes/01-standard.jpg")"></div>
+            Standard<div>Durable and classic, appropriate for dress or casual shirt styling. Unavailable on Luxe Reserve Collection.</div>
+            <div class="row">
+                <div class="col-xs-6 responsive-tile">
+                    <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/buttons/01a-standard-white.jpg")"></div>
+                    Standard White
+                </div><div class="col-xs-6 responsive-tile">
+                <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/buttons/01b-standard-smoke.jpg")"></div>
+                Standard Smoke
+            </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="img-2-1 gutter-vertical" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/buttontypes/02-shell.jpg")"></div>
+            Shell<div>A more polished and sophisticated button choice, perfect for any occasion. Unavailable on Non-Iron Collection. ($10 Surcharge)</div>
+            <div class="row">
+                <div class="col-xs-6 responsive-tile">
+                    <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/buttons/02a-shell-white.jpg")"></div>
+                    Shell White
+                </div><div class="col-xs-6 responsive-tile">
+                <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/buttons/02b-shell-smoke.jpg")"></div>
+                Shell Smoke
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-xs-center">
+        <div class="col-md-6">
+            <div class="img-2-1 gutter-vertical" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/buttontypes/03-sport.jpg")"></div>
+            Sportshirt<div>A great option for textured shirting fabrics and a casually styled shirt. Unavailable on Luxe Reserve Collection. ($10 Surcharge)</div>
+            <div class="row">
+                <div class="col-xs-6 responsive-tile">
+                    <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/buttons/03a-sport-khaki.jpg")"></div>
+                    Sport Khaki
+                </div><div class="col-xs-6 responsive-tile">
+                <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/buttons/03b-sport-brown.jpg")"></div>
+                Sport Brown
+            </div><div class="col-xs-6 responsive-tile">
+                <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/buttons/03c-sport-black.jpg")"></div>
+                Sport Black
+            </div><div class="col-xs-6 responsive-tile">
+                <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/buttons/03d-sport-fisheye.jpg")"></div>
+                Sport Fish-Eye
+            </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="img-2-1 gutter-vertical" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/buttontypes/04-snap.jpg")"></div>
+            Snap<div>Appropriate for our Western Shirt style. Unavailable on Non-Iron and Luxe Reserve Collections.</div>
+            <div class="row">
+                <div class="col-xs-6 responsive-tile">
+                    <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/buttons/04a-snap-white.jpg")"></div>
+                    Snap White
+                </div><div class="col-xs-6 responsive-tile">
+                <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/buttons/04b-snap-smoke.jpg")"></div>
+                Snap Smoke
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dlgMonograms" class="dialog option-dialog-wide">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Monogram Placements</h1>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/monogramplacements/01-collar.svg")"></div>
+            Interior Collar<div class="small">Complimentary in white block letters</div>
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/monogramplacements/02-pocket.svg")"></div>
+        Pocket
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/monogramplacements/03-waist.svg")"></div>
+        Waist
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/monogramplacements/04-cuffs.svg")"></div>
+        Left/Right Cuff
+    </div>
+    </div>
+    <h1>Monogram Designs</h1>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/monogramstyles/01-block.jpg")"></div>
+            Block<div class="small">Up to four letters.<br>Monogram size: approximately 1/4"</div>
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/monogramstyles/02-script.jpg")"></div>
+        Script<div class="small">Up to four letters.<br>Monogram size: approximately 1/4"</div>
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/monogramstyles/03-diamond.jpg")"></div>
+        Diamond<div class="small">Must be three letters.<br>Monogram size: approximately 1/2" at highest point</div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/01-navy.jpg")"></div>
+            Navy
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/02-silver.jpg")"></div>
+        Silver
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/03-black.jpg")"></div>
+        Black
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/04-red.jpg")"></div>
+        Red
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/05-brown.jpg")"></div>
+        Brown
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/06-teal.jpg")"></div>
+        Teal
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/07-maroon.jpg")"></div>
+        Maroon
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/08-orange.jpg")"></div>
+        Orange
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/09-pink.jpg")"></div>
+        Pink
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/10-green.jpg")"></div>
+        Green
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/11-purple.jpg")"></div>
+        Purple
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/12-white.jpg")"></div>
+        White
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/13-lavender.jpg")"></div>
+        Lavender
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/14-grey.jpg")"></div>
+        Grey
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/15-lightblue.jpg")"></div>
+        Light Blue
+    </div>
+    </div>
+    <p class="small">Your monogram is embroidered on the interior collar on every Custom Shirt in white thread. Add an additional monogram in any thread color for further personalization: + $10.</p>
+    <p class="small">Monogram charges are waived for orders including five or more shirts.</p>
+</div>
+
+<div id="dlgContrastThread" class="dialog option-dialog-wide">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Contrast Stitching</h1>
+    <p>Contrast stitching can be applied to the button, buttonhole and/or the entire shirt. ($10&nbsp;Surcharge)</p>
+    <div class="row text-xs-center mb-1">
+        <div class="col-md-6 gutter-vertical">
+            <div class="img-2-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadplacements/01-button-and-hole.jpg")"></div>
+            Button + Buttonhole
+        </div>
+        <div class="col-md-6 gutter-vertical">
+            <div class="img-2-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadplacements/02-button.jpg")"></div>
+            Button
+        </div>
+        <div class="col-md-6 gutter-vertical">
+            <div class="img-2-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadplacements/03-entire.jpg")"></div>
+            Entire Shirt
+        </div>
+        <div class="col-md-6 gutter-vertical">
+            <div class="img-2-1" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadplacements/04-buttonhole.jpg")"></div>
+            Buttonhole
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/01-navy.jpg")"></div>
+            Navy
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/02-silver.jpg")"></div>
+        Silver
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/03-black.jpg")"></div>
+        Black
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/04-red.jpg")"></div>
+        Red
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/05-brown.jpg")"></div>
+        Brown
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/06-teal.jpg")"></div>
+        Teal
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/07-maroon.jpg")"></div>
+        Maroon
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/08-orange.jpg")"></div>
+        Orange
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/09-pink.jpg")"></div>
+        Pink
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/10-green.jpg")"></div>
+        Green
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/11-purple.jpg")"></div>
+        Purple
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/12-white.jpg")"></div>
+        White
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/13-lavender.jpg")"></div>
+        Lavender
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/14-grey.jpg")"></div>
+        Grey
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-thread" data-img-src="@customRoutes.Assets.at("store/images/shirt-guide/threadcolors/15-lightblue.jpg")"></div>
+        Light Blue
+    </div>
+    </div>
+</div>

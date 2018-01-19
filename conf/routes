@@ -1,0 +1,351 @@
+####### APP #######
+GET           /                                                              controllers.Default.redirect(to = "/store")
+
+####### REST #######
+#auth
+GET           /rest/javascriptRoutes                                         controllers.rest.ApplicationController.javascriptRoutes
+
+POST          /rest/auth/sign-in                                             controllers.rest.AuthController.signIn
+POST          /rest/auth/sign-up                                             controllers.rest.AuthController.signUp
+POST          /rest/auth/social/bind                                         controllers.rest.AuthController.socialBind(openId: String)
+POST          /rest/auth/social/sign-up                                      controllers.rest.AuthController.socialSignUp(openId: String)
+
+POST          /rest/auth/password/change                                     controllers.rest.AuthController.changePassword
+POST          /rest/auth/sms-reset-password                                  controllers.rest.AuthController.requestSmsResetPasswordToken
+
+POST          /rest/auth/token/execute/:providerKey/:token                   controllers.rest.AuthController.execute(providerId: String ?= com.mohiva.play.silhouette.impl.providers.CredentialsProvider.ID, providerKey: String, token: String)
+
+GET           /rest/user/get                                                 controllers.rest.UserController.get
+POST          /rest/user/update                                              controllers.rest.UserController.update
+
+#cart
+GET           /rest/cart/update/:saleNumber/:quantity                        controllers.rest.CartController.update(saleNumber: String, quantity: Int)
+GET           /rest/cart/added/:saleNumber/:quantity                         controllers.rest.CartController.added(saleNumber: String, quantity: Int)
+GET           /rest/cart/subtotal                                            controllers.rest.CartController.subtotal
+GET           /rest/cart/count                                               controllers.rest.CartController.count
+GET           /rest/cart/mini-view                                           controllers.rest.CartController.miniView
+
+#sale order
+POST          /rest/sale-order/create                                        controllers.rest.SaleOrderController.create
+GET           /rest/sale-order/payment/state                                 controllers.rest.SaleOrderController.paymentState(orderNumber: String)
+GET           /rest/sale-order/payment/wepay                                 controllers.rest.SaleOrderController.wepayInfo(orderNumber: String, tradeType: String)
+GET           /rest/sale-order/payment/alipay                                controllers.rest.SaleOrderController.alipayInfo(orderNumber: String, tradeType: String)
+GET           /rest/sale-order/payment/cash                                  controllers.rest.SaleOrderController.cashInfo(orderNumber: String)
+
+#address
+GET           /rest/addresses/province                                       controllers.rest.AddressController.province(html: Boolean ?= false)
+GET           /rest/addresses/city/:provinceId                               controllers.rest.AddressController.city(provinceId: Long, html: Boolean ?= false)
+GET           /rest/addresses/district/:cityId                               controllers.rest.AddressController.district(cityId: Long, html: Boolean ?= false)
+POST          /rest/addresses                                                controllers.rest.AddressController.update(idOpt: Option[Long])
+GET           /rest/addresses                                                controllers.rest.AddressController.list(html: Boolean ?= false)
+DELETE        /rest/addresses                                                controllers.rest.AddressController.delete(id: Long)
+GET           /rest/addresses/:id                                            controllers.rest.AddressController.get(id: Long)
+
+####### ####### PINAN ####### #######
+GET           /pinan/booking                                                 controllers.pinan.BookingController.index(version: String ?= "v6")
+POST          /pinan/booking                                                 controllers.pinan.BookingController.book(version: String)
+GET           /pinan/succeed                                                 controllers.pinan.BookingController.succeed(bookingNumber: String)
+
+####### ####### STORE ####### #######
+GET           /store                                                         controllers.store.ApplicationController.index
+GET           /store/javascriptRoutes                                        controllers.store.ApplicationController.javascriptRoutes
+
+GET           /store/bag                                                     controllers.store.ApplicationController.bag
+GET           /store/checkout                                                controllers.store.ApplicationController.checkout
+GET           /store/tape                                                    controllers.store.ApplicationController.tape(returnUrl: String ?= "/store/account")
+POST          /store/tape                                                    controllers.store.ApplicationController.updateTape(returnUrl: String)
+GET           /store/contact                                                 controllers.store.ApplicationController.contact
+GET           /store/cooperation                                             controllers.store.ApplicationController.cooperation
+POST          /store/cooperation                                             controllers.store.ApplicationController.submitCooperation
+
+GET           /store/guide/:id                                               controllers.store.PageController.guide(id: String)
+GET           /store/info/:id                                                controllers.store.PageController.info(id: String)
+GET           /store/page/:id                                                controllers.store.PageController.page(id: Long)
+
+GET           /store/catalog                                                 controllers.store.CatalogController.list(p: models.ModelPager ?= models.ModelPager(), f: models.default.mall.SaleFilter ?= models.default.mall.SaleFilter(), s: models.ModelSorter ?= models.ModelSorter(attribute = "sequence", order = "DESC"))
+GET           /store/sale/:saleNumber                                        controllers.store.CatalogController.sale(saleNumber: String, p: models.ModelPager ?= models.ModelPager(), f: models.default.mall.SaleFilter ?= models.default.mall.SaleFilter(), s: models.ModelSorter ?= models.ModelSorter())
+
+GET           /store/booking                                                 controllers.store.BookingController.index(saleNumberOpt: Option[String])
+POST          /store/booking                                                 controllers.store.BookingController.update(saleNumberOpt: Option[String])
+
+GET           /store/account                                                 controllers.store.AccountController.index
+GET           /store/account/sign-in                                         controllers.store.AccountController.signIn(returnUrl: String ?= "/store")
+GET           /store/account/sign-up                                         controllers.store.AccountController.signUp(returnUrl: String ?= "/store")
+GET           /store/account/sign-out                                        controllers.store.AccountController.signOut(returnUrl: String ?= "/store")
+GET           /store/account/change-password                                 controllers.store.AccountController.changePassword(returnUrl: String ?= "/store")
+GET           /store/account/reset-password                                  controllers.store.AccountController.resetPassword(returnUrl: String ?= "/store")
+GET           /store/account/change-name                                     controllers.store.AccountController.changeName
+POST          /store/account/change-name                                     controllers.store.AccountController.handleChangeName
+GET           /store/account/addresses                                       controllers.store.AccountController.newAddress(returnUrl: String)
+POST          /store/account/addresses                                       controllers.store.AccountController.createAddress(returnUrl: String ?= "/store/account")
+GET           /store/account/addresses/:id/edit                              controllers.store.AccountController.editAddress(id: Long, returnUrl)
+POST          /store/account/addresses/:id/edit                              controllers.store.AccountController.updateAddress(id: Long, returnUrl: String ?= "/store/account")
+GET           /store/account/addresses/:id/delete                            controllers.store.AccountController.deleteAddress(id: Long, returnUrl: String ?= "/store/account")
+GET           /store/account/orders                                          controllers.store.AccountController.saleOrders(p: models.ModelPager ?= models.ModelPager(), f: models.default.mall.SaleOrderFilter ?= models.default.mall.SaleOrderFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /store/account/orders/:orderNumber                             controllers.store.AccountController.saleOrder(orderNumber: String)
+GET           /store/account/orders/:orderNumber/cancel                      controllers.store.AccountController.cancelSaleOrder(orderNumber: String)
+
+####### ####### WECHAT ####### #######
+GET           /wechat/javascriptRoutes                                       controllers.wechat.ApplicationController.javascriptRoutes
+GET           /wechat/jsApiSignature                                         controllers.wechat.ApplicationController.jsApiSignature
+POST          /wechat/pay-notify                                             controllers.wechat.ApplicationController.payNotify
+
+GET           /wechat/account/sign-in/:returnUrl                             controllers.wechat.AccountController.signIn(returnUrl: String)
+GET           /wechat/account/sign-up/:openId/:returnUrl                     controllers.wechat.AccountController.signUp(openId: String, returnUrl: String)
+GET           /wechat/account/bind/:openId/:returnUrl                        controllers.wechat.AccountController.bind(openId: String, returnUrl: String)
+
+####### ####### ALIPAY ####### #######
+POST          /alipay                                                        controllers.alipay.ApplicationController.index
+GET           /alipay/javascriptRoutes                                       controllers.alipay.ApplicationController.javascriptRoutes
+POST          /alipay/pay-notify                                             controllers.alipay.ApplicationController.payNotify
+
+GET           /alipay/account/sign-in/:returnUrl                             controllers.alipay.AccountController.signIn(returnUrl: String)
+
+####### ####### ADMIN ####### #######
+GET           /admin                                                         controllers.admin.ApplicationController.index
+GET           /admin/javascriptRoutes                                        controllers.admin.ApplicationController.javascriptRoutes
+
+GET           /admin/user/users                                              controllers.admin.user.UserController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.user.UserFilter ?= models.default.user.UserFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/user/users/new                                          controllers.admin.user.UserController.newPage
+GET           /admin/user/users/:id/next                                     controllers.admin.user.UserController.next(id: Long)
+GET           /admin/user/users/:id/prev                                     controllers.admin.user.UserController.prev(id: Long)
+POST          /admin/user/users                                              controllers.admin.user.UserController.create
+GET           /admin/user/users/:id/edit                                     controllers.admin.user.UserController.edit(id: Long)
+POST          /admin/user/users/:id                                          controllers.admin.user.UserController.update(id: Long)
+DELETE        /admin/user/users/:id                                          controllers.admin.user.UserController.delete(id: Long)
+
+GET           /admin/user/ship-to-addresses                                  controllers.admin.user.ShipToAddressController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.user.ShipToAddressFilter ?= models.default.user.ShipToAddressFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/user/ship-to-addresses/new                              controllers.admin.user.ShipToAddressController.newPage(userId: Long)
+GET           /admin/user/ship-to-addresses/:id/next                         controllers.admin.user.ShipToAddressController.next(id: Long)
+GET           /admin/user/ship-to-addresses/:id/prev                         controllers.admin.user.ShipToAddressController.prev(id: Long)
+POST          /admin/user/ship-to-addresses                                  controllers.admin.user.ShipToAddressController.create
+GET           /admin/user/ship-to-addresses/:id/edit                         controllers.admin.user.ShipToAddressController.edit(id: Long)
+POST          /admin/user/ship-to-addresses/:id                              controllers.admin.user.ShipToAddressController.update(id: Long)
+DELETE        /admin/user/ship-to-addresses/:id                              controllers.admin.user.ShipToAddressController.delete(id: Long)
+
+GET           /admin/user/login-infos                                        controllers.admin.user.LoginInfoController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.user.LoginInfoFilter ?= models.default.user.LoginInfoFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/user/login-infos/new                                    controllers.admin.user.LoginInfoController.newPage(userId: Long)
+GET           /admin/user/login-infos/:id/next                               controllers.admin.user.LoginInfoController.next(id: Long)
+GET           /admin/user/login-infos/:id/prev                               controllers.admin.user.LoginInfoController.prev(id: Long)
+POST          /admin/user/login-infos                                        controllers.admin.user.LoginInfoController.create
+GET           /admin/user/login-infos/:id/edit                               controllers.admin.user.LoginInfoController.edit(id: Long)
+POST          /admin/user/login-infos/:id                                    controllers.admin.user.LoginInfoController.update(id: Long)
+DELETE        /admin/user/login-infos/:id                                    controllers.admin.user.LoginInfoController.delete(id: Long)
+GET           /admin/user/login-infos/:id/reset                              controllers.admin.user.LoginInfoController.resetPassword(id: Long)
+
+GET           /admin/user/to-permissions                                     controllers.admin.user.ToPermissionController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.user.ToPermissionFilter ?= models.default.user.ToPermissionFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/user/to-permissions/new                                 controllers.admin.user.ToPermissionController.newPage(userId: Long)
+GET           /admin/user/to-permissions/:id/next                            controllers.admin.user.ToPermissionController.next(id: Long)
+GET           /admin/user/to-permissions/:id/prev                            controllers.admin.user.ToPermissionController.prev(id: Long)
+POST          /admin/user/to-permissions                                     controllers.admin.user.ToPermissionController.create
+GET           /admin/user/to-permissions/:id/edit                            controllers.admin.user.ToPermissionController.edit(id: Long)
+POST          /admin/user/to-permissions/:id                                 controllers.admin.user.ToPermissionController.update(id: Long)
+DELETE        /admin/user/to-permissions/:id                                 controllers.admin.user.ToPermissionController.delete(id: Long)
+
+GET           /admin/product/categories                                      controllers.admin.product.CategoryController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.product.CategoryFilter ?= models.default.product.CategoryFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/categories/new                                  controllers.admin.product.CategoryController.newPage
+GET           /admin/product/categories/:id/next                             controllers.admin.product.CategoryController.next(id: Long)
+GET           /admin/product/categories/:id/prev                             controllers.admin.product.CategoryController.prev(id: Long)
+POST          /admin/product/categories                                      controllers.admin.product.CategoryController.create
+GET           /admin/product/categories/:id/edit                             controllers.admin.product.CategoryController.edit(id: Long)
+POST          /admin/product/categories/:id                                  controllers.admin.product.CategoryController.update(id: Long)
+DELETE        /admin/product/categories/:id                                  controllers.admin.product.CategoryController.delete(id: Long)
+
+GET           /admin/product/subcategories                                   controllers.admin.product.SubcategoryController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.product.SubcategoryFilter ?= models.default.product.SubcategoryFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/subcategories/new                               controllers.admin.product.SubcategoryController.newPage
+GET           /admin/product/subcategories/:id/next                          controllers.admin.product.SubcategoryController.next(id: Long)
+GET           /admin/product/subcategories/:id/prev                          controllers.admin.product.SubcategoryController.prev(id: Long)
+POST          /admin/product/subcategories                                   controllers.admin.product.SubcategoryController.create
+GET           /admin/product/subcategories/:id/edit                          controllers.admin.product.SubcategoryController.edit(id: Long)
+POST          /admin/product/subcategories/:id                               controllers.admin.product.SubcategoryController.update(id: Long)
+DELETE        /admin/product/subcategories/:id                               controllers.admin.product.SubcategoryController.delete(id: Long)
+
+GET           /admin/product/brands                                          controllers.admin.product.BrandController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.product.BrandFilter?= models.default.product.BrandFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/brands/new                                      controllers.admin.product.BrandController.newPage
+GET           /admin/product/brands/:id/next                                 controllers.admin.product.BrandController.next(id: Long)
+GET           /admin/product/brands/:id/prev                                 controllers.admin.product.BrandController.prev(id: Long)
+POST          /admin/product/brands                                          controllers.admin.product.BrandController.create
+GET           /admin/product/brands/:id/edit                                 controllers.admin.product.BrandController.edit(id: Long)
+POST          /admin/product/brands/:id                                      controllers.admin.product.BrandController.update(id: Long)
+DELETE        /admin/product/brands/:id                                      controllers.admin.product.BrandController.delete(id: Long)
+
+GET           /admin/product/products                                        controllers.admin.product.ProductController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.product.ProductFilter?= models.default.product.ProductFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/products/new                                    controllers.admin.product.ProductController.newPage
+GET           /admin/product/products/:id/next                               controllers.admin.product.ProductController.next(id: Long)
+GET           /admin/product/products/:id/prev                               controllers.admin.product.ProductController.prev(id: Long)
+POST          /admin/product/products                                        controllers.admin.product.ProductController.create
+GET           /admin/product/products/:id/edit                               controllers.admin.product.ProductController.edit(id: Long)
+POST          /admin/product/products/:id                                    controllers.admin.product.ProductController.update(id: Long)
+DELETE        /admin/product/products/:id                                    controllers.admin.product.ProductController.delete(id: Long)
+
+GET           /admin/product/attributes                                      controllers.admin.product.AttributeController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.product.AttributeFilter?= models.default.product.AttributeFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/attributes/new                                  controllers.admin.product.AttributeController.newPage
+GET           /admin/product/attributes/:id/next                             controllers.admin.product.AttributeController.next(id: Long)
+GET           /admin/product/attributes/:id/prev                             controllers.admin.product.AttributeController.prev(id: Long)
+POST          /admin/product/attributes                                      controllers.admin.product.AttributeController.create
+GET           /admin/product/attributes/:id/edit                             controllers.admin.product.AttributeController.edit(id: Long)
+POST          /admin/product/attributes/:id                                  controllers.admin.product.AttributeController.update(id: Long)
+DELETE        /admin/product/attributes/:id                                  controllers.admin.product.AttributeController.delete(id: Long)
+
+GET           /admin/product/attribute-options                               controllers.admin.product.AttributeOptionController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.product.AttributeOptionFilter?= models.default.product.AttributeOptionFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/attribute-options/new                           controllers.admin.product.AttributeOptionController.newPage(attributeId: Long)
+GET           /admin/product/attribute-options/:id/next                      controllers.admin.product.AttributeOptionController.next(id: Long)
+GET           /admin/product/attribute-options/:id/prev                      controllers.admin.product.AttributeOptionController.prev(id: Long)
+POST          /admin/product/attribute-options                               controllers.admin.product.AttributeOptionController.create
+GET           /admin/product/attribute-options/:id/edit                      controllers.admin.product.AttributeOptionController.edit(id: Long)
+POST          /admin/product/attribute-options/:id                           controllers.admin.product.AttributeOptionController.update(id: Long)
+DELETE        /admin/product/attribute-options/:id                           controllers.admin.product.AttributeOptionController.delete(id: Long)
+
+GET           /admin/product/attribute-sets                                  controllers.admin.product.AttributeSetController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.product.AttributeSetFilter?= models.default.product.AttributeSetFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/attribute-sets/new                              controllers.admin.product.AttributeSetController.newPage
+GET           /admin/product/attribute-sets/:id/next                         controllers.admin.product.AttributeSetController.next(id: Long)
+GET           /admin/product/attribute-sets/:id/prev                         controllers.admin.product.AttributeSetController.prev(id: Long)
+POST          /admin/product/attribute-sets                                  controllers.admin.product.AttributeSetController.create
+GET           /admin/product/attribute-sets/:id/edit                         controllers.admin.product.AttributeSetController.edit(id: Long)
+POST          /admin/product/attribute-sets/:id                              controllers.admin.product.AttributeSetController.update(id: Long)
+DELETE        /admin/product/attribute-sets/:id                              controllers.admin.product.AttributeSetController.delete(id: Long)
+
+GET           /admin/product/attribute-set-details                           controllers.admin.product.AttributeSetDetailController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.product.AttributeSetDetailFilter?= models.default.product.AttributeSetDetailFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/attribute-set-details/new                       controllers.admin.product.AttributeSetDetailController.newPage(attributeSetId: Long)
+GET           /admin/product/attribute-set-details/:id/next                  controllers.admin.product.AttributeSetDetailController.next(id: Long)
+GET           /admin/product/attribute-set-details/:id/prev                  controllers.admin.product.AttributeSetDetailController.prev(id: Long)
+POST          /admin/product/attribute-set-details                           controllers.admin.product.AttributeSetDetailController.create
+GET           /admin/product/attribute-set-details/:id/edit                  controllers.admin.product.AttributeSetDetailController.edit(id: Long)
+POST          /admin/product/attribute-set-details/:id                       controllers.admin.product.AttributeSetDetailController.update(id: Long)
+DELETE        /admin/product/attribute-set-details/:id                       controllers.admin.product.AttributeSetDetailController.delete(id: Long)
+
+GET           /admin/product/attribute-value-sets                            controllers.admin.product.AttributeValueSetController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.product.AttributeValueSetFilter?= models.default.product.AttributeValueSetFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/attribute-value-sets/new                        controllers.admin.product.AttributeValueSetController.newPage
+GET           /admin/product/attribute-value-sets/:id/next                   controllers.admin.product.AttributeValueSetController.next(id: Long)
+GET           /admin/product/attribute-value-sets/:id/prev                   controllers.admin.product.AttributeValueSetController.prev(id: Long)
+POST          /admin/product/attribute-value-sets                            controllers.admin.product.AttributeValueSetController.create
+GET           /admin/product/attribute-value-sets/:id/edit                   controllers.admin.product.AttributeValueSetController.edit(id: Long)
+POST          /admin/product/attribute-value-sets/:id                        controllers.admin.product.AttributeValueSetController.update(id: Long)
+DELETE        /admin/product/attribute-value-sets/:id                        controllers.admin.product.AttributeValueSetController.delete(id: Long)
+
+GET           /admin/product/attribute-values                                controllers.admin.product.AttributeValueController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.product.AttributeValueFilter?= models.default.product.AttributeValueFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/attribute-values/new                            controllers.admin.product.AttributeValueController.newPage(attributeValueSetId: Long)
+GET           /admin/product/attribute-values/:id/next                       controllers.admin.product.AttributeValueController.next(id: Long)
+GET           /admin/product/attribute-values/:id/prev                       controllers.admin.product.AttributeValueController.prev(id: Long)
+POST          /admin/product/attribute-values                                controllers.admin.product.AttributeValueController.create
+GET           /admin/product/attribute-values/:id/edit                       controllers.admin.product.AttributeValueController.edit(id: Long)
+POST          /admin/product/attribute-values/:id                            controllers.admin.product.AttributeValueController.update(id: Long)
+DELETE        /admin/product/attribute-values/:id                            controllers.admin.product.AttributeValueController.delete(id: Long)
+
+GET           /admin/product/skus                                            controllers.admin.product.SkuController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.product.SkuFilter?= models.default.product.SkuFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/skus/new                                        controllers.admin.product.SkuController.newPage
+GET           /admin/product/skus/:id/next                                   controllers.admin.product.SkuController.next(id: Long)
+GET           /admin/product/skus/:id/prev                                   controllers.admin.product.SkuController.prev(id: Long)
+POST          /admin/product/skus                                            controllers.admin.product.SkuController.create
+GET           /admin/product/skus/:id/edit                                   controllers.admin.product.SkuController.edit(id: Long)
+POST          /admin/product/skus/:id                                        controllers.admin.product.SkuController.update(id: Long)
+DELETE        /admin/product/skus/:id                                        controllers.admin.product.SkuController.delete(id: Long)
+
+GET           /admin/crm/pages                                               controllers.admin.crm.PageController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.crm.PageFilter ?= models.default.crm.PageFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/crm/pages/new                                           controllers.admin.crm.PageController.newPage
+GET           /admin/crm/pages/:id/next                                      controllers.admin.crm.PageController.next(id: Long)
+GET           /admin/crm/pages/:id/prev                                      controllers.admin.crm.PageController.prev(id: Long)
+POST          /admin/crm/pages                                               controllers.admin.crm.PageController.create
+GET           /admin/crm/pages/:id/edit                                      controllers.admin.crm.PageController.edit(id: Long)
+POST          /admin/crm/pages/:id                                           controllers.admin.crm.PageController.update(id: Long)
+DELETE        /admin/crm/pages/:id                                           controllers.admin.crm.PageController.delete(id: Long)
+
+GET           /admin/mall/bookings                                           controllers.admin.mall.BookingController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.mall.BookingFilter ?= models.default.mall.BookingFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/bookings/new                                       controllers.admin.mall.BookingController.newPage
+GET           /admin/mall/bookings/:id/next                                  controllers.admin.mall.BookingController.next(id: Long)
+GET           /admin/mall/bookings/:id/prev                                  controllers.admin.mall.BookingController.prev(id: Long)
+POST          /admin/mall/bookings                                           controllers.admin.mall.BookingController.create
+GET           /admin/mall/bookings/:id/edit                                  controllers.admin.mall.BookingController.edit(id: Long)
+POST          /admin/mall/bookings/:id                                       controllers.admin.mall.BookingController.update(id: Long)
+DELETE        /admin/mall/bookings/:id                                       controllers.admin.mall.BookingController.delete(id: Long)
+
+GET           /admin/mall/booking-followups                                  controllers.admin.mall.BookingFollowupController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.mall.BookingFollowupFilter ?= models.default.mall.BookingFollowupFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/booking-followups/new                              controllers.admin.mall.BookingFollowupController.newPage(bookingId: Long)
+GET           /admin/mall/booking-followups/:id/next                         controllers.admin.mall.BookingFollowupController.next(id: Long)
+GET           /admin/mall/booking-followups/:id/prev                         controllers.admin.mall.BookingFollowupController.prev(id: Long)
+POST          /admin/mall/booking-followups                                  controllers.admin.mall.BookingFollowupController.create
+GET           /admin/mall/booking-followups/:id/edit                         controllers.admin.mall.BookingFollowupController.edit(id: Long)
+POST          /admin/mall/booking-followups/:id                              controllers.admin.mall.BookingFollowupController.update(id: Long)
+DELETE        /admin/mall/booking-followups/:id                              controllers.admin.mall.BookingFollowupController.delete(id: Long)
+
+GET           /admin/mall/sales                                              controllers.admin.mall.SaleController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.mall.SaleFilter ?= models.default.mall.SaleFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/sales/new                                          controllers.admin.mall.SaleController.newPage
+GET           /admin/mall/sales/:id/next                                     controllers.admin.mall.SaleController.next(id: Long)
+GET           /admin/mall/sales/:id/prev                                     controllers.admin.mall.SaleController.prev(id: Long)
+POST          /admin/mall/sales                                              controllers.admin.mall.SaleController.create
+GET           /admin/mall/sales/:id/edit                                     controllers.admin.mall.SaleController.edit(id: Long)
+POST          /admin/mall/sales/:id                                          controllers.admin.mall.SaleController.update(id: Long)
+DELETE        /admin/mall/sales/:id                                          controllers.admin.mall.SaleController.delete(id: Long)
+
+GET           /admin/mall/sale-rates                                         controllers.admin.mall.SaleRateController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.mall.SaleRateFilter ?= models.default.mall.SaleRateFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/sale-rates/new                                     controllers.admin.mall.SaleRateController.newPage
+GET           /admin/mall/sale-rates/:id/next                                controllers.admin.mall.SaleRateController.next(id: Long)
+GET           /admin/mall/sale-rates/:id/prev                                controllers.admin.mall.SaleRateController.prev(id: Long)
+POST          /admin/mall/sale-rates                                         controllers.admin.mall.SaleRateController.create
+GET           /admin/mall/sale-rates/:id/edit                                controllers.admin.mall.SaleRateController.edit(id: Long)
+POST          /admin/mall/sale-rates/:id                                     controllers.admin.mall.SaleRateController.update(id: Long)
+DELETE        /admin/mall/sale-rates/:id                                     controllers.admin.mall.SaleRateController.delete(id: Long)
+
+GET           /admin/mall/sale-orders                                        controllers.admin.mall.SaleOrderController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.mall.SaleOrderFilter ?= models.default.mall.SaleOrderFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/sale-orders/new                                    controllers.admin.mall.SaleOrderController.newPage
+GET           /admin/mall/sale-orders/:id/next                               controllers.admin.mall.SaleOrderController.next(id: Long)
+GET           /admin/mall/sale-orders/:id/prev                               controllers.admin.mall.SaleOrderController.prev(id: Long)
+POST          /admin/mall/sale-orders                                        controllers.admin.mall.SaleOrderController.create
+GET           /admin/mall/sale-orders/:id/edit                               controllers.admin.mall.SaleOrderController.edit(id: Long)
+POST          /admin/mall/sale-orders/:id                                    controllers.admin.mall.SaleOrderController.update(id: Long)
+DELETE        /admin/mall/sale-orders/:id                                    controllers.admin.mall.SaleOrderController.delete(id: Long)
+
+GET           /admin/mall/sale-order-details                                 controllers.admin.mall.SaleOrderDetailController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.mall.SaleOrderDetailFilter ?= models.default.mall.SaleOrderDetailFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/sale-order-details/new                             controllers.admin.mall.SaleOrderDetailController.newPage(saleOrderId: Long)
+GET           /admin/mall/sale-order-details/:id/next                        controllers.admin.mall.SaleOrderDetailController.next(id: Long)
+GET           /admin/mall/sale-order-details/:id/prev                        controllers.admin.mall.SaleOrderDetailController.prev(id: Long)
+POST          /admin/mall/sale-order-details                                 controllers.admin.mall.SaleOrderDetailController.create
+GET           /admin/mall/sale-order-details/:id/edit                        controllers.admin.mall.SaleOrderDetailController.edit(id: Long)
+POST          /admin/mall/sale-order-details/:id                             controllers.admin.mall.SaleOrderDetailController.update(id: Long)
+DELETE        /admin/mall/sale-order-details/:id                             controllers.admin.mall.SaleOrderDetailController.delete(id: Long)
+
+GET           /admin/mall/sale-order-detail-attribute-values                 controllers.admin.mall.SaleOrderDetailAttributeValueController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.mall.SaleOrderDetailAttributeValueFilter ?= models.default.mall.SaleOrderDetailAttributeValueFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/sale-order-detail-attribute-values/new             controllers.admin.mall.SaleOrderDetailAttributeValueController.newPage(saleOrderDetailId: Long)
+GET           /admin/mall/sale-order-detail-attribute-values/:id/next        controllers.admin.mall.SaleOrderDetailAttributeValueController.next(id: Long)
+GET           /admin/mall/sale-order-detail-attribute-values/:id/prev        controllers.admin.mall.SaleOrderDetailAttributeValueController.prev(id: Long)
+POST          /admin/mall/sale-order-detail-attribute-values                 controllers.admin.mall.SaleOrderDetailAttributeValueController.create
+GET           /admin/mall/sale-order-detail-attribute-values/:id/edit        controllers.admin.mall.SaleOrderDetailAttributeValueController.edit(id: Long)
+POST          /admin/mall/sale-order-detail-attribute-values/:id             controllers.admin.mall.SaleOrderDetailAttributeValueController.update(id: Long)
+DELETE        /admin/mall/sale-order-detail-attribute-values/:id             controllers.admin.mall.SaleOrderDetailAttributeValueController.delete(id: Long)
+
+GET           /admin/mall/home-sections                                      controllers.admin.mall.HomeSectionController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.mall.HomeSectionFilter ?= models.default.mall.HomeSectionFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/home-sections/new                                  controllers.admin.mall.HomeSectionController.newPage
+GET           /admin/mall/home-sections/:id/next                             controllers.admin.mall.HomeSectionController.next(id: Long)
+GET           /admin/mall/home-sections/:id/prev                             controllers.admin.mall.HomeSectionController.prev(id: Long)
+POST          /admin/mall/home-sections                                      controllers.admin.mall.HomeSectionController.create
+GET           /admin/mall/home-sections/:id/edit                             controllers.admin.mall.HomeSectionController.edit(id: Long)
+POST          /admin/mall/home-sections/:id                                  controllers.admin.mall.HomeSectionController.update(id: Long)
+DELETE        /admin/mall/home-sections/:id                                  controllers.admin.mall.HomeSectionController.delete(id: Long)
+
+GET           /admin/mall/home-features                                      controllers.admin.mall.HomeFeatureController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.mall.HomeFeatureFilter ?= models.default.mall.HomeFeatureFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/home-features/new                                  controllers.admin.mall.HomeFeatureController.newPage
+GET           /admin/mall/home-features/:id/next                             controllers.admin.mall.HomeFeatureController.next(id: Long)
+GET           /admin/mall/home-features/:id/prev                             controllers.admin.mall.HomeFeatureController.prev(id: Long)
+POST          /admin/mall/home-features                                      controllers.admin.mall.HomeFeatureController.create
+GET           /admin/mall/home-features/:id/edit                             controllers.admin.mall.HomeFeatureController.edit(id: Long)
+POST          /admin/mall/home-features/:id                                  controllers.admin.mall.HomeFeatureController.update(id: Long)
+DELETE        /admin/mall/home-features/:id                                  controllers.admin.mall.HomeFeatureController.delete(id: Long)
+
+GET           /admin/mall/home-sliders                                       controllers.admin.mall.HomeSliderController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.mall.HomeSliderFilter ?= models.default.mall.HomeSliderFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/home-sliders/new                                   controllers.admin.mall.HomeSliderController.newPage
+GET           /admin/mall/home-sliders/:id/next                              controllers.admin.mall.HomeSliderController.next(id: Long)
+GET           /admin/mall/home-sliders/:id/prev                              controllers.admin.mall.HomeSliderController.prev(id: Long)
+POST          /admin/mall/home-sliders                                       controllers.admin.mall.HomeSliderController.create
+GET           /admin/mall/home-sliders/:id/edit                              controllers.admin.mall.HomeSliderController.edit(id: Long)
+POST          /admin/mall/home-sliders/:id                                   controllers.admin.mall.HomeSliderController.update(id: Long)
+DELETE        /admin/mall/home-sliders/:id                                   controllers.admin.mall.HomeSliderController.delete(id: Long)
+
+GET           /admin/core/images                                             controllers.admin.core.ImageController.index(p: models.ModelPager ?= models.ModelPager(), f: models.default.core.ImageFilter ?= models.default.core.ImageFilter(), s: models.ModelSorter ?= models.ModelSorter())
+DELETE        /admin/core/images/:id                                         controllers.admin.core.ImageController.delete(id: Long)
+POST          /admin/core/images/upload                                      controllers.admin.core.ImageController.upload
+
+# Map static resources from the /public folder to the /assets URL path
+GET           /versioned/*file                                               controllers.Assets.versioned(path="/public", file: Asset)
+GET           /assets/*file                                                  controllers.Assets.at(path="/public", file)
+GET           /uploaded/*file                                                controllers.UploadedAssets.at(file)
+

@@ -1,0 +1,60 @@
+@(returnUrl: String)(implicit messages: Messages, request: RequestHeader)
+
+@styles = {
+	<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/account.css")">
+}
+
+@scripts = {
+    .script('@customRoutes.Assets.at("store/scripts/pages/account.js")')
+    .wait(function () {
+        PageAccount.handleSignUp();
+        PageAccount.handleActivate();
+    })
+}
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store"), stylesOpt = Some(styles), scriptsOpt = Some(scripts)) {
+
+	<div id="formContainer">
+		<section class="row bs-form">
+
+			<div class="col-md-4 offset-md-6">
+				<h2>欢迎注册<small>已有账号? <a href="@controllers.store.routes.AccountController.signIn(returnUrl)">点此登录</a></small></h2>
+
+				<form id="signUpForm">
+					<div class="form-group">
+						<label for="mobile">手机号</label>
+						<input type="text" id="mobile" name="mobile" class="form-control " required digits data-msg-required="请输入手机号码" data-msg-digits="请输入有效手机号码">
+					</div>
+				</form>
+
+				<form id="activateForm">
+					<div class="form-group">
+						<label for="checkCode">验证码</label>
+						<div class="input-group">
+							<input type="text" id="checkCode" name="checkCode" class="form-control " required data-msg-required="请输入验证码">
+							<span class="input-group-btn">
+								<button class="btn btn-link" style="width: 120px;" id="signUpButton" type="button">获取验证码</button>
+							</span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="password">设置密码</label>
+						<input type="password" id="password" name="password" class="form-control " required data-msg-required="请请输入密码">
+					</div>
+
+					<div class="form-group">
+						<label for="passwordCf">确认密码</label>
+						<input type="password" id="passwordCf" class="form-control " required data-msg-required="请确认密码" data-rule-equalto="#password" data-msg-equalto="两次密码输入不一致">
+					</div>
+
+					<div id="error" class="text-danger"></div>
+					<input type="button" id="registerButton" class="cta-button fill mt-1" value="立即注册">
+					<div class="mt-1">我已阅读并同意<a href="@controllers.store.routes.PageController.info(id="terms")" target="_blank" class="highlight-link">《荣定制用户协议》</a></div>
+				</form>
+			</div>
+
+		</section>
+	</div>
+
+}

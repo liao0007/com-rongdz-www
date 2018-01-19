@@ -1,0 +1,93 @@
+#formContainer {
+    padding-bottom: 40px;
+    padding-top: 40px;
+
+}
+
+#formContainer h2{
+    position: relative;
+}
+
+#formContainer h2 small {
+    position: absolute;
+    font-size: 14px;
+    right: 0;
+    bottom: 0;
+}
+
+.shipToProvince, .shipToCity, .shipToDistrict {
+    width: 25%;
+    float: left;
+    margin-right: 10px;
+}
+
+.sep-row {
+    height: 20px;
+    background: #FFF;
+}
+
+tr.detail td {
+    background: #FFF;
+}
+
+tr.detail td {
+    vertical-align: middle !important;
+}
+
+tr.detail td.order-info, th {
+    text-align: center !important;
+}
+
+
+/*order detail page*/
+.order-info {
+    border-top: 3px solid black;
+    border-bottom: 1px dashed #eee;
+    background: white;
+}
+
+.order-info dt {
+    min-width: 80px;
+    clear: both;
+}
+
+.order-detail {
+    background: white;
+}
+
+.payment-method {
+    color: #999;
+    border: 2px solid #eee;
+    width: 150px;
+    background-size: cover;
+    cursor: pointer;
+    padding: 10px;
+    float: left;
+    text-align: center;
+}
+.radio-list-item.selected .payment-method{
+    border: 2px solid #000;
+    color: #000;
+}
+
+@media (max-width:767px) {
+    .order-info {
+        border-top: 0;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        border-bottom: 0;
+    }
+    .order-info dt, .order-info dd {
+        float: left;
+    }
+    .order-info dt:after {
+        content: ":"
+    }
+    .order-info-item {
+        border-bottom: 15px solid #f9f9f9;
+    }
+    .order-detail {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+}

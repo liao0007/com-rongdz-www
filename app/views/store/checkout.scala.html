@@ -1,0 +1,151 @@
+@import models.default.mall.CartItem
+@import daos.default.product.Attribute
+@import daos.default.user.ShipToAddress
+@import views.html.helper.form
+@import daos.default.mall.SaleOrder
+@import com.mohiva.play.silhouette.api.actions.SecuredRequest
+@import auth.JWTEnv
+@import daos.default.mall.SaleOrder.SaleOrderPaymentMethod
+@import daos.default.mall.SaleOrder.SaleOrderDeliveryType
+@import daos.default.product.AttributeOption
+@(cartItems: Seq[CartItem], shipToAddresses: List[ShipToAddress])(implicit messages: Messages, request: SecuredRequest[JWTEnv, AnyContent])
+
+@implicitFieldConstructor = @{ b3.vertical.fieldConstructor }
+
+@styles = {
+	<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/checkout.css")">
+}
+
+@scripts = {
+    .script('@customRoutes.Assets.at("shared/plugins/jquery.qrcode/jquery-qrcode-0.14.0.js")')
+    .script('https://res.wx.qq.com/open/js/jweixin-1.1.0.js')
+    .script('@customRoutes.Assets.at("store/scripts/pages/checkout.js")')
+    .wait(function () {
+        PageCheckout.init();
+    })
+}
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store"), stylesOpt = Some(styles), scriptsOpt = Some(scripts)) {
+
+	<h1><i class="icon-lock" style="font-size: 0.85em;"></i> 结算</h1>
+
+	<div class="hidden-md-up text-xs-center mb-1h mt-1h"><a href="@controllers.store.routes.ApplicationController.bag()" class="cta-button alt">查看我的购物袋</a></div>
+
+	<div class="row">
+		<div class="checkout-form bs-form col-md-6 col-lg-7 col-xl-8">
+
+		<form id="saleOrderForm">
+			<input type="hidden" name="orderNumber" id="orderNumber" value="@SaleOrder.newOrderNumber(request.identity.id)">
+			<input type="hidden" name="deliveryType" id="deliveryType" value="@SaleOrderDeliveryType.Direct.toString">
+
+			<section id="section-shipping">
+				<h4 class="section-header">收货地址</h4>
+				<div class="section-summary"></div>
+
+				<fieldset class="form-group">
+					<div class="clearfix ship-to-address-row radio-list">
+						@for(shipToAddress <- shipToAddresses ) {
+							<div class="ship-to-address-col radio-list-item @if(shipToAddress.isDefault){selected} " data-value="@shipToAddress.id">
+								<div class="mb-1 address-card">
+									<address style="margin-bottom:unset !important">
+										<span class="font-weight-bold text-uppercase">@shipToAddress.name @shipToAddress.mobile @if(shipToAddress.isDefault){<small> - 默认收货地址</small>}</span><br>
+										@shipToAddress.district.city.province.name @shipToAddress.district.city.name @shipToAddress.district.name <br>
+									@shipToAddress.address
+									</address>
+									<div>
+										<a href="@controllers.store.routes.AccountController.editAddress(shipToAddress.id, request.uri)" class="highlight-link edit-address">编辑</a>
+									</div>
+								</div>
+							</div>
+						}
+						<input name="shipToAddressId" id="shipToAddressId" type="hidden" @shipToAddresses.find(_.isDefault).map{ shipToAddress => value=@shipToAddress.id} required data-msg-required="请选择收货地址" >
+						<a href="@controllers.store.routes.AccountController.newAddress(request.uri)" id="add-address" class="highlight-link">添加收货地址</a>
+					</div>
+				</fieldset>
+			</section>
+
+			<section id="section-payment">
+				<h4 class="section-header">支付方式</h4>
+				<div class="section-summary"></div>
+
+				<fieldset class="form-group">
+					<div class="clearfix payment-method-row radio-list">
+
+						@for(paymentMethod <- SaleOrderPaymentMethod) {
+							<div class="payment-method-col radio-list-item @paymentMethod.toString @if(paymentMethod == SaleOrderPaymentMethod.Wepay){selected}" data-value="@paymentMethod.toString">
+								<div class="mb-1 mr-1 payment-method">
+									<span class="font-weight-bold text-uppercase">@paymentMethod.name</span>
+								</div>
+							</div>
+						}
+						<input name="paymentMethod" id="paymentMethod" type="hidden" value="@SaleOrderPaymentMethod.Wepay.toString" required data-msg-required="请选择支付方式">
+					</div>
+				</fieldset>
+			</section>
+
+			<section id="section-review">
+				<p id="error" class="text-danger hidden-xs-up"></p>
+				<input type="button" id="btnSubmitOrder" value="提交订单" class="cta-button fill">
+			</section>
+		</form>
+		</div>
+
+
+		@*购物袋*@
+		<div class="col-md-6 col-lg-5 col-xl-4 hidden-sm-down">
+			<div class="checkout-box-heading">
+				<h4 class="section-header rel">我的购物袋 <a class="highlight-link" href="@controllers.store.routes.ApplicationController.bag()">返回修改购物袋</a></h4>
+			</div>
+			<div class="checkout-cart-items">
+				<div>
+				@for(cartItem <- cartItems) {
+					<div class="clearfix mb-2 row">
+						<img class="col-xs-4 pr-0" src="@customRoutes.UploadedAssets.at(cartItem.sale.sku.imageUrls(0))?x-oss-process=image/resize,limit_0,w_300/sharpen,100">
+						<div class="col-xs-8" >
+							<h3 class="mb-0">@cartItem.sale.title</h3>
+							<div class="text-muted text-uppercase">@cartItem.sale.sku.sku</div>
+							<span class="popover-trigger popover-trigger-html"><i class="icon-info-circled"></i> 定制详情</span>
+							<div class="display-none">
+								<table class="option-table">
+									<tbody>
+									@for(attributeValue <- cartItem.sale.sku.attributeValueSet.attributeValues.includes(_.attribute)){
+                                        <tr>
+                                            <td class="text-sm-right">@attributeValue.attribute.description</td>
+                                            <td class="pl-1">@attributeValue.readableValue()</td>
+                                        </tr>
+									}
+									</tbody>
+								</table>
+							</div>
+							<br><br>
+							数量: @cartItem.quantity 件<br>
+							小计: ¥@(cartItem.sale.originalUnitPrice * cartItem.quantity)<br>
+						</div>
+					</div>
+				}
+				</div>
+			</div>
+
+			@defining(cartItems.map(cartItem => cartItem.sale.originalUnitPrice * cartItem.quantity).sum) { subtotal =>
+				<div>
+					<div class="subtotal-box">
+						<table class="table subtotal-table">
+							<tbody>
+								<tr>
+									<td>商品金额</td>
+									<td class="text-xs-right">¥@subtotal</td>
+								</tr>
+								<tr>
+									<td>运费 <i class="icon-info-circled popover-trigger popover-trigger-text" data-content="默认顺丰快递，4-6天发货"></i></td>
+									<td class="text-xs-right">¥0.00</td>
+								</tr>
+								<tr class="total-row font-weight-bold"><td class="text-uppercase">应付总额</td><td class="text-xs-right">¥@subtotal</td></tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+
+}

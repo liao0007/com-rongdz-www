@@ -1,0 +1,66 @@
+.hero-vid { display: none; background-color: #d9d9d9; }
+.hero-img { background-color: #d9d9d9; background-position: 45% center; background-size: cover; height: 0; padding-bottom: 387px; }
+
+.hero-txt { height: 387px; margin-top: -387px; color: #fff; padding-top: 1rem; }
+.hero-txt > div { width: 100%; }
+.hero-txt h1 { line-height: 1; margin-bottom: 0; }
+.hero-txt h1 small { font-size: 0.3em; line-height: 1.2; }
+
+.sub-img { background-color: #d9d9d9; background-position: 5% 20%; background-size: 170%; height: 0; padding-bottom: 50%; margin-top: 2rem; }
+.sub-img-circle { position: relative; margin-top: 2rem; }
+.sub-img-circle > div { height: 0; padding-bottom: 50%; background-position: center 10%; background-size: cover; }
+.sub-txt > div { width: 100%; }
+.sub-txt h1 { margin-bottom: 0.333rem; margin-top: 0.5rem; }
+.sub-txt h1 small { font-size: 0.45em; line-height: 1.2; }
+
+ul.connect-list li:not(:first-child):before { content: '• '; }
+
+.locator-result { border: 1px solid #d9d9d9; padding: 1rem; }
+
+
+#bookingForm {
+    max-width: 300px;
+}
+
+@media (max-width: 543px) {
+    .shero-txt h1.display-3 { font-size: 3.333rem; }
+    ul.connect-list li { display: block; }
+    ul.connect-list li:not(:first-child):before { content: ''; }
+}
+
+@media (min-width: 768px) {
+    .hero-txt h1 { padding-top: 1.5rem; }
+
+    .sub-img { background-position: 33% center; background-size: cover; padding-bottom: 300px; }
+    .sub-img-circle { height: 300px; }
+    .sub-img-circle > div { position: absolute; right: 7%; width: 300px; padding-bottom: 300px; border-radius: 50%; }
+    .sub-txt { height: 300px; margin-top: -300px; }
+    .sub-txt h1 { margin-top: 0; }
+    .sub-txt p { margin-bottom: 0; }
+    #sub-txt-service > div { width: 40%; margin-left: 55%; }
+    #sub-txt-custom > div { width: 35%; margin-left: 5%; }
+    #sub-txt-delivery > div { width: 35%; margin-left: 60%; }
+    #sub-txt-fabrics > div { width: 35%; margin-left: 5%; }
+}
+
+@media (min-width: 1024px) {
+    .sub-img { padding-bottom: 400px; }
+    .sub-img-circle { height: 400px; }
+    .sub-img-circle > div { width: 400px; padding-bottom: 400px; }
+    .sub-txt { height: 400px; margin-top: -400px; }
+    .sub-txt p { font-size: 1.2em; }
+}
+
+@media (min-width: 1200px) {
+    .sub-img-circle > div { right: 10%; }
+    #sub-txt-service > div { width: 35%; margin-left: 55%; }
+    #sub-txt-custom > div { width: 35%; margin-left: 10%; }
+    #sub-txt-delivery > div { width: 45%; margin-left: 50%; }
+    #sub-txt-fabrics > div { width: 35%; margin-left: 10%; }
+}
+
+@media (min-width: 1366px) {
+    .hero-vid { display: block; }
+    .hero-img { display: none; }
+    .hero-txt { position: relative; top: -387px; margin-top: 0; margin-bottom: -387px; pointer-events: none; }
+}

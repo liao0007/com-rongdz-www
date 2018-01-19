@@ -1,0 +1,15 @@
+@(message: Option[String] = None)(implicit messages: Messages, request: RequestHeader)
+
+@views.html.wechat.layout.main(title = "荣定制") {
+	<div style="padding: 50px 15px 15px;">
+		<div class="icon-box" style="width: 260px; margin: 0 auto;">
+			<i class="weui-icon-warn weui-icon_msg-primary" style="float: left;"></i>
+			<div class="icon-box__ctn" style="float: left; margin-top: 25px; margin-left: 10px; color: grey;">
+				<h3 class="icon-box__title">非常抱歉! </h3>
+				<p class="icon-box__desc">@message.getOrElse("您查看的页面找不到了！")</p>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+	</div>
+
+}

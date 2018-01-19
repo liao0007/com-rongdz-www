@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;stroke:#010101;stroke-width:0.25;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#010101;stroke-width:0.25;stroke-miterlimit:10;stroke-dasharray:1.9166;}
+	.st2{fill:none;stroke:#010101;stroke-width:0.25;stroke-miterlimit:10;}
+</style>
+<g id="_x30_8-Mitered_withFlap">
+	<g>
+		<polygon class="st0" points="79.1,70.8 79.1,18.9 20.9,18.9 20.9,70.9 29.3,79.3 70.7,79.3 		"/>
+		<polygon class="st1" points="30.5,76.6 23.7,69.8 23.7,21.7 76.3,21.7 76.3,69.7 69.6,76.6 		"/>
+		<g>
+			<polygon class="st0" points="79.1,34.6 79.1,18.9 20.9,18.9 20.9,34.7 29.3,43.1 70.7,43.1 			"/>
+			<polyline class="st1" points="76.3,21.7 76.3,33.4 69.6,40.3 30.5,40.3 23.7,33.5 23.7,21.7 			"/>
+			<g>
+				<g>
+					<path class="st2" d="M50,29.5c-1.9,0-3.5,1.5-3.5,3.5c0,1.9,1.5,3.5,3.5,3.5c1.9,0,3.5-1.5,3.5-3.5S51.9,29.5,50,29.5L50,29.5z
+						"/>
+				</g>
+			</g>
+		</g>
+		<line class="st1" x1="20.9" y1="21.7" x2="79.1" y2="21.7"/>
+	</g>
+</g>
+</svg>

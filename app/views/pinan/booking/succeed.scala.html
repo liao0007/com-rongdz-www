@@ -1,0 +1,70 @@
+@import daos.default.mall.Booking
+@(booking: Booking)(implicit messages: Messages, request: RequestHeader)
+
+@styles = {
+    <link href="@customRoutes.Assets.at("pinan/styles/booking/v1.css")" rel="stylesheet" type="text/css"/>
+}
+
+@views.html.pinan.layout.main(title = "预约成功", styles = styles) {
+
+    <div class="section" id="booking">
+        <div class="container form">
+            <h2>预约成功</h2>
+            <p>我们的客服将尽快与您联系</p>
+        </div>
+        <div class="body">
+            <table class="table">
+                <tr>
+                    <th>预约号</th>
+                    <td>@booking.bookingNumber</td>
+                </tr>
+                <tr>
+                    <th>您的姓名</th>
+                    <td>@booking.name</td>
+                </tr>
+                <tr>
+                    <th>手机号码</th>
+                    <td>@booking.mobile</td>
+                </tr>
+                <tr>
+                    <th>所在城市</th>
+                    <td>@booking.city</td>
+                </tr>
+                <tr>
+                    <th>备注/地址</th>
+                    <td>@booking.address</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="head">
+            <h2 style="text-align: center">关注我们</h2>
+        </div>
+        <div>
+            <img src="@customRoutes.Assets.at("pinan/images/booking/succeed/QR-code.jpg")">
+        </div>
+    </div>
+
+    @*
+    <div class="section">
+        <div class="head">
+            <img src="@customRoutes.Assets.at("pinan/images/booking/v1/img5.jpg")" />
+            <h1>定制服务流程<small>Services</small></h1>
+        </div>
+        <div class="body">
+            <p>
+                <img src="@customRoutes.Assets.at("pinan/images/booking/v1/process.png")" />
+            </p>
+        </div>
+    </div>
+    *@
+
+    <div class="footer">
+        <p>以上服务由RONG定制提供</p>
+        <p>©2016 RONG定制 京ICP备16039452号</p>
+    </div>
+
+
+}

@@ -1,0 +1,43 @@
+@import daos.default.mall.BookingFollowup
+@import models.default.mall.BookingFollowupFilter
+@(items: Seq[BookingFollowup], pagination: Pagination, filter: BookingFollowupFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
+
+@currentController = @{controllers.admin.mall.routes.BookingFollowupController}
+
+@views.html.admin.layout.window(title = "订单详情", tabOpt = Some("saleBookingFollowup")) {
+
+    @views.html.admin.tags.pageHead {
+        订单详情
+    } {
+        <a href="@currentController.newPage(filter.bookingIdOpt.get)" class="cta-button">新建</a>
+    }
+
+    @views.html.admin.tags.pageIndexBody {
+        <form method="get" action="@currentController.index()">
+            <table class="table table-inverse" >
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="150px"></th>
+                        <th>详情</th>
+                        <th width="150px">操作</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                @for(item<-items) {
+                    <tr class="align-middle">
+                        <td class="align-middle"><a href="@controllers.admin.mall.routes.BookingFollowupController.edit(item.id)"><samp>@item.updatedAt</samp></a></td>
+                        <td class="align-middle">@item.description</td>
+                        <td class="align-middle">
+                            <a href="javascript:void()" data-target="@currentController.delete(item.id)" class="cta-button plain trans borderless btn-delete">删除</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </form>
+    }
+
+    @views.html.shared.paginator(pager => currentController.index(pager), pagination)
+
+}

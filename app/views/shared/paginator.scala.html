@@ -1,0 +1,55 @@
+@(call: ModelPager => Call, pagination: Pagination)
+
+@pages = @{
+    val wingLengh = 2
+    val totalPages = pagination.totalPages
+    val startPage = Math.max(1, Math.min(pagination.pager.page - wingLengh, totalPages - 2 * wingLengh - 1) )
+    val endPage = Math.min(totalPages, startPage + wingLengh * 2 + 1)
+    startPage to endPage
+}
+
+@defining(pagination.pager) { pager =>
+    <div class="mt-1h float-xs-right">
+        <ul class="pagination">
+            @if(pager.page == 1) {
+                <li class="first disabled cta-button">
+                    <a href="javascript:void()">
+                        上一页
+                    </a>
+                </li>
+            } else {
+                <li class="first cta-button">
+                    <a href="@call(ModelPager(Math.max(1, pager.page - 1), pager.size))">
+                        上一页
+                    </a>
+                </li>
+            }
+
+            @for(page<-pages) {
+                @if(page == pager.page) {
+                    <li class="disabled cta-button alt"><a href="javascript:void()">@page</a></li>
+                } else {
+                    <li class=" cta-button alt"><a href="@call(ModelPager(page, pager.size))">@page</a></li>
+                }
+            }
+
+            @if(pager.page == pagination.totalPages) {
+                <li class="last disabled cta-button">
+                    <a href="javascript:void()">
+                        下一页
+                    </a>
+                </li>
+            } else {
+                <li class="last cta-button">
+                    <a href="@call(ModelPager(Math.min(pagination.totalPages, pager.page + 1), pager.size))">
+                        下一页
+                    </a>
+                </li>
+            }
+
+        </ul>
+    </div>
+    <div class="clearfix"></div>
+}
+
+

@@ -1,0 +1,75 @@
+@import daos.default.product.Attribute
+@import models.default.product.AttributeFilter
+@import daos.ActiveRecord
+@import models.default.product.ProductFilter
+@import daos.default.product.Attribute.AttributeInputType
+@import models.default.product.AttributeOptionFilter
+@(items: Seq[Attribute], pagination: Pagination, filter: AttributeFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
+
+@currentController = @{controllers.admin.product.routes.AttributeController}
+
+@breadcrumb = @{
+    Seq(
+        ("Attribute", Some(currentController.index()))
+    )
+}
+
+@views.html.admin.layout.main(title = "Attribute", tabOpt = Some("productAttribute"), breadcrumb = breadcrumb) {
+
+    @views.html.admin.tags.pageHead {
+        Attribute
+    } {
+        <a href="@currentController.newPage()" class="cta-button">新建</a>
+    }
+
+    @views.html.admin.tags.pageIndexBody {
+        <form method="get" action="@currentController.index()">
+            <table class="table table-inverse" >
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="300px">名称</th>
+                        <th>描述</th>
+                        <th width="150px">类型</th>
+                        <th width="150px">操作</th>
+                    </tr>
+
+                    <tr role="row" class="filter">
+                        <td class="align-middle"><input type="text" class="form-control" name="f.name" value="@filter.nameOpt.getOrElse("")"></td>
+                        <td class="align-middle"></td>
+                        <td class="align-middle"></td>
+                        <td class="align-middle">
+                            <button class="cta-button alt"><i class="fa fa-search"></i> 搜索</button>
+                        </td>
+                    </tr>
+
+                </thead>
+                <tbody>
+                @for(item<-items) {
+                    <tr class="align-middle">
+                        <td class="align-middle"><a class="highlight-link" href="@currentController.edit(item.id)">@item.name</a></td>
+                        <td class="align-middle">@item.description</td>
+                        <td class="align-middle">
+                            @AttributeInputType.fromString(item.inputType) match {
+                                case Some(AttributeInputType.Enu) => {
+                                    <a class="highlight-link" href="javascript:App.popupWindow('@controllers.admin.product.routes.AttributeOptionController.index(f = AttributeOptionFilter(attributeIdOpt = Some(item.id)))', '@item.name')">
+                                        @AttributeInputType.fromString(item.inputType).map(_.name)
+                                    </a>
+                                }
+                                case _ => {
+                                    @AttributeInputType.fromString(item.inputType).map(_.name)
+                                }
+                            }
+                        </td>
+                        <td class="align-middle">
+                            <a href="javascript:void()" data-target="@currentController.delete(item.id)" class="cta-button plain trans borderless btn-delete">删除</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </form>
+    }
+
+    @views.html.shared.paginator(pager => currentController.index(pager), pagination)
+
+}

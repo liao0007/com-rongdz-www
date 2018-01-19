@@ -1,0 +1,17 @@
+@(general: Html)(content: Html)
+<div class="mt-1h">
+    <div class="row">
+        <div class="col-md-4">
+            <h3>基础信息</h3>
+            <table class="table table-inverse">
+                <tbody>
+                    @general
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-8">
+            @content
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+@import daos.default.crm.Page
+@(page: Page)(implicit messages: Messages, request: RequestHeader)
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store")) {
+    <style>
+    @@media (max-width:767px) {
+        .mx-auto img{
+            width: 100%;
+        }
+    }
+    </style>
+
+    <div class="mx-auto">
+        @Html(page.content)
+    </div>
+}

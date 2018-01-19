@@ -1,0 +1,101 @@
+@import com.mohiva.play.silhouette.api.actions.SecuredRequest
+@import auth.JWTEnv
+@import daos.default.user.ShipToAddress
+@import org.joda.time.format.DateTimeFormat
+@import daos.default.mall.SaleOrder.SaleOrderShippingState
+@import daos.default.mall.SaleOrder.SaleOrderState
+@import daos.default.mall.SaleOrder.SaleOrderPaymentState
+@import daos.default.mall.SaleOrder
+@import models.default.mall.SaleOrderFilter
+@import daos.default.mall.SaleOrder.PaymentState
+@(orders: Seq[SaleOrder], pagination: Pagination, filter: SaleOrderFilter, sorter: ModelSorter)(implicit messages: Messages, request: SecuredRequest[JWTEnv, _])
+
+@styles = {
+	<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/account.css")">
+}
+
+@scripts = {
+    .script('@customRoutes.Assets.at("store/scripts/pages/account.js")')
+    .wait(function () {
+        PageAccount.init();
+    })
+}
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store"), stylesOpt = Some(styles), scriptsOpt = Some(scripts)) {
+
+    <h4 class="text-md-left text-xs-center mt-3">最近的订单</h4>
+    <div class="table-responsive">
+        <table class="table table-inverse">
+            <thead>
+                <tr>
+                    <th>产品</th>
+                    <th>总额</th>
+                    <th>订单状态</th>
+                    <th>物流状态</th>
+                </tr>
+            </thead>
+
+            @if(orders.isEmpty) {
+                <tr>
+                    <td colspan="4">您还没有下过订单</td>
+                </tr>
+            } else {
+                @for(order<-orders) {
+                    <tbody>
+                        <tr class="head">
+                        @defining(
+                            DateTimeFormat.forPattern("yyyy-MM-dd hh:mm")
+                        ) { dateTimeFormatter =>
+                            <td colspan="4">
+                                <div class="float-xs-left">@dateTimeFormatter.print(order.createdAt)</div><div class="float-xs-right text-xs-right"><a href="@controllers.store.routes.AccountController.saleOrder(order.orderNumber)" class="highlight-link">订单详情</a></div>
+                            </td>
+                        }
+                        </tr>
+
+                        @defining(order.details) { orderDetails =>
+                            @orderDetails.headOption.map { orderDetail =>
+                                <tr class="detail">
+                                    <td>
+                                        <a href="@controllers.store.routes.CatalogController.sale(orderDetail.sale.saleNumber)">
+                                            <img style="width: 60px" src="@customRoutes.UploadedAssets.at(orderDetail.sale.sku.imageUrls(0))?x-oss-process=image/resize,limit_0,w_150/sharpen,100" />
+                                            <span class="hidden-md-down">@orderDetail.sale.title</span>
+                                        </a>
+                                    </td>
+
+                                    @defining(orderDetails.count) { rowCount =>
+                                        <td class="order-info" rowspan="@rowCount">¥@order.totalAmount</td>
+                                        <td class="order-info" rowspan="@rowCount">
+                                        @SaleOrderPaymentState.fromString(order.paymentState) match {
+                                            case Some(SaleOrderPaymentState.Open) => {<span class="text-danger">@SaleOrderPaymentState.Open.name</span>}
+                                            case Some(SaleOrderPaymentState.Paid) => {<span class="text-success">@SaleOrderPaymentState.Paid.name</span>}
+                                            case Some(SaleOrderPaymentState.Refunded) => {<span class="text-warning">@SaleOrderPaymentState.Refunded.name</span>}
+                                            case Some(state: PaymentState) => {<span class="">@state.name</span>}
+                                            case _ => {}
+                                        }
+                                        </td>
+                                        <td class="order-info" rowspan="@rowCount">
+                                        @SaleOrderShippingState.fromString(order.shippingState).fold("")(_.name)
+                                        </td>
+                                    }
+                                </tr>
+                            }
+
+                            @for(orderDetail<-orderDetails.tail) {
+                                <tr class="detail">
+                                    <td>
+                                        <a href="@controllers.store.routes.CatalogController.sale(orderDetail.sale.saleNumber)">
+                                            <img style="width: 60px" src="@customRoutes.UploadedAssets.at(orderDetail.sale.sku.imageUrls.head)?x-oss-process=image/resize,limit_0,w_150/sharpen,100" />
+                                            <span class="hidden-md-down">@orderDetail.sale.title</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        <tr class="sep-row"><td colspan="4"></td></tr>
+                    </tbody>
+                }
+            }
+        </table>
+    </div>
+
+}

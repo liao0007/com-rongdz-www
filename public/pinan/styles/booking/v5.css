@@ -1,0 +1,233 @@
+body {
+    font-family:"PingFangSC-Regular", "Microsoft YaHei", "San Francisco", serif;
+    background: #fff;
+    padding: 10px 15px;
+}
+
+body > img, .header {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.header {
+    display: block;
+    position: relative;
+}
+
+.header img{
+    width: 100%;
+}
+
+.header .btn {
+    position: absolute;
+    bottom: 0px;
+    display: block;
+    font-size: 16px;
+    width: 100%;
+    background: rgba(0,0,0,0.30);
+    color: white;
+    padding: 10px 15px;
+    border: 0;
+    border-radius: 0;
+    text-align: center;
+}
+
+.titleHead h2, #booking p{
+    text-align: center;
+    margin-bottom: 0;
+    font-size: 17pt;
+    margin-top: 40px;
+}
+.titleHead p {
+    font-size: 14pt;
+    text-align: center;
+}
+
+.section {
+    position: relative;
+    clear: both;
+}
+
+.section img {
+    width: 100%;
+}
+
+.section .head h2 {
+    width: 100%;
+    text-align: center;
+    color: black;
+    opacity: 0.95;
+    margin-top: 28pt;
+}
+
+.section .head h2 small {
+    display: block;
+    color: inherit;
+    text-transform: uppercase;
+    font-family: freight-display-pro, freight, "times new roman", serif;
+}
+
+.section .body {
+    padding: 10pt 10pt 0;
+    text-align: center;
+}
+
+.section .body ul {
+    padding: 0;
+    padding-left: 10pt;
+}
+
+.section .body ul li {
+    text-align: left;
+    list-style-type: square;
+}
+
+.section .body strong {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.section .body p small {
+    display: block;
+    font-size: 0.8em;
+    line-height: 1em;
+    opacity: 0.2;
+    font-family: freight-display-pro, freight, "times new roman", serif;
+    text-transform: uppercase;
+}
+
+.list ul {
+    padding: 0;
+    margin: 0;
+    margin-top: 10pt;
+}
+
+.list li {
+    width: 50%;
+    float: left;
+    list-style: none;
+    height: 390px;
+    text-align: center;
+}
+.list .title {
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 5pt;
+    padding: 0 3px;
+}
+
+.list li a {
+    color: inherit;
+}
+
+.list li a:hover {
+    text-decoration: none;
+}
+
+.list .btn {
+    background: #000;
+    color: white;
+    font-size: 17pt;
+    padding: 10px 15px;
+    border: 0;
+    border-radius: 0;
+    width: 160px;
+    display: block;
+    margin: 0 auto;
+    clear: both;
+}
+
+.price {
+    color: #f4041f;
+    font-size: 12pt;
+    padding: 0 3px;
+}
+
+.price span {
+    color: #000;
+    text-decoration: line-through;
+}
+
+.more, .more:hover {
+    clear: both;
+    display: block;
+    text-align: center;
+    line-height: 34pt;
+    font-size: 17pt;
+    color: #fff;
+    text-decoration: none;
+    background: #000;
+    width: 160pt;
+    margin: 0 auto;
+    height: 45px;
+}
+
+.more:hover {
+    text-decoration: underline;
+}
+
+#booking .form {
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 15px;
+    padding: 0;
+    border: 1px solid #ededed;
+    border-radius: 10px;
+    background: white;
+}
+#booking .form .form-group{
+    padding: 10px 0;
+    margin: 0;
+    border-bottom: 1px solid #ededed;
+}
+#booking .form .form-group:last-child {
+    border: 0;
+}
+#bookingNumber_field {
+    display: none;
+}
+#booking .form .form-group .control-label {
+    margin-top: 7px;
+    padding-right: 0;
+    text-align: right;
+    font-size: 14px;
+}
+#booking .form .form-group input, #booking .form .form-group select{
+    margin: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+#booking .info {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #909090;
+}
+
+
+
+.submit {
+    display: block;
+    font-size: 18px;
+    width: 100%;
+    background: #000;
+    color: white;
+    padding: 10px 15px;
+    margin-top: 20px;
+    border: 0;
+    text-align: center;
+}
+
+.submit:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.footer {
+    text-align: center;
+    font-size: 10px;
+    color: #b4b4b4;
+    margin-top: 55px;
+    margin-bottom: 10px;
+}

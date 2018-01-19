@@ -1,0 +1,41 @@
+.title h2{
+    margin-bottom: 0px;
+    line-height: 3rem;
+}
+
+.input-group input{
+    border-right:0;
+}
+
+.input-group .input-group-btn .cta-button{
+    padding: 0.45rem 1.2rem;
+}
+
+
+textarea.wysihtml5 {
+    height: 800px;
+    width: 779px;
+}
+
+iframe.wysihtml5-sandbox {
+    border: 1px solid #eee !important;
+    padding: 0 !important;
+}
+#detail_field .wysihtml5-command-active {
+    border-radius: 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    background-color: darkgoldenrod;
+    color: white;
+}
+
+#detail_field .dropdown-menu {
+    border-radius:0;
+}
+
+#detail_field .dropdown-menu li a{
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+}

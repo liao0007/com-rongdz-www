@@ -1,0 +1,104 @@
+@import models.default.mall.CartItem
+@import daos.default.product.Attribute
+@import daos.default.product.AttributeOption
+@(cartItems: Seq[CartItem])(implicit messages: Messages, request: RequestHeader)
+
+@styles = {
+	<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/bag.css")">
+}
+
+@scripts = {
+    .script('@customRoutes.Assets.at("shared/plugins/bootstrap-touchspin/bootstrap.touchspin.min.js")')
+    .script('@customRoutes.Assets.at("store/scripts/pages/bag.js")')
+    .wait(function () {
+        PageBag.init();
+    })
+}
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store"), stylesOpt = Some(styles), scriptsOpt = Some(scripts)) {
+
+	<h1 class="text-xs-center">我的购物袋</h1>
+	<div class="error-wrapper alert-danger p-1 mb-1h" hidden="">
+		We're sorry, but some of the items in your bag are no longer available or are availble in insufficient quantities.  Please review your bag and adjust quantities as necessary.
+	</div>
+
+	@if(cartItems.isEmpty) {
+		<p>您的购物袋是空的</p>
+	} else {
+		<div class="row hidden-sm-down pt-1 mb-1 mt-1h line-top">
+			<div class="offset-md-2 col-md-4">产品描述</div>
+			<div class="col-md-2 push-md-2 text-md-right">单价</div>
+			<div class="col-md-2 pull-md-2 text-md-center">数量</div>
+			<div class="col-md-2 text-md-right">小计</div>
+		</div>
+
+		@for(cartItem <- cartItems) {
+			<div class="item-row row line-top pt-1" data-sale-number="@cartItem.sale.saleNumber" data-available-qty="99">
+				<div class="col-md-2 text-xs-center mb-1">
+					<a href="@controllers.store.routes.CatalogController.sale(cartItem.sale.saleNumber)">
+						<img class="img-fluid mx-auto" src="@customRoutes.UploadedAssets.at(cartItem.sale.sku.imageUrls(0))?x-oss-process=image/resize,limit_0,w_300/sharpen,100" alt="@cartItem.sale.title">
+					</a>
+				</div>
+				<div class="col-md-4 text-xs-center text-md-left">
+					<h3>@cartItem.sale.title</h3>
+					<div class="mb-1">
+						<a class="text-muted" href="@controllers.store.routes.CatalogController.sale(cartItem.sale.saleNumber)">@cartItem.sale.sku.sku</a>
+					</div>
+					<span class="popover-trigger popover-trigger-html">
+						<i class="icon-info-circled"></i> 定制详情
+					</span>
+					<div hidden>
+						<table class="option-table">
+							<tbody>
+							@for(attributeValue <- cartItem.sale.sku.attributeValueSet.attributeValues.includes(_.attribute)){
+                                <tr>
+                                    <td class="text-sm-right">@attributeValue.attribute.description</td>
+                                    <td class="pl-1">@attributeValue.readableValue()</td>
+                                </tr>
+							}
+							</tbody>
+						</table>
+					</div>
+					<div class="my-1">
+						<a href="@controllers.store.routes.ApplicationController.tape(request.uri)" class="highlight-link" style="color: #000;">我的量体数据</a>
+					</div>
+					<div class="hidden-sm-down mt-1">
+						<a href="javascript:void(0)" class="remove-link highlight-link">删除</a>
+					</div>
+				</div>
+
+				<div class="col-md-2 push-md-2 text-xs-center text-md-right">
+					<span class="hidden-md-up">单价: </span>¥@cartItem.sale.originalUnitPrice
+				</div>
+
+				<div class="col-md-2 pull-md-2">
+					<div class="input-group bootstrap-touchspin">
+						<input type="text" class="item-qty form-control text-xs-center" value="@cartItem.quantity" style="display: block;">
+					</div>
+					@*<div class="qty-error text-danger text-xs-center" hidden>100 Available</div>*@
+				</div>
+
+				<div class="col-md-2 text-xs-center text-md-right">
+					<span class="hidden-md-up">小计: </span>
+					<span class="item-price">¥@(cartItem.sale.originalUnitPrice * cartItem.quantity)</span>
+				</div>
+				<div class="hidden-md-up text-xs-center">
+					<a href="javascript:void(0)" class="remove-link highlight-link">删除</a>
+				</div>
+			</div>
+		}
+
+		<div class="row">
+			<div class="offset-md-8 col-md-4" id="subtotal-container">
+			</div>
+		</div>
+
+		<div class="text-xs-center text-md-right offset-md-9 col-md-3">
+			<div>
+				<a href="@controllers.store.routes.ApplicationController.checkout()" class="cta-button checkout-link my-1h fill" id="btnCheckOut">立即结算</a>
+				<br>
+				<a href="@controllers.store.routes.ApplicationController.index()" class="text-uppercase">继续购物<i class="icon-right-open"></i></a>
+			</div>
+		</div>
+	}
+}

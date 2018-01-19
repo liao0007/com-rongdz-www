@@ -1,0 +1,26 @@
+@import com.mohiva.play.silhouette.api.actions.SecuredRequest
+@import auth.JWTEnv
+@import controllers.store.NameUpdateRequest
+@(form: Form[NameUpdateRequest])(implicit messages: Messages, request: SecuredRequest[JWTEnv, _])
+@implicitFieldConstructor = @{ b3.vertical.fieldConstructor }
+
+@styles = {
+	<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/account.css")">
+}
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store"), stylesOpt = Some(styles)) {
+
+	<div id="formContainer">
+		<div id="change-password-form-row" class="row">
+			<div class="col-md-4 offset-md-6">
+				<form method="POST" class="bs-form" id="changeNameForm">
+					@b3.text(form("name"), '_label -> "昵称")
+
+					<input type="submit" id="changeNameButton" value="修改昵称" class="cta-button mr-1 my-1 mt-1">
+					<a href="@controllers.store.routes.AccountController.index()" class="cta-button alt">取消</a>
+				</form>
+			</div>
+		</div>
+	</div>
+
+}

@@ -1,0 +1,39 @@
+@()(implicit messages: Messages, request: RequestHeader)
+
+<div>
+    <style>
+        .stylist-module-img { background-position: -11% center; background-size: cover; height: 0; padding-bottom: 40%; }
+        .stylist-module-txt > div { width: 100%; padding: 0 1rem 1rem; }
+        .stylist-module-txt h1 { line-height: 1; }
+        .stylist-module-txt h1 small { font-size: 1rem; line-height: 1.2; margin-bottom: 0.5rem; }
+
+        @@media (min-width: 768px) {
+            .stylist-module-img { background-position: 23% center; height: 300px; padding-bottom: 0; }
+            .stylist-module-txt { height: 300px; margin-top: -300px; }
+            .stylist-module-txt > div { width: 55%; margin-left: 40%; margin-bottom: 0; padding: 0 2rem; }
+        }
+        @@media (max-width: 768px) {
+             .feature-locator .gutter-vertical {
+                margin-bottom: 0;
+            }
+        }
+        @@media (min-width: 1200px) {
+            .stylist-module-txt > div { width: 60%; margin-left: 35%; }
+        }
+
+    </style>
+
+    <div style="background: #e9e9e9;">
+        <div class="feature-locator">
+            <div class="stylist-module-img" data-img-src="@customRoutes.Assets.at("store/images/stylist-module-bg.jpg")"></div>
+            <div class="stylist-module-txt center-vertical gutter-vertical">
+                <div class="text-xs-center">
+                    <h1 style="font-size: 2.333rem;"><small style="font-size: 1rem;">打造最具个人风格的个性化定制衣橱</small>即刻预约您的专属时尚顾问</h1>
+                    <div class="mx-auto" style="max-width: 200px;">
+                        <a href="@controllers.store.routes.BookingController.index(None)" class="forms-control-lg cta-button fill">免费量体</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

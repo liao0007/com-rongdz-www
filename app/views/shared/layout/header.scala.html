@@ -1,0 +1,235 @@
+@import com.mohiva.play.silhouette.api.actions.UserAwareRequest
+@import auth.JWTEnv
+@import com.mohiva.play.silhouette.api.actions.SecuredRequest
+@import models.default.mall.SaleFilter
+@import daos.default.user.ToPermission.UserToPermission
+@(tabOpt: Option[String])(implicit messages: Messages, request: RequestHeader)
+
+
+<ul class="nav-mobile list-inline justify-non-text mb-0 hidden-md-up">
+    <li>
+        <a href="@controllers.store.routes.ApplicationController.index()">
+            <i class="fa fa-home" style="font-size: 2.2rem;"></i>
+        </a>
+    </li>
+    <li>
+        <a href="@controllers.store.routes.AccountController.index()" rel="nofollow">
+            <i class="icon-man"></i>
+        </a>
+    </li>
+    <li class="search-mobile" role="button">
+        <i class="icon-search" style="position: relative; top: -3px; font-size: 1.9rem;"></i>
+        <div class="search-flyout" style="position: absolute; top: -49px; left: 0; width: 100%; height: 49px; padding-left:15px; padding-right:15px; background: rgba(255, 255, 255, 0.9); padding-bottom: 8px;">
+            <input type="search" class="form-control search-box" style="padding: 8px 35px 4px 4px; border-width: 0 0 1px 0; font-size: 1.2rem; background-color: transparent;">
+            <button class="search-button" style="position: absolute; right: 0; bottom: 0; padding: 10px 15px 15px 6px; background: none; border: 0;">
+                <i class="icon-search" style="font-size: 1.5rem;"></i>
+            </button>
+        </div>
+    </li>
+    <li>
+        <a href="@controllers.store.routes.ApplicationController.bag()">
+            <i class="icon-bag rel" style="font-size: 2.1rem;">
+                <span id="cart-mini-label" style="position: absolute; width: 100%; bottom: 0.666rem; left: 0; text-align: center; font-family: inherit; font-style: normal; letter-spacing: 0.03em; font-size: 1rem; color: #000;"></span>
+            </i>
+        </a>
+    </li>
+</ul>
+
+
+<div class="rel">
+    <div id="cart-added" class="mini-cart-container" style="max-width: 92.5%"></div>
+</div>
+
+<header class="hidden-sm-down">
+    <div class="container-fluid">
+        <div class="small clearfix">
+            <nav class="float-md-left horizontal">
+                <ul class="nav-user">
+                @defining(request match {
+                    case r : UserAwareRequest[JWTEnv @unchecked, _] => r.identity
+                    case r : SecuredRequest[JWTEnv @unchecked, _] => Some(r.identity)
+                    case _ => None
+                }) {
+                    case Some(identity) => {
+                        <li>
+                            <a href="javascript:void(0)" id="nav-user-trigger">你好, @identity.name<i class="icon-down-open"></i>
+                                </a>
+                            <ul class="flyout">
+                                <li>
+                                    <a href="@controllers.store.routes.AccountController.index()">我的账户</a>
+                                </li>
+                                <li>
+                                    <a href="@controllers.store.routes.AccountController.changePassword(request.uri)">修改密码</a>
+                                </li>
+                                <li>
+                                    <a href="@controllers.store.routes.AccountController.signOut(request.uri)">登出</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    case _ => {
+                        <li>
+                            <a href="@controllers.store.routes.AccountController.signIn(request.uri)" rel="nofollow">登录</a> |
+                            <a href="@controllers.store.routes.AccountController.signUp(request.uri)" rel="nofollow">注册</a>
+                        </li>
+                    }
+                }
+                </ul>
+            </nav>
+            <nav class="float-md-right horizontal">
+                <ul class="nav-user">
+                    @*
+                    <li class="rel" id="search-desktop">
+                    <i role="button" class="icon-search search-button" style="font-size: 1.2em; position: relative; top: -2px;">    </i>
+                    <div class="search-flyout" style="right: 45px; bottom: 0;">
+                    <input type="search" class="form-control search-box" style="padding: 0 4px 2px 4px; border-width: 0 0 1px 0;">
+                    </div>
+                    </li>
+                    *@
+                    <li id="cart-link">
+                        <a href="@controllers.store.routes.ApplicationController.bag()">购物袋</a>
+                        <span id="cart-count-label">
+                            <a href="@controllers.store.routes.ApplicationController.bag()"></a>
+                        </span>
+                        <div>
+                            <div id="mini-cart" class="mini-cart-container"></div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="header-logo">
+            <a href="@controllers.store.routes.ApplicationController.index()" title="RONG定制">
+                <img src="@customRoutes.Assets.at("store/images/logo.png")">
+                <span class="sr-only">RONG定制</span>
+            </a>
+        </div>
+
+        <nav class="rel">
+            <ul class="nav-global">
+                <li>
+                    <a href="@controllers.store.routes.CatalogController.list(f = SaleFilter(categoryIdOpt = Some(2)))">西服套装</a>
+                </li>
+
+                <li>
+                    <a href="@controllers.store.routes.CatalogController.list(f = SaleFilter(categoryIdOpt = Some(1)))">单西</a>
+                </li>
+
+                <li>
+                    <a href="@controllers.store.routes.CatalogController.list(f = SaleFilter(categoryIdOpt = Some(3)))">衬衫</a>
+                </li>
+
+                <li>
+                    <a href="@controllers.store.routes.CatalogController.list(f = SaleFilter(categoryIdOpt = Some(4)))">裤装</a>
+                </li>
+
+                <li>
+                    <a href="@controllers.store.routes.CatalogController.list(f = SaleFilter(categoryIdOpt = Some(7)))">女士成衣</a>
+                </li>
+
+                <li>
+                    <a href="@controllers.store.routes.CatalogController.list(f = SaleFilter(categoryIdOpt = Some(8)))">配饰</a>
+                </li>
+
+                <li>
+                    <a href="@controllers.store.routes.CatalogController.list(f = SaleFilter(categoryIdOpt = Some(12)))">太阳镜</a>
+                </li>
+
+                @defining(request match {
+                    case r : UserAwareRequest[JWTEnv @unchecked, _] => r.identity
+                    case r : SecuredRequest[JWTEnv @unchecked, _] => Some(r.identity)
+                    case _ => None
+                }) {
+                    case Some(identity) if identity.toPermissions.toSeq.map(_.permission).contains(UserToPermission.Admin.toString) => {
+                        <li>
+                            <a href="javascript:void(0)">管理</a>
+                            <div class="nav-shop flyout">
+                                <section class="row shopnav-rtw">
+                                    <div class="col-md-3 col-xl-2 offset-xl-2">
+                                        <h4><a href="javascript:void(0)">Mall</a></h4>
+                                        <ul>
+                                            <li><a href="@controllers.admin.mall.routes.BookingController.index()">Booking</a></li>
+                                            <li><a href="@controllers.admin.mall.routes.SaleController.index()">Sale</a></li>
+                                            <li><a href="@controllers.admin.mall.routes.SaleOrderController.index()">Sale Order</a></li>
+                                        </ul>
+
+                                        <h4><a href="javascript:void(0)">Home Page</a></h4>
+                                        <ul>
+                                            <li><a href="@controllers.admin.mall.routes.HomeFeatureController.index()">Feature</a></li>
+                                            @*<li><a href="@controllers.admin.mall.routes.HomeSectionController.index()">Section</a></li>*@
+                                            @*<li><a href="@controllers.admin.mall.routes.HomeSliderController.index()">Slider</a></li>*@
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3 col-xl-2">
+                                        <h4><a href="javascript:void(0)">Product</a></h4>
+                                        <ul>
+                                            <li><a href="@controllers.admin.product.routes.BrandController.index()">Brand</a></li>
+                                            <li><a href="@controllers.admin.product.routes.CategoryController.index()">Category</a></li>
+                                            <li><a href="@controllers.admin.product.routes.SubcategoryController.index()">Subcategory</a></li>
+                                            <li><a href="@controllers.admin.product.routes.ProductController.index()">MKU</a></li>
+                                            <li><a href="@controllers.admin.product.routes.SkuController.index()">SKU</a></li>
+                                        </ul>
+                                        <h4><a href="javascript:void(0)">Product Attribute</a></h4>
+                                        <ul>
+                                            <li><a href="@controllers.admin.product.routes.AttributeController.index()">Attribute</a></li>
+                                            <li><a href="@controllers.admin.product.routes.AttributeSetController.index()">Set</a></li>
+                                            <li><a href="@controllers.admin.product.routes.AttributeValueSetController.index()">Value Set</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3 col-xl-2">
+                                        <h4><a href="javascript:void(0)">Core</a></h4>
+                                        <ul>
+                                            <li><a href="@controllers.admin.core.routes.ImageController.index()">Image</a></li>
+                                        </ul>
+
+                                        <h4><a href="javascript:void(0)">User</a></h4>
+                                        <ul>
+                                            <li><a href="@controllers.admin.user.routes.UserController.index()">User</a></li>
+                                        </ul>
+
+                                        <h4><a href="javascript:void(0)">Crm</a></h4>
+                                        <ul>
+                                            <li><a href="@controllers.admin.crm.routes.PageController.index()">Page</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3 col-xl-2">
+                                        <h4 data-toggle="">
+                                            <a href="cardbuilder">Gift Cards</a>
+                                        </h4>
+                                            <!-- 1 -->
+                                        <h4>
+                                            <a href="catalog/shoes">Shoes</a>
+                                        </h4>
+                                            <!-- 2 -->
+                                        <ul>
+                                            <li>
+                                                <a href="catalog/shoes/dress_shoes">Dress</a>
+                                            </li>
+                                                <!-- 3 -->
+                                            <li>
+                                                <a href="catalog/shoes/casual_shoes">Casual</a>
+                                            </li>
+                                                <!-- 4 -->
+                                            <li>
+                                                <a href="catalog/shoes/made_to_order_shoes">Made-To-Order</a>
+                                            </li>
+                                                <!-- 5 -->
+                                            <li>
+                                                <a href="catalog/shoes/shoe_care">Shoe Care</a>
+                                            </li>
+                                                <!-- 6 -->
+                                        </ul>
+                                    </div>
+                                </section>
+                            </div>
+
+                        </li>
+                    }
+                    case _ => {}
+                }
+
+            </ul>
+        </nav>
+    </div>
+</header>

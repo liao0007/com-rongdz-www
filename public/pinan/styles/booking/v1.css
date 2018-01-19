@@ -1,0 +1,144 @@
+body {
+    font-family:"Microsoft YaHei", "PingFangSC-Regular", "San Francisco", serif;
+}
+
+.section {
+    position: relative;
+    clear: both;
+}
+
+.section:after {
+    content: url('../../images/booking/v1/divider.png');
+    display: block;
+    margin: 0pt auto 15pt;
+    text-align: center;
+    transform: scale(.5);
+}
+
+.section img {
+    width: 100%;
+}
+
+.section .head h1 {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    color: white;
+    opacity: 0.95;
+    top:  35pt;
+}
+
+.section .head h1 small {
+    display: block;
+    color: inherit;
+    text-transform: uppercase;
+    font-family: freight-display-pro, freight, "times new roman", serif;
+}
+
+.section .body {
+    padding: 10pt 10pt 0;
+    text-align: center;
+}
+
+.section .body ul {
+    padding: 0;
+    padding-left: 10pt;
+}
+
+.section .body ul li {
+    text-align: left;
+    list-style-type: square;
+}
+
+.section .body strong {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.section .body p small {
+    display: block;
+    font-size: 0.8em;
+    line-height: 1em;
+    opacity: 0.2;
+    font-family: freight-display-pro, freight, "times new roman", serif;
+    text-transform: uppercase;
+}
+
+.list ul {
+    padding: 0;
+    margin: 0;
+    margin-top: 10pt;
+}
+
+.list li {
+    width: 50%;
+    float: left;
+    list-style: none;
+    height: 220pt;
+    text-align: center;
+}
+.list .title {
+    font-weight: bold;
+    margin-top: 5pt;
+}
+.list .btn {
+    background: #e2d584;
+    color: white;
+    padding: 2pt 15pt;
+    margin-top: 5pt;
+}
+
+.more {
+    clear: both;
+    display: block;
+    text-align: center;
+    padding-top: 20pt;
+    color: black;
+    text-decoration: underline;
+}
+
+#booking h2 {
+    text-align: center;
+}
+
+
+#booking p {
+    text-align: center;
+}
+
+#booking .form-control {
+    border: 0;
+    border-bottom: 1pt solid #000;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+}
+
+#booking .form .btn {
+    display: block;
+    width: 100%;
+    background: #e2d584;
+    color: white;
+    font-size:  28pt;
+}
+
+.footer {
+    text-align: center;
+    font-size: 0.8em;
+    color: #bbb;
+}
+
+.table th {
+    text-align: right;
+    width: 80pt;
+}
+
+.table td {
+    text-align: left;
+}
+
+.price span {
+    text-decoration: line-through;
+    font-size: 12px;
+    color: darkgray;
+}

@@ -1,0 +1,83 @@
+@import models.default.mall.SaleFilter
+@import com.mohiva.play.silhouette.api.actions.UserAwareRequest
+@import com.mohiva.play.silhouette.api.actions.SecuredRequest
+@import auth.JWTEnv
+@()(implicit messages: Messages, request: RequestHeader)
+
+<footer class="hidden-sm-down">
+    <div class="container-fluid">
+        <nav class="row">
+            <div class="col-md-2">
+                <h6 data-toggle="collapse-next">购物<i class="icon-plus hidden-md-up"></i></h6>
+                <ul class="collapse">
+                    <li>
+                        <a href="@controllers.store.routes.CatalogController.list(f = SaleFilter(subcategoryIdOpt = Some(1)))">西服套装</a>
+                    </li>
+                    <li>
+                        <a href="@controllers.store.routes.CatalogController.list(f = SaleFilter(subcategoryIdOpt = Some(2)))">单西</a>
+                    </li>
+
+                    <li>
+                        <a href="@controllers.store.routes.CatalogController.list(f = SaleFilter(categoryIdOpt = Some(3)))">衬衫</a>
+                    </li>
+
+                    <li>
+                        <a href="@controllers.store.routes.CatalogController.list(f = SaleFilter(subcategoryIdOpt = Some(5)))">裤装</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <h6 data-toggle="collapse-next">帮助<i class="icon-plus hidden-md-up"></i></h6>
+                <ul class="collapse">
+                    <li><a href="@controllers.store.routes.PageController.info(id="faq")#faq-delivery">配送</a></li>
+                    <li><a href="@controllers.store.routes.PageController.info(id="faq")#faq-return">退换货</a></li>
+                    <li><a href="@controllers.store.routes.PageController.info(id="faq")#faq-payment">支付方式</a></li>
+                    <li><a href="@controllers.store.routes.PageController.info(id="faq")">常见问题</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <h6 data-toggle="collapse-next">关于<i class="icon-plus hidden-md-up"></i></h6>
+                <ul class="collapse">
+                    <li><a href="@controllers.store.routes.PageController.info(id="terms")">用户协议</a></li>
+                    <li><a href="@controllers.store.routes.PageController.info(id="career")">加入我们</a></li>
+                    <li><a href="@controllers.store.routes.ApplicationController.cooperation()">业务合作</a></li>
+                    @defining(request match {
+                        case r : UserAwareRequest[JWTEnv @unchecked, _] => r.identity
+                        case r : SecuredRequest[JWTEnv @unchecked, _] => Some(r.identity)
+                        case _ => None
+                    }) {
+                        case Some(identity) => {
+                            <li><a href="@controllers.pinan.routes.BookingController.index()">平安专属</a></li>
+                        }
+                        case _ => {
+                        }
+                    }
+
+                </ul>
+            </div>
+
+
+
+            <div class="col-md-4">
+                <div class="mx-auto text-xs-center">
+                    <div class="clearfix">
+                        <div class="footer-logo"><a href="/" title="RONG定制"><img src="@customRoutes.Assets.at("store/images/logo.png")"><span class="sr-only">RONG定制</span></a></div>
+                        <div class="row footer-terms">
+                            <div style="color: #999;">©北京山仁汇投资管理有限公司 京ICP备16039452号</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="mx-auto text-xs-center">
+                    <div class="clearfix">
+                        <div class="footer-logo"><img src="@customRoutes.Assets.at("store/images/qrcode.jpg")"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </nav>
+    </div>
+</footer>

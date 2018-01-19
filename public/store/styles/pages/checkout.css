@@ -1,0 +1,47 @@
+.promo-box { background: #def8f5; text-align: center; padding: 16px; }
+.promo-sep { font-size: 16px; line-height: 18px; font-weight: 700; }
+.promo-message strong { letter-spacing: 0.2em; text-transform: uppercase; display: block; }
+.checkout-form .cta-button { white-space: normal; }
+.checkout-cart-items { padding: 24px 24px 0 24px; }
+.checkout-cart-items:after { content: ''; display: block; height: 24px; }
+.checkout-partner-info { padding: 24px; }
+.checkout-box-heading { background: #f8f8f8; padding: 20px 24px; }
+.subtotal-box { padding: 24px 24px 0 24px; overflow: hidden; }
+.bottom-line { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 1.5rem; }
+
+.section-header a.highlight-link {
+    float: right;
+    font-size: 1rem;
+    padding-top: 8px;
+}
+
+.address-card {
+    color: #999;
+    border: 2px solid #eee;
+    width: 100%;
+    background-size: cover;
+    cursor: pointer;
+    padding: 10px;
+}
+.address-card a {
+    color: inherit;
+}
+.radio-list-item.selected .address-card{
+    border: 2px solid #000;
+    color: #000;
+}
+
+.payment-method {
+    color: #999;
+    border: 2px solid #eee;
+    width: 150px;
+    background-size: cover;
+    cursor: pointer;
+    padding: 10px;
+    float: left;
+    text-align: center;
+}
+.radio-list-item.selected .payment-method{
+    border: 2px solid #000;
+    color: #000;
+}

@@ -1,0 +1,53 @@
+@import daos.default.user.ShipToAddress
+@(call: Call, form: Form[ShipToAddress], returnUrl: String)(implicit messages: Messages, request: RequestHeader)
+
+@implicitFieldConstructor = @{ b3.vertical.fieldConstructor }
+
+@styles = {
+	<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/account.css")">
+}
+
+@scripts = {
+    .wait(function () {
+        App.handleAddressForm($('#addressForm'));
+    })
+}
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store"), stylesOpt = Some(styles), scriptsOpt = Some(scripts)) {
+
+	<div id="formContainer">
+		<section class="row bs-form">
+			<div class="col-md-6 offset-md-3">
+				<h2>更新收货地址</h2>
+
+				@b3.form(call, 'id->"addressForm") {
+					@b3.text(form("name"), '_label -> "收货人", 'required->true)
+					@b3.text(form("mobile"), '_label -> "收货电话")
+
+					<div class="form-group" id="districtId_field">
+						<label class="control-label" for="districtId">所在地区</label>
+						<div>
+							<select class="form-control shipToProvince">
+								<option>--请选择--</option>
+							</select>
+							<select class="form-control shipToCity">
+								<option>--请选择--</option>
+							</select>
+							<select class="form-control shipToDistrict" name="districtId" id="districtId" @form.value.map{ shipToAddress => value="@shipToAddress.districtId"}>
+								<option>--请选择--</option>
+							</select>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+
+					@b3.text(form("address"), '_label -> "详细地址")
+					@b3.checkbox(form("isDefault"), '_text -> "设为默认收货地址")
+					<input type="submit" value="保存" class="cta-button mr-1 my-1 mt-1">
+					<a href="@returnUrl" class="cta-button alt">取消</a>
+				}
+			</div>
+
+		</section>
+	</div>
+
+}

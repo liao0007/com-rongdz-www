@@ -1,0 +1,67 @@
+@import daos.default.user.Tape.TapeKey
+@import daos.default.user.Tape
+@import views.html.helper._
+@(tapeMap: Map[String, Tape], returnUrl: String)(implicit messages: Messages, request: RequestHeader)
+
+@styles = {
+	<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/tape.css")">
+}
+
+@scripts = {
+    .script('@customRoutes.Assets.at("shared/plugins/bootstrap-touchspin/bootstrap.touchspin.min.js")')
+    .script('@customRoutes.Assets.at("store/scripts/pages/tape.js")')
+    .wait(function () {
+        PageTape.init();
+    })
+}
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store"), stylesOpt = Some(styles), scriptsOpt = Some(scripts)) {
+
+	<div style="width: 100%; max-width: 275px; margin: 0 auto 1rem auto; position: relative;">
+		<div style="width: 100%; height: 0; padding-bottom: 100%; border-radius: 50%; background: #f2f2f2;">
+
+		</div>
+		<img style="width: 88%; height: 88%; position: absolute; right: 3%; top: 1%;" src="@customRoutes.Assets.at("store/images/tape/tape-hero.svg")">
+	</div>
+
+	<div id="tape-results">
+		<h1 class="display-4 text-xs-center">我的量体数据</h1>
+		<p class="text-uppercase text-xs-center">(点击 "+" 和 "-" 进行微调)</p>
+
+		@form(controllers.store.routes.ApplicationController.updateTape(returnUrl), 'id->"tape-form", 'class->"bs-form tape-form mx-auto rel gutter-vertical") {
+			<div id="tape-adjust-fields" class="mx-auto" style="max-width: 300px;">
+
+				@for(tapeKey <- TapeKey.keys.filterNot(key => List("YX").contains(key.toString))) {
+					<fieldset class="form-group">
+						<label for="tape-adjust-text-neck">@tapeKey.name</label>
+						<div class="input-group bootstrap-touchspin">
+							<input name="@tapeKey.toString" @tapeMap.get(tapeKey.toString).map{tape=> value="@tape.value" } type="text" class="form-control form-control-lg tape-adjust" data-initval="@tapeKey.initial" data-step="@tapeKey.step" data-min="@tapeKey.min" data-max="@tapeKey.max" data-postfix="@tapeKey.um">
+						</div>
+					</fieldset>
+				}
+
+				<fieldset class="form-group">
+					<label>腰形</label>
+					<div class="clearfix midsection-row radio-list">
+						@for(value <- 1 to 4 ) {
+							@defining(value.toString) { valueString =>
+								<div class="midsection-col radio-list-item @if(tapeMap.get("YX").map(_.value).contains(valueString) || (tapeMap.get("YX").isEmpty && TapeKey.YX.initial==valueString)){selected} " data-value="@valueString">
+									<div class="belly-btn-img" style="background-image: url(@customRoutes.Assets.at("store/images/tape/midsection-" + valueString + ".svg"));"></div>
+								</div>
+							}
+						}
+						<input name="YX" type="hidden" value="@tapeMap.get("YX").fold(Html(TapeKey.YX.initial)){ tape =>@Html(tape.value)}">
+					</div>
+				</fieldset>
+
+				<div class="text-xs-center pb-3">
+					<input type="submit" class="cta-button mt-1 mr-1" style="width: 45%; max-width: 240px;" value="保存">
+					<a href="@returnUrl" class="cta-button alt mt-1" style="width: 45%; max-width: 240px;" >取消</a>
+				</div>
+		}
+
+		<table hidden="" id="tape-table" class="large mx-auto">
+		</table>
+	</div>
+
+}

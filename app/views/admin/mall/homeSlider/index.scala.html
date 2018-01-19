@@ -1,0 +1,55 @@
+@import daos.default.mall.HomeSlider
+@import models.default.mall.HomeSliderFilter
+@import daos.ActiveRecord
+@(items: Seq[HomeSlider], pagination: Pagination, filter: HomeSliderFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
+
+@currentController = @{controllers.admin.mall.routes.HomeSliderController}
+
+@breadcrumb = @{
+  Seq(
+    ("首页滚动栏", Some(currentController.index()))
+  )
+}
+
+@views.html.admin.layout.main(title = "首页滚动栏", tabOpt = Some("mallHomeSlider"), breadcrumb = breadcrumb) {
+
+    @views.html.admin.tags.pageHead {
+        首页滚动栏
+    } {
+        <a href="@currentController.newPage()" class="cta-button">新建</a>
+    }
+
+    @views.html.admin.tags.pageIndexBody {
+        <form method="get" action="@currentController.index()">
+            <table class="table table-inverse" >
+                <thead>
+                    <tr role="row" class="heading">
+                        <th width="1%"><input type="checkbox" class="group-checkable"></th>
+                        <th width="10%">#</th>
+                        <th>名称</th>
+                        <th>开始日期</th>
+                        <th>开始日期</th>
+                        <th width="10%">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @for(item<-items) {
+                    <tr>
+                        <td></td>
+                        <td><a href="@currentController.edit(item.id)">@item.id</a></td>
+                        <td>@item.content</td>
+                        <td>@item.startAt</td>
+                        <td>@item.closeAt</td>
+                        <td>
+                            <a href="javascript:void()" data-target="@currentController.delete(item.id)" class="cta-button plain trans borderless btn-delete">删除</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </form>
+    }
+
+    @views.html.shared.paginator(pager => currentController.index(pager), pagination)
+
+}

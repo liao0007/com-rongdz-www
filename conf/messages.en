@@ -1,0 +1,4 @@
+signin.state.not.activated=未激活会员
+login.info.missing=登录信息缺失
+invalid.credentials=密码错误
+provider.error=登录失败

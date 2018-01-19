@@ -1,0 +1,70 @@
+@(title: String,
+		tabOpt: Option[String] = None,
+		breadcrumb: Seq[(String, Option[Call])] = Seq.empty,
+		stylesOpt: Option[Html] = None,
+		scriptsOpt: Option[Html] = None,
+		modalsOpt: Option[Html] = None
+)(content: Html)(implicit messages: Messages, request: RequestHeader)
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>@title</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="">
+
+		<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("shared/plugins/jquery-weui/dist/lib/weui.min.css")">
+		<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("shared/plugins/jquery-weui/dist/css/jquery-weui.css")">
+		<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("wechat/styles/wechat.css")">
+		@stylesOpt.map { styles =>
+			@styles
+		}
+	</head>
+
+	<body ontouchstart>
+		@content
+
+		<script type="text/javascript" src="@customRoutes.Assets.at("shared/plugins/labjs/LAB.js")" ></script>
+		<script>
+				'use strict';
+				(function (w, lab) {
+					if (/msie\s+[78]/i.test(w.navigator.userAgent)) { track(); return; }
+					lab
+							.script('@customRoutes.Assets.at("shared/plugins/jquery-3.1.1.min.js")').wait()
+							.script('@customRoutes.Assets.at("shared/plugins/jquery-weui/dist/lib/fastclick.js")').wait()
+							.script('@customRoutes.Assets.at("shared/plugins/jquery-validation-1.15.1/dist/jquery.validate.min.js")')
+							.script('@customRoutes.Assets.at("shared/plugins/jquery-weui/dist/js/jquery-weui.js")')
+							.script('@customRoutes.Assets.at("shared/scripts/bundle.min.js")')
+							.script('@customRoutes.Assets.at("shared/scripts/app.js")')
+							.script('@customRoutes.Assets.at("wechat/scripts/wechat.js")')
+							.script('@controllers.rest.routes.ApplicationController.javascriptRoutes()')
+							.script('@controllers.wechat.routes.ApplicationController.javascriptRoutes()')
+							.wait(function() {
+								track();
+							})
+							.wait(function() {
+								App.init();
+								FastClick.attach(document.body);
+							});
+
+					function track() {
+						(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+									(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+								m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+						})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+						ga('create', 'UA-89584117-1', 'auto');
+						ga('send', 'pageview');
+					};
+				})(window, $LAB);
+		</script>
+		@scriptsOpt.map { scripts =>
+			@scripts
+		}
+
+		@modalsOpt.map { modals =>
+			@modals
+		}
+	</body>
+</html>

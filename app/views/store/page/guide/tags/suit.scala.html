@@ -1,0 +1,657 @@
+@import models.default.mall.SaleFilter
+@()(implicit messages: Messages, request: RequestHeader)
+
+<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/guide/suit.css")">
+<script>
+        /**
+         $LAB.wait(function(){
+            var dlgopts = { top: 'center', fixed: false, close: '.close-dialog', mask: '#000', onBeforeLoad: function () { this.getOverlay().find('[data-img-src]').trigger('appear'); } };
+            $('.option-link-construction').overlay($.extend(dlgopts, { target: '#dlgConstruction' }));
+            $('.option-link-fit').overlay($.extend(dlgopts, { target: '#dlgJacketFits' }));
+            $('.option-link-lining').overlay($.extend(dlgopts, { target: '#dlgLining' }));
+            $('.option-link-monogram').overlay($.extend(dlgopts, { target: '#dlgMonograms' }));
+            $('.option-link-lapel').overlay($.extend(dlgopts, { target: '#dlgLapels' }));
+            $('.option-link-buttons').overlay($.extend(dlgopts, { target: '#dlgButtons' }));
+            $('.option-link-pockets').overlay($.extend(dlgopts, { target: '#dlgPockets' }));
+            $('.option-link-button-holes').overlay($.extend(dlgopts, { target: '#dlgButtonholes' }));
+            $('.option-link-button-thread').overlay($.extend(dlgopts, { target: '#dlgContrastStitch' }));
+            $('.option-link-trouser-fronts').overlay($.extend(dlgopts, { target: '#dlgTrouserFronts' }));
+            $('.option-link-vent').overlay($.extend(dlgopts, { target: '#dlgVents' }));
+            $('.option-link-trouser-fits').overlay($.extend(dlgopts, { target: '#dlgTrouserFits' }));
+            $('.option-link-trouser-bottoms').overlay($.extend(dlgopts, { target: '#dlgTrouserBottoms' }));
+            $('.option-link-trouser-breaks').overlay($.extend(dlgopts, { target: '#dlgTrouserBreaks' }));
+        })
+         **/
+</script>
+<div class="hero-fit text-xs-center gutter-vertical">
+    <div class="mx-auto center-vertical rel">
+        <div class="w-100">
+            <h1 class="display-2">一套合身的西装</h1>
+            <p class="large text-uppercase hidden-sm-down">优质的意大利面料与个性化定制的完美结合</p>
+        </div>
+        <div class="hidden-sm-down">
+            <div style="width: 100%; height: 100%; overflow: hidden; position: relative;">
+                <svg class="line" viewBox="0 0 500 9"><line x1="4" y1="4.5" x2="500" y2="4.5"></line><circle cx="004.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="0" y1="4.5" x2="496" y2="4.5"></line><circle cx="495.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="0" y1="4.5" x2="496" y2="4.5"></line><circle cx="495.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="4" y1="4.5" x2="500" y2="4.5"></line><circle cx="004.5" cy="4.5" r="4.5"></circle></svg>
+            </div>
+            <div class="note note-right">平整的肩部线条</div>
+            <div class="note note-left">合适的肩宽</div>
+            <div class="note note-left">袖长应以露出衬衣1-1.5厘米为宜</div>
+            <div class="note note-right">衣长应平行于大拇指第一个和第二个关节之间为宜</div>
+        </div>
+    </div>
+</div>
+
+<h1 class="text-xs-center">专属个性化定制</h1>
+
+<div class="hero-options hidden-sm-down text-xs-center gutter-vertical" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/hero-options.jpg")">
+    <div class="mx-auto rel">
+        <div class="hidden-sm-down">
+            <div style="width: 100%; height: 100%; overflow: hidden; position: relative;">
+                <svg class="line" viewBox="0 0 500 9"><line x1="4" y1="4.5" x2="500" y2="4.5"></line><circle cx="004.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="0" y1="4.5" x2="496" y2="4.5"></line><circle cx="495.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="4" y1="4.5" x2="500" y2="4.5"></line><circle cx="004.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="0" y1="4.5" x2="496" y2="4.5"></line><circle cx="495.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="0" y1="4.5" x2="496" y2="4.5"></line><circle cx="495.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="4" y1="4.5" x2="500" y2="4.5"></line><circle cx="004.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="4" y1="4.5" x2="500" y2="4.5"></line><circle cx="004.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="0" y1="4.5" x2="496" y2="4.5"></line><circle cx="495.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="4" y1="4.5" x2="500" y2="4.5"></line><circle cx="004.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="0" y1="4.5" x2="496" y2="4.5"></line><circle cx="495.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="4" y1="4.5" x2="500" y2="4.5"></line><circle cx="004.5" cy="4.5" r="4.5"></circle></svg>
+                <svg class="line" viewBox="0 0 500 9"><line x1="0" y1="4.5" x2="496" y2="4.5"></line><circle cx="495.5" cy="4.5" r="4.5"></circle></svg>
+            </div>
+            <div class="note note-right"><h6>内衬结构</h6><a href="javascript:void(0)" class="option-link-construction">4种选择@*<i class="icon-right-open"></i>*@</a></div>
+            <div class="note note-left"><h6>版型</h6><a href="javascript:void(0)" class="option-link-fit">3种选择@*<i class="icon-right-open"></i>*@</a></div>
+            <div class="note note-right"><h6>内衬里料</h6><a href="javascript:void(0)" class="option-link-lining">20种选择@*<i class="icon-right-open"></i>*@</a></div>
+            <div class="note note-left"><h6>绣字</h6><a href="javascript:void(0)" class="option-link-monogram">4种选择@*<i class="icon-right-open"></i>*@</a></div>
+            <div class="note note-left"><h6>领型</h6><a href="javascript:void(0)" class="option-link-lapel">4种选择@*<i class="icon-right-open"></i>*@</a></div>
+            <div class="note note-right"><h6>扣子</h6><a href="javascript:void(0)" class="option-link-buttons">10种选择@*<i class="icon-right-open"></i>*@</a></div>
+            <div class="note note-right"><h6>Pockets</h6><a href="javascript:void(0)" class="option-link-pockets">7 Options<i class="icon-right-open"></i></a></div>
+            <div class="note note-left"><h6>驳头锁眼/袖口末扣锁眼</h6><a href="javascript:void(0)" class="option-link-button-holes">20种选择@*<i class="icon-right-open"></i>*@</a></div>
+            <div class="note note-right"><h6>西裤口袋</h6><a href="javascript:void(0)" class="option-link-trouser-fronts">2种选择@*<i class="icon-right-open"></i>*@</a></div>
+            <div class="note note-left"><h6>后背开衩</h6><a href="javascript:void(0)" class="option-link-vent">3种选择@*<i class="icon-right-open"></i>*@</a></div>
+            <div class="note note-right"><h6>裤型</h6><a href="javascript:void(0)" class="option-link-trouser-fits">3种选择@*<i class="icon-right-open"></i>*@</a></div>
+            <div class="note note-left"><h6>Trouser Bottoms</h6><a href="javascript:void(0)" class="option-link-trouser-bottoms">3 Bottoms<i class="icon-right-open"></i></a><a href="#" class="option-link-trouser-breaks">3 Breaks@*<i class="icon-right-open"></i>*@</a></div>
+        </div>
+    </div>
+</div>
+
+<div class="row option-row hidden-md-up text-xs-center text-uppercase">
+    <div class="col-xs-6">
+        <div class="center-vertical" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/options-fit.jpg")">
+            <a href="javascript:void(0)" class="w-100 option-link-fit"><h6>版型</h6>3种选择@*<i class="icon-right-open"></i>*@</a>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="center-vertical" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/options-construction.jpg")">
+            <a href="javascript:void(0)" class="w-100 option-link-construction"><h6>内衬结构</h6>4种选择@*<i class="icon-right-open"></i>*@</a>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="center-vertical" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/options-lapel.jpg")">
+            <a href="javascript:void(0)" class="w-100 option-link-lapel"><h6>领型</h6>4种选择@*<i class="icon-right-open"></i>*@</a>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="center-vertical" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/options-vent.jpg")">
+            <a href="javascript:void(0)" class="w-100 option-link-vent"><h6>后背开衩</h6>3种选择@*<i class="icon-right-open"></i>*@</a>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="center-vertical" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/options-buttons.jpg")">
+            <a href="javascript:void(0)" class="w-100 option-link-buttons"><h6>扣子</h6>10种选择@*<i class="icon-right-open"></i>*@</a>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="center-vertical" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/options-lining.jpg")">
+            <a href="javascript:void(0)" class="w-100 option-link-lining"><h6>内衬里料</h6>20种选择@*<i class="icon-right-open"></i>*@</a>
+        </div>
+    </div>
+    @*
+    <div class="col-xs-6">
+    <div class="center-vertical" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/options-pockets.jpg")">
+    <a href="javascript:void(0)" class="w-100 option-link-pockets"><h6>口袋</h6>2种选择<i class="icon-right-open"></i></a>
+    </div>
+    </div>
+    *@
+    <div class="col-xs-6">
+        <div class="center-vertical" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/options-trousers.jpg")">
+            <a href="javascript:void(0)" class="w-100 option-link-trouser-fronts"><h6>裤型</h6>3种选择@*<i class="icon-right-open"></i>*@</a>
+        </div>
+    </div>
+</div>
+
+@*<h1 class="text-xs-center">Our Fabric Collections</h1>*@
+
+<div class="row fabric-row gutter-vertical">
+    <div class="col-md-6 col-lg-7">
+        <div class="fabric-img" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/fabrics-core.jpg")"></div>
+    </div>
+    <div class="col-md-6 col-lg-5 text-xs-center">
+        <div class="center-vertical">
+            <div class="w-100">
+                <h1><small>The Foundation </small>经典系列</h1>
+                <p class="hidden-sm-down">超过20种来自意大利的金羊毛标志面料，精选超细羊毛110支，120支，130支，150支顶级美丽诺羊毛面料</p>
+                <a href="@controllers.store.routes.CatalogController.list(f = SaleFilter(subcategoryIdOpt = Some(1)))" class="text-uppercase">查看全部<i class="icon-right-open"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*
+<div class="row fabric-row gutter-vertical">
+<div class="col-md-6 push-md-6 col-lg-7 push-lg-5">
+<div class="fabric-img" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/fabrics-revenge.jpg")"></div>
+</div>
+<div class="col-md-6 pull-md-6 col-lg-5 pull-lg-7 text-xs-center">
+<div class="center-vertical">
+<div class="w-100">
+<h1><small>Ultra Premium </small>Revenge Collection</h1>
+<p class="hidden-sm-down">Vitale Barberis Canonico’s Revenge Super 150s suiting fabrics are the pinnacle of Italian luxury. Incredibly soft and smooth, the Revenge Collection of over 25 colors and patterns makes everyday a&nbsp;special&nbsp;occasion.</p>
+<a href="/catalog/suits?f.collection=revenge" class="text-uppercase">View All<i class="icon-right-open"></i></a>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row fabric-row gutter-vertical">
+<div class="col-md-6 col-lg-7">
+<div class="fabric-img" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/fabrics-loro-piana.jpg")"></div>
+</div>
+<div class="col-md-6 col-lg-5 text-xs-center">
+<div class="center-vertical">
+<div class="w-100">
+<h1><small>Legendary Fabrics </small>Luxe Collection</h1>
+<p class="hidden-sm-down">We believe introductions are in order: Meet the newly minted Luxe Collection, a combination of impeccable made-to-measure tailoring and the cream of Italian fabrics. The result is a decidedly modern take on sartorial elegance for the man who&nbsp;knows&nbsp;best. </p>
+<a href="/catalog/suits?f.collection=luxe" class="text-uppercase">View All<i class="icon-right-open"></i></a>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row fabric-row gutter-vertical">
+<div class="col-md-6 push-md-6 col-lg-7 push-lg-5">
+<div class="fabric-img" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/fabrics-performance.jpg")"></div>
+</div>
+<div class="col-md-6 pull-md-6 col-lg-5 pull-lg-7 text-xs-center">
+<div class="center-vertical">
+<div class="w-100">
+<h1><small>All Conditions </small>Performance Collection</h1>
+<p class="hidden-sm-down">We’re pleased to have partnered with the innovation experts at Vitale Barberis Canonico to oﬀer our Performance Collection of Italian suiting. These 100% wool fabrics are wind/rain resistant and have natural stretch for ease of movement and enhanced&nbsp;comfort.</p>
+<a href="/catalog/suits?f.collection=performance" class="text-uppercase">View All<i class="icon-right-open"></i></a>
+</div>
+</div>
+</div>
+</div>
+*@
+
+<div class="hero-img" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/formal.jpg")"></div>
+<div class="hero-txt center-vertical gutter-vertical">
+    <div class="text-xs-center">
+        <h1>免费量体</h1>
+        <p>打造最具个人风格的个性化定制衣橱，即刻预约您的专属时尚顾问</p>
+        <a href="@controllers.store.routes.BookingController.index(None)" class="text-uppercase">立即预约<i class="icon-right-open"></i></a>
+    </div>
+</div>
+
+<div id="dlgLapels" class="dialog option-dialog-wide">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Lapels &amp; Button Stance</h1>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/lapels/a1.svg")"></div>
+            Notch Lapel<div class="small">2 Buttons</div>
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/lapels/a4.svg")"></div>
+        Narrow Notch<div class="small">2 Buttons</div>
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/lapels/a6.svg")"></div>
+        Peak Lapel<div class="small">1 Button</div>
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/lapels/a12.svg")"></div>
+        Double-Breasted Peak<div class="small">6 on 2</div>
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/lapels/a0.svg")"></div>
+        Notch Lapel<div class="small">1 Button</div>
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/lapels/a2.svg")"></div>
+        Notch Lapel<div class="small">3 Buttons</div>
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/lapels/a3.svg")"></div>
+        Narrow Notch<div class="small">1 Button</div>
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/lapels/a5.svg")"></div>
+        Narrow Notch<div class="small">3 Buttons</div>
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/lapels/a7.svg")"></div>
+        Peak Lapel<div class="small">2 Buttons</div>
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/lapels/a24.svg")"></div>
+        Shawl<div class="small">1 Button</div>
+    </div>
+    </div>
+</div>
+
+<div id="dlgPockets" class="dialog option-dialog-wide">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Pockets</h1>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/pockets/c1.svg")"></div>
+            Flap
+            <div class="small">Works best with a Notch or Narrow Notch Lapel in traditional suiting fabrics.</div>
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/pockets/c2.svg")"></div>
+        Flap with Ticket
+        <div class="small">Works best with a Notch or Narrow Notch Lapel in a non-traditional suiting fabric, occasion sportcoat, or formal suiting.</div>
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/pockets/c4.svg")"></div>
+        Hacking
+        <div class="small">Works well with all lapel options.  The angled pocket creates a sleek and modern jacket silhouette.</div>
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/pockets/c5.svg")"></div>
+        Hacking with Ticket
+        <div class="small">Works best with a Narrow Notch Lapel in a non-traditional suiting fabric or an occasion sportcoat.</div>
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/pockets/c7.svg")"></div>
+        Two Open Patch
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/pockets/c8.svg")"></div>
+        Three Open Patch
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/pockets/c10.svg")"></div>
+        Besom
+    </div>
+    </div>
+</div>
+
+<div id="dlgVents" class="dialog option-dialog">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Vents</h1>
+    <div class="row">
+        <div class="col-xs-6 responsive-tile">
+            <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/vents/b3.svg")"></div>
+            Side
+        </div><div class="col-xs-6 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/vents/b2.svg")"></div>
+        Center
+    </div><div class="col-xs-6 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/vents/b1.svg")"></div>
+        No Vent
+    </div>
+    </div>
+</div>
+
+<div id="dlgButtons" class="dialog option-dialog-wide">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Buttons</h1>
+    <h2>Standard</h2>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttons/01-standard-navy.jpg")"></div>
+            Navy
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttons/02-standard-grey.jpg")"></div>
+        Grey
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttons/03-standard-brown.jpg")"></div>
+        Brown
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttons/04-standard-khaki.jpg")"></div>
+        Khaki
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttons/05-standard-black.jpg")"></div>
+        Black
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttons/06-standard-elmwood.jpg")"></div>
+        Elmwood
+    </div>
+    </div>
+    <h2 class="mb-0">Distressed</h2>
+    <p class="small">($10 Surcharge)</p>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttons/07-distressed-navy.jpg")"></div>
+            Navy
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttons/08-distressed-grey.jpg")"></div>
+        Grey
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttons/09-distressed-brown.jpg")"></div>
+        Brown
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttons/10-distressed-khaki.jpg")"></div>
+        Khaki
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttons/11-distressed-black.jpg")"></div>
+        Black
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttons/12-distressed-elmwood.jpg")"></div>
+        Elmwood
+    </div>
+    </div>
+    <h2 class="mb-0">Shell/Metal</h2>
+    <p class="small">($15 Surcharge)</p>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttons/13-shell-smoke.jpg")"></div>
+            Smoke Shell
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttons/14-shell-natural.jpg")"></div>
+        Natural Shell
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttons/15-antique-silver.jpg")"></div>
+        Antique Silver Metal
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttons/16-antique-brass.jpg")"></div>
+        Antique Brass Metal
+    </div>
+    </div>
+</div>
+
+<div id="dlgMonograms" class="dialog option-dialog">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1 class="mb-0">Monogramming</h1>
+    <p class="small">Choose up to 4 letters or numbers</p>
+    <div class="row">
+        <div class="col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/monograms/01-interior.jpg")"></div>
+            Interior Label
+        </div><div class="col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/monograms/02-sleeve.jpg")"></div>
+        Sleeve Placket
+        <div class="small">($10 Surcharge)</div>
+    </div><div class="col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/monograms/03-trouser-rear.jpg")"></div>
+        Back Pocket
+        <div class="small">($15 Surcharge)</div>
+    </div><div class="col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/monograms/04-trouser-waistband.jpg")"></div>
+        Waistband
+        <div class="small">($15 Surcharge)</div>
+    </div>
+    </div>
+</div>
+
+<div id="dlgButtonholes" class="dialog option-dialog">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Buttonholes</h1>
+    <div class="row">
+        <div class="col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttonholes/01-working.jpg")"></div>
+            Working Buttonholes
+            <div class="small">($25 Surcharge)</div>
+        </div><div class="col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttonholes/04-contrast-sleeve-all.jpg")"></div>
+        Contrast Buttonholes
+        <div class="small">(Last sleeve buttonhole $10&nbsp;surcharge.  All four buttonholes $15&nbsp;surcharge)</div>
+    </div><div class="col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/buttonholes/02-contrast-lapel.jpg")"></div>
+        Lapel Contrast Buttonholes
+        <div class="small">($10 Surcharge)</div>
+    </div>
+    </div>
+</div>
+
+<div id="dlgContrastStitch" class="dialog option-dialog-wide">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Contrast Stitching</h1>
+    <p>For functioning buttonholes, lapel buttonhole, or monogram sleeve placket</p>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-5-2" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/contraststitch/01-blue.jpg")"></div>
+            Blue
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-5-2" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/contraststitch/02-heather-blue.jpg")"></div>
+        Heather Blue
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-5-2" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/contraststitch/03-navy.jpg")"></div>
+        Navy
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-5-2" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/contraststitch/04-brown.jpg")"></div>
+        Brown
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-5-2" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/contraststitch/05-red.jpg")"></div>
+        Red
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-5-2" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/contraststitch/06-burgundy.jpg")"></div>
+        Burgundy
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-5-2" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/contraststitch/07-purple.jpg")"></div>
+        Purple
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-5-2" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/contraststitch/08-black.jpg")"></div>
+        Black
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-5-2" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/contraststitch/09-camel.jpg")"></div>
+        Camel
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-5-2" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/contraststitch/10-charcoal.jpg")"></div>
+        Charcoal
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-5-2" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/contraststitch/11-off-white.jpg")"></div>
+        White
+    </div>
+    </div>
+</div>
+
+<div id="dlgConstruction" class="dialog option-dialog-wide">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Jacket Construction</h1>
+    <div class="row">
+        <div class="col-md-6 col-xs-12 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/construction/01-full.jpg")"></div>
+            Full-Lined
+        </div><div class="col-md-6 col-xs-12 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/construction/02-half.jpg")"></div>
+        Half-Lined<div class="small">($50 Surcharge)</div>
+    </div><div class="col-md-6 col-xs-12 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/construction/03-soft.jpg")"></div>
+        Soft Jacket<div class="small">Minimal padding on shoulder. Lighter, half-canvas chest piece.<br>($50 Surcharge)</div>
+    </div><div class="col-md-6 col-xs-12 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/construction/04-deconstructed.jpg")"></div>
+        Deconstructed Jacket<div class="small">Our lightest jacket. The under collar is cut in self fabric. No shoulder pad or canvas chest piece.<br>($50 Surcharge)</div>
+    </div>
+    </div>
+</div>
+
+<div id="dlgLining" class="dialog option-dialog-wide">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Standard Linings</h1>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/2014.jpg")"></div>
+            Blue
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/2031.jpg")"></div>
+        Heather Blue
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/2033.jpg")"></div>
+        Navy
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/2007.jpg")"></div>
+        Brown
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/2029.jpg")"></div>
+        Red
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/2030.jpg")"></div>
+        Burgundy
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/712-145.jpg")"></div>
+        Purple
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/Black.jpg")"></div>
+        Black
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/2003.jpg")"></div>
+        Camel
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/2037.jpg")"></div>
+        Charcoal
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/estival natural.jpg")"></div>
+        Off-White
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/Saglia Estival  2019.jpg")"></div>
+        Royal Purple
+    </div>
+    </div>
+    <h1 class="mb-0">Fancy Linings</h1>
+    <p class="small">($50 Surcharge)</p>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/SAGLIA PONZA DIS 41746 8545.jpg")"></div>
+            Navy Paisley
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/SAGLIA PONZA DIS 41746 604.jpg")"></div>
+        Charcoal Paisley
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/Orchidea Dis. 515 col. 9.jpg")"></div>
+        Navy Dot
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/Orchidea Dis. 515 col. V.13.jpg")"></div>
+        Grey Dot
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/BN2878  1.jpg")"></div>
+        Navy Stripe
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/BN2878  2.jpg")"></div>
+        Grey Stripe
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/Foulard Elas  951.jpg")"></div>
+        Blue Stretch*
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/Foulard Elas  846.jpg")"></div>
+        Grey Stretch*
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/Origano Dis. 375 col. 9.jpg")"></div>
+        Brown Paisley
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/Origano Dis. 204 col. 7.jpg")"></div>
+        Red Paisley
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/Origano Dis. 375 col. 8.jpg")"></div>
+        Blue Paisley
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/Origano DIS 274  8.jpg")"></div>
+        Grey Camouflage
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/Origano DIS 203  16.jpg")"></div>
+        Navy Geometric
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-lining" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/linings/Origano DIS 203  D.jpg")"></div>
+        Grey Geometric
+    </div>
+    </div>
+    <p class="small">* Stretch linings are complimentary when ordered on our Performance Series jackets</p>
+</div>
+
+<div id="dlgTrouserFronts" class="dialog option-dialog-wide">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Trouser Fronts</h1>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/trouserfronts/01-flat.svg")"></div>
+            Flat Front
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/trouserfronts/02-reverse-pleats.svg")"></div>
+        Reverse Pleats
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/trouserfronts/03-reverse-pleats-single.svg")"></div>
+        Single Reverse Pleat
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/trouserfronts/04-forward-pleats.svg")"></div>
+        Forward Pleats
+    </div>
+    </div>
+    <h1>Waistbands</h1>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/waistbands/01-standard.svg")"></div>
+            Standard
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/waistbands/02-tabbed.svg")"></div>
+        Side Tabs<div class="small">Brace buttons are located on interior waistband.</div>
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/waistbands/03-inside.jpg")"></div>
+        Waistband Gripper<div class="small">All trousers come with our Waistband Gripper to help keep your shirt tucked in.</div>
+    </div>
+    </div>
+</div>
+
+<div id="dlgTrouserBottoms" class="dialog option-dialog">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Trouser Bottoms</h1>
+    <div class="row">
+        <div class="col-xs-6 responsive-tile">
+            <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/trouserbottoms/01-cuffed.svg")"></div>
+            Cuffed<div class="small">Cuff Width: 1 5/8". Cannot be adjusted.</div>
+        </div><div class="col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/trouserbottoms/02-nocuff.svg")"></div>
+        No Cuff
+    </div><div class="col-xs-6 responsive-tile">
+        <div class="img-1-1" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/trouserbottoms/03-unfinished.svg")"></div>
+        Unfinished
+    </div>
+    </div>
+</div>
+
+<div id="dlgTrouserBreaks" class="dialog option-dialog">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Trouser Break</h1>
+    <div class="row">
+        <div class="col-xs-6 responsive-tile">
+            <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/trouserbreaks/01-fullbreak.jpg")"></div>
+            Full Break<div class="small">Covers the top of your shoe. Appropriate for all trouser fits.</div>
+        </div><div class="col-xs-6 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/trouserbreaks/02-halfbreak.jpg")"></div>
+        Half Break<div class="small">Covers your shoe at the highest point of your instep. Appropriate for Tailored, European, and European Slim fits.</div>
+    </div><div class="col-xs-6 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/trouserbreaks/03-nobreak.jpg")"></div>
+        No Break<div class="small">The pant leg barely brushes the top of your shoe. Appropriate for European and European Slim fits.</div>
+    </div>
+    </div>
+</div>
+
+<div id="dlgTrouserFits" class="dialog option-dialog-wide">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Trouser Fits</h1>
+    <div class="row">
+        <div class="col-md-3 col-xs-6 responsive-tile">
+            <div class="img-trouser" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/trouserfits/01-classic.svg")"></div>
+            Classic Fit<div class="small">Our most traditional fit, this style offers a higher rise along with the fullest seat, thigh, and leg of any of our trouser&nbsp;fits.</div>
+        </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-trouser" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/trouserfits/02-tailored.svg")"></div>
+        Tailored Fit<div class="small">This updated look features a slightly lower rise with a trimmer seat, thigh, and leg than our Classic&nbsp;Fit.</div>
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-trouser" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/trouserfits/03-european.svg")"></div>
+        European Fit<div class="small">This contemporary look offers a modern cut with a low rise as well as a narrower fit through the seat, thigh, and leg than our Tailored&nbsp;Fit.</div>
+    </div><div class="col-md-3 col-xs-6 responsive-tile">
+        <div class="img-trouser" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/trouserfits/04-european-slim.svg")"></div>
+        European Slim&nbsp;Fit<div class="small">This is our slimmest and most fashion forward look, offering a more aggressive taper from knee to leg opening. It’s typically worn without&nbsp;a&nbsp;break.</div>
+    </div>
+    </div>
+    <p class="small"><svg width="9" height="9"><circle cx="4.5" cy="4.5" r="4.5" fill="#b4975a"></circle></svg> Gold area represents the Classic Fit</p>
+</div>
+
+<div id="dlgJacketFits" class="dialog option-dialog-wide">
+    <a href="javascript:void(0)" class="close-dialog close-circle"></a>
+    <h1>Jacket Fits</h1>
+    <div class="row">
+        <div class="col-md-6 col-xs-12 responsive-tile">
+            <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/jacketfits/01-tailored.svg")"></div>
+            Tailored Fit<div class="small">This updated look features a silhouette that is slightly shorter and narrower than the Classic&nbsp;Fit.</div>
+        </div><div class="col-md-6 col-xs-12 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/jacketfits/02-european.svg")"></div>
+        European Fit<div class="small">Our slimmest cut offers a fashion forward look and feel. It features narrow shoulders, chest, and sleeves as well as our shortest body length. It also has a close fit through the waist and hips. This fit is ideal for men with a lean&nbsp;silhouette.</div>
+    </div><div class="col-md-6 col-xs-12 responsive-tile">
+        <div class="img-4-5" data-img-src="@customRoutes.Assets.at("store/images/suit-guide/jacketfits/03-classic.svg")"></div>
+        Classic Fit<div class="small">This traditional fit is familiar to most men and is suitable for all body types. It offers unrestrictive shoulders, chest, and sleeves, and has a standard body&nbsp;length.</div>
+    </div>
+    </div>
+    <p class="small"><svg width="9" height="9"><circle cx="4.5" cy="4.5" r="4.5" fill="#b4975a"></circle></svg> Gold area represents the Classic Fit</p>
+</div>

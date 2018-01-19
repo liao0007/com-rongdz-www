@@ -1,0 +1,112 @@
+@import daos.default.mall.Booking
+@(call: Call, bookingForm: Form[Booking])(implicit messages: Messages, request: RequestHeader)
+@implicitFieldConstructor = @{ b3.vertical.fieldConstructor}
+
+@styles = {
+	<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/booking.css")">
+}
+
+@scripts = {
+    .script('@customRoutes.Assets.at("store/scripts/pages/booking.js")')
+    .wait(function () {
+        PageBooking.init();
+    })
+}
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store"), stylesOpt = Some(styles), scriptsOpt = Some(scripts)) {
+
+	<video class="hero-vid" width="1336" height="387" autoplay="" loop="" poster="@customRoutes.Assets.at("store/images/partnerlocator/hero.jpg")" data-vid-src="@customRoutes.Assets.at("store/images/partnerlocator/webvideo.mp4")"></video>
+	<div class="hero-img" style="background-image: url(@customRoutes.Assets.at("store/images/partnerlocator/hero.jpg"));"></div>
+	<div class="hero-txt center-vertical">
+		<div class="text-xs-center">
+			<h1 class="display-3"><small>RONG定制</small>开启您的定制生活</h1>
+		</div>
+	</div>
+
+	<div id="connect-header" class="gutter-vertical"></div>
+
+
+	@*<div id="pnlConnect" class="display-none">*@
+	<div id="pnlConnect">
+		<div class="p-1 text-xs-center">
+			<h1>现在预约</h1>
+			<p class="text-xs-center">请填写您的联系方式，专属量体师将尽快与您联系!</p>
+		</div>
+
+		@helper.form(call, 'class->"bs-form mx-auto mt-1h", 'id->"bookingForm") {
+			<input type="hidden" name="bookingNumber" value="@Booking.newBookingNumber">
+			<input type="hidden" name="saleId" value="@bookingForm.value.flatMap(_.saleId)">
+
+			@b3.text(bookingForm("name"), '_label->"您的姓名", 'class->"form-control form-control-lg", 'required->"required", Symbol("data-msg-required")->"请填写您的姓名")
+
+			@b3.text(bookingForm("mobile"), '_label->"手机号码", 'class->"form-control form-control-lg", 'required->"required", 'digits->"digits", Symbol("data-msg-required")->"请填写手机号码", Symbol("data-msg-digits")->"请填写有效手机号码" )
+
+			<fieldset class="form-group">
+				<label for="city">所在城市</label>
+				<select class="form-control form-control-lg" name="city" data-rule-required="false">
+					<option value="北京市">北京市</option>
+					<option value="上海市">上海市</option>
+					<option value="广州市">广州市</option>
+					<option value="深圳市">深圳市</option>
+					<option value="重庆市">重庆市</option>
+					<option value="成都市">成都市</option>
+					<option value="杭州市">杭州市</option>
+					<option value="郑州市">郑州市</option>
+					<option value="青岛市">青岛市</option>
+					<option value="合肥市">合肥市</option>
+					<option value="长沙市">长沙市</option>
+					<option value="沈阳市">沈阳市</option>
+					<option value="济南市">济南市</option>
+					<option value="其他">其他</option>
+				</select>
+			</fieldset>
+
+			<input type="submit" id="btnConnectGo" class="cta-button fill mt-1" value="立即预定">
+			}
+	</div>
+
+
+	<div class="sub-img mt-3" data-img-src="@customRoutes.Assets.at("store/images/partnerlocator/step1.jpg")"></div>
+	<div id="sub-txt-service" class="sub-txt center-vertical">
+		<div class="text-xs-center">
+			<h1><small>第一步</small>了解</h1>
+			<p>量体师会询问您几个简单的问题，了解您的需求、喜好和穿着习惯</p>
+		</div>
+	</div>
+
+	<div class="sub-img-circle"><div data-img-src="@customRoutes.Assets.at("store/images/partnerlocator/step2.jpg")"></div></div>
+	<div id="sub-txt-custom" class="sub-txt center-vertical">
+		<div class="text-xs-center">
+			<h1><small>第二步</small>量体</h1>
+			<p>测量您身体22项数据，获取属于您的唯一尺码，您的时间非常宝贵，我们只需要您的10分钟</p>
+		</div>
+	</div>
+
+	<div class="sub-img" data-img-src="@customRoutes.Assets.at("store/images/partnerlocator/step3.jpg")"></div>
+	<div id="sub-txt-delivery" class="sub-txt center-vertical">
+		<div class="text-xs-center">
+			<h1><small>第三步</small>选择</h1>
+			<p>量体师会和您一起选择合适的款式和面料，您可以随意进行个性化搭配</p>
+		</div>
+	</div>
+
+	<div class="sub-img-circle"><div data-img-src="@customRoutes.Assets.at("store/images/partnerlocator/step4.jpg")"></div></div>
+	<div id="sub-txt-fabrics" class="sub-txt center-vertical">
+		<div class="text-xs-center">
+			<h1><small>第四步</small>反馈</h1>
+			<p>经过上面几步，量体师已经获取您的体型和定制偏好，将和您确认并向我们的专属工厂下单。我们将持续跟踪您的订单情况并即使反馈，并且和您确定最后试穿的时间和地点。</p>
+		</div>
+	</div>
+
+	<div class="sub-img" data-img-src="@customRoutes.Assets.at("store/images/partnerlocator/step5.jpg")"></div>
+	<div id="sub-txt-delivery" class="sub-txt center-vertical">
+		<div class="text-xs-center">
+			<h1><small>第五步</small>试穿</h1>
+			<p>15个工作日内，您的定制产品将由专属顾问送达并将进行试穿，我们将保证您对产品满意并且提供一次返厂改动的机会。</p>
+		</div>
+	</div>
+
+	<div class="text-xs-center mt-1 mb-1">
+		<a href="#connect-header" class="cta-button">预定您的专属量体师</a>
+	</div>
+}

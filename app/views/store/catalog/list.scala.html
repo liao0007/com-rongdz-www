@@ -1,0 +1,90 @@
+@import daos.default.mall.Sale
+@import models.default.mall.SaleFilter
+@import daos.default.product.Subcategory
+@(saleGroups: Seq[(Subcategory, Seq[Sale])], pagination: Option[Pagination], filter: SaleFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
+
+@styles = {
+	<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/catalog.css")">
+}
+
+@scripts = {
+    .script('@customRoutes.Assets.at("store/scripts/pages/catalog.js")')
+    .wait(function () {
+        PageCatalog.init();
+    })
+}
+
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store"), stylesOpt = Some(styles), scriptsOpt = Some(scripts)) {
+
+	@* header *@
+	@(filter.category, filter.subcategory) match {
+		case (_, Some(subcategory)) => {
+			@subcategory.bannerImage.fold {
+				<h1 class="text-xs-center mb-1h">@if(subcategory.category.isCustom) {定制款&nbsp;} @subcategory.name</h1>
+				<h3 class="text-xs-center">@subcategory.description</h3>
+			} { bannerImage =>
+				<div class="catalog-hero-img" data-img-src="@customRoutes.UploadedAssets.at(bannerImage)" ></div>
+				<div class="catalog-hero-txt">
+					<div class="txt-md-invert">
+						<h1 class="display-3">
+							@if(subcategory.category.isCustom) {<small>定制款</small>}
+							@subcategory.name
+						</h1>
+						<p class="mb-1h">@subcategory.description</p>
+						@subcategory.guideLink.map{ guildLink => <a href="@guildLink" class="cta-button alt">了解更多</a>}
+					</div>
+				</div>
+			}
+		}
+		case (Some(category), _) => {
+			@category.bannerImage.fold {
+				<h1 class="text-xs-center mb-1h">@if(category.isCustom) {定制款&nbsp;} @category.name</h1>
+				<h3 class="text-xs-center">@category.description</h3>
+			} { bannerImage =>
+				<div class="catalog-hero-img" data-img-src="@customRoutes.UploadedAssets.at(bannerImage)" ></div>
+				<div class="catalog-hero-txt">
+					<div class="txt-md-invert">
+						<h1 class="display-3">
+							@if(category.isCustom) {<small>定制款</small>}
+							@category.name
+						</h1>
+						<p class="mb-1h">@category.description</p>
+						@category.guideLink.map{ guildLink => <a href="@guildLink" class="cta-button alt">了解更多</a>}
+					</div>
+				</div>
+			}
+		}
+		case _ => {}
+	}
+
+
+	@* content *@
+	<section class="row catalog-tile-container">
+
+		@if(saleGroups.length > 1) {
+			@for((subcategory, sales) <- saleGroups) {
+				<div class="catalog-heading ml-1">
+					<h2>@subcategory.name</h2>
+					<p>@subcategory.description</p>
+				</div>
+
+				@for(sale<-sales) {
+					@views.html.store.tags.saleListItem(sale)
+				}
+				<div class="text-xs-center mb-1h">
+					<a href="@controllers.store.routes.CatalogController.list(f = SaleFilter(subcategoryIdOpt = Some(subcategory.id)))" class="cta-button alt">查看全部</a>
+				</div>
+			}
+
+		} else {
+			@for((_, sales) <- saleGroups) {
+				@for(sale <- sales) {
+					@views.html.store.tags.saleListItem(sale)
+				}
+			}
+		}
+
+	</section>
+
+}

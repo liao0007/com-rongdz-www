@@ -1,0 +1,35 @@
+body {
+    font-family: "Microsoft YaHei",Helvetica,"Hiragino Sans GB",Arial,sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    background: #fbfbfb;
+}
+
+.title-header {
+    padding: 35px 0;
+}
+
+.title {
+    text-align: center;
+    font-size: 34px;
+    color: #3cc51f;
+    font-weight: 400;
+    margin: 0 15%;
+}
+
+.weui-cell__bd .text-danger {
+    position: absolute;
+    right: 50px;
+}
+
+.weui-cells__tips.error {
+    color: #e64340
+}
+
+.weui-cells__tips ul {
+    margin-left: 20px;
+}
+
+.hidden {
+    display: none;
+}

@@ -1,0 +1,59 @@
+@()(implicit messages: Messages, request: RequestHeader)
+
+@styles = {
+
+}
+
+@scripts = {
+
+}
+
+@views.html.store.layout.main(title = "荣定制", tabOpt = Some("store"), stylesOpt = Some(styles), scriptsOpt = Some(scripts)) {
+
+	<div class="mx-auto" style="max-width: 900px;">
+		<h1>联系我们</h1>
+		<div class="row">
+			<div class="col-md-6">
+				<h2>在线留言</h2>
+				<form id="frmContact" method="post" class="bs-form mb-3" style="max-width: 400px;" novalidate="novalidate">
+					<input name="__RequestVerificationToken" type="hidden" value="s6Y1ONSpy1V1QgTIXxhkhGJfOU6mxLacQnHagFkwIT4Lpy-jxwsVGNaSvmAQPAwVR36MR8-31UKm-HNiT99qOe6amxIuD1o2KZAd6l1eoXU1">
+					<fieldset>
+						<fieldset class="form-group">
+							<label for="txtName">姓名</label>
+							<input type="text" name="txtName" class="form-control form-control-lg" data-rule-required="true" data-msg-required="Please enter your name." aria-required="true">
+						</fieldset>
+						<fieldset class="form-group">
+							<label for="txtEmail">邮箱/手机</label>
+							<input type="email" name="txtEmail" class="form-control form-control-lg" data-rule-required="true" data-msg-required="Please enter your email address." data-rule-email="true" aria-required="true">
+						</fieldset>
+						<fieldset class="form-group">
+							<label for="txtSubject">标题</label>
+							<input type="text" name="txtSubject" maxlength="256" class="form-control form-control-lg" data-rule-required="true" data-msg-required="Please enter a subject." aria-required="true">
+						</fieldset>
+						<fieldset class="form-group">
+							<label for="txtMessage">信息</label>
+							<textarea name="txtMessage" maxlength="1024" class="form-control form-control-lg" rows="5" data-rule-required="true" data-msg-required="Please enter a message." aria-required="true"></textarea>
+						</fieldset>
+						<input type="submit" class="cta-button" value="发送">
+					</fieldset>
+				</form>
+			</div>
+			<div class="col-md-5 offset-md-1">
+				<h2>服务电话</h2>
+				<p><a href="tel:01084417380"><strong>010-84417380</strong></a></p>
+
+				<h2 class="mt-1h">合作邮箱</h2>
+				<p>
+					<a href="mailto:rong_market@@qq.com">市场合作 / Cai小姐: rong_market@@qq.com</a><br/>
+					<a href="mailto:rong_tobusiness@@qq.com">企业合作 / Wang先生: rong_tobusiness@@qq.com</a>
+				</p>
+
+				<h2 class="mt-1h">微信公众号</h2>
+				<p><img src="@customRoutes.Assets.at("store/images/weixin.jpg")" style="max-width: 200px;"></p>
+				
+			</div>
+		</div>
+
+	</div>
+
+}

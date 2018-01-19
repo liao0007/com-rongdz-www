@@ -1,0 +1,24 @@
+.tape-form .form-group label.text-danger { display: block; margin-bottom: -20px; }
+
+@media (min-width: 768px) {
+    .tape-form .form-group label:first-child { display: block; position: relative; left: -104%; top: 37px; text-align: right; text-transform: uppercase; }
+    .tape-form .form-group label:first-child:after { content: ': '; }
+}
+
+.midsection-row { margin: 0 -3px; }
+.midsection-col { padding: 0 3px; float: left; width: 25%; }
+
+.belly-btn-img { width: 100%; height: 0; padding-bottom: 100%; background-size: cover; border: 1px solid #000; cursor: pointer; }
+.radio-list-item.selected .belly-btn-img { background-color: #d9d9d9; }
+fieldset.has-danger .belly-btn-img { border-color: #d9534f; }
+
+.input-group > .input-group-btn { font-family: fontello; background: transparent; border: 1px solid #000; }
+.input-group > .input-group-btn:first-child { border-right-width: 0; }
+.input-group > .input-group-btn:last-child { border-left-width: 0; }
+.input-group > .input-group-btn > button { background: transparent; line-height: inherit; }
+.input-group > input.tape-adjust { color: #000; padding: 11.5px 1rem; background: transparent !important; text-align: center; }
+
+#tape-table { width: 100%; max-width: 400px; }
+#tape-table td { padding: 1rem 0.5rem; }
+#tape-table td:first-child { width: 50%; text-align: right; text-transform: uppercase; }
+

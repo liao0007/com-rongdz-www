@@ -1,0 +1,82 @@
+# Ignore all dotfiles...
+.*
+# except for .gitignore
+!.gitignore
+
+# Ignore Play! working directory #
+######################
+db
+eclipse
+.eclipse
+log
+logs
+precompiled
+project/project
+target
+uploaded
+.target
+tmp
+test-result
+server.pid
+*.eml
+.cache
+public/client
+/out
+RUNNING_PID
+activator*
+# except for activator.properties
+!activator.properties
+
+# Ignore Play Modules within Modules #
+modules/*/modules
+
+
+
+# Compiled source #
+###################
+*.com
+*.exe
+*.o
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+
+
+# general
+*~
+
+# Eclipse
+.settings
+.project
+.classpath
+
+# IDEA
+/.idea_modules
+
+# Public Assets
+app-2.11/
+test-2.11/
+test/
+src/assets/
