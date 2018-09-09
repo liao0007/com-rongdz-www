@@ -1,4 +1,5 @@
-@import models.mall.{Booking, BookingFilter}
+@import models.mall.Booking
+@import models.mall.filters.BookingFilter
 @(items: Seq[Booking], pagination: Pagination, filter: BookingFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.BookingController}

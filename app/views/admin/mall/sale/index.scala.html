@@ -1,4 +1,5 @@
-@import models.mall.{Sale, SaleFilter}
+@import models.mall.Sale
+@import models.mall.filters.SaleFilter
 @(items: Seq[Sale], pagination: Pagination, filter: SaleFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.SaleController}

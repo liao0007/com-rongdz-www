@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
 import models._
-import models.mall.{HomeSlider, HomeSliderFilter}
+import models.mall.HomeSlider
 import services.CrudService
 
 /**

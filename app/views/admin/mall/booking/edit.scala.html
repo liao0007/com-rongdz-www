@@ -1,4 +1,5 @@
-@import models.mall.{Booking, BookingFollowupFilter}
+@import models.mall.Booking
+@import models.mall.filters.BookingFollowupFilter
 @(modelForm: Form[Booking], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @implicitFieldConstructor = @{ b3.vertical.fieldConstructor }

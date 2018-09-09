@@ -1,4 +1,5 @@
-@import models.mall.{HomeFeature, HomeFeatureFilter}
+@import models.mall.HomeFeature
+@import models.mall.filters.HomeFeatureFilter
 @(items: Seq[HomeFeature], pagination: Pagination, filter: HomeFeatureFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.HomeFeatureController}

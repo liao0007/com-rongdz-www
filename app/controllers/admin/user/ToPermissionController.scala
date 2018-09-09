@@ -4,7 +4,8 @@ import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
 import javax.inject.Inject
 import models.ModelResult
-import models.user.{Permission, PermissionFilter}
+import models.user.Permission
+import models.user.filters.PermissionFilter
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}

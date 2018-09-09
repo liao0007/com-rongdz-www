@@ -4,7 +4,8 @@ import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
 import javax.inject.Inject
 import models.ModelResult
-import models.product.{AttributeOption, AttributeOptionFilter}
+import models.product.AttributeOption
+import models.product.filters.AttributeOptionFilter
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}

@@ -9,7 +9,7 @@ import auth.services._
 import com.google.inject.Inject
 import com.mohiva.play.silhouette.api.{HandlerResult, Silhouette, LoginInfo => SilhouetteLoginInfo}
 import com.mohiva.play.silhouette.impl.providers.CredentialsProvider
-import models.user.{UserToken, User}
+import models.user.{Token, User}
 import org.joda.time.DateTime
 import play.api.Configuration
 import play.api.libs.json._
@@ -182,11 +182,11 @@ class AuthController @Inject()(
   /**
     * Do not forget to consume tokens upon successful request
     */
-  private def executeImpl(user: User, providerId: String, providerKey: String, userToken: UserToken)(
+  private def executeImpl(user: User, providerId: String, providerKey: String, userToken: Token)(
       implicit request: Request[AnyContent]): Future[Result] =
     userToken match {
       //activate
-      case UserToken(_, _, expiresOn, userTokenAction) if userTokenAction == implicitly[String](TokenAction.ActivateAccount) =>
+      case Token(_, _, expiresOn, userTokenAction) if userTokenAction == implicitly[String](TokenAction.ActivateAccount) =>
         request.body.asJson match {
           case Some(json) =>
             json
@@ -209,7 +209,7 @@ class AuthController @Inject()(
         }
 
       //reset password
-      case UserToken(_, _, _, userTokenAction) if userTokenAction == implicitly[String](TokenAction.ResetPassword) =>
+      case Token(_, _, _, userTokenAction) if userTokenAction == implicitly[String](TokenAction.ResetPassword) =>
         request.body.asJson match {
           case Some(json) =>
             json

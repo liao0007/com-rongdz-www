@@ -1,4 +1,5 @@
-@import models.mall.{BookingFollowup, BookingFollowupFilter}
+@import models.mall.BookingFollowup
+@import models.mall.filters.BookingFollowupFilter
 @(bookingId: Long, modelForm: Form[BookingFollowup], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.BookingFollowupController}

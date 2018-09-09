@@ -1,4 +1,5 @@
-@import models.user.{LoginInfo, LoginInfoFilter}
+@import models.user.LoginInfo
+@import models.user.filters.LoginInfoFilter
 @(items: Seq[LoginInfo], pagination: Pagination, filter: LoginInfoFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.user.routes.LoginInfoController}

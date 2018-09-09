@@ -9,8 +9,7 @@ class UserPermissionService {
   /**
     * Finds permission - user pair
     */
-  def find(permission: Permission, userId: Long): Future[Option[Permission]] =
-    Future.successful {
+  def find(permission: Permission, userId: Long): Future[Option[Permission]] = Future.successful {
       Permission.findBy("userId" -> userId, "permission" -> permission.toString)
     }
 

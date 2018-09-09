@@ -1,4 +1,5 @@
-@import models.crm.{Page, PageFilter}
+@import models.crm.Page
+@import models.crm.filters.PageFilter
 @(items: Seq[Page], pagination: Pagination, filter: PageFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.crm.routes.PageController}

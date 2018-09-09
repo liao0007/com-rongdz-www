@@ -20,17 +20,17 @@ case class HomeFeature(
 
 object HomeFeature extends ActiveRecordCompanion[HomeFeature] with PlayFormSupport[HomeFeature] {
 
-  abstract class PresentingType(val name: String) extends EnumAttributeValue
+  sealed abstract class PresentingTypeValue(val name: String) extends EnumAttributeValue
 
-  object HomeFeaturePresentingType extends EnumAttribute[PresentingType] {
+  object PresentingType extends EnumAttribute[PresentingTypeValue] {
 
-    case object Custom extends PresentingType("定制")
+    case object Custom extends PresentingTypeValue("定制")
 
-    case object Collection extends PresentingType("成衣")
+    case object Collection extends PresentingTypeValue("成衣")
 
-    case object Page extends PresentingType("主题")
+    case object Page extends PresentingTypeValue("主题")
 
-    override protected def all: Seq[PresentingType] = Seq[PresentingType](Custom, Collection, Page)
+    override protected def all: Seq[PresentingTypeValue] = Seq[PresentingTypeValue](Custom, Collection, Page)
   }
 
   implicit val jsonFormat: OFormat[HomeFeature] = Json.format[HomeFeature]

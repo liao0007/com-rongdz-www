@@ -1,6 +1,6 @@
 package auth.authenticators
 
-import auth.entities._
+import entities.{auth, _}
 import auth.environments.JWTEnv
 import auth.services.{UserActionTokenService, UserIdentityService, UserLoginInfoService}
 import com.mohiva.play.silhouette.api.Silhouette
@@ -12,8 +12,8 @@ import entities.auth._
 import entities.user.{PasswordUpdateRequest, PasswordUpdateResponse, RegistrationRequest, SmsTokenResponse}
 import auth.entities
 import javax.inject.Inject
-import models.user.User
-import models.user.User.UserState
+import models.user.User.State
+import models.user.{User, Token => UserToken}
 import play.api.libs.json.{JsObject, Json}
 import play.api.mvc.RequestHeader
 
@@ -38,9 +38,9 @@ class JWTAuthenticator @Inject()(
   protected def userStatusCheck[T](
                                     pf: PartialFunction[Option[User], Future[Either[Nothing, T]]]): PartialFunction[Option[User], Future[Either[UserStateError, T]]] = {
     val userStatePf: PartialFunction[Option[User], Future[Either[UserStateError, Nothing]]] = {
-      case Some(user) if user.state == implicitly[String](UserState.Created) => Future.successful(Left(UserNotActivated))
-      case Some(user) if user.state == implicitly[String](UserState.Activated) => Future.successful(Left(UserAlreadyExists))
-      case Some(user) if user.state == implicitly[String](UserState.Disabled) => Future.successful(Left(UserDisabled))
+      case Some(user) if user.state == implicitly[String](State.Created) => Future.successful(Left(UserNotActivated))
+      case Some(user) if user.state == implicitly[String](State.Activated) => Future.successful(Left(UserAlreadyExists))
+      case Some(user) if user.state == implicitly[String](State.Disabled) => Future.successful(Left(UserDisabled))
       case None => Future.successful(Left(UserNotExists))
     }
     pf orElse userStatePf
@@ -52,7 +52,7 @@ class JWTAuthenticator @Inject()(
       tokenValue <- silhouette.env.authenticatorService.init(authenticator)
       expiration = authenticator.expirationDateTime
     } yield {
-      Right(Token(token = tokenValue, expiresOn = expiration))
+      Right(auth.Token(token = tokenValue, expiresOn = expiration))
     }
   }
 
@@ -61,7 +61,7 @@ class JWTAuthenticator @Inject()(
     userIdentityService.retrieve(silhouetteLoginInfo) flatMap userStatusCheck {
       case Some(user) =>
         userActionTokenService.issue(user.id, tokenAction, validForMinutes) map { token =>
-          Right(SmsTokenResponse(entities.Token(token = token.token, expiresOn = token.expiresOn)))
+          Right(SmsTokenResponse(auth.Token(token = token.token, expiresOn = token.expiresOn)))
         }
     }
   }
@@ -71,9 +71,9 @@ class JWTAuthenticator @Inject()(
     userIdentityService.retrieve(loginInfo) flatMap userStatusCheck {
       case None =>
         User.transaction {
-          val user = User(name = signUpRequest.name, mobile = Some(signUpRequest.identifier), state = UserState.Created, avatar = signUpRequest.avatar).create
+          val user = User(name = signUpRequest.name, mobile = Some(signUpRequest.identifier), state = State.Created, avatar = signUpRequest.avatar).create
           userLoginInfoService.save(loginInfo, user.id)
-          userActionTokenService.issue(user.id, ActionTokenAction.ActivateAccount, validForMinutes) map { token =>
+          userActionTokenService.issue(user.id, UserToken.Actions.ActivateAccount, validForMinutes) map { token =>
             Right(Token(token.token, token.expiresOn))
           }
         }
@@ -85,7 +85,7 @@ class JWTAuthenticator @Inject()(
 
     credentialsProvider.authenticate(Credentials(identifier, password)) flatMap { loginInfo =>
       userIdentityService.retrieve(loginInfo) flatMap userStatusCheck {
-        case Some(user) if user.state == implicitly[String](UserState.Activated) => createJWTToken(loginInfo, user)
+        case Some(user) if user.state == implicitly[String](State.Activated) => createJWTToken(loginInfo, user)
       }
     } recover {
       case _: InvalidPasswordException => Left(UserNotExists)

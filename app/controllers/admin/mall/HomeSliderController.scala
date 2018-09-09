@@ -4,7 +4,8 @@ import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
 import javax.inject.Inject
 import models.ModelResult
-import models.mall.{HomeSlider, HomeSliderFilter}
+import models.mall.HomeSlider
+import models.mall.filters.HomeSliderFilter
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}

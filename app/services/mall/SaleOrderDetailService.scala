@@ -3,7 +3,7 @@ package services.mall
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
 import models._
-import models.mall.{SaleOrderDetail, SaleOrderDetailAttributeValue, SaleOrderDetailFilter}
+import models.mall.{SaleOrderDetail, SaleOrderDetailAttributeValue}
 import services.CrudService
 
 /**

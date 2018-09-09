@@ -1,4 +1,5 @@
-@import models.user.{Permission, PermissionFilter}
+@import models.user.Permission
+@import models.user.filters.PermissionFilter
 @(userId: Long, modelForm: Form[Permission], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.user.routes.ToPermissionController}

@@ -1,4 +1,8 @@
-@import models.user.{LoginInfoFilter, ShipToAddressFilter, PermissionFilter, User, UserFilter}
+@import models.user.User
+@import models.user.filters.LoginInfoFilter
+@import models.user.filters.PermissionFilter
+@import models.user.filters.ShipToAddressFilter
+@import models.user.filters.UserFilter
 @(items: Seq[User], pagination: Pagination, filter: UserFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.user.routes.UserController}

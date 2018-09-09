@@ -1,8 +1,9 @@
-@@@import models.mall.{Sale, SaleFilter}
+@@@import models.mall.Sale
 @import models.product.Subcategory
 @(saleGroups: Seq[(Subcategory, Seq[Sale])], pagination: Option[Pagination], filter: SaleFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
-@styles = {
+@import models.mall.filters.SaleFilter
+    @styles = {
 	<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/catalog.css")">
 }
 

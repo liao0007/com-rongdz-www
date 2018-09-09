@@ -1,6 +1,8 @@
-@@@import models.mall.{SaleOrderDetail, SaleOrderDetailAttributeValueFilter, SaleOrderDetailFilter}
+@@@import models.mall.SaleOrderDetail
 @(items: Seq[SaleOrderDetail], pagination: Pagination, filter: SaleOrderDetailFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
+@import models.mall.filters.SaleOrderDetailAttributeValueFilter
+@import models.mall.filters.SaleOrderDetailFilter
 @currentController = @{controllers.admin.mall.routes.SaleOrderDetailController}
 
 @views.html.admin.layout.window(title = "订单详情", tabOpt = Some("productSaleOrderDetail")) {

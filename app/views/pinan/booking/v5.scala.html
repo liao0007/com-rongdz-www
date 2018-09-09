@@ -1,4 +1,5 @@
-@import models.mall.{Booking, SaleFilter}
+@import models.mall.Booking
+@import models.mall.filters.SaleFilter
 @(bookingForm: Form[Booking])(implicit messages: Messages, request: RequestHeader)
 @implicitFieldConstructor = @{ b3.horizontal.fieldConstructor("col-xs-3", "col-xs-9") }
 

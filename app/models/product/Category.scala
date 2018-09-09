@@ -2,7 +2,7 @@ package models.product
 
 import com.github.aselab.activerecord.{ActiveRecord, ActiveRecordCompanion, PlayFormSupport}
 import models.mall.Sale
-import models.product.Category.CategoryHoverType
+import models.product.Category.HoverType
 import models.{ActiveRecord, EnumAttribute, EnumAttributeValue}
 import play.api.libs.json.{Json, OFormat}
 
@@ -13,27 +13,26 @@ case class Category(
                      var bannerImage: Option[String] = None,
                      var guideLink: Option[String] = None,
                      var isCustom: Boolean = true,
-                     var hoverType: String = CategoryHoverType.None
+                     var hoverType: String = HoverType.None
                    ) extends ActiveRecord {
-  lazy val subcategories: ActiveRecord.HasManyAssociation[Category.this.type, Subcategory] =
-    hasMany[Subcategory]
+  lazy val subcategories: ActiveRecord.HasManyAssociation[Category.this.type, Subcategory] = hasMany[Subcategory]
   lazy val products: ActiveRecord.HasManyAssociation[Category.this.type, Product] = hasMany[Product]
   lazy val sales: ActiveRecord.HasManyAssociation[Category.this.type, Sale] = hasMany[Sale]
 }
 
 object Category extends ActiveRecordCompanion[Category] with PlayFormSupport[Category] {
 
-  sealed class HoverType(val name: String) extends EnumAttributeValue
+  sealed abstract class HoverTypeValue(val name: String) extends EnumAttributeValue
 
-  object CategoryHoverType extends EnumAttribute[HoverType] {
+  object HoverType extends EnumAttribute[HoverTypeValue] {
 
-    case object None extends HoverType("None")
+    case object None extends HoverTypeValue("None")
 
-    case object Fabric extends HoverType("Fabric")
+    case object Fabric extends HoverTypeValue("Fabric")
 
-    case object Normal extends HoverType("Normal")
+    case object Normal extends HoverTypeValue("Normal")
 
-    protected def all: Seq[HoverType] = Seq[HoverType](None, Fabric, Normal)
+    protected def all: Seq[HoverTypeValue] = Seq[HoverTypeValue](None, Fabric, Normal)
   }
 
   implicit val format: OFormat[Category] = Json.format[Category]

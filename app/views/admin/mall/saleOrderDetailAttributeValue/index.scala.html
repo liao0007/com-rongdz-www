@@ -1,4 +1,5 @@
-@import models.mall.{SaleOrderDetailAttributeValue, SaleOrderDetailAttributeValueFilter}
+@import models.mall.SaleOrderDetailAttributeValue
+@import models.mall.filters.SaleOrderDetailAttributeValueFilter
 @(items: Seq[SaleOrderDetailAttributeValue], pagination: Pagination, filter: SaleOrderDetailAttributeValueFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.SaleOrderDetailAttributeValueController}

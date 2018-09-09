@@ -14,10 +14,8 @@ case class Product(
                     var attributeSetId: Long
                   ) extends ActiveRecord {
   lazy val brand: ActiveRecord.BelongsToAssociation[Product.this.type, Brand] = belongsTo[Brand]
-  lazy val subcategory: ActiveRecord.BelongsToAssociation[Product.this.type, Subcategory] =
-    belongsTo[Subcategory]
-  lazy val attributeSet: ActiveRecord.BelongsToAssociation[Product.this.type, AttributeSet] =
-    belongsTo[AttributeSet]
+  lazy val subcategory: ActiveRecord.BelongsToAssociation[Product.this.type, Subcategory] = belongsTo[Subcategory]
+  lazy val attributeSet: ActiveRecord.BelongsToAssociation[Product.this.type, AttributeSet] = belongsTo[AttributeSet]
   lazy val skus: ActiveRecord.HasManyAssociation[Product.this.type, Sku] = hasMany[Sku]
   lazy val sales: ActiveRecord.HasManyAssociation[Product.this.type, Sale] = hasMany[Sale]
 }

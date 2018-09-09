@@ -1,4 +1,5 @@
-@import models.product.{Sku, SkuFilter}
+@import models.product.Sku
+@import models.product.filters.SkuFilter
 @(items: Seq[Sku], pagination: Pagination, filter: SkuFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.product.routes.SkuController}

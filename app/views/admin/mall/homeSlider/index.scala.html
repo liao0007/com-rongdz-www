@@ -1,4 +1,5 @@
-@import models.mall.{HomeSlider, HomeSliderFilter}
+@import models.mall.HomeSlider
+@import models.mall.filters.HomeSliderFilter
 @(items: Seq[HomeSlider], pagination: Pagination, filter: HomeSliderFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.HomeSliderController}

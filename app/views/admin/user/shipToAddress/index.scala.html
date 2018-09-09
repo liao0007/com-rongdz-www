@@ -1,4 +1,5 @@
-@import models.user.{ShipToAddress, ShipToAddressFilter}
+@import models.user.ShipToAddress
+@import models.user.filters.ShipToAddressFilter
 @(items: Seq[ShipToAddress], pagination: Pagination, filter: ShipToAddressFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.user.routes.ShipToAddressController}

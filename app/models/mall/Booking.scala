@@ -2,6 +2,7 @@ package models.mall
 
 import com.github.aselab.activerecord.dsl._
 import com.github.aselab.activerecord.{ActiveRecordCompanion, PlayFormSupport}
+import models.user.User
 import models.{ActiveRecord, EnumAttribute, EnumAttributeValue}
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
@@ -19,9 +20,9 @@ case class Booking(
                     var saleId: Option[Long] = None,
                     var districtId: Option[Long] = None,
                     var targetDateTime: Option[DateTime] = None,
-                    var state: String = BookingState.Open.toString,
-                    var channel: String = SaleOrderChannel.OnlineStore.toString,
-                    var gender: String = UserGender.Secret.toString,
+                    var state: String = Booking.State.Open,
+                    var channel: String = SaleOrder.Channel.OnlineStore,
+                    var gender: String = User.Gender.Secret,
                     var servicePerson: Option[String] = None,
                     var memo: Option[String] = None
                   ) extends ActiveRecord {
@@ -36,21 +37,21 @@ object Booking extends ActiveRecordCompanion[Booking] with PlayFormSupport[Booki
     pattern.print(DateTime.now())
   }
 
-  sealed class State(val name: String) extends EnumAttributeValue
+  sealed abstract class StateValue(val name: String) extends EnumAttributeValue
 
-  object BookingState extends EnumAttribute[State] {
+  object State extends EnumAttribute[StateValue] {
 
-    case object Open extends State("待处理")
+    case object Open extends StateValue("待处理")
 
-    case object InProgress extends State("已沟通")
+    case object InProgress extends StateValue("已沟通")
 
-    case object Pending extends State("待上门")
+    case object Pending extends StateValue("待上门")
 
-    case object OrderCreated extends State("成单")
+    case object OrderCreated extends StateValue("成单")
 
-    case object Closed extends State("关闭")
+    case object Closed extends StateValue("关闭")
 
-    protected def all: Seq[State] = Seq[State](Open, InProgress, Pending, OrderCreated, Closed)
+    protected def all: Seq[StateValue] = Seq[StateValue](Open, InProgress, Pending, OrderCreated, Closed)
   }
 
   implicit val jsonFormat: OFormat[Booking] = Json.format[Booking]

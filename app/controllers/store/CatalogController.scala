@@ -5,7 +5,8 @@ import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
 import com.mohiva.play.silhouette.api.Silhouette
 import javax.inject.Inject
-import models.mall.{Sale, SaleFilter}
+import models.mall.Sale
+import models.mall.filters.SaleFilter
 import models.product.Subcategory
 import models.{ModelPager, ModelSorter}
 import play.api.i18n.{I18nSupport, MessagesApi}

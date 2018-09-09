@@ -1,39 +1,38 @@
 package models.mall
 
-import com.github.aselab.activerecord.{ActiveRecordCompanion, PlayFormSupport}
-import models.ActiveRecord
+import com.github.aselab.activerecord.{ActiveRecord, ActiveRecordCompanion, PlayFormSupport}
 import models.user.User
+import models.{ActiveRecord, EnumAttribute, EnumAttributeValue}
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import play.api.libs.json.{Json, OFormat}
 
 case class SaleOrder(
-    override val id: Long = 0L,
-    var orderNumber: String,
-    var userId: Long,
-    var totalAmount: Float,
-    var shipToAddressId: Long,
-    var shipToName: String,
-    var shipToProvince: String,
-    var shipToCity: String,
-    var shipToDistrict: String,
-    var shipToMobile: String,
-    var shipToAddress: String,
-    var memo: Option[String] = None,
-    var channel: String = SaleOrderChannel.OnlineStore,
-    var deliveryType: String = SaleOrderDeliveryType.Direct,
-    var carrier: Option[String] = None,
-    var trackingNumber: Option[String] = None,
-    var state: String = SaleOrderState.Created,
-    var paymentOutTradeNumber: Option[String] = None,
-    var paymentMethod: String = SaleOrderPaymentMethod.Wepay,
-    var paymentState: String = SaleOrderPaymentState.Open,
-    var paymentTransactionId: Option[String] = None,
-    var shippingState: String = SaleOrderShippingState.Pending
-) extends ActiveRecord {
-  lazy val user: _root_.com.github.aselab.activerecord.ActiveRecord.BelongsToAssociation[SaleOrder.this.type, User] = belongsTo[User]
-  lazy val details: _root_.com.github.aselab.activerecord.ActiveRecord.HasManyAssociation[SaleOrder.this.type, SaleOrderDetail] =
-    hasMany[SaleOrderDetail]
+                      override val id: Long = 0L,
+                      var orderNumber: String,
+                      var userId: Long,
+                      var totalAmount: Float,
+                      var shipToAddressId: Long,
+                      var shipToName: String,
+                      var shipToProvince: String,
+                      var shipToCity: String,
+                      var shipToDistrict: String,
+                      var shipToMobile: String,
+                      var shipToAddress: String,
+                      var memo: Option[String] = None,
+                      var channel: String = SaleOrder.Channel.OnlineStore,
+                      var deliveryType: String = SaleOrder.DeliveryType.Direct,
+                      var carrier: Option[String] = None,
+                      var trackingNumber: Option[String] = None,
+                      var state: String = SaleOrder.State.Created,
+                      var paymentOutTradeNumber: Option[String] = None,
+                      var paymentMethod: String = SaleOrder.PaymentMethod.Wepay,
+                      var paymentState: String = SaleOrder.PaymentState.Open,
+                      var paymentTransactionId: Option[String] = None,
+                      var shippingState: String = SaleOrder.ShippingState.Pending
+                    ) extends ActiveRecord {
+  lazy val user: ActiveRecord.BelongsToAssociation[SaleOrder.this.type, User] = belongsTo[User]
+  lazy val details: ActiveRecord.HasManyAssociation[SaleOrder.this.type, SaleOrderDetail] = hasMany[SaleOrderDetail]
 }
 
 object SaleOrder extends ActiveRecordCompanion[SaleOrder] with PlayFormSupport[SaleOrder] {
@@ -43,80 +42,90 @@ object SaleOrder extends ActiveRecordCompanion[SaleOrder] with PlayFormSupport[S
     pattern.print(DateTime.now()) + ("00000" + userId).takeRight(5)
   }
 
-  sealed class State(val name: String)
-  object SaleOrderState extends EnumAttribute[State] {
-    case object Created  extends State("待处理")
-    case object Audited  extends State("已处理")
-    case object Disabled extends State("已关闭")
+  sealed abstract class StateValue(val name: String) extends EnumAttributeValue
 
-    protected def all: Seq[State] = Seq[State](Created, Audited, Disabled)
+  object State extends EnumAttribute[StateValue] {
 
-    implicit def fromString(x: String): Option[State] = all.find(_.toString == x)
-    implicit def toString(state: State): String       = state.toString
+    case object Created extends StateValue("待处理")
+
+    case object Audited extends StateValue("已处理")
+
+    case object Disabled extends StateValue("已关闭")
+
+    protected def all: Seq[StateValue] = Seq[StateValue](Created, Audited, Disabled)
   }
 
-  sealed class DeliveryType(val name: String)
-  object SaleOrderDeliveryType extends EnumAttribute[DeliveryType] {
-    case object Direct  extends DeliveryType("送货上门")
-    case object Express extends DeliveryType("普通快递")
-    case object Pickup  extends DeliveryType("门店自取")
+  sealed abstract class DeliveryTypeValue(val name: String) extends EnumAttributeValue
 
-    protected def all: Seq[DeliveryType] = Seq[DeliveryType](Express, Direct, Pickup)
+  object DeliveryType extends EnumAttribute[DeliveryTypeValue] {
 
-    implicit def fromString(x: String): Option[DeliveryType] = all.find(_.toString == x)
-    implicit def toString(s: DeliveryType): String           = s.toString
+    case object Direct extends DeliveryTypeValue("送货上门")
+
+    case object Express extends DeliveryTypeValue("普通快递")
+
+    case object Pickup extends DeliveryTypeValue("门店自取")
+
+    protected def all: Seq[DeliveryTypeValue] = Seq[DeliveryTypeValue](Express, Direct, Pickup)
   }
 
-  sealed class PaymentMethod(val name: String)
-  object SaleOrderPaymentMethod extends EnumAttribute[PaymentMethod] {
-    case object Alipay extends PaymentMethod("支付宝支付")
-    case object Wepay  extends PaymentMethod("微信支付")
-    case object Cash   extends PaymentMethod("现金支付")
+  sealed abstract class PaymentMethodValue(val name: String) extends EnumAttributeValue
 
-    protected def all: Seq[PaymentMethod] = Seq(Wepay, Alipay, Cash)
+  object PaymentMethod extends EnumAttribute[PaymentMethodValue] {
 
-    implicit def fromString(x: String): Option[PaymentMethod] = all.find(_.toString == x)
-    implicit def toString(s: PaymentMethod): String           = s.toString
+    case object Alipay extends PaymentMethodValue("支付宝支付")
+
+    case object Wepay extends PaymentMethodValue("微信支付")
+
+    case object Cash extends PaymentMethodValue("现金支付")
+
+    protected def all: Seq[PaymentMethodValue] = Seq(Wepay, Alipay, Cash)
   }
 
-  sealed class PaymentState(val name: String)
-  object SaleOrderPaymentState extends EnumAttribute[PaymentState] {
-    case object Open     extends PaymentState("待付款")
-    case object Paid     extends PaymentState("已付款")
-    case object Closed   extends PaymentState("已关闭")
-    case object Refunded extends PaymentState("已退款")
+  sealed abstract class PaymentStateValue(val name: String) extends EnumAttributeValue
 
-    protected def all: Seq[PaymentState] = Seq[PaymentState](Open, Paid, Closed, Refunded)
+  object PaymentState extends EnumAttribute[PaymentStateValue] {
 
-    implicit def fromString(x: String): Option[PaymentState] = all.find(_.toString == x)
-    implicit def toString(s: PaymentState): String           = s.toString
+    case object Open extends PaymentStateValue("待付款")
+
+    case object Paid extends PaymentStateValue("已付款")
+
+    case object Closed extends PaymentStateValue("已关闭")
+
+    case object Refunded extends PaymentStateValue("已退款")
+
+    protected def all: Seq[PaymentStateValue] = Seq[PaymentStateValue](Open, Paid, Closed, Refunded)
   }
 
-  sealed class ShippingState(val name: String)
-  object SaleOrderShippingState extends EnumAttribute[ShippingState] {
-    case object Pending    extends ShippingState("待发货")
-    case object Processing extends ShippingState("正在发货")
-    case object Shipped    extends ShippingState("已发货")
-    case object Disabled   extends ShippingState("已关闭")
+  sealed abstract class ShippingStateValue(val name: String) extends EnumAttributeValue
 
-    protected def all: Seq[ShippingState] = Seq[ShippingState](Pending, Processing, Shipped, Disabled)
+  object ShippingState extends EnumAttribute[ShippingStateValue] {
 
-    implicit def fromString(x: String): Option[ShippingState] = all.find(_.toString == x)
-    implicit def toString(s: ShippingState): String           = s.toString
+    case object Pending extends ShippingStateValue("待发货")
+
+    case object Processing extends ShippingStateValue("正在发货")
+
+    case object Shipped extends ShippingStateValue("已发货")
+
+    case object Disabled extends ShippingStateValue("已关闭")
+
+    protected def all: Seq[ShippingStateValue] = Seq[ShippingStateValue](Pending, Processing, Shipped, Disabled)
   }
 
-  sealed class Channel(val name: String)
-  object SaleOrderChannel extends EnumAttribute[Channel] {
-    case object OnlineStore  extends Channel("网站")
-    case object OnlineWechat extends Channel("微信")
-    case object OnlinePinan  extends Channel("平安")
-    case object Offline      extends Channel("线下")
-    case object Internal     extends Channel("内部")
+  sealed abstract class ChannelValue(val name: String) extends EnumAttributeValue
 
-    protected def all: Seq[Channel] = Seq[Channel](OnlineStore, OnlineWechat, OnlinePinan, Offline, Internal)
+  object Channel extends EnumAttribute[ChannelValue] {
 
-    implicit def fromString(x: String): Option[Channel] = all.find(_.toString == x)
-    implicit def toString(s: Channel): String           = s.toString
+    case object OnlineStore extends ChannelValue("网站")
+
+    case object OnlineWechat extends ChannelValue("微信")
+
+    case object OnlinePinan extends ChannelValue("平安")
+
+    case object Offline extends ChannelValue("线下")
+
+    case object Internal extends ChannelValue("内部")
+
+    protected def all: Seq[ChannelValue] = Seq[ChannelValue](OnlineStore, OnlineWechat, OnlinePinan, Offline, Internal)
   }
 
   implicit val jsonFormat: OFormat[SaleOrder] = Json.format[SaleOrder]

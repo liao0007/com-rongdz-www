@@ -26,17 +26,17 @@ object SaleRate extends ActiveRecordCompanion[SaleRate] with PlayFormSupport[Sal
     sku + pattern.print(DateTime.now())
   }
 
-  abstract class RateType(val name: String) extends EnumAttributeValue
+  sealed abstract class RateTypeValue(val name: String) extends EnumAttributeValue
 
-  object SaleRateType extends EnumAttribute[RateType] {
+  object RateType extends EnumAttribute[RateTypeValue] {
 
-    case object SpecialOffer extends RateType("SpecialOffer")
+    case object SpecialOffer extends RateTypeValue("SpecialOffer")
 
-    case object Corporate extends RateType("Corporate")
+    case object Corporate extends RateTypeValue("Corporate")
 
-    case object Group extends RateType("Group")
+    case object Group extends RateTypeValue("Group")
 
-    override protected def all: Seq[RateType] = Seq[RateType](SpecialOffer, Corporate, Group)
+    override protected def all: Seq[RateTypeValue] = Seq[RateTypeValue](SpecialOffer, Corporate, Group)
   }
 
   implicit val jsonFormat: OFormat[SaleRate] = Json.format[SaleRate]

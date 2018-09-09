@@ -1,7 +1,9 @@
-@@@import models.mall.{SaleOrder, SaleOrderDetailAttributeValueFilter, SaleOrderDetailFilter}
-@import models.user.ShipToAddressFilter
+@@@import models.mall.SaleOrder
+@import models.user.filters.ShipToAddressFilter
 @(modelForm: Form[SaleOrder], action: Call)(implicit messages: Messages, request: RequestHeader)
 
+@import models.mall.filters.SaleOrderDetailAttributeValueFilter
+@import models.mall.filters.SaleOrderDetailFilter
 @currentController = @{controllers.admin.mall.routes.SaleOrderController}
 @implicitFieldConstructor = @{ b3.vertical.fieldConstructor }
 @updateOrCreateLabel() = @{modelForm.value.fold("新建")( _ => "更新")}

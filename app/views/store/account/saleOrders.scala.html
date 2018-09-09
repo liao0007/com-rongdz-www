@@ -1,6 +1,7 @@
 @import com.mohiva.play.silhouette.api.actions.SecuredRequest
-@import models.mall.{SaleOrder, SaleOrderFilter}
+@import models.mall.SaleOrder
 @import org.joda.time.format.DateTimeFormat
+@import models.mall.filters.SaleOrderFilter
 @(orders: Seq[SaleOrder], pagination: Pagination, filter: SaleOrderFilter, sorter: ModelSorter)(implicit messages: Messages, request: SecuredRequest[JWTEnv, _])
 
 @styles = {

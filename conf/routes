@@ -62,8 +62,8 @@ GET           /store/guide/:id                                               con
 GET           /store/info/:id                                                controllers.store.PageController.info(id: String)
 GET           /store/page/:id                                                controllers.store.PageController.page(id: Long)
 
-GET           /store/catalog                                                 controllers.store.CatalogController.list(p: models.ModelPager ?= models.ModelPager(), f: models.mall.SaleFilter ?= models.default.mall.SaleFilter(), s: models.ModelSorter ?= models.ModelSorter(attribute = "sequence", order = "DESC"))
-GET           /store/sale/:saleNumber                                        controllers.store.CatalogController.sale(saleNumber: String, p: models.ModelPager ?= models.ModelPager(), f: models.mall.SaleFilter ?= models.default.mall.SaleFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /store/catalog                                                 controllers.store.CatalogController.list(p: models.ModelPager ?= models.ModelPager(), f: SaleFilter ?= models.default.mall.SaleFilter(), s: models.ModelSorter ?= models.ModelSorter(attribute = "sequence", order = "DESC"))
+GET           /store/sale/:saleNumber                                        controllers.store.CatalogController.sale(saleNumber: String, p: models.ModelPager ?= models.ModelPager(), f: SaleFilter ?= models.default.mall.SaleFilter(), s: models.ModelSorter ?= models.ModelSorter())
 
 GET           /store/booking                                                 controllers.store.BookingController.index(saleNumberOpt: Option[String])
 POST          /store/booking                                                 controllers.store.BookingController.update(saleNumberOpt: Option[String])
@@ -81,7 +81,7 @@ POST          /store/account/addresses                                       con
 GET           /store/account/addresses/:id/edit                              controllers.store.AccountController.editAddress(id: Long, returnUrl)
 POST          /store/account/addresses/:id/edit                              controllers.store.AccountController.updateAddress(id: Long, returnUrl: String ?= "/store/account")
 GET           /store/account/addresses/:id/delete                            controllers.store.AccountController.deleteAddress(id: Long, returnUrl: String ?= "/store/account")
-GET           /store/account/orders                                          controllers.store.AccountController.saleOrders(p: models.ModelPager ?= models.ModelPager(), f: models.mall.SaleOrderFilter ?= models.default.mall.SaleOrderFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /store/account/orders                                          controllers.store.AccountController.saleOrders(p: models.ModelPager ?= models.ModelPager(), f: SaleOrderFilter ?= models.default.mall.SaleOrderFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /store/account/orders/:orderNumber                             controllers.store.AccountController.saleOrder(orderNumber: String)
 GET           /store/account/orders/:orderNumber/cancel                      controllers.store.AccountController.cancelSaleOrder(orderNumber: String)
 
@@ -105,7 +105,7 @@ GET           /alipay/account/sign-in/:returnUrl                             con
 GET           /admin                                                         controllers.admin.ApplicationController.index
 GET           /admin/javascriptRoutes                                        controllers.admin.ApplicationController.javascriptRoutes
 
-GET           /admin/user/users                                              controllers.admin.user.UserController.index(p: models.ModelPager ?= models.ModelPager(), f: models.user.UserFilter ?= models.default.user.UserFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/user/users                                              controllers.admin.user.UserController.index(p: models.ModelPager ?= models.ModelPager(), f: UserFilter ?= models.default.user.UserFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/user/users/new                                          controllers.admin.user.UserController.newPage
 GET           /admin/user/users/:id/next                                     controllers.admin.user.UserController.next(id: Long)
 GET           /admin/user/users/:id/prev                                     controllers.admin.user.UserController.prev(id: Long)
@@ -114,7 +114,7 @@ GET           /admin/user/users/:id/edit                                     con
 POST          /admin/user/users/:id                                          controllers.admin.user.UserController.update(id: Long)
 DELETE        /admin/user/users/:id                                          controllers.admin.user.UserController.delete(id: Long)
 
-GET           /admin/user/ship-to-addresses                                  controllers.admin.user.ShipToAddressController.index(p: models.ModelPager ?= models.ModelPager(), f: models.user.ShipToAddressFilter ?= models.default.user.ShipToAddressFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/user/ship-to-addresses                                  controllers.admin.user.ShipToAddressController.index(p: models.ModelPager ?= models.ModelPager(), f: ShipToAddressFilter ?= models.default.user.ShipToAddressFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/user/ship-to-addresses/new                              controllers.admin.user.ShipToAddressController.newPage(userId: Long)
 GET           /admin/user/ship-to-addresses/:id/next                         controllers.admin.user.ShipToAddressController.next(id: Long)
 GET           /admin/user/ship-to-addresses/:id/prev                         controllers.admin.user.ShipToAddressController.prev(id: Long)
@@ -123,7 +123,7 @@ GET           /admin/user/ship-to-addresses/:id/edit                         con
 POST          /admin/user/ship-to-addresses/:id                              controllers.admin.user.ShipToAddressController.update(id: Long)
 DELETE        /admin/user/ship-to-addresses/:id                              controllers.admin.user.ShipToAddressController.delete(id: Long)
 
-GET           /admin/user/login-infos                                        controllers.admin.user.LoginInfoController.index(p: models.ModelPager ?= models.ModelPager(), f: models.user.LoginInfoFilter ?= models.default.user.LoginInfoFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/user/login-infos                                        controllers.admin.user.LoginInfoController.index(p: models.ModelPager ?= models.ModelPager(), f: LoginInfoFilter ?= models.default.user.LoginInfoFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/user/login-infos/new                                    controllers.admin.user.LoginInfoController.newPage(userId: Long)
 GET           /admin/user/login-infos/:id/next                               controllers.admin.user.LoginInfoController.next(id: Long)
 GET           /admin/user/login-infos/:id/prev                               controllers.admin.user.LoginInfoController.prev(id: Long)
@@ -133,7 +133,7 @@ POST          /admin/user/login-infos/:id                                    con
 DELETE        /admin/user/login-infos/:id                                    controllers.admin.user.LoginInfoController.delete(id: Long)
 GET           /admin/user/login-infos/:id/reset                              controllers.admin.user.LoginInfoController.resetPassword(id: Long)
 
-GET           /admin/user/to-permissions                                     controllers.admin.user.ToPermissionController.index(p: models.ModelPager ?= models.ModelPager(), f: models.user.PermissionFilter ?= models.default.user.ToPermissionFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/user/to-permissions                                     controllers.admin.user.ToPermissionController.index(p: models.ModelPager ?= models.ModelPager(), f: PermissionFilter ?= models.default.user.ToPermissionFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/user/to-permissions/new                                 controllers.admin.user.ToPermissionController.newPage(userId: Long)
 GET           /admin/user/to-permissions/:id/next                            controllers.admin.user.ToPermissionController.next(id: Long)
 GET           /admin/user/to-permissions/:id/prev                            controllers.admin.user.ToPermissionController.prev(id: Long)
@@ -142,7 +142,7 @@ GET           /admin/user/to-permissions/:id/edit                            con
 POST          /admin/user/to-permissions/:id                                 controllers.admin.user.ToPermissionController.update(id: Long)
 DELETE        /admin/user/to-permissions/:id                                 controllers.admin.user.ToPermissionController.delete(id: Long)
 
-GET           /admin/product/categories                                      controllers.admin.product.CategoryController.index(p: models.ModelPager ?= models.ModelPager(), f: models.product.CategoryFilter ?= models.default.product.CategoryFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/categories                                      controllers.admin.product.CategoryController.index(p: models.ModelPager ?= models.ModelPager(), f: CategoryFilter ?= models.default.product.CategoryFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/product/categories/new                                  controllers.admin.product.CategoryController.newPage
 GET           /admin/product/categories/:id/next                             controllers.admin.product.CategoryController.next(id: Long)
 GET           /admin/product/categories/:id/prev                             controllers.admin.product.CategoryController.prev(id: Long)
@@ -151,7 +151,7 @@ GET           /admin/product/categories/:id/edit                             con
 POST          /admin/product/categories/:id                                  controllers.admin.product.CategoryController.update(id: Long)
 DELETE        /admin/product/categories/:id                                  controllers.admin.product.CategoryController.delete(id: Long)
 
-GET           /admin/product/subcategories                                   controllers.admin.product.SubcategoryController.index(p: models.ModelPager ?= models.ModelPager(), f: models.product.SubcategoryFilter ?= models.default.product.SubcategoryFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/subcategories                                   controllers.admin.product.SubcategoryController.index(p: models.ModelPager ?= models.ModelPager(), f: SubcategoryFilter ?= models.default.product.SubcategoryFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/product/subcategories/new                               controllers.admin.product.SubcategoryController.newPage
 GET           /admin/product/subcategories/:id/next                          controllers.admin.product.SubcategoryController.next(id: Long)
 GET           /admin/product/subcategories/:id/prev                          controllers.admin.product.SubcategoryController.prev(id: Long)
@@ -160,7 +160,7 @@ GET           /admin/product/subcategories/:id/edit                          con
 POST          /admin/product/subcategories/:id                               controllers.admin.product.SubcategoryController.update(id: Long)
 DELETE        /admin/product/subcategories/:id                               controllers.admin.product.SubcategoryController.delete(id: Long)
 
-GET           /admin/product/brands                                          controllers.admin.product.BrandController.index(p: models.ModelPager ?= models.ModelPager(), f: models.product.BrandFilter?= models.default.product.BrandFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/brands                                          controllers.admin.product.BrandController.index(p: models.ModelPager ?= models.ModelPager(), f: BrandFilter?= models.default.product.BrandFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/product/brands/new                                      controllers.admin.product.BrandController.newPage
 GET           /admin/product/brands/:id/next                                 controllers.admin.product.BrandController.next(id: Long)
 GET           /admin/product/brands/:id/prev                                 controllers.admin.product.BrandController.prev(id: Long)
@@ -169,7 +169,7 @@ GET           /admin/product/brands/:id/edit                                 con
 POST          /admin/product/brands/:id                                      controllers.admin.product.BrandController.update(id: Long)
 DELETE        /admin/product/brands/:id                                      controllers.admin.product.BrandController.delete(id: Long)
 
-GET           /admin/product/products                                        controllers.admin.product.ProductController.index(p: models.ModelPager ?= models.ModelPager(), f: models.product.ProductFilter?= models.default.product.ProductFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/products                                        controllers.admin.product.ProductController.index(p: models.ModelPager ?= models.ModelPager(), f: ProductFilter?= models.default.product.ProductFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/product/products/new                                    controllers.admin.product.ProductController.newPage
 GET           /admin/product/products/:id/next                               controllers.admin.product.ProductController.next(id: Long)
 GET           /admin/product/products/:id/prev                               controllers.admin.product.ProductController.prev(id: Long)
@@ -178,7 +178,7 @@ GET           /admin/product/products/:id/edit                               con
 POST          /admin/product/products/:id                                    controllers.admin.product.ProductController.update(id: Long)
 DELETE        /admin/product/products/:id                                    controllers.admin.product.ProductController.delete(id: Long)
 
-GET           /admin/product/attributes                                      controllers.admin.product.AttributeController.index(p: models.ModelPager ?= models.ModelPager(), f: models.product.AttributeFilter?= models.default.product.AttributeFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/attributes                                      controllers.admin.product.AttributeController.index(p: models.ModelPager ?= models.ModelPager(), f: AttributeFilter?= models.default.product.AttributeFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/product/attributes/new                                  controllers.admin.product.AttributeController.newPage
 GET           /admin/product/attributes/:id/next                             controllers.admin.product.AttributeController.next(id: Long)
 GET           /admin/product/attributes/:id/prev                             controllers.admin.product.AttributeController.prev(id: Long)
@@ -187,7 +187,7 @@ GET           /admin/product/attributes/:id/edit                             con
 POST          /admin/product/attributes/:id                                  controllers.admin.product.AttributeController.update(id: Long)
 DELETE        /admin/product/attributes/:id                                  controllers.admin.product.AttributeController.delete(id: Long)
 
-GET           /admin/product/attribute-options                               controllers.admin.product.AttributeOptionController.index(p: models.ModelPager ?= models.ModelPager(), f: models.product.AttributeOptionFilter?= models.default.product.AttributeOptionFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/attribute-options                               controllers.admin.product.AttributeOptionController.index(p: models.ModelPager ?= models.ModelPager(), f: AttributeOptionFilter?= models.default.product.AttributeOptionFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/product/attribute-options/new                           controllers.admin.product.AttributeOptionController.newPage(attributeId: Long)
 GET           /admin/product/attribute-options/:id/next                      controllers.admin.product.AttributeOptionController.next(id: Long)
 GET           /admin/product/attribute-options/:id/prev                      controllers.admin.product.AttributeOptionController.prev(id: Long)
@@ -196,7 +196,7 @@ GET           /admin/product/attribute-options/:id/edit                      con
 POST          /admin/product/attribute-options/:id                           controllers.admin.product.AttributeOptionController.update(id: Long)
 DELETE        /admin/product/attribute-options/:id                           controllers.admin.product.AttributeOptionController.delete(id: Long)
 
-GET           /admin/product/attribute-sets                                  controllers.admin.product.AttributeSetController.index(p: models.ModelPager ?= models.ModelPager(), f: models.product.AttributeSetFilter?= models.default.product.AttributeSetFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/attribute-sets                                  controllers.admin.product.AttributeSetController.index(p: models.ModelPager ?= models.ModelPager(), f: AttributeSetFilter?= models.default.product.AttributeSetFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/product/attribute-sets/new                              controllers.admin.product.AttributeSetController.newPage
 GET           /admin/product/attribute-sets/:id/next                         controllers.admin.product.AttributeSetController.next(id: Long)
 GET           /admin/product/attribute-sets/:id/prev                         controllers.admin.product.AttributeSetController.prev(id: Long)
@@ -205,7 +205,7 @@ GET           /admin/product/attribute-sets/:id/edit                         con
 POST          /admin/product/attribute-sets/:id                              controllers.admin.product.AttributeSetController.update(id: Long)
 DELETE        /admin/product/attribute-sets/:id                              controllers.admin.product.AttributeSetController.delete(id: Long)
 
-GET           /admin/product/attribute-set-details                           controllers.admin.product.AttributeSetDetailController.index(p: models.ModelPager ?= models.ModelPager(), f: models.product.AttributeSetDetailFilter?= models.default.product.AttributeSetDetailFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/attribute-set-details                           controllers.admin.product.AttributeSetDetailController.index(p: models.ModelPager ?= models.ModelPager(), f: AttributeSetDetailFilter?= models.default.product.AttributeSetDetailFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/product/attribute-set-details/new                       controllers.admin.product.AttributeSetDetailController.newPage(attributeSetId: Long)
 GET           /admin/product/attribute-set-details/:id/next                  controllers.admin.product.AttributeSetDetailController.next(id: Long)
 GET           /admin/product/attribute-set-details/:id/prev                  controllers.admin.product.AttributeSetDetailController.prev(id: Long)
@@ -214,7 +214,7 @@ GET           /admin/product/attribute-set-details/:id/edit                  con
 POST          /admin/product/attribute-set-details/:id                       controllers.admin.product.AttributeSetDetailController.update(id: Long)
 DELETE        /admin/product/attribute-set-details/:id                       controllers.admin.product.AttributeSetDetailController.delete(id: Long)
 
-GET           /admin/product/attribute-value-sets                            controllers.admin.product.AttributeValueSetController.index(p: models.ModelPager ?= models.ModelPager(), f: models.product.AttributeValueSetFilter?= models.default.product.AttributeValueSetFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/attribute-value-sets                            controllers.admin.product.AttributeValueSetController.index(p: models.ModelPager ?= models.ModelPager(), f: AttributeValueSetFilter?= models.default.product.AttributeValueSetFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/product/attribute-value-sets/new                        controllers.admin.product.AttributeValueSetController.newPage
 GET           /admin/product/attribute-value-sets/:id/next                   controllers.admin.product.AttributeValueSetController.next(id: Long)
 GET           /admin/product/attribute-value-sets/:id/prev                   controllers.admin.product.AttributeValueSetController.prev(id: Long)
@@ -223,7 +223,7 @@ GET           /admin/product/attribute-value-sets/:id/edit                   con
 POST          /admin/product/attribute-value-sets/:id                        controllers.admin.product.AttributeValueSetController.update(id: Long)
 DELETE        /admin/product/attribute-value-sets/:id                        controllers.admin.product.AttributeValueSetController.delete(id: Long)
 
-GET           /admin/product/attribute-values                                controllers.admin.product.AttributeValueController.index(p: models.ModelPager ?= models.ModelPager(), f: models.product.AttributeValueFilter?= models.default.product.AttributeValueFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/attribute-values                                controllers.admin.product.AttributeValueController.index(p: models.ModelPager ?= models.ModelPager(), f: AttributeValueFilter?= models.default.product.AttributeValueFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/product/attribute-values/new                            controllers.admin.product.AttributeValueController.newPage(attributeValueSetId: Long)
 GET           /admin/product/attribute-values/:id/next                       controllers.admin.product.AttributeValueController.next(id: Long)
 GET           /admin/product/attribute-values/:id/prev                       controllers.admin.product.AttributeValueController.prev(id: Long)
@@ -232,7 +232,7 @@ GET           /admin/product/attribute-values/:id/edit                       con
 POST          /admin/product/attribute-values/:id                            controllers.admin.product.AttributeValueController.update(id: Long)
 DELETE        /admin/product/attribute-values/:id                            controllers.admin.product.AttributeValueController.delete(id: Long)
 
-GET           /admin/product/skus                                            controllers.admin.product.SkuController.index(p: models.ModelPager ?= models.ModelPager(), f: models.product.SkuFilter?= models.default.product.SkuFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/product/skus                                            controllers.admin.product.SkuController.index(p: models.ModelPager ?= models.ModelPager(), f: SkuFilter?= models.default.product.SkuFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/product/skus/new                                        controllers.admin.product.SkuController.newPage
 GET           /admin/product/skus/:id/next                                   controllers.admin.product.SkuController.next(id: Long)
 GET           /admin/product/skus/:id/prev                                   controllers.admin.product.SkuController.prev(id: Long)
@@ -241,7 +241,7 @@ GET           /admin/product/skus/:id/edit                                   con
 POST          /admin/product/skus/:id                                        controllers.admin.product.SkuController.update(id: Long)
 DELETE        /admin/product/skus/:id                                        controllers.admin.product.SkuController.delete(id: Long)
 
-GET           /admin/crm/pages                                               controllers.admin.crm.PageController.index(p: models.ModelPager ?= models.ModelPager(), f: models.crm.PageFilter ?= models.default.crm.PageFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/crm/pages                                               controllers.admin.crm.PageController.index(p: models.ModelPager ?= models.ModelPager(), f: PageFilter ?= models.default.crm.PageFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/crm/pages/new                                           controllers.admin.crm.PageController.newPage
 GET           /admin/crm/pages/:id/next                                      controllers.admin.crm.PageController.next(id: Long)
 GET           /admin/crm/pages/:id/prev                                      controllers.admin.crm.PageController.prev(id: Long)
@@ -250,7 +250,7 @@ GET           /admin/crm/pages/:id/edit                                      con
 POST          /admin/crm/pages/:id                                           controllers.admin.crm.PageController.update(id: Long)
 DELETE        /admin/crm/pages/:id                                           controllers.admin.crm.PageController.delete(id: Long)
 
-GET           /admin/mall/bookings                                           controllers.admin.mall.BookingController.index(p: models.ModelPager ?= models.ModelPager(), f: models.mall.BookingFilter ?= models.default.mall.BookingFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/bookings                                           controllers.admin.mall.BookingController.index(p: models.ModelPager ?= models.ModelPager(), f: BookingFilter ?= models.default.mall.BookingFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/mall/bookings/new                                       controllers.admin.mall.BookingController.newPage
 GET           /admin/mall/bookings/:id/next                                  controllers.admin.mall.BookingController.next(id: Long)
 GET           /admin/mall/bookings/:id/prev                                  controllers.admin.mall.BookingController.prev(id: Long)
@@ -259,7 +259,7 @@ GET           /admin/mall/bookings/:id/edit                                  con
 POST          /admin/mall/bookings/:id                                       controllers.admin.mall.BookingController.update(id: Long)
 DELETE        /admin/mall/bookings/:id                                       controllers.admin.mall.BookingController.delete(id: Long)
 
-GET           /admin/mall/booking-followups                                  controllers.admin.mall.BookingFollowupController.index(p: models.ModelPager ?= models.ModelPager(), f: models.mall.BookingFollowupFilter ?= models.default.mall.BookingFollowupFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/booking-followups                                  controllers.admin.mall.BookingFollowupController.index(p: models.ModelPager ?= models.ModelPager(), f: BookingFollowupFilter ?= models.default.mall.BookingFollowupFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/mall/booking-followups/new                              controllers.admin.mall.BookingFollowupController.newPage(bookingId: Long)
 GET           /admin/mall/booking-followups/:id/next                         controllers.admin.mall.BookingFollowupController.next(id: Long)
 GET           /admin/mall/booking-followups/:id/prev                         controllers.admin.mall.BookingFollowupController.prev(id: Long)
@@ -268,7 +268,7 @@ GET           /admin/mall/booking-followups/:id/edit                         con
 POST          /admin/mall/booking-followups/:id                              controllers.admin.mall.BookingFollowupController.update(id: Long)
 DELETE        /admin/mall/booking-followups/:id                              controllers.admin.mall.BookingFollowupController.delete(id: Long)
 
-GET           /admin/mall/sales                                              controllers.admin.mall.SaleController.index(p: models.ModelPager ?= models.ModelPager(), f: models.mall.SaleFilter ?= models.default.mall.SaleFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/sales                                              controllers.admin.mall.SaleController.index(p: models.ModelPager ?= models.ModelPager(), f: SaleFilter ?= models.default.mall.SaleFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/mall/sales/new                                          controllers.admin.mall.SaleController.newPage
 GET           /admin/mall/sales/:id/next                                     controllers.admin.mall.SaleController.next(id: Long)
 GET           /admin/mall/sales/:id/prev                                     controllers.admin.mall.SaleController.prev(id: Long)
@@ -277,7 +277,7 @@ GET           /admin/mall/sales/:id/edit                                     con
 POST          /admin/mall/sales/:id                                          controllers.admin.mall.SaleController.update(id: Long)
 DELETE        /admin/mall/sales/:id                                          controllers.admin.mall.SaleController.delete(id: Long)
 
-GET           /admin/mall/sale-rates                                         controllers.admin.mall.SaleRateController.index(p: models.ModelPager ?= models.ModelPager(), f: models.mall.SaleRateFilter ?= models.default.mall.SaleRateFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/sale-rates                                         controllers.admin.mall.SaleRateController.index(p: models.ModelPager ?= models.ModelPager(), f: SaleRateFilter ?= models.default.mall.SaleRateFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/mall/sale-rates/new                                     controllers.admin.mall.SaleRateController.newPage
 GET           /admin/mall/sale-rates/:id/next                                controllers.admin.mall.SaleRateController.next(id: Long)
 GET           /admin/mall/sale-rates/:id/prev                                controllers.admin.mall.SaleRateController.prev(id: Long)
@@ -286,7 +286,7 @@ GET           /admin/mall/sale-rates/:id/edit                                con
 POST          /admin/mall/sale-rates/:id                                     controllers.admin.mall.SaleRateController.update(id: Long)
 DELETE        /admin/mall/sale-rates/:id                                     controllers.admin.mall.SaleRateController.delete(id: Long)
 
-GET           /admin/mall/sale-orders                                        controllers.admin.mall.SaleOrderController.index(p: models.ModelPager ?= models.ModelPager(), f: models.mall.SaleOrderFilter ?= models.default.mall.SaleOrderFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/sale-orders                                        controllers.admin.mall.SaleOrderController.index(p: models.ModelPager ?= models.ModelPager(), f: SaleOrderFilter ?= models.default.mall.SaleOrderFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/mall/sale-orders/new                                    controllers.admin.mall.SaleOrderController.newPage
 GET           /admin/mall/sale-orders/:id/next                               controllers.admin.mall.SaleOrderController.next(id: Long)
 GET           /admin/mall/sale-orders/:id/prev                               controllers.admin.mall.SaleOrderController.prev(id: Long)
@@ -295,7 +295,7 @@ GET           /admin/mall/sale-orders/:id/edit                               con
 POST          /admin/mall/sale-orders/:id                                    controllers.admin.mall.SaleOrderController.update(id: Long)
 DELETE        /admin/mall/sale-orders/:id                                    controllers.admin.mall.SaleOrderController.delete(id: Long)
 
-GET           /admin/mall/sale-order-details                                 controllers.admin.mall.SaleOrderDetailController.index(p: models.ModelPager ?= models.ModelPager(), f: models.mall.SaleOrderDetailFilter ?= models.default.mall.SaleOrderDetailFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/sale-order-details                                 controllers.admin.mall.SaleOrderDetailController.index(p: models.ModelPager ?= models.ModelPager(), f: SaleOrderDetailFilter ?= models.default.mall.SaleOrderDetailFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/mall/sale-order-details/new                             controllers.admin.mall.SaleOrderDetailController.newPage(saleOrderId: Long)
 GET           /admin/mall/sale-order-details/:id/next                        controllers.admin.mall.SaleOrderDetailController.next(id: Long)
 GET           /admin/mall/sale-order-details/:id/prev                        controllers.admin.mall.SaleOrderDetailController.prev(id: Long)
@@ -304,7 +304,7 @@ GET           /admin/mall/sale-order-details/:id/edit                        con
 POST          /admin/mall/sale-order-details/:id                             controllers.admin.mall.SaleOrderDetailController.update(id: Long)
 DELETE        /admin/mall/sale-order-details/:id                             controllers.admin.mall.SaleOrderDetailController.delete(id: Long)
 
-GET           /admin/mall/sale-order-detail-attribute-values                 controllers.admin.mall.SaleOrderDetailAttributeValueController.index(p: models.ModelPager ?= models.ModelPager(), f: models.mall.SaleOrderDetailAttributeValueFilter ?= models.default.mall.SaleOrderDetailAttributeValueFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/sale-order-detail-attribute-values                 controllers.admin.mall.SaleOrderDetailAttributeValueController.index(p: models.ModelPager ?= models.ModelPager(), f: SaleOrderDetailAttributeValueFilter ?= models.default.mall.SaleOrderDetailAttributeValueFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/mall/sale-order-detail-attribute-values/new             controllers.admin.mall.SaleOrderDetailAttributeValueController.newPage(saleOrderDetailId: Long)
 GET           /admin/mall/sale-order-detail-attribute-values/:id/next        controllers.admin.mall.SaleOrderDetailAttributeValueController.next(id: Long)
 GET           /admin/mall/sale-order-detail-attribute-values/:id/prev        controllers.admin.mall.SaleOrderDetailAttributeValueController.prev(id: Long)
@@ -313,7 +313,7 @@ GET           /admin/mall/sale-order-detail-attribute-values/:id/edit        con
 POST          /admin/mall/sale-order-detail-attribute-values/:id             controllers.admin.mall.SaleOrderDetailAttributeValueController.update(id: Long)
 DELETE        /admin/mall/sale-order-detail-attribute-values/:id             controllers.admin.mall.SaleOrderDetailAttributeValueController.delete(id: Long)
 
-GET           /admin/mall/home-sections                                      controllers.admin.mall.HomeSectionController.index(p: models.ModelPager ?= models.ModelPager(), f: models.mall.HomeSectionFilter ?= models.default.mall.HomeSectionFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/home-sections                                      controllers.admin.mall.HomeSectionController.index(p: models.ModelPager ?= models.ModelPager(), f: HomeSectionFilter ?= models.default.mall.HomeSectionFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/mall/home-sections/new                                  controllers.admin.mall.HomeSectionController.newPage
 GET           /admin/mall/home-sections/:id/next                             controllers.admin.mall.HomeSectionController.next(id: Long)
 GET           /admin/mall/home-sections/:id/prev                             controllers.admin.mall.HomeSectionController.prev(id: Long)
@@ -322,7 +322,7 @@ GET           /admin/mall/home-sections/:id/edit                             con
 POST          /admin/mall/home-sections/:id                                  controllers.admin.mall.HomeSectionController.update(id: Long)
 DELETE        /admin/mall/home-sections/:id                                  controllers.admin.mall.HomeSectionController.delete(id: Long)
 
-GET           /admin/mall/home-features                                      controllers.admin.mall.HomeFeatureController.index(p: models.ModelPager ?= models.ModelPager(), f: models.mall.HomeFeatureFilter ?= models.default.mall.HomeFeatureFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/home-features                                      controllers.admin.mall.HomeFeatureController.index(p: models.ModelPager ?= models.ModelPager(), f: HomeFeatureFilter ?= models.default.mall.HomeFeatureFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/mall/home-features/new                                  controllers.admin.mall.HomeFeatureController.newPage
 GET           /admin/mall/home-features/:id/next                             controllers.admin.mall.HomeFeatureController.next(id: Long)
 GET           /admin/mall/home-features/:id/prev                             controllers.admin.mall.HomeFeatureController.prev(id: Long)
@@ -331,7 +331,7 @@ GET           /admin/mall/home-features/:id/edit                             con
 POST          /admin/mall/home-features/:id                                  controllers.admin.mall.HomeFeatureController.update(id: Long)
 DELETE        /admin/mall/home-features/:id                                  controllers.admin.mall.HomeFeatureController.delete(id: Long)
 
-GET           /admin/mall/home-sliders                                       controllers.admin.mall.HomeSliderController.index(p: models.ModelPager ?= models.ModelPager(), f: models.mall.HomeSliderFilter ?= models.default.mall.HomeSliderFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/mall/home-sliders                                       controllers.admin.mall.HomeSliderController.index(p: models.ModelPager ?= models.ModelPager(), f: HomeSliderFilter ?= models.default.mall.HomeSliderFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/mall/home-sliders/new                                   controllers.admin.mall.HomeSliderController.newPage
 GET           /admin/mall/home-sliders/:id/next                              controllers.admin.mall.HomeSliderController.next(id: Long)
 GET           /admin/mall/home-sliders/:id/prev                              controllers.admin.mall.HomeSliderController.prev(id: Long)
@@ -340,7 +340,7 @@ GET           /admin/mall/home-sliders/:id/edit                              con
 POST          /admin/mall/home-sliders/:id                                   controllers.admin.mall.HomeSliderController.update(id: Long)
 DELETE        /admin/mall/home-sliders/:id                                   controllers.admin.mall.HomeSliderController.delete(id: Long)
 
-GET           /admin/core/images                                             controllers.admin.core.ImageController.index(p: models.ModelPager ?= models.ModelPager(), f: models.core.ImageFilter ?= models.default.core.ImageFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/core/images                                             controllers.admin.core.ImageController.index(p: models.ModelPager ?= models.ModelPager(), f: ImageFilter ?= models.default.core.ImageFilter(), s: models.ModelSorter ?= models.ModelSorter())
 DELETE        /admin/core/images/:id                                         controllers.admin.core.ImageController.delete(id: Long)
 POST          /admin/core/images/upload                                      controllers.admin.core.ImageController.upload
 

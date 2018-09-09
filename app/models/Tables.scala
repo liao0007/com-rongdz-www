@@ -57,7 +57,7 @@ object Tables extends ActiveRecordTables with PlaySupport {
   val user: _root_.com.github.aselab.activerecord.dsl.Table[User] = table[User]("user")
   val userLoginInfo: _root_.com.github.aselab.activerecord.dsl.Table[LoginInfo] = table[LoginInfo]("user_login_info")
   val userPasswordInfo: _root_.com.github.aselab.activerecord.dsl.Table[PasswordInfo] = table[PasswordInfo]("user_password_info")
-  val userToken: _root_.com.github.aselab.activerecord.dsl.Table[UserToken] = table[UserToken]("user_token")
+  val userToken: _root_.com.github.aselab.activerecord.dsl.Table[Token] = table[Token]("user_token")
   val userPermission: _root_.com.github.aselab.activerecord.dsl.Table[Permission] = table[Permission]("user_to_permission")
   val userShipToAddress: _root_.com.github.aselab.activerecord.dsl.Table[ShipToAddress] = table[ShipToAddress]("user_ship_to_address")
   val tape: _root_.com.github.aselab.activerecord.dsl.Table[Tape] = table[Tape]("user_tape")

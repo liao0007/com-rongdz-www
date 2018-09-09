@@ -1,7 +1,7 @@
 package models.core
 
 import com.github.aselab.activerecord.{ActiveRecordCompanion, PlayFormSupport}
-import models.core.WepayLog.WepayLogType
+import models.core.WepayLog.LogType
 import models.{ActiveRecord, EnumAttribute, EnumAttributeValue}
 
 case class WepayLog(
@@ -31,22 +31,22 @@ case class WepayLog(
                      var outTradeNo: String,
                      var attach: Option[String] = None,
                      var timeEnd: String,
-                     var logType: String = WepayLogType.Query
+                     var logType: String = LogType.Query
                    ) extends ActiveRecord
 
 object WepayLog extends ActiveRecordCompanion[WepayLog] with PlayFormSupport[WepayLog] {
 
-  sealed class LogType(val name: String) extends EnumAttributeValue
+  sealed abstract class LogTypeValue(val name: String) extends EnumAttributeValue
 
-  object WepayLogType extends EnumAttribute[LogType] {
+  object LogType extends EnumAttribute[LogTypeValue] {
 
-    case object Notify extends LogType("Notify")
+    case object Notify extends LogTypeValue("Notify")
 
-    case object Query extends LogType("Query")
+    case object Query extends LogTypeValue("Query")
 
-    case object Close extends LogType("Close")
+    case object Close extends LogTypeValue("Close")
 
-    protected def all: Seq[LogType] = Seq[LogType](Notify, Query, Close)
+    protected def all: Seq[LogTypeValue] = Seq[LogTypeValue](Notify, Query, Close)
   }
 
 }

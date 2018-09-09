@@ -16,17 +16,17 @@ case class Attribute(
 
 object Attribute extends ActiveRecordCompanion[Attribute] with PlayFormSupport[Attribute] {
 
-  abstract class InputType(val name: String) extends EnumAttributeValue
+  sealed abstract class InputTypeValue(val name: String) extends EnumAttributeValue
 
-  object AttributeInputType extends EnumAttribute[InputType] {
+  object InputType extends EnumAttribute[InputTypeValue] {
 
-    case object Text extends InputType("Text")
+    case object Text extends InputTypeValue("Text")
 
-    case object Enu extends InputType("Enu")
+    case object Enu extends InputTypeValue("Enu")
 
-    case object Bool extends InputType("Boolean")
+    case object Bool extends InputTypeValue("Boolean")
 
-    override protected def all: Seq[InputType] = Seq[InputType](Text, Enu, Bool)
+    override protected def all: Seq[InputTypeValue] = Seq[InputTypeValue](Text, Enu, Bool)
   }
 
   implicit val format: OFormat[Attribute] = Json.format[Attribute]

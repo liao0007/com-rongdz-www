@@ -19,7 +19,7 @@ abstract class ActiveRecord extends com.github.aselab.activerecord.ActiveRecord
 trait EnumAttributeValue {
   val name: String
 
-  override def toString: String = name.toLowerCase
+  override def toString: String = this.toString
 }
 
 trait EnumAttribute[T <: EnumAttributeValue] extends Seq[T] {

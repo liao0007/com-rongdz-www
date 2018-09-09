@@ -5,7 +5,8 @@ import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
 import javax.inject.Inject
 import models._
-import models.product.{Product, ProductFilter}
+import models.product.Product
+import models.product.filters.ProductFilter
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}

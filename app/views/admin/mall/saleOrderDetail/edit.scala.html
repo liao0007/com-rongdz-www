@@ -1,4 +1,6 @@
-@import models.mall.{SaleOrderDetail, SaleOrderDetailAttributeValueFilter, SaleOrderDetailFilter}
+@import models.mall.SaleOrderDetail
+@import models.mall.filters.SaleOrderDetailAttributeValueFilter
+@import models.mall.filters.SaleOrderDetailFilter
 @(saleOrderId: Long, modelForm: Form[SaleOrderDetail], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.SaleOrderDetailController}

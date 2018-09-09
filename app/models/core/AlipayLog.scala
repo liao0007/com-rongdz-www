@@ -1,7 +1,7 @@
 package models.core
 
 import com.github.aselab.activerecord.{ActiveRecordCompanion, PlayFormSupport}
-import models.core.AlipayLog.AlipayLogType
+import models.core.AlipayLog.LogType
 import models.{ActiveRecord, EnumAttribute, EnumAttributeValue}
 import org.joda.time.DateTime
 
@@ -35,22 +35,22 @@ case class AlipayLog(
                       var gmtRefund: Option[DateTime] = None,
                       var gmtClose: Option[DateTime] = None,
                       var fundBillList: Option[String] = None,
-                      var logType: String = AlipayLogType.Query
+                      var logType: String = LogType.Query
                     ) extends ActiveRecord
 
 object AlipayLog extends ActiveRecordCompanion[AlipayLog] with PlayFormSupport[AlipayLog] {
 
-  sealed class LogType(val name: String) extends EnumAttributeValue
+  sealed abstract class LogTypeValue(val name: String) extends EnumAttributeValue
 
-  object AlipayLogType extends EnumAttribute[LogType] {
+  object LogType extends EnumAttribute[LogTypeValue] {
 
-    case object Notify extends LogType("Notify")
+    case object Notify extends LogTypeValue("Notify")
 
-    case object Query extends LogType("Query")
+    case object Query extends LogTypeValue("Query")
 
-    case object Close extends LogType("Close")
+    case object Close extends LogTypeValue("Close")
 
-    protected def all: Seq[LogType] = Seq[LogType](Notify, Query, Close)
+    protected def all: Seq[LogTypeValue] = Seq[LogTypeValue](Notify, Query, Close)
   }
 
 }

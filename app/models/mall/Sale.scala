@@ -30,8 +30,7 @@ case class Sale(
   lazy val sku: ActiveRecord.BelongsToAssociation[Sale.this.type, Sku] = belongsTo[Sku]
   lazy val brand: ActiveRecord.BelongsToAssociation[Sale.this.type, Brand] = belongsTo[Brand]
   lazy val category: ActiveRecord.BelongsToAssociation[Sale.this.type, Category] = belongsTo[Category]
-  lazy val subcategory: ActiveRecord.BelongsToAssociation[Sale.this.type, Subcategory] =
-    belongsTo[Subcategory]
+  lazy val subcategory: ActiveRecord.BelongsToAssociation[Sale.this.type, Subcategory] = belongsTo[Subcategory]
 }
 
 object Sale extends ActiveRecordCompanion[Sale] with PlayFormSupport[Sale] {

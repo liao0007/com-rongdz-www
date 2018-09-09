@@ -1,4 +1,6 @@
-@import models.product.{Attribute, AttributeFilter, AttributeOptionFilter}
+@import models.product.Attribute
+@import models.product.filters.AttributeFilter
+@import models.product.filters.AttributeOptionFilter
 @(items: Seq[Attribute], pagination: Pagination, filter: AttributeFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.product.routes.AttributeController}

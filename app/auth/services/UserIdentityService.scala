@@ -9,10 +9,9 @@ import scala.concurrent.Future
 
 class UserIdentityService extends IdentityService[User] {
 
-  def retrieve(loginInfo: LoginInfo): Future[Option[User]] =
-    Future.successful {
-      models.user.LoginInfo.findBy("providerId" -> loginInfo.providerID, "providerKey" -> loginInfo.providerKey).flatMap(_.user.toOption)
-    }
+  def retrieve(loginInfo: LoginInfo): Future[Option[User]] = Future.successful {
+    models.user.LoginInfo.findBy("providerId" -> loginInfo.providerID, "providerKey" -> loginInfo.providerKey).flatMap(_.user.toOption)
+  }
 
   /**
     * Retrieves the user
@@ -49,12 +48,11 @@ class UserIdentityService extends IdentityService[User] {
     *
     * @return true if new state was set successfuly, otherwise false
     */
-  def setState(userId: Long, newState: User.State): Future[Option[Boolean]] =
-    Future.successful {
-      User.find(userId) map { user =>
-        user.state = newState.toString
-        user.save()
-      }
+  def setState(userId: Long, newState: User.StateValue): Future[Option[Boolean]] = Future.successful {
+    User.find(userId) map { user =>
+      user.state = newState.toString
+      user.save()
     }
+  }
 
 }

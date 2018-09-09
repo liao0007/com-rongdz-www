@@ -26,15 +26,15 @@ case class HomeSection(
 
 object HomeSection extends ActiveRecordCompanion[HomeSection] with PlayFormSupport[HomeSection] {
 
-  sealed class PresentingType(val name: String) extends EnumAttributeValue
+  sealed abstract class PresentingTypeValue(val name: String) extends EnumAttributeValue
 
-  object HomeSectionPresentingType extends EnumAttribute[PresentingType] {
+  object PresentingType extends EnumAttribute[PresentingTypeValue] {
 
-    case object ScreenWidth extends PresentingType("ScreenWidth")
+    case object ScreenWidth extends PresentingTypeValue("ScreenWidth")
 
-    case object HalfScreenWidth extends PresentingType("HalfScreenWidth")
+    case object HalfScreenWidth extends PresentingTypeValue("HalfScreenWidth")
 
-    override protected def all: Seq[PresentingType] = Seq[PresentingType](ScreenWidth, HalfScreenWidth)
+    override protected def all: Seq[PresentingTypeValue] = Seq[PresentingTypeValue](ScreenWidth, HalfScreenWidth)
   }
 
   implicit val jsonFormat: OFormat[HomeSection] = Json.format[HomeSection]

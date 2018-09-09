@@ -1,6 +1,6 @@
 package entities.user
 
-import auth.entities.Token
 import entities.Response
+import entities.auth.Token
 
 case class SmsTokenResponse(token: Token) extends Response

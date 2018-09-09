@@ -1,4 +1,5 @@
-@import models.product.{Category, Subcategory, SubcategoryFilter}
+@import models.product.{Category, Subcategory}
+@import models.product.filters.SubcategoryFilter
 @(items: Seq[Subcategory], pagination: Pagination, filter: SubcategoryFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.product.routes.SubcategoryController}

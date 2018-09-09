@@ -1,4 +1,5 @@
-@import models.user.{ShipToAddress, ShipToAddressFilter}
+@import models.user.ShipToAddress
+@import models.user.filters.ShipToAddressFilter
 @(userId: Long, modelForm: Form[ShipToAddress], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.user.routes.ShipToAddressController}

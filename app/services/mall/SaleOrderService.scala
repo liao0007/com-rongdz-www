@@ -8,7 +8,7 @@ import com.github.aselab.activerecord.dsl._
 import com.google.inject.Inject
 import controllers.rest.SaleOrderCreateRequest
 import models.ModelFilter
-import models.mall.{SaleOrder, SaleOrderDetail, SaleOrderDetailAttributeValue, SaleOrderFilter}
+import models.mall.{SaleOrder, SaleOrderDetail, SaleOrderDetailAttributeValue}
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import play.api.libs.json.Json

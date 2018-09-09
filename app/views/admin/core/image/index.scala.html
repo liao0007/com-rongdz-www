@@ -1,4 +1,5 @@
-@import models.core.{Image, ImageFilter}
+@import models.core.Image
+@import models.core.filters.ImageFilter
 @(items: Seq[Image], pagination: Pagination, filter: ImageFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 @implicitFieldConstructor = @{ b3.vertical.fieldConstructor }
 

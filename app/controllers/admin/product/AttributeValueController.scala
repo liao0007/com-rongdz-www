@@ -4,7 +4,8 @@ import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
 import javax.inject.Inject
-import models.product.{AttributeValue, AttributeValueFilter}
+import models.product.AttributeValue
+import models.product.filters.AttributeValueFilter
 import models.{ModelFilter, ModelPager, ModelResult, ModelSorter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi

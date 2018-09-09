@@ -3,7 +3,7 @@ package services.product
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
 import models._
-import models.product.{Product, ProductFilter}
+import models.product.Product
 import services.CrudService
 
 /**

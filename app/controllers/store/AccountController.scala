@@ -4,7 +4,8 @@ import auth.filters.CookieSettings
 import com.github.aselab.activerecord.dsl._
 import com.mohiva.play.silhouette.api.Silhouette
 import javax.inject.Inject
-import models.mall.{SaleOrder, SaleOrderFilter}
+import models.mall.SaleOrder
+import models.mall.filters.SaleOrderFilter
 import models.{ModelPager, ModelResult, ModelSorter}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
