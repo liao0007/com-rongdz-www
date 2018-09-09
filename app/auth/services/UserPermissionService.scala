@@ -1,7 +1,5 @@
 package auth.services
 
-import com.github.aselab.activerecord.dsl._
-import models.user.UserPermission._
 import models.user._
 
 import scala.concurrent.Future

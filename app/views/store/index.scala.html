@@ -1,7 +1,4 @@
-@import daos.default.mall.HomeFeature.HomeFeaturePresentingType
-@import daos.default.mall.HomeSlider
-@import models.mall.HomeFeature
-@import models.mall.HomeSlider
+@import models.mall.{HomeFeature, HomeSlider}
 @(features: Map[String, List[HomeFeature]], sliders: List[HomeSlider])(implicit messages: Messages, request: RequestHeader)
 
 @styles = {

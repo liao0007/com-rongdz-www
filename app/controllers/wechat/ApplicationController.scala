@@ -1,11 +1,7 @@
 package controllers.wechat
 
-import javax.inject.Inject
-import auth.JWTEnv
 import com.mohiva.play.silhouette.api.Silhouette
-import daos.default.core.WepayLog.WepayLogType
-import daos.default.mall.SaleOrder.{SaleOrderPaymentMethod, SaleOrderPaymentState}
-import me.chanjar.weixin.mp.bean.pay.WxPayJsSDKCallback
+import javax.inject.Inject
 import models.core.WepayLog
 import models.mall.SaleOrder
 import play.api.i18n.MessagesApi
@@ -15,7 +11,7 @@ import play.api.routing.JavaScriptReverseRouter
 import services.WxMpService
 import services.mall.SaleOrderService
 
-import collection.JavaConverters._
+import scala.collection.JavaConverters._
 import scala.concurrent.Future
 import scala.xml.NodeSeq
 

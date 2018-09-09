@@ -1,7 +1,6 @@
 package models.user
 
 import com.github.aselab.activerecord.{ActiveRecordCompanion, PlayFormSupport}
-import com.mohiva.play.silhouette.api.AuthInfo
 import models.ActiveRecord
 import play.api.libs.json.{Json, OFormat}
 

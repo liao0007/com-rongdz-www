@@ -1,5 +1,4 @@
 @import models.user.{ToPermission, ToPermissionFilter}
-@import daos.default.user.ToPermission.UserToPermission
 @(userId: Long, modelForm: Form[ToPermission], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.user.routes.ToPermissionController}

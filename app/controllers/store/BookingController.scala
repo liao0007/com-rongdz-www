@@ -1,17 +1,9 @@
 package controllers.store
 
-import java.text.SimpleDateFormat
-import javax.inject.Inject
-
-import auth.JWTEnv
 import auth.filters.CookieSettings
-import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
 import com.mohiva.play.silhouette.api.Silhouette
-import daos.default.mall.Booking.BookingState
-import daos.default.mall.Sale
-import models.mall.SaleFilter
-import models.{ModelPager, Paging, ModelSorter}
+import javax.inject.Inject
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
 

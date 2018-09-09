@@ -1,7 +1,6 @@
 package controllers.admin
 
 import javax.inject.Inject
-
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
 import play.api.routing.JavaScriptReverseRouter

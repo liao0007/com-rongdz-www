@@ -1,11 +1,8 @@
 package controllers.admin.user
 
-import javax.inject.Inject
-import auth.JWTEnv
-import auth.services.authorizations.Has
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.user.ToPermission.UserToPermission
+import javax.inject.Inject
 import models.ModelResult
 import models.user.{ShipToAddress, ShipToAddressFilter}
 import play.api.data.Form
@@ -14,7 +11,6 @@ import play.api.libs.json.{JsValue, Json}
 import play.api.mvc._
 import play.twirl.api.Html
 import services.user.ShipToAddressService
-import com.github.aselab.activerecord.dsl._
 
 import scala.concurrent.Future
 

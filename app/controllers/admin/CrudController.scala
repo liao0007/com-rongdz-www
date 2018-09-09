@@ -1,9 +1,6 @@
 package controllers.admin
 
-import auth.JWTEnv
-import auth.services.authorizations.Has
 import com.mohiva.play.silhouette.api.Silhouette
-import daos.default.user.ToPermission.UserToPermission
 import models.{ActiveRecord, _}
 import play.api.data.Form
 import play.api.i18n.I18nSupport
@@ -13,7 +10,6 @@ import play.twirl.api.Html
 import services.CrudService
 
 import scala.concurrent.Future
-import scala.concurrent.ExecutionContext.Implicits.global
 
 abstract class CrudController[T <: ActiveRecord] extends Controller with I18nSupport with Paging {
 

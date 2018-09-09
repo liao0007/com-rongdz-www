@@ -1,12 +1,10 @@
-package auth
+package auth.errorHandlers
 
-import java.util.Locale
+import controllers.Default
 import javax.inject.Inject
-
-import com.mohiva.play.silhouette.api.actions.SecuredErrorHandler
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.{RequestHeader, Result}
 import play.api.mvc.Results._
+import play.api.mvc.{RequestHeader, Result}
 
 import scala.concurrent.Future
 
@@ -15,7 +13,10 @@ import scala.concurrent.Future
   *
   * @param messagesApi The Play messages API.
   */
-class CustomSecuredErrorHandler @Inject()(val messagesApi: MessagesApi) extends SecuredErrorHandler with I18nSupport with CustomErrorHandler {
+class SecuredErrorHandler @Inject()(val messagesApi: MessagesApi,
+                                    val defaultController: Default,
+                                    wwwErrorTemplate: views.html.www.Error,
+                                   ) extends com.mohiva.play.silhouette.api.actions.SecuredErrorHandler with I18nSupport with ErrorHandler {
 
   /**
     * Called when a user is not authenticated.
@@ -26,7 +27,7 @@ class CustomSecuredErrorHandler @Inject()(val messagesApi: MessagesApi) extends 
     * @return The result to send to the client.
     */
   override def onNotAuthenticated(implicit request: RequestHeader): Future[Result] = Future.successful {
-    authenticatePf(request)(request.uri)
+    dispatchError(Unauthorized)(request)(request.uri)
   }
 
   /**
@@ -39,10 +40,10 @@ class CustomSecuredErrorHandler @Inject()(val messagesApi: MessagesApi) extends 
     */
   override def onNotAuthorized(implicit request: RequestHeader): Future[Result] = Future.successful {
     request.uri match {
-      case uri: String if uri.startsWith("/store")  => Unauthorized(views.html.store.error(Some("无权限")))
-      case uri: String if uri.startsWith("/admin")  => Unauthorized(views.html.store.error(Some("无权限")))
-      case uri: String if uri.startsWith("/wechat") => Unauthorized(views.html.wechat.error(Some("无权限")))
-      case _                                        => Unauthorized(views.html.store.error(Some("无权限")))
+      case uri: String if uri.startsWith("/api") => Unauthorized
+      //      case uri: String if uri.startsWith("/admin")  => Unauthorized(views.html.store.error(Some("Unauthorized")))
+      //      case uri: String if uri.startsWith("/wechat") => Unauthorized(views.html.wechat.error(Some("Unauthorized")))
+      case _ => Unauthorized(wwwErrorTemplate(Some("Unauthorized")))
     }
   }
 }

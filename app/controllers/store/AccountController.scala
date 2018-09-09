@@ -1,14 +1,11 @@
 package controllers.store
 
-import javax.inject.Inject
-import auth.JWTEnv
 import auth.filters.CookieSettings
 import com.github.aselab.activerecord.dsl._
 import com.mohiva.play.silhouette.api.Silhouette
-import daos.default.mall.SaleOrder.{SaleOrderPaymentState, SaleOrderShippingState, SaleOrderState}
-import daos.default.user.User
+import javax.inject.Inject
 import models.mall.{SaleOrder, SaleOrderFilter}
-import models.{ModelFilter, ModelPager, ModelResult, ModelSorter}
+import models.{ModelPager, ModelResult, ModelSorter}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
 import services.mall.SaleOrderService

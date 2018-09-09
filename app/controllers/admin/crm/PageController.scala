@@ -1,10 +1,8 @@
 package controllers.admin.crm
 
-import javax.inject.Inject
-import auth.JWTEnv
-import auth.services.authorizations.Has
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
+import javax.inject.Inject
 import models._
 import models.crm.{Page, PageFilter}
 import play.api.data.Form

@@ -2,12 +2,11 @@
   * Created by liangliao on 6/2/16.
   */
 import javax.inject._
-
-import play.api.http.DefaultHttpErrorHandler
 import play.api._
+import play.api.http.DefaultHttpErrorHandler
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc._
 import play.api.mvc.Results._
+import play.api.mvc._
 import play.api.routing.Router
 
 import scala.concurrent._

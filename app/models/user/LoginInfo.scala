@@ -2,8 +2,7 @@ package models.user
 
 import com.github.aselab.activerecord.{ActiveRecordCompanion, PlayFormSupport}
 import com.mohiva.play.silhouette.impl.providers.CredentialsProvider
-import daos.IterableAttribute
-import models.{ActiveRecord, IterableAttribute}
+import models.ActiveRecord
 import play.api.libs.json.{Json, OFormat}
 
 /**

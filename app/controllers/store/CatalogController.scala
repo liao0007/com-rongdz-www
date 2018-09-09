@@ -1,17 +1,16 @@
 package controllers.store
 
-import javax.inject.Inject
-import auth.JWTEnv
 import auth.filters.CookieSettings
+import com.github.aselab.activerecord.ActiveRecord.Relation1
+import com.github.aselab.activerecord.dsl._
 import com.mohiva.play.silhouette.api.Silhouette
+import javax.inject.Inject
 import models.mall.{Sale, SaleFilter}
-import models.{ModelPager, ModelSorter, Paging}
+import models.product.Subcategory
+import models.{ModelPager, ModelSorter}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
 import services.mall.SaleService
-import com.github.aselab.activerecord.ActiveRecord.Relation1
-import com.github.aselab.activerecord.dsl._
-import models.product.Subcategory
 
 import scala.concurrent.Future
 

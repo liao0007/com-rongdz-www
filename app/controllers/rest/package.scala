@@ -1,6 +1,5 @@
 package controllers
 
-import daos.default.mall.SaleOrder.{SaleOrderChannel, SaleOrderDeliveryType}
 import play.api.libs.json._
 import play.api.mvc.{Result, Results}
 

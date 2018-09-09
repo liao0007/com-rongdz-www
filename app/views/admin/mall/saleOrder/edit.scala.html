@@ -1,12 +1,5 @@
-@@@import daos.default.mall.SaleOrder.SaleOrderState
-@import daos.default.mall.SaleOrder.SaleOrderPaymentState
-@import daos.default.mall.SaleOrder.SaleOrderShippingState
+@@@import models.mall.{SaleOrder, SaleOrderDetailAttributeValueFilter, SaleOrderDetailFilter}
 @import models.user.ShipToAddressFilter
-@import daos.default.mall.SaleOrder.SaleOrderDeliveryType
-@import models.mall.{SaleOrder, SaleOrderDetailAttributeValueFilter, SaleOrderDetailFilter}
-@import daos.default.product.AttributeOption
-@import daos.default.product.Attribute.AttributeInputType
-@import models.product.Attribute
 @(modelForm: Form[SaleOrder], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.SaleOrderController}

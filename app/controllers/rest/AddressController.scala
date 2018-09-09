@@ -1,12 +1,7 @@
 package controllers.rest
 
-import javax.inject.Inject
-
-import auth.JWTEnv
-import com.github.aselab.activerecord.dsl._
 import com.mohiva.play.silhouette.api.Silhouette
-import daos.default.address._
-import daos.default.user.User
+import javax.inject.Inject
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.libs.json.Json
 import play.api.mvc._

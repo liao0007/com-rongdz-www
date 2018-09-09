@@ -1,6 +1,4 @@
 @import models.mall.{SaleRate, SaleRateFilter}
-@import daos.default.mall.SaleRate.SaleRateType
-@import models.ActiveRecord
 @(items: Seq[SaleRate], pagination: Pagination, filter: SaleRateFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.SaleRateController}

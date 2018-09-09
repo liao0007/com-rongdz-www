@@ -1,4 +1,3 @@
-@import models.ActiveRecord
 @import models.product.{Sku, SkuFilter}
 @(items: Seq[Sku], pagination: Pagination, filter: SkuFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 

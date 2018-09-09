@@ -1,7 +1,4 @@
-@import daos.default.product.Product
-@import daos.default.product.Subcategory
-@import models.product.Brand
-@import models.product.Product
+@import models.product.{Brand, Product}
 @(modelForm: Form[Product], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.product.routes.ProductController}

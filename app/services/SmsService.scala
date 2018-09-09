@@ -2,9 +2,8 @@ package services
 
 import java.net.URLEncoder
 
-import javax.inject.Inject
 import com.typesafe.config.Config
-import daos.default.core.Sms.{SmsDirection, SmsState}
+import javax.inject.Inject
 import models.core.Sms
 import play.api.Configuration
 import play.api.libs.ws.WSClient

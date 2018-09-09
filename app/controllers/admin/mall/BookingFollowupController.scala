@@ -1,14 +1,10 @@
 package controllers.admin.mall
 
-import javax.inject.Inject
-import auth.JWTEnv
-import auth.services.authorizations.Has
-import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.user.ToPermission.UserToPermission
+import javax.inject.Inject
+import models.ModelResult
 import models.mall.{BookingFollowup, BookingFollowupFilter}
-import models.{ModelFilter, ModelPager, ModelResult, ModelSorter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}

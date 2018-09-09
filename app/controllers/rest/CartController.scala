@@ -1,18 +1,16 @@
 package controllers.rest
 
-import javax.inject.Inject
-import auth.JWTEnv
+import com.github.aselab.activerecord.dsl._
 import com.mohiva.play.silhouette.api.Silhouette
+import controllers.customRoutes
+import javax.inject.Inject
+import models.mall.Sale
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.libs.json.Json
 import play.api.mvc._
 import services.mall.CartService
-import com.github.aselab.activerecord.dsl._
-import controllers.customRoutes
-import models.mall.Sale
 
-import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 
 class CartController @Inject()(val messagesApi: MessagesApi, silhouette: Silhouette[JWTEnv], cartService: CartService)
     extends Controller

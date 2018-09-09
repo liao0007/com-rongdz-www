@@ -1,12 +1,9 @@
 package controllers.admin.product
 
-import javax.inject.Inject
-import auth.JWTEnv
-import auth.services.authorizations.Has
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
+import javax.inject.Inject
 import models.ModelResult
-import models.mall.HomeFeatureFilter
 import models.product.{Subcategory, SubcategoryFilter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi

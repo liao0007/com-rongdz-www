@@ -1,8 +1,7 @@
 package models.product
 
 import com.github.aselab.activerecord.{ActiveRecordCompanion, PlayFormSupport}
-import daos.IterableAttribute
-import models.{ActiveRecord, IterableAttribute}
+import models.ActiveRecord
 import play.api.libs.json.{Json, OFormat}
 
 case class Attribute(

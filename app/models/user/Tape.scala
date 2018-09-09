@@ -1,9 +1,8 @@
 package models.user
 
 import com.github.aselab.activerecord.{ActiveRecordCompanion, PlayFormSupport}
-import play.api.libs.json.{Json, OFormat}
-import com.github.aselab.activerecord.dsl._
 import models.ActiveRecord
+import play.api.libs.json.{Json, OFormat}
 
 /**
   * Created by liangliao on 4/13/16.

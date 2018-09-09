@@ -1,8 +1,7 @@
 package services
 
-import javax.inject.Inject
-
 import com.typesafe.config.Config
+import javax.inject.Inject
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl
 import play.api.Configuration

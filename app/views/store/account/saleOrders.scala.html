@@ -1,12 +1,6 @@
 @import com.mohiva.play.silhouette.api.actions.SecuredRequest
-@import auth.JWTEnv
-@import daos.default.user.ShipToAddress
-@import org.joda.time.format.DateTimeFormat
-@import daos.default.mall.SaleOrder.SaleOrderShippingState
-@import daos.default.mall.SaleOrder.SaleOrderState
-@import daos.default.mall.SaleOrder.SaleOrderPaymentState
 @import models.mall.{SaleOrder, SaleOrderFilter}
-@import daos.default.mall.SaleOrder.PaymentState
+@import org.joda.time.format.DateTimeFormat
 @(orders: Seq[SaleOrder], pagination: Pagination, filter: SaleOrderFilter, sorter: ModelSorter)(implicit messages: Messages, request: SecuredRequest[JWTEnv, _])
 
 @styles = {

@@ -1,9 +1,7 @@
 package controllers.store
 
-import javax.inject.Inject
-import auth.JWTEnv
 import com.mohiva.play.silhouette.api.Silhouette
-import models.Paging
+import javax.inject.Inject
 import models.crm.Page
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._

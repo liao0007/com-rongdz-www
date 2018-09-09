@@ -1,15 +1,13 @@
 package controllers.rest
 
-import javax.inject.Inject
-import auth.JWTEnv
 import com.mohiva.play.silhouette.api.Silhouette
-import daos.default.mall.SaleOrder.SaleOrderPaymentMethod
+import javax.inject.Inject
 import models.mall.SaleOrder
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc._
-import services.{AlipayService, WxMpService}
 import services.mall.SaleOrderService
+import services.{AlipayService, WxMpService}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future

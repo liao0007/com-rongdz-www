@@ -5,9 +5,7 @@ import java.lang.Long
 import com.google.inject.Inject
 import models.mall.{CartItem, Sale}
 import models.user.User
-import org.sedis.Pool
 
-import scala.collection.JavaConverters._
 import scala.concurrent.Future
 
 /**

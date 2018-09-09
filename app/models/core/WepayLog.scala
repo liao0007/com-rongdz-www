@@ -1,8 +1,7 @@
 package models.core
 
 import com.github.aselab.activerecord.{ActiveRecordCompanion, PlayFormSupport}
-import daos.IterableAttribute
-import models.{ActiveRecord, IterableAttribute}
+import models.ActiveRecord
 
 case class WepayLog(
                      override val id: Long = 0L,

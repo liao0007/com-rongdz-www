@@ -1,14 +1,11 @@
 package controllers.wechat
 
-import javax.inject.Inject
-
 import _root_.services.SmsService
-import auth._
 import auth.filters.CookieSettings
-import auth.providers.{WechatOAuth2Info, WechatProvider}
-import auth.services.{JWTAuthService, UserLoginInfoService, WechatAuthService}
+import auth.services.UserLoginInfoService
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.rest.Bad
+import javax.inject.Inject
 import play.api.Configuration
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.libs.json.Json

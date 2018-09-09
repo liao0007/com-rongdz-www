@@ -2,17 +2,13 @@ package controllers.rest
 
 import java.time.Duration
 
-import auth.{PasswordUpdateRequest, UserAlreadyExists, UserNotActivated, _}
-import auth.filters.CookieSettings
-import services._
 import _root_.services.SmsService
+import auth._
+import auth.filters.CookieSettings
+import auth.services._
 import com.google.inject.Inject
 import com.mohiva.play.silhouette.api.{HandlerResult, Silhouette, LoginInfo => SilhouetteLoginInfo}
 import com.mohiva.play.silhouette.impl.providers.CredentialsProvider
-import daos.default.user.Token.TokenAction
-import daos.default.user.Token.TokenAction.{ActivateAccount, ResetPassword}
-import daos.default.user.User.UserState
-import daos.default.user._
 import models.user.{Token, User}
 import org.joda.time.DateTime
 import play.api.Configuration
@@ -20,8 +16,8 @@ import play.api.libs.json._
 import play.api.mvc.Results.EmptyContent
 import play.api.mvc._
 
-import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 import scala.util.Left
 
 /**

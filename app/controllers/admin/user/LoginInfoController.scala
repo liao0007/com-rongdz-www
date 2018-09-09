@@ -1,14 +1,8 @@
 package controllers.admin.user
 
-import javax.inject.Inject
-import auth.{JWTEnv, PasswordUpdateRequest, PasswordUpdated}
-import auth.services.JWTAuthService
-import auth.services.authorizations.Has
-import com.github.aselab.activerecord.dsl._
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.user.LoginInfo.LoginInfoProviderId
-import daos.default.user.ToPermission.UserToPermission
+import javax.inject.Inject
 import models.ModelResult
 import models.user.{LoginInfo, LoginInfoFilter}
 import play.api.data.Form
@@ -19,7 +13,6 @@ import play.twirl.api.Html
 import services.user.LoginInfoService
 
 import scala.concurrent.Future
-import scala.concurrent.ExecutionContext.Implicits.global
 
 class LoginInfoController @Inject()(val messagesApi: MessagesApi,
                                     val silhouette: Silhouette[JWTEnv],

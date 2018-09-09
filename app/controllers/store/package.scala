@@ -1,6 +1,5 @@
 package controllers
 
-import auth.PasswordUpdateRequest
 import play.api.data.Form
 import play.api.data.Forms._
 

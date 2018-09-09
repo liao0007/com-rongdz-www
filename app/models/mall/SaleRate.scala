@@ -3,8 +3,7 @@ package models.mall
 import java.util.Date
 
 import com.github.aselab.activerecord.{ActiveRecordCompanion, PlayFormSupport}
-import daos.IterableAttribute
-import models.{ActiveRecord, IterableAttribute}
+import models.ActiveRecord
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import play.api.libs.json.{Json, OFormat}

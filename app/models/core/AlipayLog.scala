@@ -1,8 +1,7 @@
 package models.core
 
 import com.github.aselab.activerecord.{ActiveRecordCompanion, PlayFormSupport}
-import daos.IterableAttribute
-import models.{ActiveRecord, IterableAttribute}
+import models.ActiveRecord
 import org.joda.time.DateTime
 
 case class AlipayLog(

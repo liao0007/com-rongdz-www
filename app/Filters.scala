@@ -1,15 +1,13 @@
-import javax.inject._
-
 import auth.filters.CookieAuthFilter
+import com.mohiva.play.htmlcompressor.HTMLCompressorFilter
+import com.mohiva.play.xmlcompressor.XMLCompressorFilter
+import javax.inject._
 import play.api._
 import play.api.http.HttpFilters
+import play.api.mvc.EssentialFilter
 import play.filters.cors.CORSFilter
 import play.filters.gzip.GzipFilter
 import play.filters.headers.SecurityHeadersFilter
-import com.mohiva.play.htmlcompressor.HTMLCompressorFilter
-import com.mohiva.play.xmlcompressor.XMLCompressorFilter
-import play.api.mvc.EssentialFilter
-import play.filters.csrf.CSRFFilter
 
 @Singleton
 class Filters @Inject()(

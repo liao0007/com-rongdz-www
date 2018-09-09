@@ -1,17 +1,16 @@
-package auth
+package auth.errorHandlers
 
-import java.util.Locale
-
-import com.mohiva.play.silhouette.api.actions.UnsecuredErrorHandler
-import play.api.mvc.{Call, RequestHeader, Result}
-import play.api.mvc.Results._
+import com.google.inject.Inject
+import controllers.Default
+import play.api.mvc.Results.Unauthorized
+import play.api.mvc.{RequestHeader, Result}
 
 import scala.concurrent.Future
 
 /**
   * Custom unsecured error handler.
   */
-class CustomUnsecuredErrorHandler extends UnsecuredErrorHandler with CustomErrorHandler {
+class UnsecuredErrorHandler @Inject()(val defaultController: Default) extends com.mohiva.play.silhouette.api.actions.UnsecuredErrorHandler with ErrorHandler {
 
   /**
     * Called when a user is authenticated but not authorized.
@@ -22,7 +21,7 @@ class CustomUnsecuredErrorHandler extends UnsecuredErrorHandler with CustomError
     * @return The result to send to the client.
     */
   override def onNotAuthorized(implicit request: RequestHeader): Future[Result] = Future.successful {
-    authenticatePf(request)(request.uri)
+    dispatchError(Unauthorized)(request)(request.uri)
   }
 
 }

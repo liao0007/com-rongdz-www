@@ -1,8 +1,7 @@
 package models.mall
 
 import com.github.aselab.activerecord.{ActiveRecordCompanion, PlayFormSupport}
-import daos.IterableAttribute
-import models.{ActiveRecord, IterableAttribute}
+import models.ActiveRecord
 import models.user.User
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat

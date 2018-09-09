@@ -2,16 +2,11 @@ package services.mall
 
 import java.lang.Long
 
-import auth.providers.WechatProvider
 import com.alipay.api.request.{AlipayTradePrecreateRequest, AlipayTradeWapPayRequest}
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
 import com.google.inject.Inject
 import controllers.rest.SaleOrderCreateRequest
-import daos.default.mall.SaleOrder.{SaleOrderPaymentMethod, SaleOrderPaymentState, SaleOrderState}
-import daos.default.mall.{SaleOrderDetail, SaleOrderDetailAttributeValue}
-import daos.default.user.ShipToAddress
-import me.chanjar.weixin.mp.bean.pay.request.WxPayUnifiedOrderRequest
 import models.ModelFilter
 import models.mall.{SaleOrder, SaleOrderDetail, SaleOrderDetailAttributeValue, SaleOrderFilter}
 import org.joda.time.DateTime
@@ -20,7 +15,6 @@ import play.api.libs.json.Json
 import play.api.mvc.RequestHeader
 import services.{AlipayService, CrudService, WxMpService}
 
-import scala.collection.JavaConverters._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 

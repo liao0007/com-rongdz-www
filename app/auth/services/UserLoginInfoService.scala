@@ -1,7 +1,6 @@
 package auth.services
 
 import com.mohiva.play.silhouette.api.{LoginInfo => SilhouetteLoginInfo}
-import models.user.UserLoginInfo
 
 import scala.concurrent.Future
 

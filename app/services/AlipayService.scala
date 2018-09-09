@@ -1,9 +1,8 @@
 package services
 
-import javax.inject.Inject
-
-import play.api.Configuration
 import com.alipay.api._
+import javax.inject.Inject
+import play.api.Configuration
 
 /**
   * Created by liangliao on 18/4/16.

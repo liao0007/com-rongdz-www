@@ -1,5 +1,4 @@
 @import models.mall.{HomeFeature, HomeFeatureFilter}
-@import daos.default.mall.HomeFeature.HomeFeaturePresentingType
 @(items: Seq[HomeFeature], pagination: Pagination, filter: HomeFeatureFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.HomeFeatureController}

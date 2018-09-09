@@ -1,14 +1,11 @@
 package controllers.rest
 
-import java.time.Duration
-
-import auth._
 import auth.services.{UserIdentityService, UserPermissionService}
 import com.google.inject.Inject
 import com.mohiva.play.silhouette.api.Silhouette
 import play.api.Configuration
 import play.api.libs.json.{JsValue, Json}
-import play.api.mvc.{Action, Controller, Result}
+import play.api.mvc.{Action, Controller}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future

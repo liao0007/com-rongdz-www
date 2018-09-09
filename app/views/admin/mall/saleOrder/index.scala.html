@@ -1,9 +1,4 @@
-@import models.mall.{SaleOrder, SaleOrderDetailFilter, SaleOrderFilter}
-@import daos.default.mall.SaleOrder.SaleOrderChannel
-@import daos.default.mall.SaleOrder.SaleOrderDeliveryType
-@import daos.default.mall.SaleOrder.SaleOrderState
-@import daos.default.mall.SaleOrder.SaleOrderShippingState
-@import daos.default.mall.SaleOrder.SaleOrderPaymentState
+@import models.mall.{SaleOrder, SaleOrderFilter}
 @(items: Seq[SaleOrder], pagination: Pagination, filter: SaleOrderFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.SaleOrderController}

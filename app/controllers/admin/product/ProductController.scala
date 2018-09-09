@@ -1,11 +1,9 @@
 package controllers.admin.product
 
-import javax.inject.Inject
-import auth.JWTEnv
-import auth.services.authorizations.Has
+import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.user.ToPermission.UserToPermission
+import javax.inject.Inject
 import models._
 import models.product.{Product, ProductFilter}
 import play.api.data.Form
@@ -14,7 +12,6 @@ import play.api.libs.json.{JsValue, Json}
 import play.api.mvc._
 import play.twirl.api.Html
 import services.product.ProductService
-import com.github.aselab.activerecord.ActiveRecord.Relation1
 
 import scala.concurrent.Future
 

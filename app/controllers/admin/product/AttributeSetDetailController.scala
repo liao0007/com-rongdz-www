@@ -1,22 +1,17 @@
 package controllers.admin.product
 
-import javax.inject.Inject
-import auth.JWTEnv
-import auth.services.authorizations.Has
+import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.product.AttributeValue
-import daos.default.user.ToPermission.UserToPermission
-import models.{ModelFilter, ModelPager, ModelResult, ModelSorter}
-import models.mall.{HomeFeatureFilter, SaleOrderDetailAttributeValue}
+import javax.inject.Inject
 import models.product.{AttributeSetDetail, AttributeSetDetailFilter}
+import models.{ModelFilter, ModelPager, ModelResult, ModelSorter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc._
 import play.twirl.api.Html
 import services.product.AttributeSetDetailService
-import com.github.aselab.activerecord.ActiveRecord.Relation1
 
 import scala.concurrent.Future
 

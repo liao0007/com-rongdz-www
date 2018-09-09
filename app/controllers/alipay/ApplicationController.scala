@@ -1,13 +1,9 @@
 package controllers.alipay
 
-import javax.inject.Inject
-import auth.JWTEnv
 import com.alipay.api.AlipayConstants
 import com.alipay.api.internal.util.AlipaySignature
-import com.alipay.api.internal.util.codec.Base64
 import com.mohiva.play.silhouette.api.Silhouette
-import daos.default.core.AlipayLog.AlipayLogType
-import daos.default.mall.SaleOrder.{SaleOrderPaymentMethod, SaleOrderPaymentState}
+import javax.inject.Inject
 import models.core.AlipayLog
 import models.mall.SaleOrder
 import org.joda.time.format.DateTimeFormat
@@ -18,7 +14,7 @@ import play.api.routing.JavaScriptReverseRouter
 import services.AlipayService
 import services.mall.SaleOrderService
 
-import collection.JavaConverters._
+import scala.collection.JavaConverters._
 import scala.concurrent.Future
 
 /**

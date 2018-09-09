@@ -1,15 +1,13 @@
 package models.user
 
-import java.util.{Date, UUID}
+import java.util.Date
 
+import com.github.aselab.activerecord.dsl._
 import com.github.aselab.activerecord.{ActiveRecordCompanion, PlayFormSupport}
 import com.mohiva.play.silhouette.api.Identity
-import daos.IterableAttribute
-import play.api.libs.json.{Json, OFormat}
-import com.github.aselab.activerecord.dsl._
-import daos.default.user.User.UserGender
-import models.{ActiveRecord, IterableAttribute}
+import models.ActiveRecord
 import models.mall.SaleOrder
+import play.api.libs.json.{Json, OFormat}
 
 /**
   * Created by liangliao on 4/13/16.
