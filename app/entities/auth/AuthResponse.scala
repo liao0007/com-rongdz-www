@@ -13,6 +13,5 @@ case class AuthResponse(override val code: Int = 0,
 object AuthResponse {
   implicit val dateTimeWriter: Writes[DateTime] = JodaWrites.jodaDateWrites("dd/MM/yyyy HH:mm:ss")
   implicit val dateTimeJsReader: Reads[DateTime] = JodaReads.jodaDateReads("dd/MM/yyyy HH:mm:ss")
-
   implicit val format: OFormat[AuthResponse] = Json.format[AuthResponse]
 }
