@@ -4,9 +4,8 @@ import java.text.SimpleDateFormat
 
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
-import daos.default.user.User
 import models._
-import models.default.user.UserFilter
+import models.user.{User, UserFilter}
 import services.CrudService
 
 /**

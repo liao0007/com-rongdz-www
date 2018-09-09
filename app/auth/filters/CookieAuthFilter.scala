@@ -1,14 +1,12 @@
 package auth.filters
 
-import javax.inject.Inject
-
 import akka.stream.Materializer
-import play.api.Configuration
+import javax.inject.Inject
 import play.api.http.Status
 import play.api.mvc._
+import play.api.{Configuration, Logger}
 
-import scala.concurrent.Future
-import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.{ExecutionContext, Future}
 
 /**
   * Remark:
@@ -23,22 +21,22 @@ import scala.concurrent.ExecutionContext.Implicits.global
   * If it's not present, it tries to supply it using that cookie
   */
 class CookieAuthFilter @Inject()(
-    config: Configuration,
-    implicit val mat: Materializer
-) extends Filter {
+                                  config: Configuration,
+                                  implicit val mat: Materializer,
+                                  implicit val ec: ExecutionContext,
+                                ) extends Filter {
 
   private[this] val cookie = new CookieSettings(config)
+
   if (!cookie.secure || !cookie.httpOnly) {
-    System.err.println(
-      "Check your cookie settings (filters.cookieauth.cookie), as they are not secure!"
-    )
+    Logger(this.getClass).warn("check your cookie settings (filters.cookieauth.cookie), as they are not secure!")
   }
 
-  override def apply(f: (RequestHeader) => Future[Result])(rh: RequestHeader): Future[Result] = {
-    rh.headers.get(cookie.tokenHeader) match {
+  override def apply(f: RequestHeader => Future[Result])(requestHeader: RequestHeader): Future[Result] = {
+    requestHeader.headers.get(cookie.tokenHeader) match {
       // Token was sent - discard current token cookie, and set it to new value
       case Some(token) =>
-        f(rh).map { result =>
+        f(requestHeader).map { result =>
           val withoutCookie = result.discardingCookies(DiscardingCookie(cookie.name))
 
           // Have we been denied entry? If yes, discard our cookie
@@ -47,10 +45,10 @@ class CookieAuthFilter @Inject()(
 
       // Token was not sent - look into cookies and set to header
       case None =>
-        rh.cookies.get(cookie.name) match {
+        requestHeader.cookies.get(cookie.name) match {
           // Cookie was found - transform it into X-Auth-Token
           case Some(found) =>
-            val newRh  = rh.copy(headers = rh.headers.add(cookie.tokenHeader -> found.value))
+            val newRh = requestHeader.withHeaders(newHeaders = requestHeader.headers.add(cookie.tokenHeader -> found.value))
             val result = f(newRh)
             // Have we been denied entry in our result? If yes, discard cookie we sent (as it is invalid)
             result.map { withCookie =>
@@ -59,7 +57,7 @@ class CookieAuthFilter @Inject()(
 
           // Cookie was not found - process as you would
           case None =>
-            f(rh)
+            f(requestHeader)
         }
     }
   }
@@ -72,20 +70,20 @@ class CookieAuthFilter @Inject()(
 }
 
 class CookieSettings @Inject()(configuration: Configuration) {
-  val config              = configuration.underlying
-  val name: String        = config.getString("filters.cookieauth.cookie.name")
-  val tokenHeader: String = config.getString("filters.cookieauth.cookie.token.header")
+  val config: Configuration = configuration.get[Configuration]("filters.cookieauth.cookie")
+  val name: String = config.get[String]("name")
+  val tokenHeader: String = config.get[String]("token.header")
   val maxAge: Option[Int] = {
-    val age = config.getInt("filters.cookieauth.cookie.maxage")
+    val age = config.get[Int]("maxage")
     if (age >= 0) Some(age) else None
   }
-  val path: String = config.getString("filters.cookieauth.cookie.path")
+  val path: String = config.get[String]("path")
   val domain: Option[String] = {
-    val domain = config.getString("filters.cookieauth.cookie.domain")
+    val domain = config.get[String]("domain")
     if (domain.length >= 0) Some(domain) else None
   }
-  val secure: Boolean   = config.getBoolean("filters.cookieauth.cookie.secure")
-  val httpOnly: Boolean = config.getBoolean("filters.cookieauth.cookie.httpOnly")
+  val secure: Boolean = config.get[Boolean]("secure")
+  val httpOnly: Boolean = config.get[Boolean]("httpOnly")
 
   def make(value: String): Cookie = Cookie(name, value, maxAge, path, domain, secure, httpOnly)
 }

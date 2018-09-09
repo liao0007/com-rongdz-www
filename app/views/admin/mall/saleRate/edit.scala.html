@@ -1,5 +1,5 @@
-@import daos.default.mall.SaleRate
-@(modelForm: Form[SaleRate], action: Call)(implicit messages: Messages, request: RequestHeader)
+@@import models.mall.SaleRate
+(modelForm: Form[SaleRate], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.SaleRateController}
 @implicitFieldConstructor = @{ b3.vertical.fieldConstructor }

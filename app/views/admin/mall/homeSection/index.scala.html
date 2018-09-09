@@ -1,6 +1,5 @@
-@import daos.default.mall.HomeSection
-@import models.default.mall.HomeSectionFilter
-@import daos.ActiveRecord
+@import models.ActiveRecord
+@import models.mall.{HomeSection, HomeSectionFilter}
 @(items: Seq[HomeSection], pagination: Pagination, filter: HomeSectionFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.HomeSectionController}

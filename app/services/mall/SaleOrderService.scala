@@ -9,11 +9,11 @@ import com.github.aselab.activerecord.dsl._
 import com.google.inject.Inject
 import controllers.rest.SaleOrderCreateRequest
 import daos.default.mall.SaleOrder.{SaleOrderPaymentMethod, SaleOrderPaymentState, SaleOrderState}
-import daos.default.mall.{SaleOrder, SaleOrderDetail, SaleOrderDetailAttributeValue}
-import daos.default.user.{LoginInfo, ShipToAddress}
+import daos.default.mall.{SaleOrderDetail, SaleOrderDetailAttributeValue}
+import daos.default.user.ShipToAddress
 import me.chanjar.weixin.mp.bean.pay.request.WxPayUnifiedOrderRequest
 import models.ModelFilter
-import models.default.mall.SaleOrderFilter
+import models.mall.{SaleOrder, SaleOrderDetail, SaleOrderDetailAttributeValue, SaleOrderFilter}
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import play.api.libs.json.Json

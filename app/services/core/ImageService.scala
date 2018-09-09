@@ -3,9 +3,8 @@ package services.core
 import com.google.inject.Inject
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
-import daos.default.core.Image
 import models.ModelFilter
-import models.default.core.ImageFilter
+import models.core.{Image, ImageFilter}
 import org.apache.commons.codec.digest.DigestUtils
 import org.joda.time.LocalDateTime
 import org.joda.time.format.DateTimeFormat

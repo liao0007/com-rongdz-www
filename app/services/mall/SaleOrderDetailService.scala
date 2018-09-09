@@ -2,9 +2,9 @@ package services.mall
 
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
-import daos.default.mall.{SaleOrderDetail, SaleOrderDetailAttributeValue}
+import daos.default.mall.SaleOrderDetailAttributeValue
 import models._
-import models.default.mall.SaleOrderDetailFilter
+import models.mall.{SaleOrderDetail, SaleOrderDetailAttributeValue, SaleOrderDetailFilter}
 import services.CrudService
 
 /**

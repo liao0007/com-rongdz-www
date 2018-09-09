@@ -3,9 +3,8 @@ package services.mall
 import java.lang.Long
 
 import com.google.inject.Inject
-import daos.default.mall.Sale
-import daos.default.user.User
-import models.default.mall.CartItem
+import models.mall.{CartItem, Sale}
+import models.user.User
 import org.sedis.Pool
 
 import scala.collection.JavaConverters._

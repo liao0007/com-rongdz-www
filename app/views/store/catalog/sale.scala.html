@@ -1,7 +1,6 @@
-@import daos.default.mall.Sale
-@import models.default.mall.SaleFilter
-@import daos.default.product.Attribute
+@@@import models.mall.{Sale, SaleFilter}
 @import daos.default.product.AttributeOption
+@import models.product.Attribute
 @(sale: Sale, pager: ModelPager, filter: SaleFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @styles = {

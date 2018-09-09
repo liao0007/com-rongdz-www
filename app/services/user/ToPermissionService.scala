@@ -2,9 +2,8 @@ package services.user
 
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
-import daos.default.user.ToPermission
 import models._
-import models.default.user.ToPermissionFilter
+import models.user.{ToPermission, ToPermissionFilter}
 import services.CrudService
 
 /**

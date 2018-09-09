@@ -4,9 +4,9 @@ import java.text.SimpleDateFormat
 
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
-import daos.default.mall.{Sale, SaleOrderDetail, SaleOrderDetailAttributeValue}
+import daos.default.mall.{SaleOrderDetail, SaleOrderDetailAttributeValue}
 import models._
-import models.default.mall.SaleFilter
+import models.mall.{Sale, SaleFilter}
 import services.CrudService
 
 /**

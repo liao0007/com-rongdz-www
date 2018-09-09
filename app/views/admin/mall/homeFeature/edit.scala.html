@@ -1,7 +1,7 @@
-@import daos.default.mall.HomeFeature
 @import daos.default.mall.HomeFeature.HomeFeaturePresentingType._
-@import daos.ActiveRecord
 @import daos.default.mall.HomeFeature.HomeFeaturePresentingType
+@import models.ActiveRecord
+@import models.mall.HomeFeature
 @(modelForm: Form[HomeFeature], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.HomeFeatureController}

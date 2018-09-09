@@ -1,7 +1,7 @@
 @import daos.default.product.Product
-@import models.default.product.ProductFilter
+@import models.product.{Brand, ProductFilter}
 @import daos.default.product.Subcategory
-@import daos.default.product.Brand
+@import models.product.Product
 @(items: Seq[Product], pagination: Pagination, filter: ProductFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.product.routes.ProductController}

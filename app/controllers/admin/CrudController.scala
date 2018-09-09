@@ -3,9 +3,8 @@ package controllers.admin
 import auth.JWTEnv
 import auth.services.authorizations.Has
 import com.mohiva.play.silhouette.api.Silhouette
-import daos.ActiveRecord
 import daos.default.user.ToPermission.UserToPermission
-import models._
+import models.{ActiveRecord, _}
 import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.libs.json.JsValue

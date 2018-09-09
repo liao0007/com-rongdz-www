@@ -1,20 +1,19 @@
 package auth.services
 
 import com.github.aselab.activerecord.dsl._
-import daos.default.user._
-import daos.default.user.ToPermission.{Permission, UserToPermission}
+import models.user.UserPermission._
+import models.user._
 
 import scala.concurrent.Future
-import scala.concurrent.ExecutionContext.Implicits.global
 
 class UserPermissionService {
 
   /**
     * Finds permission - user pair
     */
-  def find(permission: Permission, userId: Long): Future[Option[ToPermission]] =
+  def find(permission: Permission, userId: Long): Future[Option[UserPermission]] =
     Future.successful {
-      ToPermission.findBy("userId" -> userId, "permission" -> permission.toString)
+      UserPermission.findBy("userId" -> userId, "permission" -> permission.toString)
     }
 
   /**
@@ -22,7 +21,7 @@ class UserPermissionService {
     */
   def revoke(permission: Permission, userId: Long): Future[Unit] =
     Future.successful {
-      ToPermission.findAllBy("userId" -> userId, "permission" -> permission.toString) foreach (_.delete())
+      UserPermission.findAllBy("userId" -> userId, "permission" -> permission.toString) foreach (_.delete())
     }
 
   /**
@@ -30,7 +29,7 @@ class UserPermissionService {
     */
   def allOfUser(userId: Long): Future[Seq[Permission]] = Future.successful {
     User.find(userId) map { user =>
-      user.toPermissions.toSeq.flatMap(userPermission => UserToPermission.fromString(userPermission.permission))
+      user.permissions.toSeq.flatMap(userPermission => UserPermissionPermission.fromString(userPermission.permission))
     } getOrElse Seq.empty
   }
 
@@ -42,7 +41,7 @@ class UserPermissionService {
       (for {
         user <- User.find(userId)
       } yield {
-        ToPermission.findByOrCreate(ToPermission(userId = userId, permission = permission.toString), "userId", "permission")
+        UserPermission.findByOrCreate(UserPermission(userId = userId, permission = permission.toString), "userId", "permission")
         true
       }) getOrElse false
     }
@@ -51,6 +50,6 @@ class UserPermissionService {
     * Lists all possible permissions
     */
   def allPossible(): Future[Seq[Permission]] = Future.successful {
-    UserToPermission.all
+    UserPermissionPermission.all
   }
 }

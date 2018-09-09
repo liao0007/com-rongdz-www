@@ -1,6 +1,5 @@
-@import daos.default.mall.Sale
-@import models.default.mall.SaleFilter
-@import daos.ActiveRecord
+@import models.ActiveRecord
+@import models.mall.{Sale, SaleFilter}
 @(items: Seq[Sale], pagination: Pagination, filter: SaleFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.SaleController}

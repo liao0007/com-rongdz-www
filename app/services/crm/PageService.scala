@@ -2,9 +2,8 @@ package services.crm
 
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
-import daos.default.crm.Page
 import models._
-import models.default.crm.PageFilter
+import models.crm.{Page, PageFilter}
 import services.CrudService
 
 /**

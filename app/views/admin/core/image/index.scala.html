@@ -1,6 +1,5 @@
-@import daos.default.core.Image
-@import models.default.core.ImageFilter
-@import daos.ActiveRecord
+@import models.ActiveRecord
+@import models.core.{Image, ImageFilter}
 @(items: Seq[Image], pagination: Pagination, filter: ImageFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 @implicitFieldConstructor = @{ b3.vertical.fieldConstructor }
 

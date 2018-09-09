@@ -1,11 +1,10 @@
 package controllers.store
 
 import javax.inject.Inject
-
 import auth.JWTEnv
 import com.mohiva.play.silhouette.api.Silhouette
-import daos.default.crm.Page
 import models.Paging
+import models.crm.Page
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
 

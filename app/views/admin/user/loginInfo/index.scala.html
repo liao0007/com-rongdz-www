@@ -1,5 +1,4 @@
-@import daos.default.user.LoginInfo
-@import models.default.user.LoginInfoFilter
+@import models.user.{LoginInfo, LoginInfoFilter}
 @import daos.default.user.LoginInfo.LoginInfoProviderId
 @(items: Seq[LoginInfo], pagination: Pagination, filter: LoginInfoFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 

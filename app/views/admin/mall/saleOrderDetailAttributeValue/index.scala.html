@@ -1,5 +1,4 @@
-@import daos.default.mall.SaleOrderDetailAttributeValue
-@import models.default.mall.SaleOrderDetailAttributeValueFilter
+@import models.mall.{SaleOrderDetailAttributeValue, SaleOrderDetailAttributeValueFilter}
 @(items: Seq[SaleOrderDetailAttributeValue], pagination: Pagination, filter: SaleOrderDetailAttributeValueFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.SaleOrderDetailAttributeValueController}

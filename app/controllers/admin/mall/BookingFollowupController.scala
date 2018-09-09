@@ -1,15 +1,13 @@
 package controllers.admin.mall
 
 import javax.inject.Inject
-
 import auth.JWTEnv
 import auth.services.authorizations.Has
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.mall.BookingFollowup
 import daos.default.user.ToPermission.UserToPermission
-import models.default.mall.BookingFollowupFilter
+import models.mall.{BookingFollowup, BookingFollowupFilter}
 import models.{ModelFilter, ModelPager, ModelResult, ModelSorter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi
@@ -27,7 +25,7 @@ class BookingFollowupController @Inject()(val messagesApi: MessagesApi,
     extends CrudController[BookingFollowup] {
 
   override def indexJson(modelResult: ModelResult[BookingFollowup])(implicit requestHeader: RequestHeader): JsValue = {
-    import models.default.mall.BookingFollowupFilter.format
+    import models.mall.BookingFollowupFilter.format
     Json.toJson(modelResult)
   }
 

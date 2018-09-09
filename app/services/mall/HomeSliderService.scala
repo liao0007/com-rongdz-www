@@ -4,9 +4,8 @@ import java.text.SimpleDateFormat
 
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
-import daos.default.mall.HomeSlider
 import models._
-import models.default.mall.HomeSliderFilter
+import models.mall.{HomeSlider, HomeSliderFilter}
 import services.CrudService
 
 /**

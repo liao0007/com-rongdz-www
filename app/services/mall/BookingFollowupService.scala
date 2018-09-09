@@ -2,9 +2,8 @@ package services.mall
 
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
-import daos.default.mall.BookingFollowup
 import models._
-import models.default.mall.BookingFollowupFilter
+import models.mall.{BookingFollowup, BookingFollowupFilter}
 import services.CrudService
 
 /**

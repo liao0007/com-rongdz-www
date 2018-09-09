@@ -1,7 +1,6 @@
-@import daos.default.mall.Booking
-@import models.default.mall.BookingFilter
+@import models.mall.{Booking, BookingFilter}
 @import daos.default.mall.Booking.BookingState
-@import daos.ActiveRecord
+@import models.ActiveRecord
 @(items: Seq[Booking], pagination: Pagination, filter: BookingFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.BookingController}

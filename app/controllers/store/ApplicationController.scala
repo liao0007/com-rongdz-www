@@ -1,15 +1,14 @@
 package controllers.store
 
 import javax.inject.Inject
-
 import auth.JWTEnv
 import auth.filters.CookieSettings
 import com.github.aselab.activerecord.dsl._
 import com.mohiva.play.silhouette.api.Silhouette
 import daos.default.mall.Booking.BookingState
-import daos.default.mall.{Booking, HomeFeature, HomeSlider}
-import daos.default.user.Tape
+import daos.default.mall.HomeSlider
 import daos.default.user.Tape.TapeKey
+import models.user.Tape
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
 import play.api.routing.JavaScriptReverseRouter

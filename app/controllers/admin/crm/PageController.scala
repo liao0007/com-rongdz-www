@@ -1,14 +1,12 @@
 package controllers.admin.crm
 
 import javax.inject.Inject
-
 import auth.JWTEnv
 import auth.services.authorizations.Has
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.crm.Page
 import models._
-import models.default.crm.PageFilter
+import models.crm.{Page, PageFilter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}
@@ -19,7 +17,7 @@ import services.crm.PageService
 class PageController @Inject()(val messagesApi: MessagesApi, val silhouette: Silhouette[JWTEnv], val has: Has, val crudService: PageService) extends CrudController[Page] {
 
   override def indexJson(modelResult: ModelResult[Page])(implicit requestHeader: RequestHeader): JsValue = {
-    import models.default.crm.PageFilter.format
+    import models.crm.PageFilter.format
     Json.toJson(modelResult)
   }
 

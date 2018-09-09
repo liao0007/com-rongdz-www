@@ -1,9 +1,8 @@
 package controllers.pinan
 
 import javax.inject.Inject
-
-import daos.default.mall.Booking
 import daos.default.mall.Booking.BookingState
+import models.mall.Booking
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._

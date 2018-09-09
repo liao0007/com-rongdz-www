@@ -4,8 +4,7 @@ import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
 import com.github.aselab.activerecord.reflections.ReflectionUtil.classToARCompanion
 import com.github.aselab.activerecord.{ActiveRecordCompanion, PlayFormSupport}
-import daos.ActiveRecord
-import models._
+import models.{ActiveRecord, _}
 import play.api.data.Form
 
 import scala.annotation.tailrec

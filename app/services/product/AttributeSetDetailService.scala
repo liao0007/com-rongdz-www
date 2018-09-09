@@ -2,9 +2,9 @@ package services.product
 
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
-import daos.default.product.{AttributeSetDetail, AttributeValue}
+import daos.default.product.AttributeValue
 import models._
-import models.default.product.AttributeSetDetailFilter
+import models.product.{AttributeSetDetail, AttributeSetDetailFilter, AttributeValue}
 import services.CrudService
 
 /**

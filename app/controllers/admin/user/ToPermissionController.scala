@@ -1,15 +1,13 @@
 package controllers.admin.user
 
 import javax.inject.Inject
-
 import auth.JWTEnv
 import auth.services.authorizations.Has
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.user.ToPermission
 import daos.default.user.ToPermission.UserToPermission
 import models.ModelResult
-import models.default.user.ToPermissionFilter
+import models.user.{ToPermission, ToPermissionFilter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}
@@ -26,7 +24,7 @@ class ToPermissionController @Inject()(val messagesApi: MessagesApi,
     extends CrudController[ToPermission] {
 
   override def indexJson(modelResult: ModelResult[ToPermission])(implicit requestHeader: RequestHeader): JsValue = {
-    import models.default.user.ToPermissionFilter.format
+    import models.user.ToPermissionFilter.format
     Json.toJson(modelResult)
   }
 

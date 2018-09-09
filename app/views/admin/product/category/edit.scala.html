@@ -1,5 +1,5 @@
-@import daos.default.product.Category
 @import daos.default.product.Category.CategoryHoverType
+@import models.product.Category
 @(modelForm: Form[Category], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.product.routes.CategoryController}

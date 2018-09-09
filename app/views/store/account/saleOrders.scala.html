@@ -5,8 +5,7 @@
 @import daos.default.mall.SaleOrder.SaleOrderShippingState
 @import daos.default.mall.SaleOrder.SaleOrderState
 @import daos.default.mall.SaleOrder.SaleOrderPaymentState
-@import daos.default.mall.SaleOrder
-@import models.default.mall.SaleOrderFilter
+@import models.mall.{SaleOrder, SaleOrderFilter}
 @import daos.default.mall.SaleOrder.PaymentState
 @(orders: Seq[SaleOrder], pagination: Pagination, filter: SaleOrderFilter, sorter: ModelSorter)(implicit messages: Messages, request: SecuredRequest[JWTEnv, _])
 

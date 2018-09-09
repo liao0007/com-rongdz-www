@@ -1,14 +1,12 @@
 package controllers.admin.mall
 
 import javax.inject.Inject
-
 import auth.JWTEnv
 import auth.services.authorizations.Has
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.mall.HomeFeature
 import models.ModelResult
-import models.default.mall.HomeFeatureFilter
+import models.mall.{HomeFeature, HomeFeatureFilter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}
@@ -19,7 +17,7 @@ import services.mall.HomeFeatureService
 class HomeFeatureController @Inject()(val messagesApi: MessagesApi, val silhouette: Silhouette[JWTEnv], val has: Has, val crudService: HomeFeatureService) extends CrudController[HomeFeature] {
 
   override def indexJson(modelResult: ModelResult[HomeFeature])(implicit requestHeader: RequestHeader): JsValue = {
-    import models.default.mall.HomeFeatureFilter.format
+    import models.mall.HomeFeatureFilter.format
     Json.toJson(modelResult)
   }
 

@@ -1,5 +1,6 @@
-@import daos.default.mall.Booking
-@(bookingForm: Form[Booking])(implicit messages: Messages, request: RequestHeader)
+@import models.mall.Booking
+@@import models.mall.Booking
+(bookingForm: Form[Booking])(implicit messages: Messages, request: RequestHeader)
 @implicitFieldConstructor = @{ b3.horizontal.fieldConstructor("col-md-2", "col-md-10") }
 
 @headScripts = {

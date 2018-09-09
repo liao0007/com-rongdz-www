@@ -1,6 +1,6 @@
 @import daos.default.product.Subcategory
-@import models.default.product.SubcategoryFilter
-@import daos.default.product.Category
+@import models.product.{Category, SubcategoryFilter}
+@import models.product.Subcategory
 @(items: Seq[Subcategory], pagination: Pagination, filter: SubcategoryFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.product.routes.SubcategoryController}

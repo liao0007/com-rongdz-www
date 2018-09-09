@@ -1,5 +1,5 @@
-@import daos.default.crm.Page
-@(modelForm: Form[Page], action: Call)(implicit messages: Messages, request: RequestHeader)
+@@import models.crm.Page
+(modelForm: Form[Page], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @implicitFieldConstructor = @{ b3.vertical.fieldConstructor }
 @currentController = @{controllers.admin.crm.routes.PageController}

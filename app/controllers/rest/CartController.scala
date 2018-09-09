@@ -1,7 +1,6 @@
 package controllers.rest
 
 import javax.inject.Inject
-
 import auth.JWTEnv
 import com.mohiva.play.silhouette.api.Silhouette
 import play.api.i18n.{I18nSupport, MessagesApi}
@@ -10,7 +9,7 @@ import play.api.mvc._
 import services.mall.CartService
 import com.github.aselab.activerecord.dsl._
 import controllers.customRoutes
-import daos.default.mall.Sale
+import models.mall.Sale
 
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global

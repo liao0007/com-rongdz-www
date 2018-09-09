@@ -1,14 +1,12 @@
 package controllers.admin.user
 
 import javax.inject.Inject
-
 import auth.JWTEnv
 import auth.services.authorizations.Has
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.user.User
 import models.ModelResult
-import models.default.user.UserFilter
+import models.user.{User, UserFilter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}
@@ -23,7 +21,7 @@ class UserController @Inject()(val messagesApi: MessagesApi,
     extends CrudController[User] {
 
   override def indexJson(modelResult: ModelResult[User])(implicit requestHeader: RequestHeader): JsValue = {
-    import models.default.user.UserFilter.format
+    import models.user.UserFilter.format
     Json.toJson(modelResult)
   }
 

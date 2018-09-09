@@ -1,18 +1,16 @@
 package controllers.admin.user
 
 import javax.inject.Inject
-
 import auth.{JWTEnv, PasswordUpdateRequest, PasswordUpdated}
 import auth.services.JWTAuthService
 import auth.services.authorizations.Has
 import com.github.aselab.activerecord.dsl._
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.user.LoginInfo
 import daos.default.user.LoginInfo.LoginInfoProviderId
 import daos.default.user.ToPermission.UserToPermission
 import models.ModelResult
-import models.default.user.LoginInfoFilter
+import models.user.{LoginInfo, LoginInfoFilter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}
@@ -31,7 +29,7 @@ class LoginInfoController @Inject()(val messagesApi: MessagesApi,
     extends CrudController[LoginInfo] {
 
   override def indexJson(modelResult: ModelResult[LoginInfo])(implicit requestHeader: RequestHeader): JsValue = {
-    import models.default.user.LoginInfoFilter.format
+    import models.user.LoginInfoFilter.format
     Json.toJson(modelResult)
   }
 

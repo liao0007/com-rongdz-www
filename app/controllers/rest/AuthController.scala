@@ -13,6 +13,7 @@ import daos.default.user.Token.TokenAction
 import daos.default.user.Token.TokenAction.{ActivateAccount, ResetPassword}
 import daos.default.user.User.UserState
 import daos.default.user._
+import models.user.{Token, User}
 import org.joda.time.DateTime
 import play.api.Configuration
 import play.api.libs.json._

@@ -1,6 +1,6 @@
-@import daos.default.mall.HomeSection
 @import daos.default.mall.HomeSection.HomeSectionPresentingType.ScreenWidth
 @import daos.default.mall.HomeSection.HomeSectionPresentingType.HalfScreenWidth
+@import models.mall.HomeSection
 @(modelForm: Form[HomeSection], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.HomeSectionController}

@@ -1,5 +1,4 @@
-@import daos.default.product.Category
-@import models.default.product.CategoryFilter
+@import models.product.{Category, CategoryFilter}
 @(items: Seq[Category], pagination: Pagination, filter: CategoryFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.product.routes.CategoryController}

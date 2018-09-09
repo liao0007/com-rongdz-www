@@ -1,5 +1,4 @@
-@import daos.default.mall.SaleOrderDetailAttributeValue
-@import models.default.mall.SaleOrderDetailAttributeValueFilter
+@import models.mall.{SaleOrderDetailAttributeValue, SaleOrderDetailAttributeValueFilter}
 @(saleOrderDetailId: Long, modelForm: Form[SaleOrderDetailAttributeValue], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.SaleOrderDetailAttributeValueController}

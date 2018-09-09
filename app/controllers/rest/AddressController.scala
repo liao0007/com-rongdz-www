@@ -6,7 +6,7 @@ import auth.JWTEnv
 import com.github.aselab.activerecord.dsl._
 import com.mohiva.play.silhouette.api.Silhouette
 import daos.default.address._
-import daos.default.user.{ShipToAddress, User}
+import daos.default.user.User
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.libs.json.Json
 import play.api.mvc._

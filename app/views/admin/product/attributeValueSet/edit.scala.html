@@ -1,5 +1,4 @@
-@import daos.default.product.AttributeValueSet
-@import models.default.product.AttributeValueFilter
+@import models.product.{AttributeValueFilter, AttributeValueSet}
 @(modelForm: Form[AttributeValueSet], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.product.routes.AttributeValueSetController}

@@ -5,8 +5,8 @@
 @import daos.default.mall.SaleOrder.SaleOrderShippingState
 @import daos.default.mall.SaleOrder.SaleOrderState
 @import daos.default.mall.SaleOrder.SaleOrderPaymentState
-@import daos.default.mall.SaleOrder
 @import daos.default.mall.SaleOrder.PaymentState
+@import models.mall.SaleOrder
 @(shipToAddresses: Seq[ShipToAddress], recentOrders: Seq[SaleOrder])(implicit messages: Messages, request: SecuredRequest[JWTEnv, _])
 
 @styles = {

@@ -1,11 +1,10 @@
 package controllers.rest
 
 import javax.inject.Inject
-
 import auth.JWTEnv
 import com.mohiva.play.silhouette.api.Silhouette
-import daos.default.mall.SaleOrder
 import daos.default.mall.SaleOrder.SaleOrderPaymentMethod
+import models.mall.SaleOrder
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc._

@@ -1,15 +1,13 @@
 package controllers.admin.user
 
 import javax.inject.Inject
-
 import auth.JWTEnv
 import auth.services.authorizations.Has
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.user.ShipToAddress
 import daos.default.user.ToPermission.UserToPermission
 import models.ModelResult
-import models.default.user.ShipToAddressFilter
+import models.user.{ShipToAddress, ShipToAddressFilter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}
@@ -27,7 +25,7 @@ class ShipToAddressController @Inject()(val messagesApi: MessagesApi,
     extends CrudController[ShipToAddress] {
 
   override def indexJson(modelResult: ModelResult[ShipToAddress])(implicit requestHeader: RequestHeader): JsValue = {
-    import models.default.user.ShipToAddressFilter.format
+    import models.user.ShipToAddressFilter.format
     Json.toJson(modelResult)
   }
 

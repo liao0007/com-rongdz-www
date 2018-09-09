@@ -2,9 +2,8 @@ package services.user
 
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
-import daos.default.user.ShipToAddress
 import models._
-import models.default.user.ShipToAddressFilter
+import models.user.{ShipToAddress, ShipToAddressFilter}
 import services.CrudService
 
 /**

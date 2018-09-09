@@ -1,14 +1,14 @@
-@import com.mohiva.play.silhouette.api.actions.SecuredRequest
+@@import com.mohiva.play.silhouette.api.actions.SecuredRequest
 @import auth.JWTEnv
 @import org.joda.time.format.DateTimeFormat
 @import daos.default.mall.SaleOrder.SaleOrderShippingState
 @import daos.default.mall.SaleOrder.SaleOrderState
 @import daos.default.mall.SaleOrder.SaleOrderPaymentState
-@import daos.default.mall.SaleOrder
 @import daos.default.mall.SaleOrder.SaleOrderDeliveryType
 @import daos.default.mall.SaleOrder.SaleOrderPaymentMethod
-@import daos.default.product.Attribute
 @import daos.default.product.AttributeOption
+@import models.mall.SaleOrder
+@import models.product.Attribute
 @(order: SaleOrder)(implicit messages: Messages, request: SecuredRequest[JWTEnv, _])
 
 @styles = {

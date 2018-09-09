@@ -1,9 +1,6 @@
-@import daos.default.product.Attribute
-@import models.default.product.AttributeFilter
-@import daos.ActiveRecord
-@import models.default.product.ProductFilter
+@import models.product.{Attribute, AttributeFilter, AttributeOptionFilter, ProductFilter}
 @import daos.default.product.Attribute.AttributeInputType
-@import models.default.product.AttributeOptionFilter
+@import models.ActiveRecord
 @(items: Seq[Attribute], pagination: Pagination, filter: AttributeFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.product.routes.AttributeController}

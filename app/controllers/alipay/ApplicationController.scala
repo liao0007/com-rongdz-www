@@ -1,16 +1,15 @@
 package controllers.alipay
 
 import javax.inject.Inject
-
 import auth.JWTEnv
 import com.alipay.api.AlipayConstants
 import com.alipay.api.internal.util.AlipaySignature
 import com.alipay.api.internal.util.codec.Base64
 import com.mohiva.play.silhouette.api.Silhouette
-import daos.default.core.AlipayLog
 import daos.default.core.AlipayLog.AlipayLogType
-import daos.default.mall.SaleOrder
 import daos.default.mall.SaleOrder.{SaleOrderPaymentMethod, SaleOrderPaymentState}
+import models.core.AlipayLog
+import models.mall.SaleOrder
 import org.joda.time.format.DateTimeFormat
 import play.api.Configuration
 import play.api.i18n.MessagesApi

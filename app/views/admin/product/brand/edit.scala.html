@@ -1,5 +1,5 @@
-@import daos.default.product.Brand
-@(modelForm: Form[Brand], action: Call)(implicit messages: Messages, request: RequestHeader)
+@@import models.product.Brand
+(modelForm: Form[Brand], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.product.routes.BrandController}
 @implicitFieldConstructor = @{ b3.vertical.fieldConstructor }

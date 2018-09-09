@@ -1,6 +1,5 @@
-@import daos.default.product.Sku
-@import models.default.product.SkuFilter
-@import daos.ActiveRecord
+@import models.ActiveRecord
+@import models.product.{Sku, SkuFilter}
 @(items: Seq[Sku], pagination: Pagination, filter: SkuFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.product.routes.SkuController}

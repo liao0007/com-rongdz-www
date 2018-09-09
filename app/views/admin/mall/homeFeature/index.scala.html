@@ -1,5 +1,4 @@
-@import daos.default.mall.HomeFeature
-@import models.default.mall.HomeFeatureFilter
+@import models.mall.{HomeFeature, HomeFeatureFilter}
 @import daos.default.mall.HomeFeature.HomeFeaturePresentingType
 @(items: Seq[HomeFeature], pagination: Pagination, filter: HomeFeatureFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 

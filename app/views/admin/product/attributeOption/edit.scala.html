@@ -1,5 +1,4 @@
-@import daos.default.product.AttributeOption
-@import models.default.product.AttributeOptionFilter
+@import models.product.{AttributeOption, AttributeOptionFilter}
 @(attributeId: Long, modelForm: Form[AttributeOption], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.product.routes.AttributeOptionController}

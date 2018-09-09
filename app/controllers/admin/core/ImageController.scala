@@ -1,14 +1,12 @@
 package controllers.admin.core
 
 import javax.inject.Inject
-
 import auth.JWTEnv
 import auth.services.authorizations.Has
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.core.Image
 import models.ModelResult
-import models.default.core.ImageFilter
+import models.core.{Image, ImageFilter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.Files.TemporaryFile
@@ -21,7 +19,7 @@ class ImageController @Inject()(val messagesApi: MessagesApi, val silhouette: Si
     extends CrudController[Image] {
 
   override def indexJson(modelResult: ModelResult[Image])(implicit requestHeader: RequestHeader): JsValue = {
-    import models.default.core.ImageFilter.format
+    import models.core.ImageFilter.format
     Json.toJson(modelResult)
   }
 

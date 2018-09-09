@@ -1,15 +1,14 @@
 package controllers.admin.mall
 
 import javax.inject.Inject
-
 import auth.JWTEnv
 import auth.services.authorizations.Has
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.mall.{SaleOrderDetail, SaleOrderDetailAttributeValue}
+import daos.default.mall.SaleOrderDetailAttributeValue
 import daos.default.user.ToPermission.UserToPermission
 import models.{ModelFilter, ModelPager, ModelResult, ModelSorter}
-import models.default.mall.SaleOrderDetailAttributeValueFilter
+import models.mall.{SaleOrderDetailAttributeValue, SaleOrderDetailAttributeValueFilter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}
@@ -27,7 +26,7 @@ class SaleOrderDetailAttributeValueController @Inject()(val messagesApi: Message
     extends CrudController[SaleOrderDetailAttributeValue] {
 
   override def indexJson(modelResult: ModelResult[SaleOrderDetailAttributeValue])(implicit requestHeader: RequestHeader): JsValue = {
-    import models.default.mall.SaleOrderDetailAttributeValueFilter.format
+    import models.mall.SaleOrderDetailAttributeValueFilter.format
     Json.toJson(modelResult)
   }
 

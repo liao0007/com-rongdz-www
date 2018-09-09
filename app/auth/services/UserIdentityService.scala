@@ -1,22 +1,22 @@
 package auth.services
 
+import com.github.aselab.activerecord.dsl._
 import com.mohiva.play.silhouette.api.LoginInfo
 import com.mohiva.play.silhouette.api.services.IdentityService
-import com.github.aselab.activerecord.dsl._
-import daos.default.user._
+import models.user._
 
 import scala.concurrent.Future
-import scala.concurrent.ExecutionContext.Implicits.global
 
 class UserIdentityService extends IdentityService[User] {
 
   def retrieve(loginInfo: LoginInfo): Future[Option[User]] =
     Future.successful {
-      daos.default.user.LoginInfo.findBy("providerId" -> loginInfo.providerID, "providerKey" -> loginInfo.providerKey).flatMap(_.user.toOption)
+      models.user.UserLoginInfo.findBy("providerId" -> loginInfo.providerID, "providerKey" -> loginInfo.providerKey).flatMap(_.user.toOption)
     }
 
   /**
     * Retrieves the user
+    *
     * @return Some of user if found, otherwise None
     */
   def retrieve(userId: Long): Future[Option[User]] = Future.successful {
@@ -46,6 +46,7 @@ class UserIdentityService extends IdentityService[User] {
 
   /**
     * Sets new state to user with `id`
+    *
     * @return true if new state was set successfuly, otherwise false
     */
   def setState(userId: Long, newState: User.State): Future[Option[Boolean]] =

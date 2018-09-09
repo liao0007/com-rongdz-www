@@ -2,9 +2,8 @@ package services.user
 
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
-import daos.default.user.LoginInfo
 import models._
-import models.default.user.LoginInfoFilter
+import models.user.{LoginInfo, LoginInfoFilter}
 import services.CrudService
 
 /**

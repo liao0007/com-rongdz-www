@@ -1,16 +1,14 @@
 package controllers.admin.mall
 
 import javax.inject.Inject
-
 import auth.JWTEnv
 import auth.services.authorizations.Has
 import com.github.aselab.activerecord.dsl._
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.mall.Sale
 import daos.default.user.ToPermission.UserToPermission
 import models.{ModelFilter, ModelPager, ModelResult, ModelSorter}
-import models.default.mall.SaleFilter
+import models.mall.{Sale, SaleFilter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}
@@ -25,7 +23,7 @@ class SaleController @Inject()(val messagesApi: MessagesApi, val silhouette: Sil
     extends CrudController[Sale] {
 
   override def indexJson(modelResult: ModelResult[Sale])(implicit requestHeader: RequestHeader): JsValue = {
-    import models.default.mall.SaleFilter.format
+    import models.mall.SaleFilter.format
     Json.toJson(modelResult)
   }
 

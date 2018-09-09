@@ -1,5 +1,4 @@
-@import daos.default.user.ShipToAddress
-@import models.default.user.ShipToAddressFilter
+@import models.user.{ShipToAddress, ShipToAddressFilter}
 @(userId: Long, modelForm: Form[ShipToAddress], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.user.routes.ShipToAddressController}

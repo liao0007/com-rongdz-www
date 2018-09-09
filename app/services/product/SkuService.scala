@@ -2,9 +2,8 @@ package services.product
 
 import com.github.aselab.activerecord.ActiveRecord.Relation1
 import com.github.aselab.activerecord.dsl._
-import daos.default.product.Sku
 import models._
-import models.default.product.SkuFilter
+import models.product.{Sku, SkuFilter}
 import services.CrudService
 
 /**

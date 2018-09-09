@@ -1,9 +1,6 @@
-@import daos.default.user.User
 @import daos.default.user.User.UserGender
 @import daos.default.user.User.UserState
-@import models.default.user.ShipToAddressFilter
-@import models.default.user.LoginInfoFilter
-@import models.default.user.ToPermissionFilter
+@import models.user.{LoginInfoFilter, ShipToAddressFilter, ToPermissionFilter, User}
 @(modelForm: Form[User], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.user.routes.UserController}

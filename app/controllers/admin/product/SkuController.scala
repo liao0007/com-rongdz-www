@@ -1,15 +1,13 @@
 package controllers.admin.product
 
 import javax.inject.Inject
-
 import auth.JWTEnv
 import auth.services.authorizations.Has
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.product.Sku
 import daos.default.user.ToPermission.UserToPermission
 import models.{ModelFilter, ModelPager, ModelResult, ModelSorter}
-import models.default.product.SkuFilter
+import models.product.{Sku, SkuFilter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}
@@ -24,7 +22,7 @@ class SkuController @Inject()(val messagesApi: MessagesApi, val silhouette: Silh
     extends CrudController[Sku] {
 
   override def indexJson(modelResult: ModelResult[Sku])(implicit requestHeader: RequestHeader): JsValue = {
-    import models.default.product.SkuFilter.format
+    import models.product.SkuFilter.format
     Json.toJson(modelResult)
   }
 

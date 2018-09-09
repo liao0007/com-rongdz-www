@@ -1,5 +1,5 @@
-@import daos.default.product.Sku
-@(modelForm: Form[Sku], action: Call)(implicit messages: Messages, request: RequestHeader)
+@@import models.product.Sku
+(modelForm: Form[Sku], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.product.routes.SkuController}
 @implicitFieldConstructor = @{ b3.vertical.fieldConstructor }

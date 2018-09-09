@@ -1,10 +1,6 @@
-@import daos.default.user.User
-@import models.default.user.UserFilter
+@import models.user.{LoginInfoFilter, ShipToAddressFilter, ToPermissionFilter, User, UserFilter}
 @import daos.default.user.User.UserState
 @import daos.default.user.User.UserGender
-@import models.default.user.ShipToAddressFilter
-@import models.default.user.LoginInfoFilter
-@import models.default.user.ToPermissionFilter
 @(items: Seq[User], pagination: Pagination, filter: UserFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.user.routes.UserController}

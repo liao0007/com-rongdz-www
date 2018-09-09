@@ -1,5 +1,4 @@
-@import daos.default.user.ToPermission
-@import models.default.user.ToPermissionFilter
+@import models.user.{ToPermission, ToPermissionFilter}
 @import daos.default.user.ToPermission.UserToPermission
 @(items: Seq[ToPermission], pagination: Pagination, filter: ToPermissionFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 

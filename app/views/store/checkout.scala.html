@@ -1,13 +1,12 @@
-@import models.default.mall.CartItem
-@import daos.default.product.Attribute
+@@import models.mall.{CartItem, SaleOrder}
 @import daos.default.user.ShipToAddress
 @import views.html.helper.form
-@import daos.default.mall.SaleOrder
 @import com.mohiva.play.silhouette.api.actions.SecuredRequest
 @import auth.JWTEnv
 @import daos.default.mall.SaleOrder.SaleOrderPaymentMethod
 @import daos.default.mall.SaleOrder.SaleOrderDeliveryType
 @import daos.default.product.AttributeOption
+@import models.product.Attribute
 @(cartItems: Seq[CartItem], shipToAddresses: List[ShipToAddress])(implicit messages: Messages, request: SecuredRequest[JWTEnv, AnyContent])
 
 @implicitFieldConstructor = @{ b3.vertical.fieldConstructor }

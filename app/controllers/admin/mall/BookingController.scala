@@ -1,14 +1,12 @@
 package controllers.admin.mall
 
 import javax.inject.Inject
-
 import auth.JWTEnv
 import auth.services.authorizations.Has
 import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
-import daos.default.mall.Booking
 import models._
-import models.default.mall.BookingFilter
+import models.mall.{Booking, BookingFilter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}
@@ -19,7 +17,7 @@ import services.mall.BookingService
 class BookingController @Inject()(val messagesApi: MessagesApi, val silhouette: Silhouette[JWTEnv], val has: Has, val crudService: BookingService) extends CrudController[Booking] {
 
   override def indexJson(modelResult: ModelResult[Booking])(implicit requestHeader: RequestHeader): JsValue = {
-    import models.default.mall.BookingFilter.format
+    import models.mall.BookingFilter.format
     Json.toJson(modelResult)
   }
 

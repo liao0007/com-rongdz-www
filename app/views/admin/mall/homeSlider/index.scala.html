@@ -1,6 +1,5 @@
-@import daos.default.mall.HomeSlider
-@import models.default.mall.HomeSliderFilter
-@import daos.ActiveRecord
+@import models.ActiveRecord
+@import models.mall.{HomeSlider, HomeSliderFilter}
 @(items: Seq[HomeSlider], pagination: Pagination, filter: HomeSliderFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.HomeSliderController}

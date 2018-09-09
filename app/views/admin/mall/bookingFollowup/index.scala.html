@@ -1,5 +1,4 @@
-@import daos.default.mall.BookingFollowup
-@import models.default.mall.BookingFollowupFilter
+@import models.mall.{BookingFollowup, BookingFollowupFilter}
 @(items: Seq[BookingFollowup], pagination: Pagination, filter: BookingFollowupFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.mall.routes.BookingFollowupController}
