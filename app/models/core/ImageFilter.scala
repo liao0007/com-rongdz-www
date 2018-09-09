@@ -13,17 +13,17 @@ object ImageFilter {
 
   implicit def queryStringBinder(implicit longBinder: QueryStringBindable[Long],
                                  booleanBinder: QueryStringBindable[Boolean],
-                                 stringBinder: QueryStringBindable[String]) =
+                                 stringBinder: QueryStringBindable[String]): QueryStringBindable[ImageFilter] =
     new QueryStringBindable[ImageFilter] {
       override def bind(key: String, params: Map[String, Seq[String]]): Option[Either[String, ImageFilter]] = {
         val idOpt = longBinder.bind(key + ".id", params).flatMap {
           case Right(value) => Some(value)
-          case _            => None
+          case _ => None
         }
 
         val urlOpt = stringBinder.bind(key + ".url", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         Some(Right(ImageFilter(idOpt, urlOpt)))

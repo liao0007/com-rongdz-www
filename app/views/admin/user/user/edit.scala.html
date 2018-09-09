@@ -1,4 +1,4 @@
-@import models.user.{LoginInfoFilter, ShipToAddressFilter, ToPermissionFilter, User}
+@import models.user.{LoginInfoFilter, ShipToAddressFilter, PermissionFilter, User}
 @(modelForm: Form[User], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.user.routes.UserController}
@@ -23,7 +23,7 @@
         <a href="@currentController.newPage()" class="cta-button alt pad-left">新建</a>
         <a href="javascript:App.popupWindow('@controllers.admin.user.routes.LoginInfoController.index(f = LoginInfoFilter(userIdOpt = Some(item.id)))', '@item.name')" class="cta-button alt pad-left">登录方式</a>
         <a href="javascript:App.popupWindow('@controllers.admin.user.routes.ShipToAddressController.index(f = ShipToAddressFilter(userIdOpt = Some(item.id)))', '@item.name')" class="cta-button alt pad-left">收货地址</a>
-        <a href="javascript:App.popupWindow('@controllers.admin.user.routes.ToPermissionController.index(f = ToPermissionFilter(userIdOpt = Some(item.id)))', '@item.name')" class="cta-button alt pad-left">权限</a>
+        <a href="javascript:App.popupWindow('@controllers.admin.user.routes.ToPermissionController.index(f = PermissionFilter(userIdOpt = Some(item.id)))', '@item.name')" class="cta-button alt pad-left">权限</a>
         <a href="javascript:void()" data-redirect="@currentController.index()" data-target="@currentController.delete(item.id)" class="cta-button alt pad-left btn-delete">删除</a>
         <a class="cta-button plain pad-left" href="@currentController.prev(item.id)"><i class="fa fa-angle-double-left" aria-hidden="true"> 上一条</i></a>
         <a class="cta-button plain" href="@currentController.next(item.id)">下一条 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>

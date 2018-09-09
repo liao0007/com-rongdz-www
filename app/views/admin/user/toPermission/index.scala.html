@@ -1,9 +1,9 @@
-@import models.user.{ToPermission, ToPermissionFilter}
-@(items: Seq[ToPermission], pagination: Pagination, filter: ToPermissionFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
+@import models.user.{Permission, PermissionFilter}
+@(items: Seq[Permission], pagination: Pagination, filter: PermissionFilter, sorter: ModelSorter)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.user.routes.ToPermissionController}
-@typedItems = @{items.asInstanceOf[Seq[ToPermission]]}
-@typedFilter = @{filter.asInstanceOf[ToPermissionFilter]}
+@typedItems = @{items.asInstanceOf[Seq[Permission]]}
+@typedFilter = @{filter.asInstanceOf[PermissionFilter]}
 
 @views.html.admin.layout.window(title = "用户权限", tabOpt = Some("userToPermission")) {
 

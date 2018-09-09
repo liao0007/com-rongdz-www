@@ -9,9 +9,9 @@ class UserPermissionService {
   /**
     * Finds permission - user pair
     */
-  def find(permission: Permission, userId: Long): Future[Option[UserPermission]] =
+  def find(permission: Permission, userId: Long): Future[Option[Permission]] =
     Future.successful {
-      UserPermission.findBy("userId" -> userId, "permission" -> permission.toString)
+      Permission.findBy("userId" -> userId, "permission" -> permission.toString)
     }
 
   /**
@@ -19,7 +19,7 @@ class UserPermissionService {
     */
   def revoke(permission: Permission, userId: Long): Future[Unit] =
     Future.successful {
-      UserPermission.findAllBy("userId" -> userId, "permission" -> permission.toString) foreach (_.delete())
+      Permission.findAllBy("userId" -> userId, "permission" -> permission.toString) foreach (_.delete())
     }
 
   /**
@@ -39,7 +39,7 @@ class UserPermissionService {
       (for {
         user <- User.find(userId)
       } yield {
-        UserPermission.findByOrCreate(UserPermission(userId = userId, permission = permission.toString), "userId", "permission")
+        Permission.findByOrCreate(Permission(userId = userId, permission = permission.toString), "userId", "permission")
         true
       }) getOrElse false
     }

@@ -14,8 +14,8 @@ class WxMpService @Inject()(val configuration: Configuration) extends WxMpServic
   val wxConfig: Config = configuration.underlying.getConfig("wechat")
 
   private val config = new WxMpInMemoryConfigStorage {
-    appId = configuration.underlying.getString("silhouette.wechat.clientID")
-    secret = configuration.underlying.getString("silhouette.wechat.clientSecret")
+    appId = configuration.get[String]("silhouette.wechat.clientID")
+    secret = configuration.get[String]("silhouette.wechat.clientSecret")
 
     token = wxConfig.getString("token")
     aesKey = wxConfig.getString("aesKey")

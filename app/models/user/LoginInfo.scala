@@ -1,36 +1,35 @@
 package models.user
 
-import com.github.aselab.activerecord.{ActiveRecordCompanion, PlayFormSupport}
+import com.github.aselab.activerecord.{ActiveRecord, ActiveRecordCompanion, PlayFormSupport}
 import com.mohiva.play.silhouette.impl.providers.CredentialsProvider
-import models.ActiveRecord
+import models.{ActiveRecord, EnumAttribute, EnumAttributeValue}
 import play.api.libs.json.{Json, OFormat}
 
 /**
   * Created by liangliao on 4/13/16.
   */
 case class LoginInfo(
-    var userId: Long,
-    var providerId: String,
-    var providerKey: String
-) extends ActiveRecord {
-  lazy val user: _root_.com.github.aselab.activerecord.ActiveRecord.BelongsToAssociation[LoginInfo.this.type, User] = belongsTo[User]
-  lazy val passwordInfo: _root_.com.github.aselab.activerecord.ActiveRecord.HasOneAssociation[LoginInfo.this.type, PasswordInfo] =
+                          var userId: Long,
+                          var providerId: String,
+                          var providerKey: String
+                        ) extends ActiveRecord {
+  lazy val user: ActiveRecord.BelongsToAssociation[LoginInfo.this.type, User] = belongsTo[User]
+  lazy val passwordInfo: ActiveRecord.HasOneAssociation[LoginInfo.this.type, PasswordInfo] =
     hasOne[PasswordInfo]
 }
 
 object LoginInfo extends ActiveRecordCompanion[LoginInfo] with PlayFormSupport[LoginInfo] {
 
-  sealed class ProviderId(val name: String)
-  object LoginInfoProviderId extends IterableAttribute[ProviderId] {
-    case object Credentials extends ProviderId("手机") {
-      override def toString: String = CredentialsProvider.ID
-    }
-    case object Wechat extends ProviderId("微信") {
-      override def toString: String = "wechat"
-    }
-    protected def all: Seq[ProviderId]                     = Seq[ProviderId](Credentials, Wechat)
-    implicit def fromString(x: String): Option[ProviderId] = all.find(_.toString == x)
-    implicit def toString(providerId: ProviderId): String      = providerId.toString
+  sealed class ProviderId(val name: String) extends EnumAttributeValue
+
+  object LoginInfoProviderId extends EnumAttribute[ProviderId] {
+
+    case object Credentials extends ProviderId(CredentialsProvider.ID.capitalize)
+
+    case object Wechat extends ProviderId("Wechat")
+
+    protected def all: Seq[ProviderId] = Seq[ProviderId](Credentials, Wechat)
+
   }
 
   implicit val format: OFormat[LoginInfo] = Json.format[LoginInfo]

@@ -14,7 +14,7 @@ case class UserFilter(idOpt: Option[Long] = None,
                       birthdayOpt: Option[String] = None,
                       emailOpt: Option[String] = None,
                       stateOpt: Option[String] = None)
-    extends ModelFilter[User]
+  extends ModelFilter[User]
 
 object UserFilter {
 
@@ -22,42 +22,42 @@ object UserFilter {
                                  intBinder: QueryStringBindable[Int],
                                  floatBinder: QueryStringBindable[Float],
                                  booleanBinder: QueryStringBindable[Boolean],
-                                 stringBinder: QueryStringBindable[String]) =
+                                 stringBinder: QueryStringBindable[String]): QueryStringBindable[UserFilter] =
     new QueryStringBindable[UserFilter] {
       override def bind(key: String, params: Map[String, Seq[String]]): Option[Either[String, UserFilter]] = {
         val idOpt = longBinder.bind(key + ".id", params).flatMap {
           case Right(value) => Some(value)
-          case _            => None
+          case _ => None
         }
 
         val mobileOpt = stringBinder.bind(key + ".mobile", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         val nameOpt = stringBinder.bind(key + ".name", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         val genderOpt = stringBinder.bind(key + ".gender", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         val birthdayOpt = stringBinder.bind(key + ".birthday", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         val emailOpt = stringBinder.bind(key + ".email", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         val stateOpt = stringBinder.bind(key + ".state", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         Some(Right(UserFilter(idOpt, mobileOpt, nameOpt, genderOpt, birthdayOpt, emailOpt, stateOpt)))
@@ -65,12 +65,12 @@ object UserFilter {
 
       override def unbind(key: String, filter: UserFilter): String = {
         Seq(filter.idOpt map (value => longBinder.unbind(key + ".id", value)),
-            filter.mobileOpt map (value => stringBinder.unbind(key + ".mobile", value)),
-            filter.nameOpt map (value => stringBinder.unbind(key + ".name", value)),
-            filter.genderOpt map (value => stringBinder.unbind(key + ".gender", value)),
-            filter.birthdayOpt map (value => stringBinder.unbind(key + ".birthday", value)),
-            filter.emailOpt map (value => stringBinder.unbind(key + ".email", value)),
-            filter.stateOpt map (value => stringBinder.unbind(key + ".state", value))).flatten.mkString("&")
+          filter.mobileOpt map (value => stringBinder.unbind(key + ".mobile", value)),
+          filter.nameOpt map (value => stringBinder.unbind(key + ".name", value)),
+          filter.genderOpt map (value => stringBinder.unbind(key + ".gender", value)),
+          filter.birthdayOpt map (value => stringBinder.unbind(key + ".birthday", value)),
+          filter.emailOpt map (value => stringBinder.unbind(key + ".email", value)),
+          filter.stateOpt map (value => stringBinder.unbind(key + ".state", value))).flatten.mkString("&")
       }
     }
 

@@ -133,7 +133,7 @@ POST          /admin/user/login-infos/:id                                    con
 DELETE        /admin/user/login-infos/:id                                    controllers.admin.user.LoginInfoController.delete(id: Long)
 GET           /admin/user/login-infos/:id/reset                              controllers.admin.user.LoginInfoController.resetPassword(id: Long)
 
-GET           /admin/user/to-permissions                                     controllers.admin.user.ToPermissionController.index(p: models.ModelPager ?= models.ModelPager(), f: models.user.ToPermissionFilter ?= models.default.user.ToPermissionFilter(), s: models.ModelSorter ?= models.ModelSorter())
+GET           /admin/user/to-permissions                                     controllers.admin.user.ToPermissionController.index(p: models.ModelPager ?= models.ModelPager(), f: models.user.PermissionFilter ?= models.default.user.ToPermissionFilter(), s: models.ModelSorter ?= models.ModelSorter())
 GET           /admin/user/to-permissions/new                                 controllers.admin.user.ToPermissionController.newPage(userId: Long)
 GET           /admin/user/to-permissions/:id/next                            controllers.admin.user.ToPermissionController.next(id: Long)
 GET           /admin/user/to-permissions/:id/prev                            controllers.admin.user.ToPermissionController.prev(id: Long)

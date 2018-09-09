@@ -11,7 +11,7 @@ case class SaleOrderDetailAttributeValueFilter(idOpt: Option[Long] = None,
                                                saleOrderDetailIdOpt: Option[Long] = None,
                                                attributeIdOpt: Option[Long] = None,
                                                valueOpt: Option[String] = None)
-    extends ModelFilter[SaleOrderDetailAttributeValue]
+  extends ModelFilter[SaleOrderDetailAttributeValue]
 
 object SaleOrderDetailAttributeValueFilter {
 
@@ -19,27 +19,27 @@ object SaleOrderDetailAttributeValueFilter {
                                  intBinder: QueryStringBindable[Int],
                                  floatBinder: QueryStringBindable[Float],
                                  booleanBinder: QueryStringBindable[Boolean],
-                                 stringBinder: QueryStringBindable[String]) =
+                                 stringBinder: QueryStringBindable[String]): QueryStringBindable[SaleOrderDetailAttributeValueFilter] =
     new QueryStringBindable[SaleOrderDetailAttributeValueFilter] {
       override def bind(key: String, params: Map[String, Seq[String]]): Option[Either[String, SaleOrderDetailAttributeValueFilter]] = {
         val idOpt = longBinder.bind(key + ".id", params).flatMap {
           case Right(value) => Some(value)
-          case _            => None
+          case _ => None
         }
 
         val saleOrderDetailIdOpt = longBinder.bind(key + ".sodid", params).flatMap {
           case Right(value) => Some(value)
-          case _            => None
+          case _ => None
         }
 
         val attributeIdOpt = longBinder.bind(key + ".attid", params).flatMap {
           case Right(value) => Some(value)
-          case _            => None
+          case _ => None
         }
 
         val valueOpt = stringBinder.bind(key + ".value", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         Some(Right(SaleOrderDetailAttributeValueFilter(idOpt, saleOrderDetailIdOpt, attributeIdOpt, valueOpt)))
@@ -47,9 +47,9 @@ object SaleOrderDetailAttributeValueFilter {
 
       override def unbind(key: String, filter: SaleOrderDetailAttributeValueFilter): String = {
         Seq(filter.idOpt map (value => longBinder.unbind(key + ".id", value)),
-            filter.saleOrderDetailIdOpt map (value => longBinder.unbind(key + ".sodid", value)),
-            filter.attributeIdOpt map (value => longBinder.unbind(key + ".attid", value)),
-            filter.valueOpt map (value => stringBinder.unbind(key + ".value", value))).flatten.mkString("&")
+          filter.saleOrderDetailIdOpt map (value => longBinder.unbind(key + ".sodid", value)),
+          filter.attributeIdOpt map (value => longBinder.unbind(key + ".attid", value)),
+          filter.valueOpt map (value => stringBinder.unbind(key + ".value", value))).flatten.mkString("&")
       }
     }
 

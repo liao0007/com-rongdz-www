@@ -1,5 +1,5 @@
-@import models.user.{ToPermission, ToPermissionFilter}
-@(userId: Long, modelForm: Form[ToPermission], action: Call)(implicit messages: Messages, request: RequestHeader)
+@import models.user.{Permission, PermissionFilter}
+@(userId: Long, modelForm: Form[Permission], action: Call)(implicit messages: Messages, request: RequestHeader)
 
 @currentController = @{controllers.admin.user.routes.ToPermissionController}
 @implicitFieldConstructor = @{ b3.vertical.fieldConstructor }
@@ -7,7 +7,7 @@
 
 @breadcrumb = @{
   Seq(
-    ("返回", Some( controllers.admin.user.routes.ToPermissionController.index(f = ToPermissionFilter(userIdOpt = Some(userId) ))))
+    ("返回", Some( controllers.admin.user.routes.ToPermissionController.index(f = PermissionFilter(userIdOpt = Some(userId) ))))
   )
 }
 
@@ -20,7 +20,7 @@
       <button type="submit" class="cta-button">保存</button>
       @modelForm.value.map{ item =>
         <a href="@currentController.newPage(userId)" class="cta-button alt pad-left">新建</a>
-        <a href="javascript:void()" data-redirect="@controllers.admin.user.routes.ToPermissionController.index(f = ToPermissionFilter(userIdOpt = Some(userId) ))" data-target="@currentController.delete(item.id)" class="cta-button alt pad-left btn-delete">删除</a>
+        <a href="javascript:void()" data-redirect="@controllers.admin.user.routes.ToPermissionController.index(f = PermissionFilter(userIdOpt = Some(userId) ))" data-target="@currentController.delete(item.id)" class="cta-button alt pad-left btn-delete">删除</a>
         <a class="cta-button plain pad-left" href="@currentController.prev(item.id)"><i class="fa fa-angle-double-left" aria-hidden="true"> 上一条</i></a>
         <a class="cta-button plain" href="@currentController.next(item.id)">下一条 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
       }

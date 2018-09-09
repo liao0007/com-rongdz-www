@@ -11,7 +11,7 @@ class UserIdentityService extends IdentityService[User] {
 
   def retrieve(loginInfo: LoginInfo): Future[Option[User]] =
     Future.successful {
-      models.user.UserLoginInfo.findBy("providerId" -> loginInfo.providerID, "providerKey" -> loginInfo.providerKey).flatMap(_.user.toOption)
+      models.user.LoginInfo.findBy("providerId" -> loginInfo.providerID, "providerKey" -> loginInfo.providerKey).flatMap(_.user.toOption)
     }
 
   /**

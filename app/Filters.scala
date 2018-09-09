@@ -11,14 +11,14 @@ import play.filters.headers.SecurityHeadersFilter
 
 @Singleton
 class Filters @Inject()(
-    env: Environment,
-    corsFilter: CORSFilter,
-    securityHeadersFilter: SecurityHeadersFilter,
-    cookieAuthFilter: CookieAuthFilter,
-    gzipFilter: GzipFilter,
-    htmlCompressorFilter: HTMLCompressorFilter,
-    xmlCompressorFilter: XMLCompressorFilter
-) extends HttpFilters {
+                         env: Environment,
+                         corsFilter: CORSFilter,
+                         securityHeadersFilter: SecurityHeadersFilter,
+                         cookieAuthFilter: CookieAuthFilter,
+                         gzipFilter: GzipFilter,
+                         htmlCompressorFilter: HTMLCompressorFilter,
+                         xmlCompressorFilter: XMLCompressorFilter
+                       ) extends HttpFilters {
 
   override val filters: Seq[EssentialFilter] = {
     // Use the example filter if we're running development mode. If

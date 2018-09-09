@@ -14,7 +14,7 @@ object AttributeValueSetFilter {
 
   implicit def queryStringBinder(implicit longBinder: QueryStringBindable[Long],
                                  booleanBinder: QueryStringBindable[Boolean],
-                                 stringBinder: QueryStringBindable[String]) =
+                                 stringBinder: QueryStringBindable[String]): QueryStringBindable[AttributeValueSetFilter] =
     new QueryStringBindable[AttributeValueSetFilter] {
       override def bind(key: String, params: Map[String, Seq[String]]): Option[Either[String, AttributeValueSetFilter]] = {
         val idOpt = longBinder.bind(key + ".id", params).flatMap {

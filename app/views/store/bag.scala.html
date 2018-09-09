@@ -1,5 +1,4 @@
-@import models.mall.CartItem
-@(cartItems: Seq[CartItem])(implicit messages: Messages, request: RequestHeader)
+@@(cartItems: Seq[CartItem])(implicit messages: Messages, request: RequestHeader)
 
 @styles = {
 	<link rel="stylesheet" type="text/css" href="@customRoutes.Assets.at("store/styles/pages/bag.css")">

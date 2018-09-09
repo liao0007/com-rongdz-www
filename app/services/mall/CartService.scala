@@ -3,7 +3,8 @@ package services.mall
 import java.lang.Long
 
 import com.google.inject.Inject
-import models.mall.{CartItem, Sale}
+import entities.mall.CartItem
+import models.mall.Sale
 import models.user.User
 
 import scala.concurrent.Future

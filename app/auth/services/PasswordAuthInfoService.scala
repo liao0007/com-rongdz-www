@@ -11,29 +11,29 @@ class PasswordAuthInfoService @Inject()(implicit ec: ExecutionContext) extends D
 
   def find(loginInfo: LoginInfo): Future[Option[PasswordInfo]] =
     Future.successful {
-      models.user.UserLoginInfo
+      models.user.LoginInfo
         .findBy("providerId" -> loginInfo.providerID, "providerKey" -> loginInfo.providerKey)
         .flatMap(_.passwordInfo.toOption)
         .map(passwordInfo => PasswordInfo(hasher = passwordInfo.hasher, password = passwordInfo.password, salt = passwordInfo.salt))
     }
 
   def remove(loginInfo: LoginInfo): Future[Unit] = Future.successful {
-    models.user.UserLoginInfo
+    models.user.LoginInfo
       .findBy("providerId" -> loginInfo.providerID, "providerKey" -> loginInfo.providerKey)
       .flatMap(_.passwordInfo.toOption) foreach (_.delete())
   }
 
   def add(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] =
     Future.successful {
-      val userLoginInfo = models.user.UserLoginInfo.findBy("providerId" -> loginInfo.providerID, "providerKey" -> loginInfo.providerKey).get
+      val userLoginInfo = models.user.LoginInfo.findBy("providerId" -> loginInfo.providerID, "providerKey" -> loginInfo.providerKey).get
       val passwordInfo =
-        models.user.UserPasswordInfo(userLoginInfo.id, hasher = authInfo.hasher, password = authInfo.password, salt = authInfo.salt).create
+        models.user.PasswordInfo(userLoginInfo.id, hasher = authInfo.hasher, password = authInfo.password, salt = authInfo.salt).create
       PasswordInfo(hasher = passwordInfo.hasher, password = passwordInfo.password, salt = passwordInfo.salt)
     }
 
   def update(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] =
     Future.successful {
-      val userLoginInfo = models.user.UserLoginInfo.findBy("providerId" -> loginInfo.providerID, "providerKey" -> loginInfo.providerKey).get
+      val userLoginInfo = models.user.LoginInfo.findBy("providerId" -> loginInfo.providerID, "providerKey" -> loginInfo.providerKey).get
       val userPasswordInfo = userLoginInfo.passwordInfo.toOption.get
 
       userPasswordInfo.password = authInfo.password
@@ -45,7 +45,7 @@ class PasswordAuthInfoService @Inject()(implicit ec: ExecutionContext) extends D
 
   def save(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] =
     Future.successful {
-      models.user.UserLoginInfo.findBy("providerId" -> loginInfo.providerID, "providerKey" -> loginInfo.providerKey).get
+      models.user.LoginInfo.findBy("providerId" -> loginInfo.providerID, "providerKey" -> loginInfo.providerKey).get
     }.flatMap { userLoginInfo =>
       userLoginInfo.passwordInfo.toOption match {
         case Some(_) => this.update(loginInfo, authInfo)

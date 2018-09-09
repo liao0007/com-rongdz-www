@@ -15,20 +15,20 @@ object PageFilter {
                                  intBinder: QueryStringBindable[Int],
                                  floatBinder: QueryStringBindable[Float],
                                  booleanBinder: QueryStringBindable[Boolean],
-                                 stringBinder: QueryStringBindable[String]) =
+                                 stringBinder: QueryStringBindable[String]): QueryStringBindable[PageFilter] =
     new QueryStringBindable[PageFilter] {
       override def bind(key: String, params: Map[String, Seq[String]]): Option[Either[String, PageFilter]] = {
         val idOpt = longBinder.bind(key + ".id", params).flatMap {
           case Right(value) => Some(value)
-          case _            => None
+          case _ => None
         }
         val nameOpt = stringBinder.bind(key + ".name", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
         val contentOpt = stringBinder.bind(key + ".content", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         Some(Right(PageFilter(idOpt, nameOpt, contentOpt)))
@@ -36,8 +36,8 @@ object PageFilter {
 
       override def unbind(key: String, filter: PageFilter): String = {
         Seq(filter.idOpt map (value => longBinder.unbind(key + ".id", value)),
-            filter.nameOpt map (value => stringBinder.unbind(key + ".name", value)),
-            filter.contentOpt map (value => stringBinder.unbind(key + ".content", value))).flatten.mkString("&")
+          filter.nameOpt map (value => stringBinder.unbind(key + ".name", value)),
+          filter.contentOpt map (value => stringBinder.unbind(key + ".content", value))).flatten.mkString("&")
       }
     }
 

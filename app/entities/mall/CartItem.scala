@@ -1,5 +1,6 @@
-package models.mall
+package entities.mall
 
+import models.mall.Sale
 import models.user.User
 import play.api.libs.json._
 

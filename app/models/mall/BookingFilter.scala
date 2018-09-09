@@ -22,7 +22,7 @@ object BookingFilter {
                                  intBinder: QueryStringBindable[Int],
                                  floatBinder: QueryStringBindable[Float],
                                  booleanBinder: QueryStringBindable[Boolean],
-                                 stringBinder: QueryStringBindable[String]) =
+                                 stringBinder: QueryStringBindable[String]): QueryStringBindable[BookingFilter] =
     new QueryStringBindable[BookingFilter] {
       override def bind(key: String, params: Map[String, Seq[String]]): Option[Either[String, BookingFilter]] = {
         val idOpt = longBinder.bind(key + ".id", params).flatMap {

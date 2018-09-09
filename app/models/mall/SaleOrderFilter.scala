@@ -18,7 +18,7 @@ case class SaleOrderFilter(idOpt: Option[Long] = None,
                            paymentStateOpt: Option[String] = None,
                            shippingStateOpt: Option[String] = None,
                            memoOpt: Option[String] = None)
-    extends ModelFilter[SaleOrder]
+  extends ModelFilter[SaleOrder]
 
 object SaleOrderFilter {
 
@@ -26,77 +26,77 @@ object SaleOrderFilter {
                                  intBinder: QueryStringBindable[Int],
                                  floatBinder: QueryStringBindable[Float],
                                  booleanBinder: QueryStringBindable[Boolean],
-                                 stringBinder: QueryStringBindable[String]) =
+                                 stringBinder: QueryStringBindable[String]): QueryStringBindable[SaleOrderFilter] =
     new QueryStringBindable[SaleOrderFilter] {
       override def bind(key: String, params: Map[String, Seq[String]]): Option[Either[String, SaleOrderFilter]] = {
         val idOpt = longBinder.bind(key + ".id", params).flatMap {
           case Right(value) => Some(value)
-          case _            => None
+          case _ => None
         }
 
         val orderNumberOpt = stringBinder.bind(key + ".num", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         val shipToNameOpt = stringBinder.bind(key + ".shname", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         val shipToMobileOpt = stringBinder.bind(key + ".shmob", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         val totalAmountOpt = stringBinder.bind(key + ".total", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         val channelOpt = stringBinder.bind(key + ".ch", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         val deliveryTypeOpt = stringBinder.bind(key + ".deltype", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         val stateOpt = stringBinder.bind(key + ".stat", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         val paymentStateOpt = stringBinder.bind(key + ".paystat", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         val shippingStateOpt = stringBinder.bind(key + ".shstat", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         val memoOpt = stringBinder.bind(key + ".memo", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         Some(
           Right(
             SaleOrderFilter(idOpt,
-                            orderNumberOpt,
-                            shipToNameOpt,
-                            shipToMobileOpt,
-                            totalAmountOpt,
-                            channelOpt,
-                            deliveryTypeOpt,
-                            stateOpt,
-                            paymentStateOpt,
-                            shippingStateOpt,
-                            memoOpt)))
+              orderNumberOpt,
+              shipToNameOpt,
+              shipToMobileOpt,
+              totalAmountOpt,
+              channelOpt,
+              deliveryTypeOpt,
+              stateOpt,
+              paymentStateOpt,
+              shippingStateOpt,
+              memoOpt)))
       }
 
       override def unbind(key: String, filter: SaleOrderFilter): String = {

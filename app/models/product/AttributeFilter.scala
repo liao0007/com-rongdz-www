@@ -11,17 +11,17 @@ object AttributeFilter {
 
   implicit def queryStringBinder(implicit longBinder: QueryStringBindable[Long],
                                  booleanBinder: QueryStringBindable[Boolean],
-                                 stringBinder: QueryStringBindable[String]) =
+                                 stringBinder: QueryStringBindable[String]): QueryStringBindable[AttributeFilter] =
     new QueryStringBindable[AttributeFilter] {
       override def bind(key: String, params: Map[String, Seq[String]]): Option[Either[String, AttributeFilter]] = {
         val idOpt = longBinder.bind(key + ".id", params).flatMap {
           case Right(value) => Some(value)
-          case _            => None
+          case _ => None
         }
 
         val nameOpt = stringBinder.bind(key + ".name", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         Some(Right(AttributeFilter(idOpt, nameOpt)))

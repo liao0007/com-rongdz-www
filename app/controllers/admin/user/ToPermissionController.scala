@@ -4,7 +4,7 @@ import com.mohiva.play.silhouette.api.Silhouette
 import controllers.admin.CrudController
 import javax.inject.Inject
 import models.ModelResult
-import models.user.{ToPermission, ToPermissionFilter}
+import models.user.{Permission, PermissionFilter}
 import play.api.data.Form
 import play.api.i18n.MessagesApi
 import play.api.libs.json.{JsValue, Json}
@@ -18,23 +18,23 @@ class ToPermissionController @Inject()(val messagesApi: MessagesApi,
                                        val silhouette: Silhouette[JWTEnv],
                                        val has: Has,
                                        val crudService: ToPermissionService)
-    extends CrudController[ToPermission] {
+    extends CrudController[Permission] {
 
-  override def indexJson(modelResult: ModelResult[ToPermission])(implicit requestHeader: RequestHeader): JsValue = {
-    import models.user.ToPermissionFilter.format
+  override def indexJson(modelResult: ModelResult[Permission])(implicit requestHeader: RequestHeader): JsValue = {
+    import models.user.PermissionFilter.format
     Json.toJson(modelResult)
   }
 
-  override def indexHtml(modelResult: ModelResult[ToPermission])(implicit requestHeader: RequestHeader): Html = {
+  override def indexHtml(modelResult: ModelResult[Permission])(implicit requestHeader: RequestHeader): Html = {
     val ModelResult(pagedSearchResult, pagination, filter, sorter) = modelResult
-    views.html.admin.user.toPermission.index(pagedSearchResult, pagination, filter.asInstanceOf[ToPermissionFilter], sorter)
+    views.html.admin.user.toPermission.index(pagedSearchResult, pagination, filter.asInstanceOf[PermissionFilter], sorter)
   }
 
   override def indexCall(implicit requestHeader: RequestHeader): Call = {
     routes.ToPermissionController.index()
   }
 
-  override def editHtml(form: Form[ToPermission])(implicit requestHeader: RequestHeader): Html = {
+  override def editHtml(form: Form[Permission])(implicit requestHeader: RequestHeader): Html = {
     val record = form.value.get
     views.html.admin.user.toPermission.edit(record.userId, form, routes.ToPermissionController.update(record.id))
   }

@@ -11,7 +11,7 @@ case class SaleOrderDetailFilter(idOpt: Option[Long] = None,
                                  saleOrderIdOpt: Option[Long] = None,
                                  saleIdOpt: Option[Long] = None,
                                  quantity: Option[String] = None)
-    extends ModelFilter[SaleOrderDetail]
+  extends ModelFilter[SaleOrderDetail]
 
 object SaleOrderDetailFilter {
 
@@ -19,27 +19,27 @@ object SaleOrderDetailFilter {
                                  intBinder: QueryStringBindable[Int],
                                  floatBinder: QueryStringBindable[Float],
                                  booleanBinder: QueryStringBindable[Boolean],
-                                 stringBinder: QueryStringBindable[String]) =
+                                 stringBinder: QueryStringBindable[String]): QueryStringBindable[SaleOrderDetailFilter] =
     new QueryStringBindable[SaleOrderDetailFilter] {
       override def bind(key: String, params: Map[String, Seq[String]]): Option[Either[String, SaleOrderDetailFilter]] = {
         val idOpt = longBinder.bind(key + ".id", params).flatMap {
           case Right(value) => Some(value)
-          case _            => None
+          case _ => None
         }
 
         val saleOrderIdOpt = longBinder.bind(key + ".soid", params).flatMap {
           case Right(value) => Some(value)
-          case _            => None
+          case _ => None
         }
 
         val saleIdOpt = longBinder.bind(key + ".sid", params).flatMap {
           case Right(value) => Some(value)
-          case _            => None
+          case _ => None
         }
 
         val quantity = stringBinder.bind(key + ".qty", params).flatMap {
           case Right(value) if value.length > 0 => Some(value)
-          case _                                => None
+          case _ => None
         }
 
         Some(Right(SaleOrderDetailFilter(idOpt, saleOrderIdOpt, saleIdOpt, quantity)))
@@ -47,9 +47,9 @@ object SaleOrderDetailFilter {
 
       override def unbind(key: String, filter: SaleOrderDetailFilter): String = {
         Seq(filter.idOpt map (value => longBinder.unbind(key + ".id", value)),
-            filter.saleOrderIdOpt map (value => longBinder.unbind(key + ".soid", value)),
-            filter.saleIdOpt map (value => longBinder.unbind(key + ".sid", value)),
-            filter.quantity map (value => stringBinder.unbind(key + ".qty", value))).flatten.mkString("&")
+          filter.saleOrderIdOpt map (value => longBinder.unbind(key + ".soid", value)),
+          filter.saleIdOpt map (value => longBinder.unbind(key + ".sid", value)),
+          filter.quantity map (value => stringBinder.unbind(key + ".qty", value))).flatten.mkString("&")
       }
     }
 

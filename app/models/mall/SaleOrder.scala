@@ -44,7 +44,7 @@ object SaleOrder extends ActiveRecordCompanion[SaleOrder] with PlayFormSupport[S
   }
 
   sealed class State(val name: String)
-  object SaleOrderState extends IterableAttribute[State] {
+  object SaleOrderState extends EnumAttribute[State] {
     case object Created  extends State("待处理")
     case object Audited  extends State("已处理")
     case object Disabled extends State("已关闭")
@@ -56,7 +56,7 @@ object SaleOrder extends ActiveRecordCompanion[SaleOrder] with PlayFormSupport[S
   }
 
   sealed class DeliveryType(val name: String)
-  object SaleOrderDeliveryType extends IterableAttribute[DeliveryType] {
+  object SaleOrderDeliveryType extends EnumAttribute[DeliveryType] {
     case object Direct  extends DeliveryType("送货上门")
     case object Express extends DeliveryType("普通快递")
     case object Pickup  extends DeliveryType("门店自取")
@@ -68,7 +68,7 @@ object SaleOrder extends ActiveRecordCompanion[SaleOrder] with PlayFormSupport[S
   }
 
   sealed class PaymentMethod(val name: String)
-  object SaleOrderPaymentMethod extends IterableAttribute[PaymentMethod] {
+  object SaleOrderPaymentMethod extends EnumAttribute[PaymentMethod] {
     case object Alipay extends PaymentMethod("支付宝支付")
     case object Wepay  extends PaymentMethod("微信支付")
     case object Cash   extends PaymentMethod("现金支付")
@@ -80,7 +80,7 @@ object SaleOrder extends ActiveRecordCompanion[SaleOrder] with PlayFormSupport[S
   }
 
   sealed class PaymentState(val name: String)
-  object SaleOrderPaymentState extends IterableAttribute[PaymentState] {
+  object SaleOrderPaymentState extends EnumAttribute[PaymentState] {
     case object Open     extends PaymentState("待付款")
     case object Paid     extends PaymentState("已付款")
     case object Closed   extends PaymentState("已关闭")
@@ -93,7 +93,7 @@ object SaleOrder extends ActiveRecordCompanion[SaleOrder] with PlayFormSupport[S
   }
 
   sealed class ShippingState(val name: String)
-  object SaleOrderShippingState extends IterableAttribute[ShippingState] {
+  object SaleOrderShippingState extends EnumAttribute[ShippingState] {
     case object Pending    extends ShippingState("待发货")
     case object Processing extends ShippingState("正在发货")
     case object Shipped    extends ShippingState("已发货")
@@ -106,7 +106,7 @@ object SaleOrder extends ActiveRecordCompanion[SaleOrder] with PlayFormSupport[S
   }
 
   sealed class Channel(val name: String)
-  object SaleOrderChannel extends IterableAttribute[Channel] {
+  object SaleOrderChannel extends EnumAttribute[Channel] {
     case object OnlineStore  extends Channel("网站")
     case object OnlineWechat extends Channel("微信")
     case object OnlinePinan  extends Channel("平安")
